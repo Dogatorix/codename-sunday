@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://2ndw07jp2xgm"]
+
+[ext_resource type="Texture2D" uid="uid://blok7ocfqc2so" path="res://assets/sprites/ui/rust-meter-icon.png" id="1_8j0f5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlo36"]
+size = Vector2(52, 52)
+
+[node name="TrainActivator" type="Area2D"]
+
+[node name="Rust-meter-icon" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_8j0f5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vlo36")

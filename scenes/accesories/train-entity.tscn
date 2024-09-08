@@ -1,0 +1,251 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7wnw3kbi5ma0"]
+
+[ext_resource type="Texture2D" uid="uid://c23o8tfpwjwja" path="res://assets/sprites/accesories/train-entity.png" id="1_eipa3"]
+[ext_resource type="Script" path="res://scripts/train-entity.gd" id="1_ovyi8"]
+[ext_resource type="Texture2D" uid="uid://sgmcwdsxq7ea" path="res://assets/sprites/accesories/train-hinge.png" id="2_cka31"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rclv5"]
+size = Vector2(268, 645)
+
+[sub_resource type="Animation" id="Animation_78xab"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Train-entity:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(183, -1177)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_sxmv0"]
+resource_name = "drive_loop"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Train-entity:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(354, -400), Vector2(354, 1170)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.139735, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"switch_hinges"
+}, {
+"args": [],
+"method": &"on_drive_loop_update"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_jh72i"]
+resource_name = "emerge"
+length = 0.45
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Train-entity:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(354, -1177), Vector2(354, 1170)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.45),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_drive_loop_update"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.125529),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_8umaa"]
+resource_name = "leave"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Train-entity:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(354, 1200), Vector2(354, 2300)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbgan"]
+_data = {
+"RESET": SubResource("Animation_78xab"),
+"drive_loop": SubResource("Animation_sxmv0"),
+"emerge": SubResource("Animation_jh72i"),
+"leave": SubResource("Animation_8umaa")
+}
+
+[node name="TrainEntity" type="StaticBody2D" node_paths=PackedStringArray("sprite_mask", "hitbox", "animation_player", "train_sprite")]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_ovyi8")
+sprite_mask = NodePath("Control")
+hitbox = NodePath("CollisionShape2D")
+animation_player = NodePath("AnimationPlayer")
+train_sprite = NodePath("Control/Train-entity")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 320.5)
+shape = SubResource("RectangleShape2D_rclv5")
+disabled = true
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -355.0
+offset_right = 355.0
+offset_bottom = 1000.0
+grow_horizontal = 2
+size_flags_horizontal = 8
+
+[node name="Train-entity" type="Sprite2D" parent="Control"]
+z_index = 1
+position = Vector2(183, -1177)
+texture = ExtResource("1_eipa3")
+
+[node name="Train-hinge" type="Sprite2D" parent="Control/Train-entity"]
+visible = false
+show_behind_parent = true
+position = Vector2(-148.25, -980)
+scale = Vector2(0.768519, 1)
+texture = ExtResource("2_cka31")
+
+[node name="Train-hinge2" type="Sprite2D" parent="Control/Train-entity"]
+visible = false
+show_behind_parent = true
+position = Vector2(149, -975)
+rotation = 3.14159
+scale = Vector2(0.768519, 1)
+texture = ExtResource("2_cka31")
+
+[node name="Train-hinge3" type="Sprite2D" parent="Control/Train-entity"]
+visible = false
+show_behind_parent = true
+position = Vector2(-148.25, -585.5)
+scale = Vector2(0.768519, 1)
+texture = ExtResource("2_cka31")
+
+[node name="Train-hinge4" type="Sprite2D" parent="Control/Train-entity"]
+visible = false
+show_behind_parent = true
+position = Vector2(149, -580.5)
+rotation = 3.14159
+scale = Vector2(0.768519, 1)
+texture = ExtResource("2_cka31")
+
+[node name="Train-hinge5" type="Sprite2D" parent="Control/Train-entity"]
+visible = false
+show_behind_parent = true
+position = Vector2(-148.25, 608.5)
+scale = Vector2(0.768519, 1)
+texture = ExtResource("2_cka31")
+
+[node name="Train-hinge6" type="Sprite2D" parent="Control/Train-entity"]
+visible = false
+show_behind_parent = true
+position = Vector2(149, 613.5)
+rotation = 3.14159
+scale = Vector2(0.768519, 1)
+texture = ExtResource("2_cka31")
+
+[node name="Train-hinge7" type="Sprite2D" parent="Control/Train-entity"]
+visible = false
+show_behind_parent = true
+position = Vector2(-148.25, 996.5)
+scale = Vector2(0.768519, 1)
+texture = ExtResource("2_cka31")
+
+[node name="Train-hinge8" type="Sprite2D" parent="Control/Train-entity"]
+visible = false
+show_behind_parent = true
+position = Vector2(149, 1001.5)
+rotation = 3.14159
+scale = Vector2(0.768519, 1)
+texture = ExtResource("2_cka31")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lbgan")
+}
+
+[node name="Duration" type="Timer" parent="."]
+wait_time = 10.0
+
+[connection signal="timeout" from="Duration" to="." method="_on_duration_timeout"]

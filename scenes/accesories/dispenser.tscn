@@ -1,0 +1,256 @@
+[gd_scene load_steps=12 format=3 uid="uid://bnhw277e04mxp"]
+
+[ext_resource type="Script" path="res://scripts/dispenser.gd" id="1_rotxr"]
+[ext_resource type="PackedScene" uid="uid://cot5l3wrd8b65" path="res://scenes/containers/energy-summoner.tscn" id="2_5o1iy"]
+[ext_resource type="Texture2D" uid="uid://dpndo4gn5r1y8" path="res://assets/sprites/accesories/dispenser.png" id="3_ay5c1"]
+[ext_resource type="Texture2D" uid="uid://cnibli34xcod4" path="res://assets/sprites/accesories/dispenser-barrel.png" id="4_cfp7s"]
+[ext_resource type="FontFile" uid="uid://cn7hc30kplvpo" path="res://assets/fonts/digital.otf" id="4_i0bv4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vh1f3"]
+font = ExtResource("4_i0bv4")
+font_size = 48
+
+[sub_resource type="Animation" id="Animation_jtglg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dispenser/Dispenser-barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2.57897e-06, 59)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dispenser:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dispenser/DisplayText:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dispenser/DisplayText:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5wy5x"]
+resource_name = "dispense"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dispenser/Dispenser-barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.277392, 1),
+"update": 0,
+"values": [Vector2(0, 30), Vector2(-2.57897e-06, 59)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dispenser:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.217638, 1),
+"update": 0,
+"values": [Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dispenser/DisplayText:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0352084, 0.0730248, 0.101713),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_4hok0"]
+resource_name = "timer_start"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dispenser/Dispenser-barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(5.09824, 1),
+"update": 0,
+"values": [Vector2(-2.57897e-06, 59), Vector2(0, 30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dispenser:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(0.258816, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 0.9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dispenser/DisplayText:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.09723, 1.14924, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dispenser/DisplayText:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.364706)]
+}
+
+[sub_resource type="Animation" id="Animation_sjfnl"]
+resource_name = "timer_stop"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dispenser/DisplayText:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.606638, 0.747878, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dispenser/DisplayText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.364706), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dispenser:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(0.176777, 1),
+"update": 0,
+"values": [Vector2(0.900013, 0.900013), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dispenser/Dispenser-barrel:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(0.517632, 1),
+"update": 0,
+"values": [Vector2(0, 30), Vector2(0, 59)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_okaqr"]
+_data = {
+"RESET": SubResource("Animation_jtglg"),
+"dispense": SubResource("Animation_5wy5x"),
+"timer_start": SubResource("Animation_4hok0"),
+"timer_stop": SubResource("Animation_sjfnl")
+}
+
+[node name="Dispenser" type="Node2D" node_paths=PackedStringArray("animation_player", "display_text")]
+z_index = 10
+script = ExtResource("1_rotxr")
+container = ExtResource("2_5o1iy")
+animation_player = NodePath("AnimationPlayer")
+display_text = NodePath("Dispenser/DisplayText")
+
+[node name="PayloadTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="CooldownTimer" type="Timer" parent="."]
+
+[node name="Dispenser" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("3_ay5c1")
+
+[node name="DisplayText" type="Label" parent="Dispenser"]
+offset_left = -67.0
+offset_top = -24.0
+offset_right = 69.0
+offset_bottom = 25.0
+pivot_offset = Vector2(68.5, 24)
+text = "test"
+label_settings = SubResource("LabelSettings_vh1f3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dispenser-barrel" type="Sprite2D" parent="Dispenser"]
+show_behind_parent = true
+position = Vector2(-2.57897e-06, 59)
+rotation = -3.14159
+texture = ExtResource("4_cfp7s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_okaqr")
+}
+
+[connection signal="timeout" from="PayloadTimer" to="." method="_on_payload_timer_timeout"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

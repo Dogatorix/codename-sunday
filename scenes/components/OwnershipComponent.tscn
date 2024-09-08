@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://kbt5l5in2465"]
+
+[ext_resource type="PackedScene" uid="uid://cjxqex8nwxfk0" path="res://scenes/tanks/tank-interface.tscn" id="1_g7jhs"]
+
+[node name="OwnershipComponent" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-132, -12)
+zoom = Vector2(0.75, 0.75)
+position_smoothing_speed = 10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TankInterface" parent="CanvasLayer" instance=ExtResource("1_g7jhs")]
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = -2.0
+metadata/_edit_use_anchors_ = true

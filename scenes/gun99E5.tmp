@@ -1,0 +1,124 @@
+[gd_scene load_steps=13 format=3 uid="uid://cse6sqfqscs8i"]
+
+[ext_resource type="Texture2D" uid="uid://c858k56rvrjan" path="res://assets/sprites/gunner-barrel-1.png" id="1_7nyao"]
+[ext_resource type="Script" path="res://scripts/tank-basic.gd" id="1_8actv"]
+[ext_resource type="Texture2D" uid="uid://d16rmjxdqyue8" path="res://assets/sprites/gunner-core-1.png" id="2_7vnue"]
+[ext_resource type="Script" path="res://scripts/components/Shooting.gd" id="4_bv578"]
+[ext_resource type="Script" path="res://scripts/components/Stats.gd" id="5_3rvtn"]
+[ext_resource type="Script" path="res://scripts/components/Movement.gd" id="6_ayqrd"]
+[ext_resource type="Script" path="res://scripts/components/CameraControl.gd" id="7_g2ajj"]
+[ext_resource type="Script" path="res://scripts/components/Interface.gd" id="8_tfg87"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uptx3"]
+radius = 146.113
+
+[sub_resource type="Animation" id="Animation_ilcse"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Core/Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -145)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Core/Barrel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cn3t0"]
+resource_name = "shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Core/Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -141.667), Vector2(0, -145)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Core/Barrel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.15607, 0.833333), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ebg0v"]
+_data = {
+"RESET": SubResource("Animation_ilcse"),
+"shoot": SubResource("Animation_cn3t0")
+}
+
+[node name="Gunner" type="CharacterBody2D" node_paths=PackedStringArray("movement_node", "stats_node", "shooting_node", "camera_node", "shoot_origin")]
+z_index = 3
+script = ExtResource("1_8actv")
+movement_node = NodePath("MovementComponent")
+stats_node = NodePath("StatsComponent")
+shooting_node = NodePath("ShootingComponent")
+camera_node = NodePath("CameraControlComponent")
+shoot_origin = NodePath("Core/ShootOrigin")
+metadata/core_tier = 1
+
+[node name="Core" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_7vnue")
+
+[node name="ShootOrigin" type="Node2D" parent="Core"]
+position = Vector2(0, -300)
+scale = Vector2(5, 5)
+
+[node name="Barrel" type="Sprite2D" parent="Core"]
+show_behind_parent = true
+position = Vector2(0, -145)
+texture = ExtResource("1_7nyao")
+offset = Vector2(0, -100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("CircleShape2D_uptx3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ebg0v")
+}
+
+[node name="ShootingComponent" type="Node" parent="." node_paths=PackedStringArray("animation_player")]
+script = ExtResource("4_bv578")
+animation_player = NodePath("../AnimationPlayer")
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("5_3rvtn")
+
+[node name="MovementComponent" type="Node2D" parent="." node_paths=PackedStringArray("stats_node")]
+script = ExtResource("6_ayqrd")
+stats_node = NodePath("../StatsComponent")
+
+[node name="CameraControlComponent" type="Node2D" parent="."]
+script = ExtResource("7_g2ajj")
+
+[node name="InterfaceComponent" type="Node" parent="."]
+script = ExtResource("8_tfg87")

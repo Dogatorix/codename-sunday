@@ -1,0 +1,162 @@
+[gd_scene load_steps=18 format=3 uid="uid://tg86jcs0270c"]
+
+[ext_resource type="Script" path="res://scripts/components/Tank.gd" id="1_4ewrs"]
+[ext_resource type="Texture2D" uid="uid://d16rmjxdqyue8" path="res://assets/sprites/tanks/gunner-core-1.png" id="2_wywic"]
+[ext_resource type="Texture2D" uid="uid://c858k56rvrjan" path="res://assets/sprites/tanks/gunner-barrel-1.png" id="3_tu7dm"]
+[ext_resource type="Script" path="res://scripts/components/MovementBasic.gd" id="4_8vhhh"]
+[ext_resource type="Script" path="res://scripts/components/DashBasic.gd" id="5_ebw22"]
+[ext_resource type="AudioStream" uid="uid://db41fnatc8fwa" path="res://assets/audio/tanks/player-dash-1.mp3" id="6_shnpv"]
+[ext_resource type="AudioStream" uid="uid://b08cew7xnwfqi" path="res://assets/audio/tanks/player-dash-2.mp3" id="7_7n0s5"]
+[ext_resource type="AudioStream" uid="uid://c7v7qyq56nm4o" path="res://assets/audio/tanks/player-dash-3.mp3" id="8_biy38"]
+[ext_resource type="Script" path="res://scripts/components/Shake2D.gd" id="9_f1mgs"]
+[ext_resource type="Script" path="res://scripts/components/ShootBasic.gd" id="10_m4tgi"]
+[ext_resource type="AudioStream" uid="uid://ooiku30st7ax" path="res://assets/audio/tanks/basic/basic-shoot.mp3" id="11_phi3q"]
+[ext_resource type="Script" path="res://scripts/components/StatsBasic.gd" id="12_fudg3"]
+[ext_resource type="PackedScene" uid="uid://cjxqex8nwxfk0" path="res://scenes/tanks/tank-interface.tscn" id="13_ruvd6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bbwtc"]
+radius = 146.113
+
+[sub_resource type="Animation" id="Animation_wga42"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Core/Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -145)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Core/Barrel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bvg2f"]
+resource_name = "shoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Core/Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.353554, 1),
+"update": 0,
+"values": [Vector2(0, -142.083), Vector2(0, -145)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Core/Barrel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.353554, 1),
+"update": 0,
+"values": [Vector2(1.15607, 0.854167), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h1kpr"]
+_data = {
+"RESET": SubResource("Animation_wga42"),
+"shoot": SubResource("Animation_bvg2f")
+}
+
+[node name="Tank" type="CharacterBody2D" node_paths=PackedStringArray("component_container")]
+script = ExtResource("1_4ewrs")
+tank_name = "Basic"
+is_client = true
+component_container = NodePath("Components")
+
+[node name="Core" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_wywic")
+
+[node name="ShootOrigin" type="Node2D" parent="Core"]
+unique_name_in_owner = true
+position = Vector2(0, -300)
+scale = Vector2(5, 5)
+
+[node name="Barrel" type="Sprite2D" parent="Core"]
+show_behind_parent = true
+position = Vector2(0, -145)
+texture = ExtResource("3_tu7dm")
+offset = Vector2(0, -100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("CircleShape2D_bbwtc")
+
+[node name="Components" type="Node" parent="."]
+
+[node name="Movement" type="Node" parent="Components" node_paths=PackedStringArray("tank", "tank_sprite")]
+script = ExtResource("4_8vhhh")
+speed = 700.0
+tank = NodePath("../..")
+tank_sprite = NodePath("../../Core")
+
+[node name="Dash" type="Node" parent="Components" node_paths=PackedStringArray("tank", "movement", "tank_stats", "dash_shake")]
+script = ExtResource("5_ebw22")
+dash_strength = 4000
+dash_consumption = 30
+tank = NodePath("../..")
+movement = NodePath("../Movement")
+tank_stats = NodePath("../StatsBasic")
+dash_sounds = Array[AudioStream]([ExtResource("6_shnpv"), ExtResource("7_7n0s5"), ExtResource("8_biy38")])
+dash_shake = NodePath("Shake2D")
+
+[node name="Shake2D" type="Node2D" parent="Components/Dash"]
+scale = Vector2(0.997009, 1)
+script = ExtResource("9_f1mgs")
+shake_range = 1000
+auto_start = true
+intensity = 2.0
+intensity_decay = 15.0
+
+[node name="ShootBasic" type="Node" parent="Components" node_paths=PackedStringArray("tank", "animation_player", "origin", "tank_sprite", "delay", "audio_player")]
+script = ExtResource("10_m4tgi")
+tank = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
+origin = NodePath("../../Core/ShootOrigin")
+tank_sprite = NodePath("../../Core")
+delay = NodePath("Delay")
+audio_player = NodePath("PlayerShoot")
+
+[node name="PlayerShoot" type="AudioStreamPlayer2D" parent="Components/ShootBasic"]
+stream = ExtResource("11_phi3q")
+volume_db = -3.0
+
+[node name="Delay" type="Timer" parent="Components/ShootBasic"]
+wait_time = 0.5
+
+[node name="StatsBasic" type="Node" parent="Components" node_paths=PackedStringArray("tank")]
+script = ExtResource("12_fudg3")
+tank = NodePath("../..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Components/StatsBasic"]
+
+[node name="TankInterface" parent="Components/StatsBasic/CanvasLayer" node_paths=PackedStringArray("stats") instance=ExtResource("13_ruvd6")]
+stats = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h1kpr")
+}
+
+[connection signal="timeout" from="Components/ShootBasic/Delay" to="Components/ShootBasic" method="_on_delay_timeout"]

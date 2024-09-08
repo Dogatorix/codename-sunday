@@ -1,0 +1,368 @@
+[gd_scene load_steps=15 format=3 uid="uid://cjxqex8nwxfk0"]
+
+[ext_resource type="Script" path="res://scripts/tank-interface.gd" id="1_nxyiu"]
+[ext_resource type="StyleBox" uid="uid://df4emjaoaktea" path="res://assets/new_style_box_flat.tres" id="1_spksd"]
+[ext_resource type="Texture2D" uid="uid://b2fy6kf32eyog" path="res://assets/sprites/ui/generic-short-bar-progress.png" id="1_uv2ws"]
+[ext_resource type="Texture2D" uid="uid://4yxgoow1in3l" path="res://assets/sprites/ui/generic-short-bar-outline.png" id="2_5xjal"]
+[ext_resource type="Texture2D" uid="uid://dykgoa8mpl167" path="res://assets/sprites/ui/core-points-bar-progress.png" id="3_hlvs5"]
+[ext_resource type="Texture2D" uid="uid://c6nt036ty7sgv" path="res://assets/sprites/ui/health-meter-icon.png" id="3_wmi0n"]
+[ext_resource type="Texture2D" uid="uid://blok7ocfqc2so" path="res://assets/sprites/ui/rust-meter-icon.png" id="4_ux4o6"]
+[ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="4_v40fp"]
+[ext_resource type="Texture2D" uid="uid://bikyy43fg1q2l" path="res://assets/sprites/ui/generic-long-bar-progress.png" id="5_wddk4"]
+[ext_resource type="Texture2D" uid="uid://1ovmix6kacua" path="res://assets/sprites/ui/generic-long-bar-outline.png" id="6_603m2"]
+[ext_resource type="Texture2D" uid="uid://ddmhjclpgpt0i" path="res://assets/sprites/ui/hud-lens-circle.png" id="11_rsaw8"]
+
+[sub_resource type="Animation" id="Animation_47fxi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoreStats/CorePointsContainer/Flash:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.352941)]
+}
+
+[sub_resource type="Animation" id="Animation_76173"]
+resource_name = "on_point"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoreStats/CorePointsContainer/Flash:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8774c"]
+_data = {
+"RESET": SubResource("Animation_47fxi"),
+"on_point": SubResource("Animation_76173")
+}
+
+[node name="TankInterface" type="Control" node_paths=PackedStringArray("animation_player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nxyiu")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="CoreStats" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -549.0
+offset_top = -95.9999
+offset_right = -109.0
+offset_bottom = -25.9999
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.2, 1.2)
+theme_override_styles/panel = ExtResource("1_spksd")
+
+[node name="CorePointsContainer" type="Panel" parent="CoreStats"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 438.0
+offset_bottom = 30.0
+theme_override_styles/panel = ExtResource("1_spksd")
+
+[node name="Flash" type="Sprite2D" parent="CoreStats/CorePointsContainer"]
+modulate = Color(1, 1, 1, 0.352941)
+z_index = 1
+position = Vector2(218, 12)
+scale = Vector2(0.393, 0.326)
+texture = ExtResource("5_wddk4")
+
+[node name="CoreBar" type="TextureProgressBar" parent="CoreStats/CorePointsContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 1094.0
+offset_bottom = 64.0
+scale = Vector2(0.392113, 0.313061)
+step = 0.1
+texture_under = ExtResource("5_wddk4")
+texture_over = ExtResource("6_603m2")
+texture_progress = ExtResource("3_hlvs5")
+tint_under = Color(0.0823529, 0.0823529, 0.0823529, 1)
+tint_over = Color(0.670689, 0.67069, 0.670689, 1)
+
+[node name="CoreInfo" type="Panel" parent="CoreStats"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 33.0
+offset_right = 439.0
+offset_bottom = 59.0
+theme_override_styles/panel = ExtResource("1_spksd")
+
+[node name="Username" type="Label" parent="CoreStats/CoreInfo"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 288.0
+offset_top = -4.0
+offset_right = 599.0
+offset_bottom = 56.0
+scale = Vector2(0.44, 0.44)
+theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("4_v40fp")
+theme_override_font_sizes/font_size = 50
+text = "Username"
+horizontal_alignment = 2
+
+[node name="CoreLevel" type="Label" parent="CoreStats/CoreInfo"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 26.0
+offset_right = 209.0
+offset_bottom = 60.0
+scale = Vector2(0.359995, 0.359995)
+theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("4_v40fp")
+theme_override_font_sizes/font_size = 50
+text = "Core Lvl"
+
+[node name="PointsLeft" type="Label" parent="CoreStats/CoreInfo"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 293.0
+offset_top = -48.0
+offset_right = 783.0
+offset_bottom = 24.0
+scale = Vector2(0.240444, 0.239075)
+theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("4_v40fp")
+theme_override_font_sizes/font_size = 60
+text = "(X points left)"
+
+[node name="TankName" type="Label" parent="CoreStats/CoreInfo"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 92.0
+offset_top = -1.0
+offset_right = 501.0
+offset_bottom = 71.0
+scale = Vector2(0.320444, 0.31862)
+theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("4_v40fp")
+theme_override_font_sizes/font_size = 60
+text = "TankName
+"
+
+[node name="TankStats" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -158.0
+offset_right = 315.0
+offset_bottom = -47.9999
+grow_vertical = 0
+scale = Vector2(1.2, 1.2)
+theme_override_styles/panel = ExtResource("1_spksd")
+
+[node name="HealthContainer" type="Panel" parent="TankStats"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 14.0
+offset_top = 8.0
+offset_right = -13.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("1_spksd")
+
+[node name="HealthBarOffset" type="TextureProgressBar" parent="TankStats/HealthContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 50.0
+offset_top = 6.0
+offset_right = 599.0
+offset_bottom = 68.0
+scale = Vector2(0.433823, 0.396899)
+step = 0.1
+value = 100.0
+texture_under = ExtResource("1_uv2ws")
+texture_over = ExtResource("2_5xjal")
+texture_progress = ExtResource("1_uv2ws")
+tint_under = Color(0.29, 0, 0, 1)
+tint_over = Color(1, 0, 0, 0)
+
+[node name="HealthBar" type="TextureProgressBar" parent="TankStats/HealthContainer"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_left = 50.0
+offset_top = 6.0
+offset_right = 599.0
+offset_bottom = 68.0
+scale = Vector2(0.438535, 0.447117)
+step = 0.1
+value = 100.0
+texture_under = ExtResource("1_uv2ws")
+texture_over = ExtResource("2_5xjal")
+texture_progress = ExtResource("1_uv2ws")
+tint_under = Color(0.290196, 0, 0, 0)
+tint_over = Color(1, 0, 0, 1)
+tint_progress = Color(1, 0, 0.0166664, 1)
+
+[node name="TextureRect" type="TextureRect" parent="TankStats/HealthContainer"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 416.0
+offset_bottom = 370.0
+scale = Vector2(0.0799994, 0.0799994)
+texture = ExtResource("3_wmi0n")
+
+[node name="RustContainer" type="Panel" parent="TankStats"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 14.0
+offset_top = 48.0
+offset_right = -13.0
+offset_bottom = 86.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("1_spksd")
+
+[node name="RustBarOffset" type="TextureProgressBar" parent="TankStats/RustContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 50.0
+offset_top = 6.0
+offset_right = 599.0
+offset_bottom = 68.0
+scale = Vector2(0.438865, 0.43359)
+texture_under = ExtResource("1_uv2ws")
+texture_over = ExtResource("2_5xjal")
+texture_progress = ExtResource("1_uv2ws")
+tint_under = Color(0.28, 0.135333, 0, 1)
+tint_over = Color(1, 0.482353, 0, 0)
+
+[node name="RustBar" type="TextureProgressBar" parent="TankStats/RustContainer"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_left = 50.0
+offset_top = 6.0
+offset_right = 599.0
+offset_bottom = 68.0
+scale = Vector2(0.44049, 0.441743)
+texture_under = ExtResource("1_uv2ws")
+texture_over = ExtResource("2_5xjal")
+texture_progress = ExtResource("1_uv2ws")
+tint_under = Color(0.278431, 0.137255, 0, 0)
+tint_over = Color(1, 0.483333, 0, 1)
+tint_progress = Color(1, 0.483333, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="TankStats/RustContainer"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 385.0
+offset_bottom = 411.0
+scale = Vector2(0.0799994, 0.0799994)
+texture = ExtResource("4_ux4o6")
+
+[node name="ManaContainer" type="Panel" parent="TankStats"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -307.0
+offset_top = 35.0
+offset_right = -13.0
+offset_bottom = 48.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_spksd")
+
+[node name="ManaBar" type="TextureProgressBar" parent="TankStats/ManaContainer"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 1093.0
+offset_bottom = 64.0
+scale = Vector2(0.258876, 0.153061)
+step = 0.1
+value = 100.0
+texture_under = ExtResource("5_wddk4")
+texture_over = ExtResource("6_603m2")
+texture_progress = ExtResource("5_wddk4")
+tint_under = Color(0, 0.203922, 0.278431, 0)
+tint_over = Color(0, 0.733333, 1, 1)
+tint_progress = Color(0, 0.733333, 1, 1)
+
+[node name="ManaBarOffset" type="TextureProgressBar" parent="TankStats/ManaContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 1093.0
+offset_bottom = 64.0
+scale = Vector2(0.258876, 0.153061)
+step = 0.1
+value = 100.0
+texture_under = ExtResource("5_wddk4")
+texture_over = ExtResource("6_603m2")
+texture_progress = ExtResource("5_wddk4")
+tint_under = Color(0, 0.205333, 0.28, 1)
+tint_over = Color(0, 0.733333, 1, 1)
+
+[node name="GameVersion" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 801.0
+offset_top = 23.0
+offset_right = 1837.0
+offset_bottom = 83.0
+scale = Vector2(0.44, 0.44)
+theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("4_v40fp")
+theme_override_font_sizes/font_size = 50
+text = "VERSION"
+horizontal_alignment = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8774c")
+}
+autoplay = "on_point"
+
+[node name="Hud-lens-circle" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.74902)
+z_index = -4
+position = Vector2(639.5, 358)
+scale = Vector2(1.00391, 0.923077)
+texture = ExtResource("11_rsaw8")
+metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

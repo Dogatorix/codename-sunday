@@ -1,0 +1,294 @@
+[gd_scene load_steps=20 format=3 uid="uid://cpdu42h25sfri"]
+
+[ext_resource type="Script" path="res://scripts/components/Tank.gd" id="1_ontu8"]
+[ext_resource type="Texture2D" uid="uid://d16rmjxdqyue8" path="res://assets/sprites/tanks/gunner-core-1.png" id="2_wd45c"]
+[ext_resource type="Texture2D" uid="uid://bnviddut5e4a5" path="res://assets/sprites/tanks/rapid-fire-barrel.png" id="3_htbya"]
+[ext_resource type="Texture2D" uid="uid://cw5ye4knf8x0h" path="res://assets/sprites/ui/tank-generic-bar.png.png" id="4_ipju3"]
+[ext_resource type="Script" path="res://scripts/components/MovementBasic.gd" id="5_kmbnf"]
+[ext_resource type="Script" path="res://scripts/components/DashBasic.gd" id="6_i6njt"]
+[ext_resource type="AudioStream" uid="uid://db41fnatc8fwa" path="res://assets/audio/tanks/player-dash-1.mp3" id="7_c44ga"]
+[ext_resource type="Script" path="res://scripts/components/Shake2D.gd" id="7_owimm"]
+[ext_resource type="Script" path="res://scripts/components/StatsBasic.gd" id="7_v4ui3"]
+[ext_resource type="AudioStream" uid="uid://b08cew7xnwfqi" path="res://assets/audio/tanks/player-dash-2.mp3" id="8_8fqrb"]
+[ext_resource type="AudioStream" uid="uid://c7v7qyq56nm4o" path="res://assets/audio/tanks/player-dash-3.mp3" id="9_vxe33"]
+[ext_resource type="Script" path="res://scripts/components/ShootingRapid.gd" id="10_atl0p"]
+[ext_resource type="PackedScene" uid="uid://cjxqex8nwxfk0" path="res://scenes/tanks/tank-interface.tscn" id="12_d2681"]
+[ext_resource type="AudioStream" uid="uid://bvtfshg87bfkl" path="res://assets/audio/tanks/rapid-fire/rapid-fire-shoot.mp3" id="14_lox6u"]
+
+[sub_resource type="Animation" id="Animation_ilcse"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Core/BarrelRight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(55, -140)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Core/BarrelRight:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Core/BarrelLeft:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-60, -140)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Core/BarrelLeft:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Core/BarrelRight/CooldownRight:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.619337, 0.857355)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Core/BarrelLeft/CooldownLeft:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.619337, 0.857356)]
+}
+
+[sub_resource type="Animation" id="Animation_l46qf"]
+resource_name = "shoot_left"
+length = 0.18
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Core/BarrelLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(0.329877, 1),
+"update": 0,
+"values": [Vector2(-60, -137.5), Vector2(-60, -140)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Core/BarrelLeft:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(0.329877, 1),
+"update": 0,
+"values": [Vector2(1.134, 0.7), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Core/BarrelRight/CooldownRight:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 0.857), Vector2(0.619337, 0.857355)]
+}
+
+[sub_resource type="Animation" id="Animation_7mv10"]
+resource_name = "shoot_right"
+length = 0.18
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Core/BarrelRight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(0.31864, 1),
+"update": 0,
+"values": [Vector2(55, -137.5), Vector2(55, -140)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Core/BarrelRight:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(0.31864, 1),
+"update": 0,
+"values": [Vector2(1.134, 0.7), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Core/BarrelLeft/CooldownLeft:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 0.857), Vector2(0.619337, 0.857356)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ebg0v"]
+_data = {
+"RESET": SubResource("Animation_ilcse"),
+"shoot_left": SubResource("Animation_l46qf"),
+"shoot_right": SubResource("Animation_7mv10")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m8dbk"]
+radius = 35.0
+
+[node name="Rapid" type="CharacterBody2D" node_paths=PackedStringArray("component_container")]
+script = ExtResource("1_ontu8")
+tank_name = "Rapid Fire"
+core_tier = 2
+component_container = NodePath("Components")
+
+[node name="Components" type="Node" parent="."]
+
+[node name="MovementBasic" type="Node" parent="Components" node_paths=PackedStringArray("tank", "tank_sprite")]
+script = ExtResource("5_kmbnf")
+speed = 800.0
+tank = NodePath("../..")
+tank_sprite = NodePath("../../Core")
+
+[node name="DashBasic" type="Node" parent="Components" node_paths=PackedStringArray("tank", "movement", "tank_stats", "dash_shake")]
+script = ExtResource("6_i6njt")
+dash_strength = 2800
+tank = NodePath("../..")
+movement = NodePath("../MovementBasic")
+tank_stats = NodePath("../StatsBasic")
+dash_sounds = Array[AudioStream]([ExtResource("7_c44ga"), ExtResource("8_8fqrb"), ExtResource("9_vxe33")])
+dash_shake = NodePath("Shake2D")
+
+[node name="Shake2D" type="Node2D" parent="Components/DashBasic"]
+scale = Vector2(0.997009, 1)
+script = ExtResource("7_owimm")
+shake_range = 1000
+intensity = 3.0
+intensity_decay = 15.0
+
+[node name="StatsBasic" type="Node" parent="Components" node_paths=PackedStringArray("tank")]
+script = ExtResource("7_v4ui3")
+max_core_points = 2000
+tank = NodePath("../..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Components/StatsBasic"]
+
+[node name="TankInterface" parent="Components/StatsBasic/CanvasLayer" node_paths=PackedStringArray("stats") instance=ExtResource("12_d2681")]
+stats = NodePath("../..")
+
+[node name="ShootingRapid" type="Node" parent="Components" node_paths=PackedStringArray("tank", "tank_sprite", "animation_player", "origin_left", "origin_right", "delay", "audio_player")]
+script = ExtResource("10_atl0p")
+tank = NodePath("../..")
+tank_sprite = NodePath("../../Core")
+animation_player = NodePath("../../AnimationPlayer")
+origin_left = NodePath("../../Core/ShootOriginLeft")
+origin_right = NodePath("../../Core/ShootOriginRight")
+delay = NodePath("Delay")
+audio_player = NodePath("PlayerShoot")
+
+[node name="PlayerShoot" type="AudioStreamPlayer2D" parent="Components/ShootingRapid"]
+stream = ExtResource("14_lox6u")
+volume_db = -6.0
+max_polyphony = 5
+
+[node name="Delay" type="Timer" parent="Components/ShootingRapid"]
+wait_time = 0.2
+
+[node name="Core" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_wd45c")
+
+[node name="ShootOriginLeft" type="Node2D" parent="Core"]
+unique_name_in_owner = true
+position = Vector2(-60, -320)
+scale = Vector2(5, 5)
+
+[node name="ShootOriginRight" type="Node2D" parent="Core"]
+unique_name_in_owner = true
+position = Vector2(55, -320)
+scale = Vector2(5, 5)
+
+[node name="BarrelRight" type="Sprite2D" parent="Core"]
+show_behind_parent = true
+position = Vector2(55, -140)
+texture = ExtResource("3_htbya")
+offset = Vector2(0, -100)
+
+[node name="CooldownRight" type="Sprite2D" parent="Core/BarrelRight"]
+modulate = Color(0.435192, 0.435192, 0.435192, 1)
+position = Vector2(0, -190)
+rotation = 1.57079
+scale = Vector2(0.619337, 0.857355)
+texture = ExtResource("4_ipju3")
+offset = Vector2(104, 0)
+
+[node name="BarrelLeft" type="Sprite2D" parent="Core"]
+show_behind_parent = true
+position = Vector2(-60, -140)
+texture = ExtResource("3_htbya")
+offset = Vector2(0, -100)
+
+[node name="CooldownLeft" type="Sprite2D" parent="Core/BarrelLeft"]
+modulate = Color(0.435192, 0.435192, 0.435192, 1)
+position = Vector2(0, -190)
+rotation = 1.57079
+scale = Vector2(0.619337, 0.857356)
+texture = ExtResource("4_ipju3")
+offset = Vector2(104, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_ebg0v")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_m8dbk")
+
+[connection signal="timeout" from="Components/ShootingRapid/Delay" to="Components/ShootingRapid" method="_on_delay_timeout"]

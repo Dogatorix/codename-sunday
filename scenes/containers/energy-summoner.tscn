@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cot5l3wrd8b65"]
+
+[ext_resource type="Script" path="res://scripts/energy-summoner.gd" id="1_jcokp"]
+[ext_resource type="PackedScene" uid="uid://c16ys2yxno5hk" path="res://scenes/containers/experience-orb.tscn" id="2_j3ndp"]
+[ext_resource type="Texture2D" uid="uid://cbnqnp7c78r7m" path="res://assets/sprites/energy/energy-placeholder.png" id="2_lytoe"]
+[ext_resource type="Texture2D" uid="uid://dan7a5p6b4w8k" path="res://assets/sprites/ui/energy-damage-bar-outline.png" id="3_0xr6a"]
+[ext_resource type="Texture2D" uid="uid://cvyhqoomv7h5x" path="res://assets/sprites/ui/energy-damage-bar-progress.png" id="4_icu4s"]
+
+[node name="EnergySummoner" type="Node2D" node_paths=PackedStringArray("healthbar", "placeholder_node")]
+script = ExtResource("1_jcokp")
+healthbar = NodePath("TextureProgressBar")
+placeholder_node = NodePath("Sprite2D")
+experience_orb_scene = ExtResource("2_j3ndp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, -2)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_lytoe")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+z_index = 10
+offset_left = -54.0
+offset_top = -87.0
+offset_right = 341.0
+offset_bottom = -7.0
+scale = Vector2(0.279999, 0.279999)
+value = 100.0
+texture_over = ExtResource("3_0xr6a")
+texture_progress = ExtResource("4_icu4s")
+tint_progress = Color(0.116667, 1, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

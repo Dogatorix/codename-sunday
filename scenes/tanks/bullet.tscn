@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbdruvih6st8j"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_nr2ty"]
+[ext_resource type="Texture2D" uid="uid://t1ybkxhvr3ab" path="res://assets/sprites/tanks/bullet-normal.png" id="2_6t811"]
+[ext_resource type="AudioStream" uid="uid://p4qo1hyh71a8" path="res://assets/audio/tanks/bullet-wall-hit-2.mp3" id="3_88hre"]
+[ext_resource type="AudioStream" uid="uid://bsjfq7ats4kev" path="res://assets/audio/tanks/bullet-wall-hit-1.mp3" id="3_w07dv"]
+[ext_resource type="AudioStream" uid="uid://b8aqi3mtbi0qr" path="res://assets/audio/tanks/bullet-wall-hit-3.mp3" id="4_ctwek"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0iprt"]
+size = Vector2(160, 140)
+
+[node name="Bullet" type="RigidBody2D"]
+z_index = -1
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_nr2ty")
+wall_sounds = Array[AudioStream]([ExtResource("3_w07dv"), ExtResource("3_88hre"), ExtResource("4_ctwek")])
+metadata/is_bullet = true
+
+[node name="Bullet" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_6t811")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("RectangleShape2D_0iprt")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_w07dv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

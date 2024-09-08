@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw60ijk5yhl6r"]
+
+[ext_resource type="Script" path="res://scripts/particle-death-timer.gd" id="1_62ler"]
+
+[sub_resource type="Curve" id="Curve_vjnkd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.423729, 0.417582), -1.87025, -1.87025, 0, 0, Vector2(0.915254, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="BulletDeathParticle" type="CPUParticles2D"]
+lifetime = 0.5
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 400.0
+scale_amount_min = 5.0
+scale_amount_max = 16.0
+scale_amount_curve = SubResource("Curve_vjnkd")
+script = ExtResource("1_62ler")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.45
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
