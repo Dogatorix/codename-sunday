@@ -3,14 +3,11 @@ extends RigidBody2D
 @onready var sprite = $Sprite2D
 @onready var animation_player = $AnimationPlayer
 
-@export var max_health: float
+@export var max_health: float 
 @export var energy: int
 @export var death_color: Color
 
 @export var default_damp: float = 1.0 
-
-@export var hit_sound: AudioStream
-@export var death_sounds: Array[AudioStream]
 
 var last_hit_by_bullet := false
 var is_being_born := true
@@ -47,8 +44,6 @@ func _on_body_entered(body):
 		
 	last_hit_by_bullet = true
 	
-	Helper.play_external_sound(get_parent(), hit_sound, -3)
-	
 	health -= body.bullet_damage
 	body.on_death()
 	
@@ -60,7 +55,7 @@ func check_health():
 			animation_player.stop()
 
 		if last_hit_by_bullet:
-			Helper.play_external_sound(self, death_sounds.pick_random(), -2)
+			%DeathAudio.start()
 		
 		death.emit(energy, death_color)
 		$Hitbox.queue_free()

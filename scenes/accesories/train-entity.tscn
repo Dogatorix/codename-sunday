@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://c7wnw3kbi5ma0"]
 
-[ext_resource type="Texture2D" uid="uid://c23o8tfpwjwja" path="res://assets/sprites/accesories/train-entity.png" id="1_eipa3"]
-[ext_resource type="Script" path="res://scripts/train-entity.gd" id="1_ovyi8"]
-[ext_resource type="Texture2D" uid="uid://sgmcwdsxq7ea" path="res://assets/sprites/accesories/train-hinge.png" id="2_cka31"]
+[ext_resource type="Texture2D" uid="uid://c23o8tfpwjwja" path="res://assets/sprites/accesories/train/train-entity.png" id="1_eipa3"]
+[ext_resource type="Script" path="res://scripts/accesories/train-entity.gd" id="1_ovyi8"]
+[ext_resource type="Texture2D" uid="uid://sgmcwdsxq7ea" path="res://assets/sprites/accesories/train/train-hinge.png" id="2_cka31"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rclv5"]
 size = Vector2(268, 645)
@@ -246,6 +246,6 @@ libraries = {
 }
 
 [node name="Duration" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 12.0
 
 [connection signal="timeout" from="Duration" to="." method="_on_duration_timeout"]

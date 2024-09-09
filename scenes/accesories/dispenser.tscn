@@ -1,10 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnhw277e04mxp"]
+[gd_scene load_steps=18 format=3 uid="uid://bnhw277e04mxp"]
 
-[ext_resource type="Script" path="res://scripts/dispenser.gd" id="1_rotxr"]
+[ext_resource type="Script" path="res://scripts/accesories/dispenser.gd" id="1_rotxr"]
 [ext_resource type="PackedScene" uid="uid://cot5l3wrd8b65" path="res://scenes/containers/energy-summoner.tscn" id="2_5o1iy"]
 [ext_resource type="Texture2D" uid="uid://dpndo4gn5r1y8" path="res://assets/sprites/accesories/dispenser.png" id="3_ay5c1"]
 [ext_resource type="Texture2D" uid="uid://cnibli34xcod4" path="res://assets/sprites/accesories/dispenser-barrel.png" id="4_cfp7s"]
 [ext_resource type="FontFile" uid="uid://cn7hc30kplvpo" path="res://assets/fonts/digital.otf" id="4_i0bv4"]
+[ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="6_jtxah"]
+[ext_resource type="AudioStream" uid="uid://dkqvhar1gvaxx" path="res://assets/audio/accesories/dispenser/close.mp3" id="6_m5tfy"]
+[ext_resource type="AudioStream" uid="uid://83pg1srswiai" path="res://assets/audio/accesories/dispenser/shoot-1.mp3" id="7_kls7s"]
+[ext_resource type="AudioStream" uid="uid://ckaotmw1nv3ab" path="res://assets/audio/accesories/dispenser/shoot-2.mp3" id="8_c3ysf"]
+[ext_resource type="AudioStream" uid="uid://cg02i1otqo73m" path="res://assets/audio/accesories/dispenser/recharge.mp3" id="10_bfric"]
+[ext_resource type="AudioStream" uid="uid://dtglbi27iwljv" path="res://assets/audio/accesories/dispenser/tick.mp3" id="11_ayud1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vh1f3"]
 font = ExtResource("4_i0bv4")
@@ -251,6 +257,33 @@ texture = ExtResource("4_cfp7s")
 libraries = {
 "": SubResource("AnimationLibrary_okaqr")
 }
+
+[node name="CloseAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_m5tfy")
+volume_db = 5.0
+script = ExtResource("6_jtxah")
+
+[node name="ShootAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+volume_db = 5.0
+max_distance = 1000.0
+script = ExtResource("6_jtxah")
+sounds = Array[AudioStream]([ExtResource("7_kls7s"), ExtResource("8_c3ysf")])
+pitch_range = 0.05
+
+[node name="RechargeAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_bfric")
+volume_db = 5.0
+script = ExtResource("6_jtxah")
+
+[node name="TickAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("11_ayud1")
+max_distance = 1000.0
+script = ExtResource("6_jtxah")
+pitch_range = 0.03
 
 [connection signal="timeout" from="PayloadTimer" to="." method="_on_payload_timer_timeout"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

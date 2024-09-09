@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://xsf2thljmtlw"]
 
-[ext_resource type="Script" path="res://scripts/sliding-door.gd" id="1_qqb3g"]
+[ext_resource type="Script" path="res://scripts/accesories/sliding-door.gd" id="1_qqb3g"]
 [ext_resource type="Texture2D" uid="uid://y0d4bwa588xa" path="res://assets/sprites/accesories/sliding-door.png" id="1_vrr48"]
-[ext_resource type="AudioStream" uid="uid://bfe4lhm3tv5ra" path="res://assets/audio/door/door-open.mp3" id="2_0pui8"]
-[ext_resource type="AudioStream" uid="uid://2yfdneb70tke" path="res://assets/audio/door/door-close.mp3" id="3_abcu0"]
+[ext_resource type="AudioStream" uid="uid://bfe4lhm3tv5ra" path="res://assets/audio/accesories/door/door-open.mp3" id="2_0pui8"]
+[ext_resource type="AudioStream" uid="uid://2yfdneb70tke" path="res://assets/audio/accesories/door/door-close.mp3" id="3_abcu0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1qms"]
 size = Vector2(294, 272)

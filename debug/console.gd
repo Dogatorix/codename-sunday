@@ -29,10 +29,11 @@ func _ready():
 	
 	%Overlay.visible = false
 	%Command.editable = false
-	
-	
-	scope.nodes = get_tree().current_scene.get_children()
 	scope.name = get_tree().current_scene
+	update_scope()
+
+func update_scope():
+	scope.nodes = scope.name.get_children()
 	
 func _on_line_edit_text_submitted(text: String):
 	if Global.no_console or not text:
@@ -46,12 +47,17 @@ func _on_line_edit_text_submitted(text: String):
 	handle_commands(command, elements.slice(1))
 	
 func handle_commands(command: String, args: Array):
-	match command:
-		"scope":
+	if command == "scope" or command == "sc":
 			var operation = "all"
 			if args:
 				operation = args[0]
+			
+			if operation == "b":
+				operation = "back" 
 			 
+			if operation == "all":
+				update_scope()
+				
 			if operation != "all" and operation != "back":
 				var node_index = int(operation)
 					
@@ -72,7 +78,7 @@ func handle_commands(command: String, args: Array):
 				append(str(index) + ". " + str(scope.nodes[index]), false)
 			line_break()
 			
-		"target":
+	if command == "target" or command == "ta":
 			if not args:
 				append("Please specify arguments")
 				return
@@ -80,21 +86,21 @@ func handle_commands(command: String, args: Array):
 			target_node = scope.nodes[int(args[0])]
 			append("Target node: " + str(target_node))
 			
-		"get":
+	if command == "get":
 			get_target(target_node, args)
 		
-		"set":
+	if command == "set":
 			set_target(target_node, args)		
 			
-		"call":
+	if command == "call":
 			call_target(target_node, args)
 			
-		"select":
+	if command == "select" or command == "sel":
 			if not args:
 				append("Please specify arguments")
 				return
 			
-			if args[0] == "clear":
+			if args[0] == "clear" or args[0] == "c":
 				selected_nodes = []
 				append("Selection cleared")
 			else:
@@ -115,28 +121,28 @@ func handle_commands(command: String, args: Array):
 					append(selected, false)
 				line_break()
 		
-		"getall":
+	if command == "getall" or command == "geta":
 			for selected in selected_nodes:
 				get_target(selected, args, true)
 			line_break()
 			
-		"setall":
+	if command == "setall" or command == "seta":
 			for selected in selected_nodes:
 				set_target(selected, args)
 			line_break()
 		
-		"callall":
+	if command == "callall" or command == "calla":
 			for selected in selected_nodes:
 				call_target(selected, args, true)
-			
-		"clear":
+				
+	if command == "clear":
 			%Output.text = ""
 		
-		"refresh":
+	if command == "refresh":
 			_ready()
 			%Output.text = ""
 			
-		"help":
+	if command == "help":
 			append("List of all commands: \n")
 			append('scope {index} / "all" / "back" \n', false)
 			
@@ -151,7 +157,6 @@ func handle_commands(command: String, args: Array):
 			append('callall {method} {...args} \n', false)
 			
 			append('clear', false)
-			append('refresh', false)
 
 func get_target(target, args, multi := false):
 	if not target:
@@ -232,7 +237,9 @@ func string_to_type(value):
 		return result
 
 func format_time(ms: int) -> String:
+	@warning_ignore("integer_division")
 	var minutes = ms / 60000
+	@warning_ignore("integer_division")
 	var seconds = (ms % 60000) / 1000
 	var milliseconds = ms % 1000
 

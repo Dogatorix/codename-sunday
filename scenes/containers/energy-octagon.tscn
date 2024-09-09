@@ -1,11 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://chsxoowhjng33"]
+[gd_scene load_steps=10 format=3 uid="uid://chsxoowhjng33"]
 
 [ext_resource type="Script" path="res://scripts/energy-container.gd" id="1_o322k"]
-[ext_resource type="AudioStream" uid="uid://bb3bbtlmldkru" path="res://assets/audio/container/container-hit-1.mp3" id="2_csx2p"]
+[ext_resource type="AudioStream" uid="uid://bb3bbtlmldkru" path="res://assets/audio/accesories/container/container-hit-1.mp3" id="2_csx2p"]
 [ext_resource type="Texture2D" uid="uid://nhpi1s4vdqni" path="res://assets/sprites/energy/energy-octagon.png" id="2_deetq"]
-[ext_resource type="AudioStream" uid="uid://bjncn467tlabx" path="res://assets/audio/container/container-destroy-3.mp3" id="4_rvnd1"]
-[ext_resource type="AudioStream" uid="uid://t2ky6folefvp" path="res://assets/audio/container/container-destroy-1.mp3" id="5_1ybgp"]
-[ext_resource type="AudioStream" uid="uid://d23ncpvvechmk" path="res://assets/audio/container/container-destroy-2.mp3" id="6_14mxh"]
+[ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="4_7txs2"]
 
 [sub_resource type="Animation" id="Animation_ygvpe"]
 length = 0.001
@@ -212,8 +210,6 @@ max_health = 175.0
 energy = 100
 death_color = Color(0.192157, 0, 0.427451, 1)
 default_damp = 0.0
-hit_sound = ExtResource("2_csx2p")
-death_sounds = Array[AudioStream]([ExtResource("5_1ybgp"), ExtResource("6_14mxh"), ExtResource("4_rvnd1")])
 metadata/is_container = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -229,5 +225,12 @@ polygon = PackedVector2Array(-54, -54, -75, 0, -53, 53, 0, 76, 54, 53, 77, 0, 55
 libraries = {
 "": SubResource("AnimationLibrary_p4gj1")
 }
+
+[node name="DeathAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_csx2p")
+volume_db = -7.0
+script = ExtResource("4_7txs2")
+external = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -263,36 +263,49 @@ metadata/_edit_lock_ = true
 
 [node name="Sliding Door" parent="." instance=ExtResource("7_7hhek")]
 position = Vector2(416, 185)
-metadata/_edit_lock_ = true
 
 [node name="Sliding Door2" parent="." instance=ExtResource("8_dm0up")]
 position = Vector2(-711, -338)
-metadata/_edit_lock_ = true
 
 [node name="Dispenser" parent="." instance=ExtResource("9_2oome")]
 position = Vector2(-716, 709)
 rotation = -1.5708
-metadata/_edit_lock_ = true
 
 [node name="Train" parent="." instance=ExtResource("10_jjtwa")]
 
 [node name="TrainActivator" parent="Train" instance=ExtResource("11_py40o")]
-position = Vector2(-149, -1197)
+position = Vector2(-149, -1267)
 
 [node name="TrainGateStart" parent="Train" instance=ExtResource("11_bsaf2")]
-position = Vector2(149, -1386)
+position = Vector2(149, -1370)
 
 [node name="TrainGateEnd" parent="Train" instance=ExtResource("12_0bosm")]
 position = Vector2(153, -791)
 
 [node name="OilCanister" parent="." instance=ExtResource("14_xad84")]
-position = Vector2(-673, -891)
-metadata/_edit_lock_ = true
+position = Vector2(-481, 621)
 
 [node name="OilCanister2" parent="." instance=ExtResource("14_xad84")]
-position = Vector2(-682, -693)
-metadata/_edit_lock_ = true
+position = Vector2(-986, -485)
 
 [node name="Rapid" parent="." instance=ExtResource("13_oqtka")]
-position = Vector2(-166, -109)
+position = Vector2(-284, -1105)
 is_client = true
+
+[node name="Dispenser2" parent="." instance=ExtResource("9_2oome")]
+position = Vector2(499, 406)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 395.0
+offset_top = -1305.0
+offset_right = 830.0
+offset_bottom = -1141.0
+scale = Vector2(1.49339, 1.49339)
+bbcode_enabled = true
+text = "[color=black]TODO FOR ALPHA 0.9 :
+-Remake bullets
+-Fix door bug
+-Overhaul UI
+-Implement health (and deaths to that extent)
+-Fix train clip
+-Make enemy tanks"

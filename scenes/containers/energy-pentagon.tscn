@@ -1,11 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://x5ps14fky35x"]
+[gd_scene load_steps=11 format=3 uid="uid://x5ps14fky35x"]
 
 [ext_resource type="Script" path="res://scripts/energy-container.gd" id="1_737ok"]
 [ext_resource type="Texture2D" uid="uid://cflbrb5l2mpi3" path="res://assets/sprites/energy/energy-pentagon.png" id="2_72xti"]
-[ext_resource type="AudioStream" uid="uid://bb3bbtlmldkru" path="res://assets/audio/container/container-hit-1.mp3" id="2_f0wih"]
-[ext_resource type="AudioStream" uid="uid://t2ky6folefvp" path="res://assets/audio/container/container-destroy-1.mp3" id="5_hb6cp"]
-[ext_resource type="AudioStream" uid="uid://d23ncpvvechmk" path="res://assets/audio/container/container-destroy-2.mp3" id="6_3yds6"]
-[ext_resource type="AudioStream" uid="uid://bjncn467tlabx" path="res://assets/audio/container/container-destroy-3.mp3" id="7_0e3gc"]
+[ext_resource type="AudioStream" uid="uid://bb3bbtlmldkru" path="res://assets/audio/accesories/container/container-hit-1.mp3" id="2_f0wih"]
+[ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="4_sa1eu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x0fap"]
 radius = 170.294
@@ -214,8 +212,6 @@ max_health = 60.0
 energy = 35
 death_color = Color(0.290196, 0, 1, 1)
 default_damp = 2.0
-hit_sound = ExtResource("2_f0wih")
-death_sounds = Array[AudioStream]([ExtResource("5_hb6cp"), ExtResource("6_3yds6"), ExtResource("7_0e3gc")])
 metadata/is_container = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -233,5 +229,12 @@ shape = SubResource("CircleShape2D_x0fap")
 libraries = {
 "": SubResource("AnimationLibrary_p4gj1")
 }
+
+[node name="DeathAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_f0wih")
+volume_db = -7.0
+script = ExtResource("4_sa1eu")
+external = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

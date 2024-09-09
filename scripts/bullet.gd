@@ -6,11 +6,10 @@ var bullet_size
 
 var particle_scene = load("res://scenes/tanks/bullet-death-particle.tscn")
 
-signal death
-
 var owner_node: CharacterBody2D
 
 @export var wall_sounds: Array[AudioStream]
+@export var audio_player: Audio2D
 
 func _ready():
 	set_gravity_scale(0)
@@ -38,10 +37,10 @@ func set_stats(speed, damage, size):
 	bullet_size = size
 
 func _on_body_entered(body):
-	if body.has_meta("is_bullet") or body.has_meta("is_container"):
+	if body.has_meta("is_bullet"):
 		return
 		
-	if not body is RigidBody2D:
-		Helper.play_external_sound(self, wall_sounds.pick_random(), -5)
-		
-	on_death()
+	audio_player.start()
+	
+	if not body.has_meta("is_container"):
+		on_death()

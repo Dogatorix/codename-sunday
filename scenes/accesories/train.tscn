@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b7bmevf7o1fxa"]
 
-[ext_resource type="Script" path="res://scripts/train.gd" id="1_c0u77"]
+[ext_resource type="Script" path="res://scripts/accesories/train.gd" id="1_c0u77"]
 [ext_resource type="PackedScene" uid="uid://c7wnw3kbi5ma0" path="res://scenes/accesories/train-entity.tscn" id="2_xnr03"]
 
 [node name="Train" type="Node"]
@@ -8,7 +8,11 @@ script = ExtResource("1_c0u77")
 train_scene = ExtResource("2_xnr03")
 
 [node name="Delay" type="Timer" parent="."]
-wait_time = 7.0
+wait_time = 9.0
 one_shot = true
 
+[node name="ButtonDelay" type="Timer" parent="."]
+wait_time = 15.0
+
 [connection signal="timeout" from="Delay" to="." method="_on_delay_timeout"]
+[connection signal="timeout" from="ButtonDelay" to="." method="_on_button_delay_timeout"]

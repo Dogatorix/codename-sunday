@@ -23,7 +23,7 @@ func _ready():
 	stats.connect("mana_change", Callable(self, "_on_mana_change"))
 	stats.connect("points_change", Callable(self, "_on_points_change"))
 	
-	%GameVersion.text = "SUNDAY IN HELL - " + Global.GAME_VERSION
+	%GameVersion.text = "SUNDAY IN HELL - %s" % [ProjectSettings.get_setting("application/config/version")]
 	%CoreLevel.text = "Core " + str(stats.tank.core_tier)
 	%TankName.text = stats.tank.tank_name
 	%Username.text = stats.tank.username

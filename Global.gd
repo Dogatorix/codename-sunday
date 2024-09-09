@@ -3,8 +3,6 @@ extends Node
 var game_camera: GameCamera = null
 var clients: Array[Tank] = []
 
-const GAME_VERSION = "ALPHA 0.8"
-
 var	no_console := true
 
 const CORE_REQUIREMENT = {

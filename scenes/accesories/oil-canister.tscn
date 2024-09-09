@@ -1,14 +1,15 @@
-[gd_scene load_steps=20 format=3 uid="uid://dkre21e8af47i"]
+[gd_scene load_steps=21 format=3 uid="uid://dkre21e8af47i"]
 
 [ext_resource type="Texture2D" uid="uid://c48c7fo8f60ul" path="res://assets/sprites/accesories/oil-canister.png" id="1_lrwvv"]
-[ext_resource type="Script" path="res://scripts/oil-canister.gd" id="1_r07p2"]
-[ext_resource type="AudioStream" uid="uid://4xsv457rdngg" path="res://assets/audio/canister/canister-damage-1.mp3" id="2_0m10h"]
+[ext_resource type="Script" path="res://scripts/accesories/oil-canister.gd" id="1_r07p2"]
+[ext_resource type="AudioStream" uid="uid://4xsv457rdngg" path="res://assets/audio/accesories/canister/canister-damage-1.mp3" id="2_0m10h"]
 [ext_resource type="Texture2D" uid="uid://c3shko63nrnlx" path="res://assets/sprites/accesories/oil-canister-lit.png" id="2_ild5y"]
-[ext_resource type="AudioStream" uid="uid://c1oedcielpnej" path="res://assets/audio/canister/canister-damage-2.mp3" id="3_qfdt5"]
+[ext_resource type="AudioStream" uid="uid://c1oedcielpnej" path="res://assets/audio/accesories/canister/canister-damage-2.mp3" id="3_qfdt5"]
 [ext_resource type="PackedScene" uid="uid://bw60ijk5yhl6r" path="res://scenes/tanks/bullet-death-particle.tscn" id="4_2yvri"]
-[ext_resource type="AudioStream" uid="uid://dshknyqweyw2w" path="res://assets/audio/canister/canister-explode.mp3" id="5_cvpq2"]
-[ext_resource type="AudioStream" uid="uid://byc3dtp7lmqhu" path="res://assets/audio/canister/canister-fuse.mp3" id="5_thmav"]
-[ext_resource type="Script" path="res://scripts/components/Shake2D.gd" id="9_3lc52"]
+[ext_resource type="AudioStream" uid="uid://dshknyqweyw2w" path="res://assets/audio/accesories/canister/canister-explode.mp3" id="5_cvpq2"]
+[ext_resource type="AudioStream" uid="uid://byc3dtp7lmqhu" path="res://assets/audio/accesories/canister/canister-fuse.mp3" id="5_thmav"]
+[ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="9_3lc52"]
+[ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="10_bcbls"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vr873"]
 size = Vector2(54, 35)
@@ -117,7 +118,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8rbni"]
-size = Vector2(58, 70)
+size = Vector2(58, 114)
 
 [sub_resource type="Curve" id="Curve_lits1"]
 min_value = -200.0
@@ -137,16 +138,16 @@ point_count = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_r0l8d"]
 radius = 450.01
 
-[node name="OilCanister" type="StaticBody2D" node_paths=PackedStringArray("animation_player", "explosion_particles", "hit_zone", "fuse_audio_player", "explosion_shake")]
+[node name="OilCanister" type="StaticBody2D" node_paths=PackedStringArray("animation_player", "explosion_particles", "hit_zone", "explosion_shake", "hit_audio", "fuse_audio", "explosion_audio")]
 script = ExtResource("1_r07p2")
 animation_player = NodePath("AnimationPlayer")
 explosion_particles = NodePath("ExplosionParticles")
 nodes_to_remove = [NodePath("Oil-canister"), NodePath("CollisionShape2D"), NodePath("Area2D")]
 hit_zone = NodePath("HitZone")
-hit_sounds = Array[AudioStream]([ExtResource("2_0m10h"), ExtResource("3_qfdt5")])
-fuse_audio_player = NodePath("CanisterFuse")
-explosion_sound = ExtResource("5_cvpq2")
 explosion_shake = NodePath("Shake2D")
+hit_audio = NodePath("HitAudio")
+fuse_audio = NodePath("FuseAudio")
+explosion_audio = NodePath("ExplosionAudio")
 metadata/is_canister = true
 
 [node name="Oil-canister" type="Sprite2D" parent="."]
@@ -173,7 +174,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -36)
+position = Vector2(0, -58)
 shape = SubResource("RectangleShape2D_8rbni")
 
 [node name="ExplosionParticles" parent="." instance=ExtResource("4_2yvri")]
@@ -211,15 +212,28 @@ position = Vector2(0, -48)
 shape = SubResource("CircleShape2D_r0l8d")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
-[node name="CanisterFuse" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_thmav")
-
 [node name="Shake2D" type="Node2D" parent="."]
 script = ExtResource("9_3lc52")
 shake_range = 2500
 duration = 3.0
 one_shot = true
 intensity_decay = 10.0
+external = true
+
+[node name="HitAudio" type="AudioStreamPlayer2D" parent="."]
+volume_db = 5.0
+script = ExtResource("10_bcbls")
+sounds = Array[AudioStream]([ExtResource("2_0m10h"), ExtResource("3_qfdt5")])
+
+[node name="FuseAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_thmav")
+volume_db = -3.0
+script = ExtResource("10_bcbls")
+
+[node name="ExplosionAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_cvpq2")
+volume_db = 4.0
+script = ExtResource("10_bcbls")
 external = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

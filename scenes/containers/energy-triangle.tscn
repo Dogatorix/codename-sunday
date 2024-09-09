@@ -1,11 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dwea4mvieekpw"]
+[gd_scene load_steps=11 format=3 uid="uid://dwea4mvieekpw"]
 
 [ext_resource type="Script" path="res://scripts/energy-container.gd" id="1_1gv42"]
-[ext_resource type="AudioStream" uid="uid://bb3bbtlmldkru" path="res://assets/audio/container/container-hit-1.mp3" id="2_4vo5s"]
+[ext_resource type="AudioStream" uid="uid://bb3bbtlmldkru" path="res://assets/audio/accesories/container/container-hit-1.mp3" id="2_4vo5s"]
 [ext_resource type="Texture2D" uid="uid://c0rbqw7lnfkfh" path="res://assets/sprites/energy/energy-triangle.png" id="2_7671c"]
-[ext_resource type="AudioStream" uid="uid://t2ky6folefvp" path="res://assets/audio/container/container-destroy-1.mp3" id="5_k0im2"]
-[ext_resource type="AudioStream" uid="uid://d23ncpvvechmk" path="res://assets/audio/container/container-destroy-2.mp3" id="6_f34u8"]
-[ext_resource type="AudioStream" uid="uid://bjncn467tlabx" path="res://assets/audio/container/container-destroy-3.mp3" id="7_eoi6t"]
+[ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="4_irowy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1cwbu"]
 size = Vector2(35, 33)
@@ -177,8 +175,6 @@ script = ExtResource("1_1gv42")
 max_health = 30.0
 energy = 10
 death_color = Color(0.929412, 0.145098, 0, 1)
-hit_sound = ExtResource("2_4vo5s")
-death_sounds = Array[AudioStream]([ExtResource("5_k0im2"), ExtResource("6_f34u8"), ExtResource("7_eoi6t")])
 metadata/is_container = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
@@ -195,5 +191,12 @@ texture = ExtResource("2_7671c")
 libraries = {
 "": SubResource("AnimationLibrary_p4gj1")
 }
+
+[node name="DeathAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_4vo5s")
+volume_db = -7.0
+script = ExtResource("4_irowy")
+external = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

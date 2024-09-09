@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://t1poiajqrasi"]
 
-[ext_resource type="Texture2D" uid="uid://dw157cqsfmqlg" path="res://assets/sprites/accesories/train-gate-end.png" id="1_vf48g"]
+[ext_resource type="Texture2D" uid="uid://dw157cqsfmqlg" path="res://assets/sprites/accesories/train/train-gate-end.png" id="1_vf48g"]
 
 [node name="TrainGateEnd" type="Node2D"]
 z_index = 5
