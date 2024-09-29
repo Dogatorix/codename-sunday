@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwea4mvieekpw"]
+[gd_scene load_steps=12 format=3 uid="uid://dwea4mvieekpw"]
 
 [ext_resource type="Script" path="res://scripts/energy-container.gd" id="1_1gv42"]
 [ext_resource type="AudioStream" uid="uid://bb3bbtlmldkru" path="res://assets/audio/accesories/container/container-hit-1.mp3" id="2_4vo5s"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1cwbu"]
 size = Vector2(35, 33)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_l5a5w"]
+polygon = PackedVector2Array(-115, 80, -5, -110, 100, 80, 90, 85, -105, 85)
 
 [sub_resource type="Animation" id="Animation_ygvpe"]
 length = 0.001
@@ -186,6 +189,9 @@ modulate = Color(0, 0, 0, 1)
 position = Vector2(1, -2)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_7671c")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+occluder = SubResource("OccluderPolygon2D_l5a5w")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

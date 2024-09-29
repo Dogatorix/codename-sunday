@@ -16,7 +16,7 @@ var can_shoot: bool = true
 @export var tank: Tank
 @export var animation_player: AnimationPlayer
 @export var origin: Node2D
-@export var tank_sprite: Sprite2D
+@export var tank_sprite: Node2D
 @export var delay: Timer
 @export var audio_player: AudioStreamPlayer2D
 

@@ -16,7 +16,7 @@ var camera: GameCamera
 
 @export_group("References")
 @export var tank: Tank
-@export var tank_sprite: Sprite2D
+@export var tank_sprite: Node2D
 
 var velocity := Vector2.ZERO
 var dash_velocity := Vector2.ZERO

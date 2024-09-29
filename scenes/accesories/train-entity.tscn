@@ -176,7 +176,7 @@ grow_horizontal = 2
 size_flags_horizontal = 8
 
 [node name="Train-entity" type="Sprite2D" parent="Control"]
-z_index = 1
+z_index = -7
 position = Vector2(183, -1177)
 texture = ExtResource("1_eipa3")
 

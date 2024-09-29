@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dkre21e8af47i"]
+[gd_scene load_steps=22 format=3 uid="uid://dkre21e8af47i"]
 
 [ext_resource type="Texture2D" uid="uid://c48c7fo8f60ul" path="res://assets/sprites/accesories/oil-canister.png" id="1_lrwvv"]
 [ext_resource type="Script" path="res://scripts/accesories/oil-canister.gd" id="1_r07p2"]
@@ -138,6 +138,9 @@ point_count = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_r0l8d"]
 radius = 450.01
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f1kol"]
+polygon = PackedVector2Array(-27, -113, -27, -105, -30, -106, -30, -89, -27, -88, -27, -26, -30, -26, -30, -10, -20, -4, -7, -1, 7, 0, 20, -4, 30, -10, 30, -26, 27, -32, 27, -89, 30, -90, 30, -106, 27, -107, 27, -114, 16, -118, 5, -120, -7, -120, -20, -117)
+
 [node name="OilCanister" type="StaticBody2D" node_paths=PackedStringArray("animation_player", "explosion_particles", "hit_zone", "explosion_shake", "hit_audio", "fuse_audio", "explosion_audio")]
 script = ExtResource("1_r07p2")
 animation_player = NodePath("AnimationPlayer")
@@ -235,6 +238,9 @@ stream = ExtResource("5_cvpq2")
 volume_db = 4.0
 script = ExtResource("10_bcbls")
 external = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_f1kol")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

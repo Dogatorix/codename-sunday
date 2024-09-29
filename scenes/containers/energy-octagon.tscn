@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://chsxoowhjng33"]
+[gd_scene load_steps=11 format=3 uid="uid://chsxoowhjng33"]
 
 [ext_resource type="Script" path="res://scripts/energy-container.gd" id="1_o322k"]
 [ext_resource type="AudioStream" uid="uid://bb3bbtlmldkru" path="res://assets/audio/accesories/container/container-hit-1.mp3" id="2_csx2p"]
 [ext_resource type="Texture2D" uid="uid://nhpi1s4vdqni" path="res://assets/sprites/energy/energy-octagon.png" id="2_deetq"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="4_7txs2"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_72mh1"]
+polygon = PackedVector2Array(-300, -310, -430, -10, -305, 290, -10, 410, 295, 285, 415, -10, 290, -305, -10, -430)
 
 [sub_resource type="Animation" id="Animation_ygvpe"]
 length = 0.001
@@ -217,6 +220,9 @@ modulate = Color(0, 0, 0, 1)
 position = Vector2(2, 2)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("2_deetq")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+occluder = SubResource("OccluderPolygon2D_72mh1")
 
 [node name="Hitbox" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-54, -54, -75, 0, -53, 53, 0, 76, 54, 53, 77, 0, 55, -52, 1, -76)

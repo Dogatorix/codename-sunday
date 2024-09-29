@@ -1,7 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://cpdu42h25sfri"]
+[gd_scene load_steps=22 format=3 uid="uid://cpdu42h25sfri"]
 
 [ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_ontu8"]
-[ext_resource type="Texture2D" uid="uid://d16rmjxdqyue8" path="res://assets/sprites/tanks/gunner-core-1.png" id="2_wd45c"]
 [ext_resource type="Texture2D" uid="uid://bnviddut5e4a5" path="res://assets/sprites/tanks/rapid-fire-barrel.png" id="3_htbya"]
 [ext_resource type="Texture2D" uid="uid://cw5ye4knf8x0h" path="res://assets/sprites/ui/tank-generic-bar.png.png" id="4_ipju3"]
 [ext_resource type="Script" path="res://scripts/tank-components/MovementBasic.gd" id="5_kmbnf"]
@@ -15,13 +14,15 @@
 [ext_resource type="PackedScene" uid="uid://cjxqex8nwxfk0" path="res://scenes/tanks/tank-interface.tscn" id="12_d2681"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="12_hbufx"]
 [ext_resource type="AudioStream" uid="uid://bvtfshg87bfkl" path="res://assets/audio/tanks/rapid-fire/rapid-fire-shoot.mp3" id="14_lox6u"]
+[ext_resource type="Texture2D" uid="uid://b3rx5mjjudhk3" path="res://assets/sprites/tanks/gunner-core-1.png" id="15_ortqr"]
+[ext_resource type="Texture2D" uid="uid://v1h867arh4l5" path="res://assets/sprites/light.png" id="16_unnwa"]
 
 [sub_resource type="Animation" id="Animation_ilcse"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Core/BarrelRight:position")
+tracks/0/path = NodePath("TankSprite/Node2D/BarrelRight:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -33,7 +34,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Core/BarrelRight:scale")
+tracks/1/path = NodePath("TankSprite/Node2D/BarrelRight:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -45,7 +46,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Core/BarrelLeft:position")
+tracks/2/path = NodePath("TankSprite/Node2D/BarrelLeft:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -57,7 +58,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Core/BarrelLeft:scale")
+tracks/3/path = NodePath("TankSprite/Node2D/BarrelLeft:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -69,7 +70,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Core/BarrelRight/CooldownRight:scale")
+tracks/4/path = NodePath("TankSprite/Node2D/BarrelRight/CooldownRight:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -81,7 +82,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Core/BarrelLeft/CooldownLeft:scale")
+tracks/5/path = NodePath("TankSprite/Node2D/BarrelLeft/CooldownLeft:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -98,7 +99,7 @@ step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Core/BarrelLeft:position")
+tracks/0/path = NodePath("TankSprite/Node2D/BarrelLeft:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -110,7 +111,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Core/BarrelLeft:scale")
+tracks/1/path = NodePath("TankSprite/Node2D/BarrelLeft:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -122,7 +123,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Core/BarrelRight/CooldownRight:scale")
+tracks/2/path = NodePath("TankSprite/Node2D/BarrelRight/CooldownRight:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -139,7 +140,7 @@ step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Core/BarrelRight:position")
+tracks/0/path = NodePath("TankSprite/Node2D/BarrelRight:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -151,7 +152,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Core/BarrelRight:scale")
+tracks/1/path = NodePath("TankSprite/Node2D/BarrelRight:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -163,7 +164,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Core/BarrelLeft/CooldownLeft:scale")
+tracks/2/path = NodePath("TankSprite/Node2D/BarrelLeft/CooldownLeft:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -183,23 +184,73 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8dbk"]
 radius = 35.0
 
-[node name="Rapid" type="CharacterBody2D" node_paths=PackedStringArray("component_container")]
+[node name="Rapid" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite")]
 script = ExtResource("1_ontu8")
 tank_name = "Rapid Fire"
 core_tier = 2
 component_container = NodePath("Components")
+core_sprite = NodePath("TankSprite/Core")
+
+[node name="TankSprite" type="Node2D" parent="."]
+
+[node name="Core" type="Sprite2D" parent="TankSprite"]
+scale = Vector2(0.351487, 0.351487)
+texture = ExtResource("15_ortqr")
+
+[node name="ShootOriginLeft" type="Node2D" parent="TankSprite"]
+unique_name_in_owner = true
+position = Vector2(-12, -64)
+scale = Vector2(1, 1)
+
+[node name="ShootOriginRight" type="Node2D" parent="TankSprite"]
+unique_name_in_owner = true
+position = Vector2(11, -64)
+scale = Vector2(1, 1)
+
+[node name="Node2D" type="Node2D" parent="TankSprite"]
+z_index = -1
+scale = Vector2(0.2, 0.2)
+
+[node name="BarrelRight" type="Sprite2D" parent="TankSprite/Node2D"]
+show_behind_parent = true
+position = Vector2(55, -140)
+texture = ExtResource("3_htbya")
+offset = Vector2(0, -100)
+
+[node name="CooldownRight" type="Sprite2D" parent="TankSprite/Node2D/BarrelRight"]
+modulate = Color(0.332881, 0.332881, 0.332881, 1)
+position = Vector2(0, -190)
+rotation = 1.57079
+scale = Vector2(0.619337, 0.857355)
+texture = ExtResource("4_ipju3")
+offset = Vector2(104, 0)
+
+[node name="BarrelLeft" type="Sprite2D" parent="TankSprite/Node2D"]
+show_behind_parent = true
+position = Vector2(-60, -140)
+texture = ExtResource("3_htbya")
+offset = Vector2(0, -100)
+
+[node name="CooldownLeft" type="Sprite2D" parent="TankSprite/Node2D/BarrelLeft"]
+modulate = Color(0.333333, 0.333333, 0.333333, 1)
+position = Vector2(0, -190)
+rotation = 1.57079
+scale = Vector2(0.619337, 0.857356)
+texture = ExtResource("4_ipju3")
+offset = Vector2(104, 0)
 
 [node name="Components" type="Node" parent="."]
 
 [node name="MovementBasic" type="Node" parent="Components" node_paths=PackedStringArray("tank", "tank_sprite")]
 script = ExtResource("5_kmbnf")
-speed = 800.0
+speed = 650.0
+acceleration = 2000.0
 tank = NodePath("../..")
-tank_sprite = NodePath("../../Core")
+tank_sprite = NodePath("../../TankSprite")
 
 [node name="DashBasic" type="Node" parent="Components" node_paths=PackedStringArray("tank", "movement", "tank_stats", "audio_player", "dash_shake")]
 script = ExtResource("6_i6njt")
-dash_strength = 2800
+dash_strength = 3800
 tank = NodePath("../..")
 movement = NodePath("../MovementBasic")
 tank_stats = NodePath("../StatsBasic")
@@ -231,10 +282,10 @@ stats = NodePath("../..")
 [node name="ShootingRapid" type="Node" parent="Components" node_paths=PackedStringArray("tank", "tank_sprite", "animation_player", "origin_left", "origin_right", "delay", "audio_player")]
 script = ExtResource("10_atl0p")
 tank = NodePath("../..")
-tank_sprite = NodePath("../../Core")
+tank_sprite = NodePath("../../TankSprite")
 animation_player = NodePath("../../AnimationPlayer")
-origin_left = NodePath("../../Core/ShootOriginLeft")
-origin_right = NodePath("../../Core/ShootOriginRight")
+origin_left = NodePath("../../TankSprite/ShootOriginLeft")
+origin_right = NodePath("../../TankSprite/ShootOriginRight")
 delay = NodePath("Delay")
 audio_player = NodePath("Audio2D")
 
@@ -247,48 +298,6 @@ volume_db = -8.0
 script = ExtResource("12_hbufx")
 pitch_range = 0.1
 
-[node name="Core" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_wd45c")
-
-[node name="ShootOriginLeft" type="Node2D" parent="Core"]
-unique_name_in_owner = true
-position = Vector2(-60, -320)
-scale = Vector2(5, 5)
-
-[node name="ShootOriginRight" type="Node2D" parent="Core"]
-unique_name_in_owner = true
-position = Vector2(55, -320)
-scale = Vector2(5, 5)
-
-[node name="BarrelRight" type="Sprite2D" parent="Core"]
-show_behind_parent = true
-position = Vector2(55, -140)
-texture = ExtResource("3_htbya")
-offset = Vector2(0, -100)
-
-[node name="CooldownRight" type="Sprite2D" parent="Core/BarrelRight"]
-modulate = Color(0.435192, 0.435192, 0.435192, 1)
-position = Vector2(0, -190)
-rotation = 1.57079
-scale = Vector2(0.619337, 0.857355)
-texture = ExtResource("4_ipju3")
-offset = Vector2(104, 0)
-
-[node name="BarrelLeft" type="Sprite2D" parent="Core"]
-show_behind_parent = true
-position = Vector2(-60, -140)
-texture = ExtResource("3_htbya")
-offset = Vector2(0, -100)
-
-[node name="CooldownLeft" type="Sprite2D" parent="Core/BarrelLeft"]
-modulate = Color(0.435192, 0.435192, 0.435192, 1)
-position = Vector2(0, -190)
-rotation = 1.57079
-scale = Vector2(0.619337, 0.857356)
-texture = ExtResource("4_ipju3")
-offset = Vector2(104, 0)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
@@ -296,6 +305,15 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_m8dbk")
+metadata/_edit_lock_ = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(1.76172, 1.51172)
+energy = 0.3
+shadow_enabled = true
+texture = ExtResource("16_unnwa")
+metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="Components/ShootingRapid/Delay" to="Components/ShootingRapid" method="_on_delay_timeout"]

@@ -1,8 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://tg86jcs0270c"]
+[gd_scene load_steps=20 format=3 uid="uid://tg86jcs0270c"]
 
 [ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_4ewrs"]
-[ext_resource type="Texture2D" uid="uid://d16rmjxdqyue8" path="res://assets/sprites/tanks/gunner-core-1.png" id="2_wywic"]
-[ext_resource type="Texture2D" uid="uid://c858k56rvrjan" path="res://assets/sprites/tanks/gunner-barrel-1.png" id="3_tu7dm"]
+[ext_resource type="Texture2D" uid="uid://b3rx5mjjudhk3" path="res://assets/sprites/tanks/gunner-core-1.png" id="2_kvrr0"]
+[ext_resource type="Texture2D" uid="uid://bg76v4dgiyq0e" path="res://assets/sprites/tanks/gunner-barrel.png" id="3_yme7k"]
 [ext_resource type="Script" path="res://scripts/tank-components/MovementBasic.gd" id="4_8vhhh"]
 [ext_resource type="Script" path="res://scripts/tank-components/DashBasic.gd" id="5_ebw22"]
 [ext_resource type="AudioStream" uid="uid://db41fnatc8fwa" path="res://assets/audio/tanks/player-dash-1.mp3" id="6_shnpv"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="12_btoxs"]
 [ext_resource type="Script" path="res://scripts/tank-components/StatsBasic.gd" id="12_fudg3"]
 [ext_resource type="PackedScene" uid="uid://cjxqex8nwxfk0" path="res://scenes/tanks/tank-interface.tscn" id="13_ruvd6"]
+[ext_resource type="Texture2D" uid="uid://v1h867arh4l5" path="res://assets/sprites/light.png" id="15_lp3xo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bbwtc"]
 radius = 146.113
@@ -23,26 +24,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Core/Barrel:position")
+tracks/0/path = NodePath("TankSprite/Barrel:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -145)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Core/Barrel:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(0.3, 0.3)]
 }
 
 [sub_resource type="Animation" id="Animation_bvg2f"]
@@ -51,26 +40,14 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Core/Barrel:position")
+tracks/0/path = NodePath("TankSprite/Barrel:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(0.353554, 1),
 "update": 0,
-"values": [Vector2(0, -142.083), Vector2(0, -145)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Core/Barrel:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.353554, 1),
-"update": 0,
-"values": [Vector2(1.15607, 0.854167), Vector2(1, 1)]
+"values": [Vector2(0.35, 0.259), Vector2(0.3, 0.3)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h1kpr"]
@@ -79,27 +56,34 @@ _data = {
 "shoot": SubResource("Animation_bvg2f")
 }
 
-[node name="Tank" type="CharacterBody2D" node_paths=PackedStringArray("component_container")]
+[node name="Tank" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite")]
 script = ExtResource("1_4ewrs")
 tank_name = "Basic"
 component_container = NodePath("Components")
+core_sprite = NodePath("TankSprite/Core")
 
-[node name="Core" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_wywic")
+[node name="TankSprite" type="Node2D" parent="."]
 
-[node name="ShootOrigin" type="Node2D" parent="Core"]
+[node name="ShootOrigin" type="Node2D" parent="TankSprite"]
 unique_name_in_owner = true
-position = Vector2(0, -300)
-scale = Vector2(5, 5)
+position = Vector2(5.96046e-08, -52.0001)
+scale = Vector2(0.999999, 0.999999)
 
-[node name="Barrel" type="Sprite2D" parent="Core"]
+[node name="Barrel" type="Sprite2D" parent="TankSprite"]
 show_behind_parent = true
-position = Vector2(0, -145)
-texture = ExtResource("3_tu7dm")
+position = Vector2(5.96046e-08, -7)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_yme7k")
 offset = Vector2(0, -100)
 
+[node name="Core" type="Sprite2D" parent="TankSprite"]
+position = Vector2(5.96046e-08, 1.19209e-07)
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("2_kvrr0")
+offset = Vector2(3.0303, 6.06061)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 scale = Vector2(0.2, 0.2)
 shape = SubResource("CircleShape2D_bbwtc")
 
@@ -107,13 +91,12 @@ shape = SubResource("CircleShape2D_bbwtc")
 
 [node name="Movement" type="Node" parent="Components" node_paths=PackedStringArray("tank", "tank_sprite")]
 script = ExtResource("4_8vhhh")
-speed = 700.0
+speed = 800.0
 tank = NodePath("../..")
-tank_sprite = NodePath("../../Core")
+tank_sprite = NodePath("../../TankSprite")
 
 [node name="Dash" type="Node" parent="Components" node_paths=PackedStringArray("tank", "movement", "tank_stats", "audio_player", "dash_shake")]
 script = ExtResource("5_ebw22")
-dash_strength = 4000
 dash_consumption = 30
 tank = NodePath("../..")
 movement = NodePath("../Movement")
@@ -138,8 +121,8 @@ pitch_range = 0.05
 script = ExtResource("10_m4tgi")
 tank = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
-origin = NodePath("../../Core/ShootOrigin")
-tank_sprite = NodePath("../../Core")
+origin = NodePath("../../TankSprite/ShootOrigin")
+tank_sprite = NodePath("../../TankSprite")
 delay = NodePath("Delay")
 audio_player = NodePath("Audio2D")
 
@@ -159,11 +142,19 @@ tank = NodePath("../..")
 [node name="CanvasLayer" type="CanvasLayer" parent="Components/StatsBasic"]
 
 [node name="TankInterface" parent="Components/StatsBasic/CanvasLayer" node_paths=PackedStringArray("stats") instance=ExtResource("13_ruvd6")]
+visible = false
 stats = NodePath("../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_h1kpr")
 }
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(1.76172, 1.51172)
+energy = 0.3
+shadow_enabled = true
+texture = ExtResource("15_lp3xo")
+metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="Components/ShootBasic/Delay" to="Components/ShootBasic" method="_on_delay_timeout"]

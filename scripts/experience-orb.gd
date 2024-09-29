@@ -1,10 +1,11 @@
 extends Node2D
 
 @export var glow: Sprite2D
+@export var animation_player: AnimationPlayer
 
 var chosen_player: Tank = null
 var value = 50
-var color = Color(0, 255, 0)
+@export var color = Color(0, 255, 0)
 
 func _ready():
 	glow.modulate = color

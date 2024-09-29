@@ -12,7 +12,7 @@ var bullet_scene = Global.PRELOADS["bullet"]
 
 @export_group("References")
 @export var tank: Tank
-@export var tank_sprite: Sprite2D
+@export var tank_sprite: Node2D
 @export var animation_player: AnimationPlayer
 @export var origin_left: Node2D
 @export var origin_right: Node2D

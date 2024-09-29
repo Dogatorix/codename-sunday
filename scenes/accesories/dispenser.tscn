@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bnhw277e04mxp"]
+[gd_scene load_steps=19 format=3 uid="uid://bnhw277e04mxp"]
 
 [ext_resource type="Script" path="res://scripts/accesories/dispenser.gd" id="1_rotxr"]
 [ext_resource type="PackedScene" uid="uid://cot5l3wrd8b65" path="res://scenes/containers/energy-summoner.tscn" id="2_5o1iy"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://ckaotmw1nv3ab" path="res://assets/audio/accesories/dispenser/shoot-2.mp3" id="8_c3ysf"]
 [ext_resource type="AudioStream" uid="uid://cg02i1otqo73m" path="res://assets/audio/accesories/dispenser/recharge.mp3" id="10_bfric"]
 [ext_resource type="AudioStream" uid="uid://dtglbi27iwljv" path="res://assets/audio/accesories/dispenser/tick.mp3" id="11_ayud1"]
+[ext_resource type="Texture2D" uid="uid://v1h867arh4l5" path="res://assets/sprites/light.png" id="12_1y4lh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vh1f3"]
 font = ExtResource("4_i0bv4")
@@ -284,6 +285,11 @@ stream = ExtResource("11_ayud1")
 max_distance = 1000.0
 script = ExtResource("6_jtxah")
 pitch_range = 0.03
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-4, -4)
+scale = Vector2(0.546875, 1.0332)
+texture = ExtResource("12_1y4lh")
 
 [connection signal="timeout" from="PayloadTimer" to="." method="_on_payload_timer_timeout"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
