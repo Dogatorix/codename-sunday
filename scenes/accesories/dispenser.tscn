@@ -287,6 +287,7 @@ script = ExtResource("6_jtxah")
 pitch_range = 0.03
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(-4, -4)
 scale = Vector2(0.546875, 1.0332)
 texture = ExtResource("12_1y4lh")

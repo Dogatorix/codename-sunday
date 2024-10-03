@@ -5,11 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://c0rbqw7lnfkfh" path="res://assets/sprites/energy/energy-triangle.png" id="2_7671c"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="4_irowy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cwbu"]
-size = Vector2(35, 33)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_l5a5w"]
-polygon = PackedVector2Array(-115, 80, -5, -110, 100, 80, 90, 85, -105, 85)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_t7jg8"]
+polygon = PackedVector2Array(-90, -120, 135, 10, -95, 145)
 
 [sub_resource type="Animation" id="Animation_ygvpe"]
 length = 0.001
@@ -168,6 +165,9 @@ _data = {
 "hit": SubResource("Animation_hcd0i")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wy4og"]
+radius = 16.0
+
 [node name="RigidBody2D" type="RigidBody2D"]
 z_index = 5
 collision_layer = 3
@@ -179,19 +179,17 @@ max_health = 30.0
 energy = 10
 death_color = Color(0.929412, 0.145098, 0, 1)
 metadata/is_container = true
-
-[node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -0.5)
-shape = SubResource("RectangleShape2D_1cwbu")
+metadata/bullet_target = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(1, -2)
+position = Vector2(3.55271e-15, -1)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_7671c")
+offset = Vector2(20, 10)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
-occluder = SubResource("OccluderPolygon2D_l5a5w")
+occluder = SubResource("OccluderPolygon2D_t7jg8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -204,5 +202,9 @@ stream = ExtResource("2_4vo5s")
 volume_db = -7.0
 script = ExtResource("4_irowy")
 external = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("CircleShape2D_wy4og")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

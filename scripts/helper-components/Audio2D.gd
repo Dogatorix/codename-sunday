@@ -14,6 +14,7 @@ func start():
 	var clone = self.duplicate()
 	
 	if external:
+		clone.global_position = self.global_position
 		get_parent().add_sibling(clone)
 		clone.external = false
 	else:

@@ -33,10 +33,7 @@ func _ready():
 func _process(delta):
 	sprite.rotation_degrees += rotation_delta * delta
  
-func _on_body_entered(body):
-	if not body.has_meta("is_bullet"):
-		return
-	
+func on_bullet_hit(bullet: BasicBullet):
 	if not is_being_born:
 		if animation_player.is_playing():
 			animation_player.stop()
@@ -44,10 +41,13 @@ func _on_body_entered(body):
 		
 	last_hit_by_bullet = true
 	
-	health -= body.bullet_damage
-	body.on_death()
+	health -= bullet.damage
 	
 	check_health()
+
+func _on_body_entered(body):
+	if not body.has_meta("is_bullet"):
+		return
 		
 func check_health():
 	if health == 0:

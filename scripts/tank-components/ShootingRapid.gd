@@ -1,17 +1,9 @@
-extends TankComponent
+extends ShootPreIndustrial
 class_name ShootingRapid
 
 const component_name = "shoot"
 
-var bullet_scene = Global.PRELOADS["bullet"]
-
-@export_group("General")
-@export var bullet_speed: int = 700
-@export var bullet_damage: int = 10
-@export var bullet_size: float = 0.5
-
 @export_group("References")
-@export var tank: Tank
 @export var tank_sprite: Node2D
 @export var animation_player: AnimationPlayer
 @export var origin_left: Node2D
@@ -38,14 +30,7 @@ func on_process(_delta):
 			barrel = origin_left
 			animation = "shoot_right"
 		
-		var bullet_instance = bullet_scene.instantiate()
-		bullet_instance.global_position = barrel.global_position
-		
-		bullet_instance.set_stats(bullet_speed, bullet_damage, bullet_size)
-		bullet_instance.set_velocity(tank_sprite.rotation_degrees - 90)
-		bullet_instance.set_tank_owner(tank)
-
-		tank.add_sibling(bullet_instance)
+		summon_bullet(barrel.global_position)
 		
 		if animation_player.is_playing():
 			animation_player.stop()

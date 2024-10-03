@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t1ybkxhvr3ab"
-path="res://.godot/imported/bullet-normal.png-42b6ab429e9a1987218ac69d87e7f238.ctex"
+uid="uid://cgo8wxdab5r3h"
+path="res://.godot/imported/wall-texture.png-c70588571e7ff3b722ff88c747897da0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tanks/bullet-normal.png"
-dest_files=["res://.godot/imported/bullet-normal.png-42b6ab429e9a1987218ac69d87e7f238.ctex"]
+source_file="res://assets/sprites/tilesets/wall-texture.png"
+dest_files=["res://.godot/imported/wall-texture.png-c70588571e7ff3b722ff88c747897da0.ctex"]
 
 [params]
 

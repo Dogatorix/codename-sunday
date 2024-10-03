@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://cpdu42h25sfri"]
+[gd_scene load_steps=24 format=3 uid="uid://cpdu42h25sfri"]
 
 [ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_ontu8"]
 [ext_resource type="Texture2D" uid="uid://bnviddut5e4a5" path="res://assets/sprites/tanks/rapid-fire-barrel.png" id="3_htbya"]
 [ext_resource type="Texture2D" uid="uid://cw5ye4knf8x0h" path="res://assets/sprites/ui/tank-generic-bar.png.png" id="4_ipju3"]
 [ext_resource type="Script" path="res://scripts/tank-components/MovementBasic.gd" id="5_kmbnf"]
 [ext_resource type="Script" path="res://scripts/tank-components/DashBasic.gd" id="6_i6njt"]
+[ext_resource type="PackedScene" uid="uid://6p84ixeqpp0f" path="res://scenes/tanks/tank-trail.tscn" id="7_0o7ap"]
 [ext_resource type="AudioStream" uid="uid://db41fnatc8fwa" path="res://assets/audio/tanks/player-dash-1.mp3" id="7_c44ga"]
 [ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="7_owimm"]
 [ext_resource type="Script" path="res://scripts/tank-components/StatsBasic.gd" id="7_v4ui3"]
@@ -15,6 +16,7 @@
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="12_hbufx"]
 [ext_resource type="AudioStream" uid="uid://bvtfshg87bfkl" path="res://assets/audio/tanks/rapid-fire/rapid-fire-shoot.mp3" id="14_lox6u"]
 [ext_resource type="Texture2D" uid="uid://b3rx5mjjudhk3" path="res://assets/sprites/tanks/gunner-core-1.png" id="15_ortqr"]
+[ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/tanks/basic-bullet.tscn" id="16_fsa33"]
 [ext_resource type="Texture2D" uid="uid://v1h867arh4l5" path="res://assets/sprites/light.png" id="16_unnwa"]
 
 [sub_resource type="Animation" id="Animation_ilcse"]
@@ -184,12 +186,31 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8dbk"]
 radius = 35.0
 
-[node name="Rapid" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite")]
+[node name="Rapid" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite", "sprite_node") groups=["tank"]]
 script = ExtResource("1_ontu8")
 tank_name = "Rapid Fire"
 core_tier = 2
 component_container = NodePath("Components")
 core_sprite = NodePath("TankSprite/Core")
+sprite_node = NodePath("TankSprite")
+
+[node name="Shake2D" type="Node2D" parent="."]
+scale = Vector2(0.997009, 1)
+script = ExtResource("7_owimm")
+shake_range = 1000
+intensity = 3.0
+intensity_decay = 15.0
+
+[node name="Audio2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_lox6u")
+volume_db = -8.0
+script = ExtResource("12_hbufx")
+pitch_range = 0.1
+
+[node name="DashAudio" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("12_hbufx")
+sounds = Array[AudioStream]([ExtResource("7_c44ga"), ExtResource("8_8fqrb"), ExtResource("9_vxe33")])
+pitch_range = 0.05
 
 [node name="TankSprite" type="Node2D" parent="."]
 
@@ -200,12 +221,10 @@ texture = ExtResource("15_ortqr")
 [node name="ShootOriginLeft" type="Node2D" parent="TankSprite"]
 unique_name_in_owner = true
 position = Vector2(-12, -64)
-scale = Vector2(1, 1)
 
 [node name="ShootOriginRight" type="Node2D" parent="TankSprite"]
 unique_name_in_owner = true
 position = Vector2(11, -64)
-scale = Vector2(1, 1)
 
 [node name="Node2D" type="Node2D" parent="TankSprite"]
 z_index = -1
@@ -254,20 +273,9 @@ dash_strength = 3800
 tank = NodePath("../..")
 movement = NodePath("../MovementBasic")
 tank_stats = NodePath("../StatsBasic")
-audio_player = NodePath("DashAudio")
-dash_shake = NodePath("Shake2D")
-
-[node name="Shake2D" type="Node2D" parent="Components/DashBasic"]
-scale = Vector2(0.997009, 1)
-script = ExtResource("7_owimm")
-shake_range = 1000
-intensity = 3.0
-intensity_decay = 15.0
-
-[node name="DashAudio" type="AudioStreamPlayer2D" parent="Components/DashBasic"]
-script = ExtResource("12_hbufx")
-sounds = Array[AudioStream]([ExtResource("7_c44ga"), ExtResource("8_8fqrb"), ExtResource("9_vxe33")])
-pitch_range = 0.05
+audio_player = NodePath("../../DashAudio")
+dash_shake = NodePath("../../Shake2D")
+tank_trail = ExtResource("7_0o7ap")
 
 [node name="StatsBasic" type="Node" parent="Components" node_paths=PackedStringArray("tank")]
 script = ExtResource("7_v4ui3")
@@ -279,24 +287,22 @@ tank = NodePath("../..")
 [node name="TankInterface" parent="Components/StatsBasic/CanvasLayer" node_paths=PackedStringArray("stats") instance=ExtResource("12_d2681")]
 stats = NodePath("../..")
 
-[node name="ShootingRapid" type="Node" parent="Components" node_paths=PackedStringArray("tank", "tank_sprite", "animation_player", "origin_left", "origin_right", "delay", "audio_player")]
+[node name="ShootingRapid" type="Node" parent="Components" node_paths=PackedStringArray("tank_sprite", "animation_player", "origin_left", "origin_right", "delay", "audio_player", "tank")]
 script = ExtResource("10_atl0p")
-tank = NodePath("../..")
 tank_sprite = NodePath("../../TankSprite")
 animation_player = NodePath("../../AnimationPlayer")
 origin_left = NodePath("../../TankSprite/ShootOriginLeft")
 origin_right = NodePath("../../TankSprite/ShootOriginRight")
 delay = NodePath("Delay")
-audio_player = NodePath("Audio2D")
+audio_player = NodePath("../../Audio2D")
+bullet_scene = ExtResource("16_fsa33")
+tank = NodePath("../..")
+bullet_speed = 600.0
+bullet_size = 0.85
+bullet_damage = 10.0
 
 [node name="Delay" type="Timer" parent="Components/ShootingRapid"]
 wait_time = 0.2
-
-[node name="Audio2D" type="AudioStreamPlayer2D" parent="Components/ShootingRapid"]
-stream = ExtResource("14_lox6u")
-volume_db = -8.0
-script = ExtResource("12_hbufx")
-pitch_range = 0.1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -315,5 +321,8 @@ energy = 0.3
 shadow_enabled = true
 texture = ExtResource("16_unnwa")
 metadata/_edit_lock_ = true
+
+[node name="TankTrail" parent="." node_paths=PackedStringArray("tank") instance=ExtResource("7_0o7ap")]
+tank = NodePath("..")
 
 [connection signal="timeout" from="Components/ShootingRapid/Delay" to="Components/ShootingRapid" method="_on_delay_timeout"]

@@ -5,6 +5,13 @@ var clients: Array[Tank] = []
 
 var	no_console := true
 
+var player_color: Color:
+	set(value):
+		clients[0].tank_color = value
+		clients[0].core_sprite.modulate = value
+		clients[0].get_node("TankTrail").update_color()
+		player_color = value
+
 const CORE_REQUIREMENT = {
 	1: 1,
 	2: 500,
@@ -18,7 +25,4 @@ var PRELOADS = {
 	"energy-triangle": load("res://scenes/containers/energy-triangle.tscn"),
 	"energy-pentagon": load("res://scenes/containers/energy-pentagon.tscn"),
 	"energy-octagon": load("res://scenes/containers/energy-octagon.tscn"),
-	"ownership-component": load("res://scenes/components/OwnershipComponent.tscn"),
-	"bullet": load("res://scenes/tanks/bullet.tscn"),
-	"tank-trail": load("res://scenes/tanks/tank-trail.tscn")
 }

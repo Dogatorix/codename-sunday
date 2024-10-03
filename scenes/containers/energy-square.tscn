@@ -5,8 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://bb3bbtlmldkru" path="res://assets/audio/accesories/container/container-hit-1.mp3" id="2_w6gy3"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="4_8ruwk"]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1883u"]
-polygon = PackedVector2Array(-95, -95, -95, 80, 80, 80, 80, -95)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_glcbn"]
+polygon = PackedVector2Array(-105, -100, -105, 90, 85, 90, 85, -100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1cwbu"]
 size = Vector2(35, 37)
@@ -178,17 +178,20 @@ max_health = 20.0
 energy = 5
 death_color = Color(0.901961, 0.643137, 0, 1)
 metadata/is_container = true
+metadata/bullet_target = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(1, 1)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_ev8ce")
+offset = Vector2(-8, -6)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
-occluder = SubResource("OccluderPolygon2D_1883u")
+occluder = SubResource("OccluderPolygon2D_glcbn")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_1cwbu")
 

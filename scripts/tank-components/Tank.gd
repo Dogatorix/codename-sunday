@@ -13,6 +13,7 @@ class_name Tank
 @export_group("References")
 @export var component_container: Node
 @export var core_sprite: Sprite2D
+@export var sprite_node: Node2D
 @onready var component_list = component_container.get_children()
 	
 var components := {}

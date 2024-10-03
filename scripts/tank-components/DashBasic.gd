@@ -13,6 +13,8 @@ const component_name = "dash"
 @export var tank_stats: StatsBasic
 @export var audio_player: Audio2D
 @export var dash_shake: Shake2D
+@export var tank_trail: PackedScene
+
 
 func _ready():
 	if not movement or not tank:
@@ -21,10 +23,11 @@ func _ready():
 		return
 
 func on_process(_delta):
-	if Input.is_action_just_pressed("special_move") and tank_stats and movement.input_vector and Global.no_console:
+	if Input.is_action_just_pressed("special_move") and tank_stats \
+	and movement.input_vector and Global.no_console:
 		if tank_stats.mana > dash_consumption:
 			tank_stats.set_mana(tank_stats.mana - dash_consumption)
-		
+			
 			audio_player.start()
 			
 			movement.velocity = Vector2.ZERO
@@ -32,6 +35,6 @@ func on_process(_delta):
 			movement.dash_velocity = dash_velocity
 			
 			dash_shake.start()
-		
+			
 	movement.dash_velocity /= 30
 	dash_shake.global_position = tank.global_position

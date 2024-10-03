@@ -8,6 +8,7 @@ var scope := {
 var target_node
 var selected_nodes := []
 var tracked_properties := {}
+var tracked_values := {}
 
 @export var button_scene: PackedScene
 
@@ -26,6 +27,7 @@ func toggle_console():
 	%Console.visible = !%Console.visible
 	%Command.editable = !%Command.editable
 	%TrackText.visible = !%TrackText.visible
+	%ValuesText.visible = !%ValuesText.visible
 	%Command.grab_focus()
 	
 func _ready():
@@ -73,6 +75,8 @@ func update_scope():
 	
 	for node in scope.nodes:
 		create_scope_button(node)
+	if highlighted_node:
+		_on_scope_button_exited(highlighted_node)
 
 func create_scope_button(node):
 	var button_instance = button_scene.instantiate()
@@ -98,7 +102,11 @@ func handle_commands(command: String, args: Array):
 		return
 		
 	if command == "track" or command == "tr":
-		track(target_node, args)
+		track_console(target_node, args)
+		return
+		
+	if command == "untrack" or command == "untr":
+		untrack(target_node)
 		return
 		
 	if command == "getall" or command == "geta":
@@ -139,6 +147,9 @@ func handle_commands(command: String, args: Array):
 		append('getall {property}', false)
 		append('setall {property} {value}', false)
 		append('callall {method} {...args} \n', false)
+		
+		append('track {property}', false)
+		append('untrack {key} \n', false)
 		
 		append('clear', false)
 		return
@@ -223,13 +234,6 @@ func call_target(target, args, multi := false):
 
 ### ABSRACT METHODS
 
-func append(text, timestamp: bool = true):
-	var timestamp_color = "#A1A1A100"
-	if timestamp:
-		timestamp_color = "#A1A1A1"
-	var timestamp_text = "[color=%s]%s[/color] " % [timestamp_color, format_time(Time.get_ticks_msec())]
-	%Output.text += timestamp_text + str(text) + "\n"
-
 func string_to_type(value):
 	var expression = Expression.new()
 	var error = expression.parse(value)
@@ -256,7 +260,7 @@ func format_time(ms: int) -> String:
 func line_break():
 	append("", false)
 	
-func track(target, args):
+func track_console(target, args):
 	if not target:
 		append("Select a target node first")
 		return
@@ -277,11 +281,41 @@ func process_track():
 			var value = node[property]
 			%TrackText.text += "   %s : %s\n" % [property, value]
 
+### API
+
+func append(text, timestamp: bool = true):
+	var timestamp_color = "#A1A1A100"
+	if timestamp:
+		timestamp_color = "#A1A1A1"
+	var timestamp_text = "[color=%s]%s[/color] " % [timestamp_color, format_time(Time.get_ticks_msec())]
+	%Output.text += timestamp_text + str(text) + "\n"
+
+func track(node: Node, property):
+	track_console(node, [str(property)])
+	
+func untrack(key):
+	if tracked_properties.has(key):
+		tracked_properties.erase(key)
+	else:
+		append("%s not found. \n")
+		
+func track_value(value, key):
+	if key == null:
+		return
+	
+	tracked_values[key] = value 
+	
+	%ValuesText.text = ""
+	for property in tracked_values:
+		%ValuesText.text += "%s: %s \n" % [property, tracked_values[property]]
+
 ### OTHER
 
 var button_modulate_original: Color
+var highlighted_node
+
 func _on_scope_button_entered(node):
-	
+	highlighted_node = node
 	if node.get("modulate"):
 		button_modulate_original = node.modulate
 		node.modulate = Color(1,0,0) 
@@ -289,3 +323,7 @@ func _on_scope_button_entered(node):
 func _on_scope_button_exited(node):
 	if node.get("modulate"):
 		node.modulate = button_modulate_original
+
+
+func _on_color_picker_color_changed(color):
+	Global.player_color = color

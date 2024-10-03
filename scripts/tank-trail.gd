@@ -1,11 +1,21 @@
 extends Line2D
 
-@export var length = 50
-@export var decay: float = 2
+@export var tank: Tank 
 
+var length = 50
 var point: Vector2
 
-func _process(_delta):
+func _ready():
+	update_color()
+
+func update_color():
+	var color: Color = tank.tank_color
+	gradient.remove_point(0)
+	gradient.add_point(0, Color(color.r,color.g,color.b, 0))
+	gradient.remove_point(1)
+	gradient.add_point(1, Color(color.r,color.g,color.b, 0.3))
+
+func _process(delta):
 	global_position = Vector2.ZERO
 	point = get_parent().global_position
 	
@@ -13,9 +23,3 @@ func _process(_delta):
 	
 	while get_point_count() > length:
 		remove_point(0)
-		
-	modulate = Color(1, 1, 1, decay)
-	decay = max(0, decay - 0.025)
-	
-	if decay == 0:
-		queue_free()

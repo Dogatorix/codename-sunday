@@ -15,13 +15,12 @@ extends StaticBody2D
 var health := 50
 var is_igniting := false
 
-func _on_area_2d_body_entered(body):
-	if not body.has_meta("is_bullet") or is_igniting:
+func on_bullet_hit(bullet: BasicBullet):
+	if is_igniting:
 		return
-	
+		
 	animation_player.play("hit")
-	health -= body.bullet_damage
-	body.on_death()
+	health -= bullet.damage
 	check_health()
 
 func check_health():

@@ -7,7 +7,8 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_2m5ma"]
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.494118)
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 0)
 
 [node name="TankTrail" type="Line2D"]
 show_behind_parent = true
