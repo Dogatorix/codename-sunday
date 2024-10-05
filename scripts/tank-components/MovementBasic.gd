@@ -15,7 +15,6 @@ var camera: GameCamera
 @export var push_force: float = 80
 
 @export_group("References")
-@export var tank: Tank
 @export var tank_sprite: Node2D
 
 var velocity := Vector2.ZERO

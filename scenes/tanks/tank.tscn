@@ -111,21 +111,21 @@ shape = SubResource("CircleShape2D_bbwtc")
 
 [node name="Components" type="Node" parent="."]
 
-[node name="Movement" type="Node" parent="Components" node_paths=PackedStringArray("tank", "tank_sprite")]
+[node name="Movement" type="Node" parent="Components" node_paths=PackedStringArray("tank_sprite", "tank")]
 script = ExtResource("4_8vhhh")
 speed = 800.0
-tank = NodePath("../..")
 tank_sprite = NodePath("../../TankSprite")
+tank = NodePath("../..")
 
-[node name="Dash" type="Node" parent="Components" node_paths=PackedStringArray("tank", "movement", "tank_stats", "audio_player", "dash_shake")]
+[node name="Dash" type="Node" parent="Components" node_paths=PackedStringArray("movement", "tank_stats", "audio_player", "dash_shake", "tank")]
 script = ExtResource("5_ebw22")
 dash_consumption = 30
-tank = NodePath("../..")
 movement = NodePath("../Movement")
 tank_stats = NodePath("../StatsBasic")
 audio_player = NodePath("../../DashAudio")
 dash_shake = NodePath("../../Shake2D")
 tank_trail = ExtResource("6_mbeyt")
+tank = NodePath("../..")
 
 [node name="ShootBasic" type="Node" parent="Components" node_paths=PackedStringArray("animation_player", "origin", "tank_sprite", "delay", "audio_player", "tank")]
 script = ExtResource("10_m4tgi")
@@ -135,9 +135,9 @@ tank_sprite = NodePath("../../TankSprite")
 delay = NodePath("Delay")
 audio_player = NodePath("../../Audio2D")
 bullet_scene = ExtResource("13_x88wv")
-tank = NodePath("../..")
 bullet_speed = 525.0
 bullet_damage = 7.0
+tank = NodePath("../..")
 
 [node name="Delay" type="Timer" parent="Components/ShootBasic"]
 wait_time = 0.5

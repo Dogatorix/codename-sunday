@@ -8,7 +8,6 @@ const component_name = "dash"
 @export var dash_consumption := 20
 
 @export_group("References")
-@export var tank: Tank
 @export var movement: MovementBasic
 @export var tank_stats: StatsBasic
 @export var audio_player: Audio2D

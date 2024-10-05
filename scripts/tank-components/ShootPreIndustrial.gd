@@ -3,7 +3,6 @@ class_name ShootPreIndustrial
 
 @export var bullet_scene: PackedScene
 
-@export var tank: Tank
 @export var bullet_speed := 500.0
 @export var bullet_size := 1.0
 @export var bullet_damage := 1.0

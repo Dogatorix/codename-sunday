@@ -11,14 +11,17 @@ func start():
 	if is_summoned:
 		return
 	
-	var clone = self.duplicate()
+	var clone: Audio2D = self.duplicate()
 	
 	if external:
-		clone.global_position = self.global_position
 		get_parent().add_sibling(clone)
+		clone.global_position = self.global_position
+		clone.is_summoned = true
 		clone.external = false
+		clone.play_sound()
 	else:
 		add_sibling(clone)
+		
 	clone.is_summoned = true
 	clone.play_sound()
 	

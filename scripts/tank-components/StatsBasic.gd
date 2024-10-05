@@ -3,15 +3,21 @@ class_name StatsBasic
 
 const component_name = "stats"
 
+const CORE_REQUIREMENT = {
+	1: 1,
+	2: 500,
+	3: 2000,
+	4: 8000,
+	5: 25000,
+}
+
 @export_group("General")
 @export var max_health = 100
 @export var max_rust = 100
 @export var max_mana = 100
-@export var max_core_points = 500
 @export var mana_regeneration_rate := 20.0
 
-@export_group("References")
-@export var tank: Tank
+var max_core_points := 1000
 
 signal health_change(value)
 signal rust_change(value)
@@ -27,6 +33,7 @@ func _ready():
 	if not tank:
 		push_error(str(self) + " Tank reference missing. Really? Are you for real?")
 		queue_free()
+	pass
 
 func set_health(value):
 	health = value

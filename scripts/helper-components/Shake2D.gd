@@ -22,11 +22,7 @@ func start():
 	intensity = max_intensity
 	
 	if external and one_shot:
-		var clone = self.duplicate()
-		clone.external = false
-		clone.global_position = self.global_position
-		get_parent().add_sibling.call_deferred(clone)
-		queue_free()
+		Global.make_external(self)
 		return
 	
 	if duration > 0 and one_shot:

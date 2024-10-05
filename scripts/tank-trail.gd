@@ -10,9 +10,10 @@ func _ready():
 
 func update_color():
 	var color: Color = tank.tank_color
-	gradient.remove_point(0)
+	if gradient.get_point_count() >= 2:
+		gradient.remove_point(0)
+		gradient.remove_point(1)
 	gradient.add_point(0, Color(color.r,color.g,color.b, 0))
-	gradient.remove_point(1)
 	gradient.add_point(1, Color(color.r,color.g,color.b, 0.3))
 
 func _process(delta):

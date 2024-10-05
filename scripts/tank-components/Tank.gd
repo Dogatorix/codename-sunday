@@ -1,11 +1,18 @@
 extends CharacterBody2D
 class_name Tank
 
+enum TIERS {
+	BASIC = 1,
+	STARTER = 2,
+	INDUSTRIAL = 3,
+	PIONEER = 4,
+}
+
 @export_group("General")
 @export var tank_name := "Tank"
 @export var tank_color := Color(1,1,1)
 @export var username := "Slow Joe"
-@export_range(1, 4) var core_tier := 1
+@export var core_tier: TIERS = TIERS.BASIC
  
 @export var default_zoom := 0.9
 @export var is_client: bool = false
@@ -23,6 +30,8 @@ var time_start = 0
 var time_now = 0
 
 func _ready():	
+	print(TIERS.BASIC)
+	
 	for component in component_list:
 		components[component.component_name] = component
 		
