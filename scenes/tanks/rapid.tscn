@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cw5ye4knf8x0h" path="res://assets/sprites/ui/tank-generic-bar.png.png" id="4_ipju3"]
 [ext_resource type="Script" path="res://scripts/tank-components/MovementBasic.gd" id="5_kmbnf"]
 [ext_resource type="Script" path="res://scripts/tank-components/DashBasic.gd" id="6_i6njt"]
-[ext_resource type="PackedScene" uid="uid://6p84ixeqpp0f" path="res://scenes/tanks/tank-trail.tscn" id="7_0o7ap"]
+[ext_resource type="PackedScene" uid="uid://6p84ixeqpp0f" path="res://scenes/tanks/other/tank-trail.tscn" id="7_0o7ap"]
 [ext_resource type="AudioStream" uid="uid://db41fnatc8fwa" path="res://assets/audio/tanks/player-dash-1.mp3" id="7_c44ga"]
 [ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="7_owimm"]
 [ext_resource type="Script" path="res://scripts/tank-components/StatsBasic.gd" id="7_v4ui3"]
@@ -194,7 +194,7 @@ component_container = NodePath("Components")
 core_sprite = NodePath("TankSprite/Core")
 sprite_node = NodePath("TankSprite")
 
-[node name="Shake2D" type="Node2D" parent="."]
+[node name="Shake2D" type="Marker2D" parent="."]
 scale = Vector2(0.997009, 1)
 script = ExtResource("7_owimm")
 shake_range = 1000

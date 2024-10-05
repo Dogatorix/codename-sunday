@@ -13,7 +13,7 @@ var damage := 0.0
 
 ###
 
-var particle_scene = load("res://scenes/tanks/bullet-death-particle.tscn")
+@export var particle_scene: PackedScene 
 
 @export var wall_sounds: Array[AudioStream]
 @export var audio_player: Audio2D

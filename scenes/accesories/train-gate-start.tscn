@@ -111,7 +111,7 @@ libraries = {
 "": SubResource("AnimationLibrary_3kkjc")
 }
 
-[node name="Shake2D" type="Node2D" parent="."]
+[node name="Shake2D" type="Marker2D" parent="."]
 position = Vector2(0, 288)
 script = ExtResource("2_vqdru")
 shake_range = 2300
@@ -125,7 +125,7 @@ z_index = 1
 position = Vector2(18, -122)
 texture = ExtResource("3_q0e7i")
 
-[node name="LightShake" type="Node2D" parent="."]
+[node name="LightShake" type="Marker2D" parent="."]
 script = ExtResource("2_vqdru")
 shake_range = 1000
 interpolation = 2
