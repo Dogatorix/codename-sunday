@@ -1,16 +1,23 @@
 extends Node
 
-var game_camera: GameCamera = null
 var clients: Array[Tank] = []
+var cameras: Array[GameCamera] = []
+
+var game_camera: GameCamera = null:
+	get:
+		if cameras.size() == 0:
+			return null
+		return cameras[0]
 
 var	no_console := true
 
 var player_color: Color:
 	set(value):
-		clients[0].tank_color = value
-		clients[0].core_sprite.modulate = value
-		clients[0].get_node("TankTrail").update_color()
-		player_color = value
+		if clients.size() > 0:
+			clients[0].tank_color = value
+			clients[0].core_sprite.modulate = value
+			clients[0].get_node("TankTrail").update_color()
+			player_color = value
 
 const CORE_REQUIREMENT = {
 	1: 1,
@@ -39,3 +46,11 @@ func make_external(node: Node, clone: Node = null):
 	dublicate.global_position = node.global_position
 	node.get_parent().add_sibling.call_deferred(dublicate)
 	node.queue_free()
+	
+func timeout_destroy(target: Node, duration: float):
+	var timer: Timer = Timer.new()
+	timer.wait_time = duration
+	timer.autostart = true
+	target.add_child(timer)
+	timer.connect("timeout", Callable(target, "queue_free"))
+	

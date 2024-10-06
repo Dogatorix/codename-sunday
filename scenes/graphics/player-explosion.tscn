@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://blyxbp5brb462"]
+
+[ext_resource type="PackedScene" uid="uid://dc1vcm54gphhw" path="res://scenes/graphics/shockwave.tscn" id="1_yfnh3"]
+[ext_resource type="AudioStream" uid="uid://8ukahyfpgefa" path="res://assets/audio/tanks/player-explode.mp3" id="2_surp2"]
+[ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="3_tyffs"]
+[ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="4_2x3ik"]
+[ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="5_4hmik"]
+
+[sub_resource type="Curve" id="Curve_8e3ty"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, -2.19781), 0.0, 0.0, 0, 0, Vector2(1, 94.5055), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_k6gh1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="PlayerExplosion" type="Node2D"]
+
+[node name="Shockwave" parent="." instance=ExtResource("1_yfnh3")]
+scale = Vector2(-0.941399, -0.941399)
+grow_speed = 8.0
+fade_speed = 1.4
+autostart = true
+
+[node name="Audio2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_surp2")
+autoplay = true
+script = ExtResource("3_tyffs")
+external = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Shake2D" type="Marker2D" parent="."]
+script = ExtResource("5_4hmik")
+shake_range = 1500
+duration = 1.5
+auto_start = true
+intensity_decay = 5.0
+
+[node name="Particle2D2" type="CPUParticles2D" parent="."]
+amount = 32
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 1000.0
+linear_accel_min = -48.54
+linear_accel_max = -34.95
+linear_accel_curve = SubResource("Curve_8e3ty")
+scale_amount_min = 0.0
+scale_amount_max = 50.0
+scale_amount_curve = SubResource("Curve_k6gh1")
+script = ExtResource("4_2x3ik")
+external = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="queue_free"]

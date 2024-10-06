@@ -12,17 +12,18 @@ extends StaticBody2D
 @export var fuse_audio: Audio2D
 @export var explosion_audio: Audio2D
 
-var health := 50
+var health := 150
 var is_igniting := false
 
-func on_bullet_hit(bullet: BasicBullet):
-	if is_igniting:
+func _on_area_2d_area_entered(bullet):
+	if is_igniting or not bullet is BasicBullet:
 		return
 		
 	animation_player.play("hit")
 	health -= bullet.damage
 	check_health()
-
+	bullet.on_death()
+	
 func check_health():
 	if health <= 0:
 		is_igniting = true
@@ -46,13 +47,13 @@ func _on_fuse_timer_timeout():
 		if body.has_meta("is_container"):
 			body.linear_velocity = distance.normalized() * distance.length() * 3
 			body.last_hit_by_bullet = false
-			body.health -= 10000 / distance.length()
+			body.health -= 15000 / distance.length()
 			body.check_health()
 		elif body is CharacterBody2D:
 			#body.stats_node.health -= 10000 / distance.length()
 			pass
 		elif body.has_meta("is_canister") and body != self:
-			body.health -= 10000 / distance.length()
+			body.health -= 25000 / distance.length()
 			body.check_health()
 	
 	$DeathTimer.start()

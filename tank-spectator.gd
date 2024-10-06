@@ -6,10 +6,18 @@ var velocity: Vector2
 
 var acceleration = 100
 var friction = 50
+var speed_normal := 900
 
 var camera_zoom := 0.7
 
-var speed_normal := 900
+var is_client := false
+
+func _ready():
+	if not is_client:
+		queue_free()
+		return
+		
+	camera.zoom = Vector2(camera_zoom, camera_zoom)
 
 func _process(delta):
 	var speed: int

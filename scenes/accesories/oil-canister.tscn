@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="10_bcbls"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vr873"]
-size = Vector2(54, 35)
+size = Vector2(54, 39)
 
 [sub_resource type="Animation" id="Animation_sbsbe"]
 length = 0.001
@@ -148,22 +148,20 @@ collision_mask = 3
 script = ExtResource("1_r07p2")
 animation_player = NodePath("AnimationPlayer")
 explosion_particles = NodePath("ExplosionParticles")
-nodes_to_remove = [NodePath("Oil-canister"), NodePath("CollisionShape2D"), NodePath("Area2D")]
+nodes_to_remove = [NodePath("Oil-canister"), NodePath("CollisionShape2D"), NodePath("Area2D"), NodePath("LightOccluder2D")]
 hit_zone = NodePath("HitZone")
 explosion_shake = NodePath("Shake2D")
 hit_audio = NodePath("HitAudio")
 fuse_audio = NodePath("FuseAudio")
 explosion_audio = NodePath("ExplosionAudio")
 metadata/is_canister = true
-metadata/bullet_target = true
 
 [node name="Oil-canister" type="Sprite2D" parent="."]
 position = Vector2(0, -60)
 texture = ExtResource("1_lrwvv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -21.5)
+position = Vector2(0, -23.5)
 shape = SubResource("RectangleShape2D_vr873")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -249,6 +247,6 @@ external = true
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_f1kol")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="timeout" from="FuseTimer" to="." method="_on_fuse_timer_timeout"]

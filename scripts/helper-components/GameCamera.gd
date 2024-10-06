@@ -10,7 +10,7 @@ var shake_interpolation := 1
 var shake_nodes = {"intensity": {}, "interpolation": {}}
 
 func _ready():
-	Global.game_camera = self
+	Global.cameras.push_front(self)
 
 func _process(_delta):
 	var max_intensity = shake_nodes.intensity.values().max()
@@ -27,3 +27,6 @@ func _process(_delta):
 	shake_vector -= (shake_vector + shake_blunt) / shake_interpolation
 	
 	position = shake_vector + offset_vector
+
+func _exit_tree():
+	Global.cameras.erase(self)

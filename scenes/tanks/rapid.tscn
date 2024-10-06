@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://cpdu42h25sfri"]
+[gd_scene load_steps=36 format=3 uid="uid://cpdu42h25sfri"]
 
 [ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_ontu8"]
 [ext_resource type="Texture2D" uid="uid://bnviddut5e4a5" path="res://assets/sprites/tanks/rapid-fire-barrel.png" id="3_htbya"]
 [ext_resource type="Texture2D" uid="uid://cw5ye4knf8x0h" path="res://assets/sprites/ui/tank-generic-bar.png.png" id="4_ipju3"]
+[ext_resource type="Script" path="res://scripts/tank-components/ComponentList.gd" id="5_fao1c"]
 [ext_resource type="Script" path="res://scripts/tank-components/MovementBasic.gd" id="5_kmbnf"]
 [ext_resource type="Script" path="res://scripts/tank-components/DashBasic.gd" id="6_i6njt"]
 [ext_resource type="PackedScene" uid="uid://6p84ixeqpp0f" path="res://scenes/tanks/other/tank-trail.tscn" id="7_0o7ap"]
@@ -12,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://b08cew7xnwfqi" path="res://assets/audio/tanks/player-dash-2.mp3" id="8_8fqrb"]
 [ext_resource type="AudioStream" uid="uid://c7v7qyq56nm4o" path="res://assets/audio/tanks/player-dash-3.mp3" id="9_vxe33"]
 [ext_resource type="Script" path="res://scripts/tank-components/ShootingRapid.gd" id="10_atl0p"]
+[ext_resource type="PackedScene" uid="uid://dkuuvwgfdon5r" path="res://scenes/spectator.tscn" id="12_37sl6"]
 [ext_resource type="PackedScene" uid="uid://cjxqex8nwxfk0" path="res://scenes/tanks/tank-interface.tscn" id="12_d2681"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="12_hbufx"]
 [ext_resource type="Script" path="res://scripts/tank-components/DeathBasic.gd" id="12_up8cd"]
@@ -19,6 +21,12 @@
 [ext_resource type="Texture2D" uid="uid://b3rx5mjjudhk3" path="res://assets/sprites/tanks/gunner-core-1.png" id="15_ortqr"]
 [ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/tanks/basic-bullet.tscn" id="16_fsa33"]
 [ext_resource type="Texture2D" uid="uid://v1h867arh4l5" path="res://assets/sprites/light.png" id="16_unnwa"]
+[ext_resource type="PackedScene" uid="uid://dc1vcm54gphhw" path="res://scenes/graphics/shockwave.tscn" id="20_dae2h"]
+[ext_resource type="AudioStream" uid="uid://db0ckwnvk7vmh" path="res://assets/audio/tanks/player-damage-1.mp3" id="23_twdss"]
+[ext_resource type="AudioStream" uid="uid://essypfdqc73m" path="res://assets/audio/tanks/player-damage-2.mp3" id="24_hfk35"]
+[ext_resource type="AudioStream" uid="uid://jriq00fwc1ui" path="res://assets/audio/tanks/player-damage-3.mp3" id="25_gulm7"]
+[ext_resource type="PackedScene" uid="uid://v0gryapwl2rt" path="res://scenes/graphics/damage-particle.tscn" id="26_revl6"]
+[ext_resource type="PackedScene" uid="uid://blyxbp5brb462" path="res://scenes/graphics/player-explosion.tscn" id="27_j2ejg"]
 
 [sub_resource type="Animation" id="Animation_ilcse"]
 length = 0.001
@@ -93,6 +101,18 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0.619337, 0.857356)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("TankSprite:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_l46qf"]
@@ -187,6 +207,43 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8dbk"]
 radius = 35.0
 
+[sub_resource type="Animation" id="Animation_x37e6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TankSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6mmyr"]
+resource_name = "damage"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TankSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0lit1"]
+_data = {
+"RESET": SubResource("Animation_x37e6"),
+"damage": SubResource("Animation_6mmyr")
+}
+
 [node name="Rapid" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite", "sprite_node") groups=["tank"]]
 script = ExtResource("1_ontu8")
 tank_name = "Rapid Fire"
@@ -242,6 +299,7 @@ texture = ExtResource("4_ipju3")
 offset = Vector2(104, 0)
 
 [node name="Components" type="Node" parent="."]
+script = ExtResource("5_fao1c")
 
 [node name="MovementBasic" type="Node" parent="Components" node_paths=PackedStringArray("tank_sprite", "tank")]
 script = ExtResource("5_kmbnf")
@@ -250,18 +308,21 @@ acceleration = 2000.0
 tank_sprite = NodePath("../../TankSprite")
 tank = NodePath("../..")
 
-[node name="DashBasic" type="Node" parent="Components" node_paths=PackedStringArray("movement", "tank_stats", "audio_player", "dash_shake", "tank")]
+[node name="DashBasic" type="Node" parent="Components" node_paths=PackedStringArray("movement", "tank_stats", "audio_player", "dash_shake", "dash_shockwave", "tank")]
 script = ExtResource("6_i6njt")
 dash_strength = 3800
 movement = NodePath("../MovementBasic")
 tank_stats = NodePath("../StatsBasic")
-audio_player = NodePath("../../ComponentReferences/DashAudio")
-dash_shake = NodePath("../../ComponentReferences/Shake2D")
-tank_trail = ExtResource("7_0o7ap")
+audio_player = NodePath("../../DashAudio")
+dash_shake = NodePath("../../Shake2D")
+dash_shockwave = NodePath("../../Shockwave")
 tank = NodePath("../..")
 
-[node name="StatsBasic" type="Node" parent="Components" node_paths=PackedStringArray("tank")]
+[node name="StatsBasic" type="Node" parent="Components" node_paths=PackedStringArray("animation_player", "damage_sounds", "damage_particle", "tank")]
 script = ExtResource("7_v4ui3")
+animation_player = NodePath("../../DamageAnimation")
+damage_sounds = NodePath("../../HurtSound")
+damage_particle = NodePath("../../HurtParticle")
 tank = NodePath("../..")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Components/StatsBasic"]
@@ -276,7 +337,7 @@ animation_player = NodePath("../../AnimationPlayer")
 origin_left = NodePath("../../TankSprite/ShootOriginLeft")
 origin_right = NodePath("../../TankSprite/ShootOriginRight")
 delay = NodePath("Delay")
-audio_player = NodePath("../../ComponentReferences/Audio2D")
+audio_player = NodePath("../../Audio2D")
 bullet_scene = ExtResource("16_fsa33")
 bullet_speed = 600.0
 bullet_size = 0.85
@@ -289,6 +350,8 @@ wait_time = 0.2
 [node name="DeathBasic" type="Node" parent="Components" node_paths=PackedStringArray("stats", "tank")]
 script = ExtResource("12_up8cd")
 stats = NodePath("../StatsBasic")
+spectator_scene = ExtResource("12_37sl6")
+death_scene = ExtResource("27_j2ejg")
 tank = NodePath("../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -312,25 +375,42 @@ metadata/_edit_lock_ = true
 [node name="TankTrail" parent="." node_paths=PackedStringArray("tank") instance=ExtResource("7_0o7ap")]
 tank = NodePath("..")
 
-[node name="ComponentReferences" type="Node2D" parent="."]
+[node name="HurtParticle" parent="." instance=ExtResource("26_revl6")]
 
-[node name="Shake2D" type="Marker2D" parent="ComponentReferences"]
+[node name="Shockwave" parent="." instance=ExtResource("20_dae2h")]
+z_index = 5
+z_as_relative = false
+scale = Vector2(0.347177, 0.347177)
+grow_speed = 4.0
+fade_speed = 5.0
+
+[node name="Shake2D" type="Marker2D" parent="."]
 scale = Vector2(0.997009, 1)
 script = ExtResource("7_owimm")
 shake_range = 1000
 intensity = 3.0
 intensity_decay = 15.0
 
-[node name="Audio2D" type="AudioStreamPlayer2D" parent="ComponentReferences"]
+[node name="Audio2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_lox6u")
 volume_db = -8.0
 script = ExtResource("12_hbufx")
 pitch_range = 0.1
 
-[node name="DashAudio" type="AudioStreamPlayer2D" parent="ComponentReferences"]
+[node name="DashAudio" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("12_hbufx")
 sounds = Array[AudioStream]([ExtResource("7_c44ga"), ExtResource("8_8fqrb"), ExtResource("9_vxe33")])
 pitch_range = 0.05
 external = true
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("12_hbufx")
+sounds = Array[AudioStream]([ExtResource("23_twdss"), ExtResource("24_hfk35"), ExtResource("25_gulm7")])
+pitch_range = 0.02
+
+[node name="DamageAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0lit1")
+}
 
 [connection signal="timeout" from="Components/ShootingRapid/Delay" to="Components/ShootingRapid" method="_on_delay_timeout"]

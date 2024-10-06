@@ -34,11 +34,4 @@ func play_sound():
 	pitch_scale += randf_range(-pitch_range, pitch_range)
 	play()
 	
-	var timer = Timer.new()
-	timer.wait_time = stream.get_length()
-	add_child(timer)
-	timer.start()
-	timer.connect("timeout", Callable(self, "_on_timer_timeout"))
-	
-func _on_timer_timeout():
-	queue_free()
+	Global.timeout_destroy(self, stream.get_length())

@@ -18,7 +18,7 @@ enum TIERS {
 @export var is_client: bool = false
 
 @export_group("References")
-@export var component_container: Node
+@export var component_container: ComponentList
 @export var core_sprite: Sprite2D
 @export var sprite_node: Node2D
 @onready var component_list = component_container.get_children()
@@ -29,9 +29,7 @@ var camera: GameCamera
 var time_start = 0
 var time_now = 0
 
-func _ready():	
-	print(TIERS.BASIC)
-	
+func _ready():		
 	for component in component_list:
 		components[component.component_name] = component
 		

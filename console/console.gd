@@ -315,12 +315,18 @@ var button_modulate_original: Color
 var highlighted_node
 
 func _on_scope_button_entered(node):
+	if node == null:
+		return
+		
 	highlighted_node = node
 	if node.get("modulate"):
 		button_modulate_original = node.modulate
 		node.modulate = Color(1,0,0) 
 
 func _on_scope_button_exited(node):
+	if node == null:
+		return
+		
 	if node.get("modulate"):
 		node.modulate = button_modulate_original
 

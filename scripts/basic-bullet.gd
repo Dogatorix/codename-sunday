@@ -14,8 +14,6 @@ var damage := 0.0
 ###
 
 @export var particle_scene: PackedScene 
-
-@export var wall_sounds: Array[AudioStream]
 @export var audio_player: Audio2D
 @export var bullet_sprite: Sprite2D
 
@@ -30,7 +28,6 @@ func _ready():
 	
 func _process(delta):
 	global_position += bullet_velocity * delta
-
 
 func _on_body_entered(body):
 	if body is BasicBullet:
