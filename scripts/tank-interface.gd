@@ -18,10 +18,10 @@ func _ready():
 		push_error(str(self) + " Missing reference to stats component")
 		queue_free()
 	
-	stats.connect("health_change", Callable(self, "_on_health_change"))
-	stats.connect("rust_change", Callable(self, "_on_rust_change"))
-	stats.connect("mana_change", Callable(self, "_on_mana_change"))
-	stats.connect("points_change", Callable(self, "_on_points_change"))
+	stats.connect("health_change", _on_health_change)
+	stats.connect("rust_change", _on_rust_change)
+	stats.connect("mana_change", _on_mana_change)
+	stats.connect("points_change", _on_points_change)
 	
 	%GameVersion.text = "SUNDAY IN HELL - %s" % [ProjectSettings.get_setting("application/config/version")]
 	%CoreLevel.text = "Core " + str(stats.tank.core_tier)

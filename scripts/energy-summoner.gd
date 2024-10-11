@@ -40,8 +40,8 @@ func _ready():
 		container_instance.linear_velocity = container_velocity_init
 		add_child(container_instance)
 		
-		container_instance.connect("health_change", Callable(self, "_on_container_health_change"))
-		container_instance.connect("death", Callable(self, "_on_death"))
+		container_instance.connect("health_change", _on_container_health_change)
+		container_instance.connect("death", _on_death)
 	else:
 		print("Failed to preload container scene")
 

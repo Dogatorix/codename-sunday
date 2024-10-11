@@ -9,7 +9,7 @@ const component_name = "death"
 
 func _ready():
 	safety_check([stats, spectator_scene])
-	stats.connect("health_change", Callable(self, "_on_health_change"))
+	stats.connect("health_change", _on_health_change)
 		
 func _on_health_change(health):
 	if health > 0:

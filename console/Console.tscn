@@ -52,6 +52,7 @@ offset_top = 18.0
 offset_right = -543.0
 offset_bottom = 57.0
 grow_horizontal = 2
+scale = Vector2(1.02567, 1.02567)
 theme_override_fonts/font = ExtResource("3_8mgpf")
 theme_override_font_sizes/font_size = 22
 placeholder_text = "ENTER to execute command. Type \"help\" for more info"
@@ -79,10 +80,11 @@ tab_size = 5
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Console"]
 layout_mode = 2
-offset_left = 986.0
-offset_top = 84.0
-offset_right = 1260.0
-offset_bottom = 635.0
+offset_left = 1585.0
+offset_top = 101.0
+offset_right = 1859.0
+offset_bottom = 652.0
+scale = Vector2(1.10132, 1.10132)
 horizontal_scroll_mode = 0
 
 [node name="Scope" type="VBoxContainer" parent="Console/ScrollContainer"]
@@ -93,29 +95,31 @@ size_flags_horizontal = 3
 [node name="ScopeName" type="Label" parent="Console"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 773.0
-offset_top = 21.0
-offset_right = 1069.0
-offset_bottom = 44.0
-scale = Vector2(1.28959, 1.28959)
+offset_left = 1058.0
+offset_top = 32.0
+offset_right = 1501.0
+offset_bottom = 55.0
+scale = Vector2(1.56984, 1.56984)
 text = "Scope: arena"
 horizontal_alignment = 2
 text_overrun_behavior = 1
 
 [node name="ScopeBack" parent="Console" instance=ExtResource("2_k5k71")]
 layout_mode = 0
-offset_left = 1185.0
+offset_left = 1778.0
 offset_top = 21.0
-offset_right = 1257.0
+offset_right = 1850.0
 offset_bottom = 56.0
+scale = Vector2(1.52148, 1.52148)
 text = "Back"
 
 [node name="ColorPicker" type="ColorPicker" parent="Console"]
 layout_mode = 0
-offset_left = 400.0
-offset_top = 350.0
-offset_right = 698.0
-offset_bottom = 650.0
+offset_left = 1591.0
+offset_top = 762.0
+offset_right = 1889.0
+offset_bottom = 1062.0
+scale = Vector2(0.978977, 1.00152)
 edit_alpha = false
 can_add_swatches = false
 sampler_visible = false
@@ -148,9 +152,9 @@ autowrap_mode = 2
 unique_name_in_owner = true
 clip_contents = false
 offset_left = 19.0
-offset_top = 444.0
+offset_top = 758.0
 offset_right = 407.0
-offset_bottom = 708.0
+offset_bottom = 1022.0
 mouse_filter = 2
 theme_override_constants/outline_size = 8
 theme_override_constants/line_separation = 1

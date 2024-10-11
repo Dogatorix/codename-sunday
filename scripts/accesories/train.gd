@@ -17,8 +17,8 @@ func _ready():
 	
 	train_instance = train_scene.instantiate()
 	
-	train_instance.connect("loop_end", Callable(self, "_on_loop_end"))
-	activator.connect("body_entered", Callable(self, "_on_activator_entered"))
+	train_instance.connect("loop_end", _on_loop_end)
+	activator.connect("body_entered", _on_activator_entered)
 	
 	gate_end.position.x = gate_start.position.x
 	train_instance.global_position = gate_start.global_position

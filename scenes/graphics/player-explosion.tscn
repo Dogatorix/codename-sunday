@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://blyxbp5brb462"]
+[gd_scene load_steps=9 format=3 uid="uid://blyxbp5brb462"]
 
 [ext_resource type="PackedScene" uid="uid://dc1vcm54gphhw" path="res://scenes/graphics/shockwave.tscn" id="1_yfnh3"]
 [ext_resource type="AudioStream" uid="uid://8ukahyfpgefa" path="res://assets/audio/tanks/player-explode.mp3" id="2_surp2"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="3_tyffs"]
 [ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="4_2x3ik"]
 [ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="5_4hmik"]
+[ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/sprites/circle-particle.png" id="5_xv7um"]
 
 [sub_resource type="Curve" id="Curve_8e3ty"]
 min_value = -200.0
@@ -44,6 +45,7 @@ intensity_decay = 5.0
 [node name="Particle2D2" type="CPUParticles2D" parent="."]
 amount = 32
 explosiveness = 1.0
+texture = ExtResource("5_xv7um")
 spread = 180.0
 gravity = Vector2(0, 0)
 initial_velocity_max = 1000.0
@@ -51,7 +53,7 @@ linear_accel_min = -48.54
 linear_accel_max = -34.95
 linear_accel_curve = SubResource("Curve_8e3ty")
 scale_amount_min = 0.0
-scale_amount_max = 50.0
+scale_amount_max = 0.7
 scale_amount_curve = SubResource("Curve_k6gh1")
 script = ExtResource("4_2x3ik")
 external = true

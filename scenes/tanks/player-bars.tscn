@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjbp1eyywcerx"]
+
+[ext_resource type="Script" path="res://scripts/graphics/player-bars.gd" id="1_4nw8i"]
+[ext_resource type="Texture2D" uid="uid://dxpnselomfq68" path="res://assets/sprites/ui/ui-bar-half-circle.png" id="1_a7271"]
+
+[node name="PlayerBars" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4nw8i")
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 21.0
+offset_right = 56.0
+offset_bottom = 61.0
+scale = Vector2(0.783784, 0.783784)
+metadata/_edit_group_ = true
+
+[node name="ManaBarUnder" type="TextureProgressBar" parent="Control"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_left = 150.0
+offset_top = 142.0
+offset_right = 300.0
+offset_bottom = 213.0
+rotation = -3.14159
+step = 0.1
+value = 50.0
+fill_mode = 8
+radial_fill_degrees = 150.0
+radial_center_offset = Vector2(0, 40)
+texture_progress = ExtResource("1_a7271")
+tint_progress = Color(6.257e-07, 0.345014, 0.558096, 1)
+
+[node name="ManaBar" type="TextureProgressBar" parent="Control"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_left = 150.0
+offset_top = 142.0
+offset_right = 300.0
+offset_bottom = 213.0
+rotation = -3.14159
+step = 0.1
+value = 100.0
+fill_mode = 8
+radial_fill_degrees = 150.0
+radial_center_offset = Vector2(0, 40)
+texture_progress = ExtResource("1_a7271")
+tint_progress = Color(0, 0.633333, 1, 1)
+
+[node name="Control2" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 50.0
+metadata/_edit_group_ = true
+
+[node name="HealthBar" type="TextureProgressBar" parent="Control2"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 71.0
+step = 0.1
+value = 40.1
+fill_mode = 8
+radial_fill_degrees = 150.0
+radial_center_offset = Vector2(0, 40)
+texture_progress = ExtResource("1_a7271")
+tint_progress = Color(1, 0, 0, 1)
+
+[node name="HealthBarUnder" type="TextureProgressBar" parent="Control2"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 71.0
+step = 0.1
+value = 100.0
+fill_mode = 8
+radial_fill_degrees = 150.0
+radial_center_offset = Vector2(0, 40)
+texture_progress = ExtResource("1_a7271")
+tint_progress = Color(0.520269, 1.49807e-06, 3.36915e-07, 1)

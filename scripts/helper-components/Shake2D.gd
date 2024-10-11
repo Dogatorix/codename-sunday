@@ -29,7 +29,7 @@ func start():
 		var timer = Timer.new()
 		timer.wait_time = duration
 		add_child(timer)
-		timer.connect("timeout", Callable(self, "_on_timer_timeout"))
+		timer.connect("timeout", queue_free)
 		timer.start()
 
 func _process(delta):
@@ -55,6 +55,3 @@ func _exit_tree():
 		
 	Global.game_camera.shake_nodes.intensity.erase(id)
 	Global.game_camera.shake_nodes.interpolation.erase(id)
-
-func _on_timer_timeout():
-	queue_free()

@@ -38,7 +38,7 @@ func _ready():
 	max_core_points = CORE_REQUIREMENT[tank.core_tier]
 
 func on_process(_delta):
-	if Input.is_action_just_pressed("debug"):
+	if Input.is_action_just_pressed("debug") and Global.no_console:
 		damage_tank(20)
 
 func set_health(value):

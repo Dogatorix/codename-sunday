@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cpdu42h25sfri"]
+[gd_scene load_steps=37 format=3 uid="uid://cpdu42h25sfri"]
 
 [ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_ontu8"]
 [ext_resource type="Texture2D" uid="uid://bnviddut5e4a5" path="res://assets/sprites/tanks/rapid-fire-barrel.png" id="3_htbya"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="7_owimm"]
 [ext_resource type="Script" path="res://scripts/tank-components/StatsBasic.gd" id="7_v4ui3"]
 [ext_resource type="AudioStream" uid="uid://b08cew7xnwfqi" path="res://assets/audio/tanks/player-dash-2.mp3" id="8_8fqrb"]
+[ext_resource type="PackedScene" uid="uid://bjbp1eyywcerx" path="res://scenes/tanks/player-bars.tscn" id="9_a5leg"]
 [ext_resource type="AudioStream" uid="uid://c7v7qyq56nm4o" path="res://assets/audio/tanks/player-dash-3.mp3" id="9_vxe33"]
 [ext_resource type="Script" path="res://scripts/tank-components/ShootingRapid.gd" id="10_atl0p"]
 [ext_resource type="PackedScene" uid="uid://dkuuvwgfdon5r" path="res://scenes/spectator.tscn" id="12_37sl6"]
@@ -248,9 +249,17 @@ _data = {
 script = ExtResource("1_ontu8")
 tank_name = "Rapid Fire"
 core_tier = 2
+default_zoom = 1.3
 component_container = NodePath("Components")
 core_sprite = NodePath("TankSprite/Core")
 sprite_node = NodePath("TankSprite")
+
+[node name="PlayerBars" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("9_a5leg")]
+offset_left = -76.0
+offset_top = -74.0
+offset_right = -76.0
+offset_bottom = -74.0
+stats = NodePath("../Components/StatsBasic")
 
 [node name="TankSprite" type="Node2D" parent="."]
 
@@ -376,6 +385,7 @@ metadata/_edit_lock_ = true
 tank = NodePath("..")
 
 [node name="HurtParticle" parent="." instance=ExtResource("26_revl6")]
+emitting = false
 
 [node name="Shockwave" parent="." instance=ExtResource("20_dae2h")]
 z_index = 5
