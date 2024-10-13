@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://ooiku30st7ax" path="res://assets/audio/tanks/basic/basic-shoot.mp3" id="11_phi3q"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="12_btoxs"]
 [ext_resource type="Script" path="res://scripts/tank-components/StatsBasic.gd" id="12_fudg3"]
-[ext_resource type="PackedScene" uid="uid://cjxqex8nwxfk0" path="res://scenes/tanks/tank-interface.tscn" id="13_ruvd6"]
+[ext_resource type="PackedScene" uid="uid://cjxqex8nwxfk0" path="res://scenes/tanks/starter-interface.tscn" id="13_ruvd6"]
 [ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/tanks/basic-bullet.tscn" id="13_x88wv"]
 [ext_resource type="Texture2D" uid="uid://v1h867arh4l5" path="res://assets/sprites/light.png" id="15_lp3xo"]
 

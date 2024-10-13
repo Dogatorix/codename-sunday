@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0bvm4ekcnm0q"]
+
+[ext_resource type="Script" path="res://scripts/player-overlay.gd" id="1_2ddac"]
+[ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="1_af1me"]
+[ext_resource type="Texture2D" uid="uid://bcsnturfy3f5n" path="res://assets/sprites/ui/hud-lens-circle.png" id="2_imnuk"]
+[ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="3_aqecx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h3d5d"]
+font = ExtResource("3_aqecx")
+font_size = 60
+font_color = Color(0.581033, 0.581033, 0.581033, 1)
+outline_size = 22
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a7kwr"]
+texture = ExtResource("2_imnuk")
+modulate_color = Color(0.04, 0.04, 0.04, 0.486275)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="PlayerOverlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2ddac")
+
+[node name="GameVersion" type="Label" parent="PlayerOverlay"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -881.0
+offset_top = 8.0
+offset_right = 3113.0
+offset_bottom = 103.0
+grow_horizontal = 2
+scale = Vector2(0.44, 0.44)
+theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("1_af1me")
+theme_override_font_sizes/font_size = 50
+text = "Alpha 1.0 - Game is in early development. Expect bugs and a bunch of other weirdness."
+label_settings = SubResource("LabelSettings_h3d5d")
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="PlayerOverlay"]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_a7kwr")

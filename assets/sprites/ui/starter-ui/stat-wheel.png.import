@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bikyy43fg1q2l"
-path="res://.godot/imported/generic-long-bar-progress.png-01db67aa5426da55f7f67f8eb30f1030.ctex"
+uid="uid://24ocp888cr45"
+path="res://.godot/imported/stat-wheel.png-5ca5cafa3ee77acbc679428d85797570.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/generic-long-bar-progress.png"
-dest_files=["res://.godot/imported/generic-long-bar-progress.png-01db67aa5426da55f7f67f8eb30f1030.ctex"]
+source_file="res://assets/sprites/ui/starter-ui/stat-wheel.png"
+dest_files=["res://.godot/imported/stat-wheel.png-5ca5cafa3ee77acbc679428d85797570.ctex"]
 
 [params]
 

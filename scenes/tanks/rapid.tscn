@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_ontu8"]
 [ext_resource type="Texture2D" uid="uid://bnviddut5e4a5" path="res://assets/sprites/tanks/rapid-fire-barrel.png" id="3_htbya"]
-[ext_resource type="Texture2D" uid="uid://cw5ye4knf8x0h" path="res://assets/sprites/ui/tank-generic-bar.png.png" id="4_ipju3"]
 [ext_resource type="Script" path="res://scripts/tank-components/ComponentList.gd" id="5_fao1c"]
+[ext_resource type="Texture2D" uid="uid://dcjdc5nbekliy" path="res://assets/sprites/ui/tank-generic-bar.png" id="5_jr6el"]
 [ext_resource type="Script" path="res://scripts/tank-components/MovementBasic.gd" id="5_kmbnf"]
 [ext_resource type="Script" path="res://scripts/tank-components/DashBasic.gd" id="6_i6njt"]
 [ext_resource type="PackedScene" uid="uid://6p84ixeqpp0f" path="res://scenes/tanks/other/tank-trail.tscn" id="7_0o7ap"]
@@ -14,8 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://bjbp1eyywcerx" path="res://scenes/tanks/player-bars.tscn" id="9_a5leg"]
 [ext_resource type="AudioStream" uid="uid://c7v7qyq56nm4o" path="res://assets/audio/tanks/player-dash-3.mp3" id="9_vxe33"]
 [ext_resource type="Script" path="res://scripts/tank-components/ShootingRapid.gd" id="10_atl0p"]
+[ext_resource type="PackedScene" uid="uid://cjxqex8nwxfk0" path="res://scenes/tanks/starter-interface.tscn" id="10_dh5wa"]
 [ext_resource type="PackedScene" uid="uid://dkuuvwgfdon5r" path="res://scenes/spectator.tscn" id="12_37sl6"]
-[ext_resource type="PackedScene" uid="uid://cjxqex8nwxfk0" path="res://scenes/tanks/tank-interface.tscn" id="12_d2681"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="12_hbufx"]
 [ext_resource type="Script" path="res://scripts/tank-components/DeathBasic.gd" id="12_up8cd"]
 [ext_resource type="AudioStream" uid="uid://bvtfshg87bfkl" path="res://assets/audio/tanks/rapid-fire/rapid-fire-shoot.mp3" id="14_lox6u"]
@@ -259,6 +259,7 @@ offset_left = -76.0
 offset_top = -74.0
 offset_right = -76.0
 offset_bottom = -74.0
+pivot_offset = Vector2(76, 74)
 stats = NodePath("../Components/StatsBasic")
 
 [node name="TankSprite" type="Node2D" parent="."]
@@ -268,11 +269,9 @@ scale = Vector2(0.351487, 0.351487)
 texture = ExtResource("15_ortqr")
 
 [node name="ShootOriginLeft" type="Node2D" parent="TankSprite"]
-unique_name_in_owner = true
 position = Vector2(-12, -64)
 
 [node name="ShootOriginRight" type="Node2D" parent="TankSprite"]
-unique_name_in_owner = true
 position = Vector2(11, -64)
 
 [node name="Node2D" type="Node2D" parent="TankSprite"]
@@ -290,7 +289,7 @@ modulate = Color(0.332881, 0.332881, 0.332881, 1)
 position = Vector2(0, -190)
 rotation = 1.57079
 scale = Vector2(0.619337, 0.857355)
-texture = ExtResource("4_ipju3")
+texture = ExtResource("5_jr6el")
 offset = Vector2(104, 0)
 
 [node name="BarrelLeft" type="Sprite2D" parent="TankSprite/Node2D"]
@@ -304,7 +303,7 @@ modulate = Color(0.333333, 0.333333, 0.333333, 1)
 position = Vector2(0, -190)
 rotation = 1.57079
 scale = Vector2(0.619337, 0.857356)
-texture = ExtResource("4_ipju3")
+texture = ExtResource("5_jr6el")
 offset = Vector2(104, 0)
 
 [node name="Components" type="Node" parent="."]
@@ -336,7 +335,7 @@ tank = NodePath("../..")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Components/StatsBasic"]
 
-[node name="TankInterface" parent="Components/StatsBasic/CanvasLayer" node_paths=PackedStringArray("stats") instance=ExtResource("12_d2681")]
+[node name="TankInterface" parent="Components/StatsBasic/CanvasLayer" node_paths=PackedStringArray("stats") instance=ExtResource("10_dh5wa")]
 stats = NodePath("../..")
 
 [node name="ShootingRapid" type="Node" parent="Components" node_paths=PackedStringArray("tank_sprite", "animation_player", "origin_left", "origin_right", "delay", "audio_player", "tank")]

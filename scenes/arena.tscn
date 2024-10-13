@@ -867,6 +867,6 @@ position = Vector2(2851, 1001)
 position = Vector2(3605, 1011)
 
 [node name="Rapid" parent="." instance=ExtResource("14_dxmea")]
-position = Vector2(1698, -1093)
-tank_color = Color(1, 0.383333, 0, 1)
+position = Vector2(597, -1053)
+tank_color = Color(0.566667, 0, 1, 1)
 is_client = true

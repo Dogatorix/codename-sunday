@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6nt036ty7sgv"
-path="res://.godot/imported/health-meter-icon.png-ca13389166f1c5c8c18d5a5d7189ad41.ctex"
+uid="uid://dfxc72incxgji"
+path="res://.godot/imported/starter-core-points-progress.png-1d0ed31aff330456b2aab71dbb280f9b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/health-meter-icon.png"
-dest_files=["res://.godot/imported/health-meter-icon.png-ca13389166f1c5c8c18d5a5d7189ad41.ctex"]
+source_file="res://assets/sprites/ui/starter-ui/starter-core-points-progress.png"
+dest_files=["res://.godot/imported/starter-core-points-progress.png-1d0ed31aff330456b2aab71dbb280f9b.ctex"]
 
 [params]
 

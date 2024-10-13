@@ -25,6 +25,7 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 
 Global="*res://Global.gd"
 Console="*res://console/Console.tscn"
+Overlay="*res://scenes/tanks/player-overlay.tscn"
 
 [display]
 

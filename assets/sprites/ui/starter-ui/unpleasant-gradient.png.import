@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dykgoa8mpl167"
-path="res://.godot/imported/core-points-bar-progress.png-f8f2960007cff9953aea61a51918670c.ctex"
+uid="uid://dawy610qsbsyp"
+path="res://.godot/imported/unpleasant-gradient.png-2f55dffbc7253d97d66863124e2d3a50.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/core-points-bar-progress.png"
-dest_files=["res://.godot/imported/core-points-bar-progress.png-f8f2960007cff9953aea61a51918670c.ctex"]
+source_file="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png"
+dest_files=["res://.godot/imported/unpleasant-gradient.png-2f55dffbc7253d97d66863124e2d3a50.ctex"]
 
 [params]
 

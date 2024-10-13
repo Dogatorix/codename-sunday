@@ -25,7 +25,7 @@ scale = Vector2(0.32, 0.315789)
 texture = ExtResource("2_qbj7q")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.0
 autostart = true
 
 [node name="Audio2D" type="AudioStreamPlayer2D" parent="."]

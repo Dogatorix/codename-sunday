@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw5ye4knf8x0h"
-path="res://.godot/imported/tank-generic-bar.png.png-9d491860cfcbae82bf607979ec2e22d3.ctex"
+uid="uid://cgyiu2ng00cjp"
+path="res://.godot/imported/stat-wheel-progress-trail.png-56cc594831eabe5abec0d256ad6dff06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/tank-generic-bar.png.png"
-dest_files=["res://.godot/imported/tank-generic-bar.png.png-9d491860cfcbae82bf607979ec2e22d3.ctex"]
+source_file="res://assets/sprites/ui/starter-ui/stat-wheel-progress-trail.png"
+dest_files=["res://.godot/imported/stat-wheel-progress-trail.png-56cc594831eabe5abec0d256ad6dff06.ctex"]
 
 [params]
 

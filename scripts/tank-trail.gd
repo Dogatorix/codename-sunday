@@ -16,7 +16,7 @@ func update_color():
 	gradient.add_point(0, Color(color.r,color.g,color.b, 0))
 	gradient.add_point(1, Color(color.r,color.g,color.b, 0.3))
 
-func _process(delta):
+func _process(_delta):
 	global_position = Vector2.ZERO
 	point = get_parent().global_position
 	

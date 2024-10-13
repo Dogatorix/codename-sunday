@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4yxgoow1in3l"
-path="res://.godot/imported/generic-short-bar-outline.png-f0a52c148de0f5768148c4951e72e496.ctex"
+uid="uid://cnge7j38hewl1"
+path="res://.godot/imported/starter-core-points.png-f90f9f07716044412000c5d186135915.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/generic-short-bar-outline.png"
-dest_files=["res://.godot/imported/generic-short-bar-outline.png-f0a52c148de0f5768148c4951e72e496.ctex"]
+source_file="res://assets/sprites/ui/starter-ui/starter-core-points.png"
+dest_files=["res://.godot/imported/starter-core-points.png-f90f9f07716044412000c5d186135915.ctex"]
 
 [params]
 

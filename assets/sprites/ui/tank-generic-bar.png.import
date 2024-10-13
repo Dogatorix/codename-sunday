@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blok7ocfqc2so"
-path="res://.godot/imported/rust-meter-icon.png-365088ef8250a42af6f4b54b29e768c8.ctex"
+uid="uid://dcjdc5nbekliy"
+path="res://.godot/imported/tank-generic-bar.png-ae9ad079a422aa609bd1db811c2d9529.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/rust-meter-icon.png"
-dest_files=["res://.godot/imported/rust-meter-icon.png-365088ef8250a42af6f4b54b29e768c8.ctex"]
+source_file="res://assets/sprites/ui/tank-generic-bar.png"
+dest_files=["res://.godot/imported/tank-generic-bar.png-ae9ad079a422aa609bd1db811c2d9529.ctex"]
 
 [params]
 
