@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0bvm4ekcnm0q"]
+[gd_scene load_steps=15 format=3 uid="uid://d0bvm4ekcnm0q"]
 
 [ext_resource type="Script" path="res://scripts/player-overlay.gd" id="1_2ddac"]
 [ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="1_af1me"]
@@ -14,7 +14,6 @@ shadow_size = 0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a7kwr"]
 texture = ExtResource("2_imnuk")
-modulate_color = Color(0.04, 0.04, 0.04, 0.486275)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_semh6"]
 bg_color = Color(0, 0, 0, 1)
@@ -109,9 +108,47 @@ _data = {
 "bar-open": SubResource("Animation_qrxn5")
 }
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
+[sub_resource type="Animation" id="Animation_nlqdu"]
+resource_name = "damage"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerOverlay/Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.638884, 2.02149e-06, 4.81307e-07, 0.392157), Color(0, 0, 0, 0.392157)]
+}
+
+[sub_resource type="Animation" id="Animation_wp1qb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerOverlay/Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.392157)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ojul"]
+_data = {
+"RESET": SubResource("Animation_wp1qb"),
+"damage": SubResource("Animation_nlqdu")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("bar_animations", "overlay_animations")]
 script = ExtResource("1_2ddac")
-animation_player = NodePath("AnimationPlayer")
+bar_animations = NodePath("BarAnimations")
+overlay_animations = NodePath("OverlayAnimations")
 
 [node name="PlayerOverlay" type="Control" parent="."]
 layout_mode = 3
@@ -145,6 +182,7 @@ text = "Alpha 1.0 - Game is in early development. Expect bugs and unfinished con
 label_settings = SubResource("LabelSettings_h3d5d")
 
 [node name="Panel" type="Panel" parent="PlayerOverlay"]
+modulate = Color(0, 0, 0, 0.392157)
 z_index = -2
 layout_mode = 1
 anchors_preset = 15
@@ -171,9 +209,14 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_semh6")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="BarAnimations" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_saydy")
+}
+
+[node name="OverlayAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8ojul")
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -11,7 +11,6 @@ func _ready():
 	if not is_summoned:
 		emitting = false
 		one_shot = true
-		print('test')
 	
 	if autostart:
 		start()

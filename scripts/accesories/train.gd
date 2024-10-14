@@ -6,8 +6,8 @@ extends Node
 
 @export var train_scene: PackedScene
 var train_instance: Node2D
-
 var is_activator_on := false
+var mask_height := 5000.0
 
 func _ready():
 	if !gate_start or !gate_end or !activator:
@@ -22,7 +22,7 @@ func _ready():
 	
 	gate_end.position.x = gate_start.position.x
 	train_instance.global_position = gate_start.global_position
-	train_instance.mask_height = gate_end.position.y - gate_start.position.y
+	mask_height = gate_end.position.y - gate_start.position.y
 	add_child(train_instance)
 	
 func _on_activator_entered(body):

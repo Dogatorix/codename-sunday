@@ -6,10 +6,12 @@ class_name BasicBullet
 var tank: Tank
 
 var speed := 500.0
-var direction := 0.0
-var size := 1.0
-var color: Color
 var damage := 0.0
+var size := 1.0
+var penetration := 1
+
+var direction := 0.0
+var color: Color
 
 ###
 

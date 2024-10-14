@@ -1,19 +1,29 @@
 extends Node2D
 
 @export var sprite_mask: Control
-#@export var hitbox: CollisionShape2D
+@export var hitbox: CollisionShape2D
 @export var animation_player: AnimationPlayer
 @export var train_sprite: Sprite2D
 
-var mask_height := 1000.0
+var mask_height: float
 var continue_loop := false
 
 signal loop_end()
 
 func _ready():
+	mask_height = get_parent().mask_height
 	sprite_mask.size.y = mask_height
-	#hitbox.shape.size.y = mask_height
-
+	hitbox.scale.y = mask_height / 100
+	hitbox.position.y = mask_height / 2
+	
+func _on_body_entered(body):
+	if body is Tank:
+		var death_component: DeathBasic = body.components["death"]
+		death_component.instant_death()
+	if body.has_meta("is_container"):
+		body.health = 0
+		body.check_health()
+	
 func drive_loop_start():
 	animation_player.play("emerge")
 	continue_loop = true
@@ -37,3 +47,7 @@ func switch_hinges():
 			hinge.visible = true
 		else:
 			hinge.visible = false
+
+func _on_area_entered(area):
+	if area is BasicBullet:
+		area.on_death()

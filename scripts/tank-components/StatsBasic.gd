@@ -15,6 +15,8 @@ const CORE_REQUIREMENT = {
 @export var max_rust = 100
 @export var max_mana = 100
 @export var mana_regeneration_rate := 20.0
+@export var health_regeneration_rate := 20.0
+@export var health_regeneration_delay := 5.0
 
 @export_group("References")
 @export var animation_player: AnimationPlayer
@@ -34,10 +36,17 @@ signal on_damaged(amount)
 var rust = 0
 var points = 0
 
+@onready var regen_delay := health_regeneration_delay
+
 func _ready():	
 	max_core_points = CORE_REQUIREMENT[tank.core_tier]
 
-func on_process(_delta):
+func on_process(delta):
+	regen_delay -= delta
+	
+	if regen_delay <= 0:
+		health = min(max_health, health + (delta * health_regeneration_rate))
+			
 	if Input.is_action_just_pressed("debug") and Global.no_console:
 		damage_tank(20)
 
@@ -59,10 +68,13 @@ func set_points(value):
 
 func damage_tank(amount):
 	set_health(health - abs(amount))
+	regen_delay = health_regeneration_delay
 	
 	if health == 0:
 		return
 	
+	if tank.is_client:
+		Overlay.damage()
 	if animation_player:
 		animation_player.play("damage")
 	if damage_sounds:

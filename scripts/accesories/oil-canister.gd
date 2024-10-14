@@ -49,9 +49,10 @@ func _on_fuse_timer_timeout():
 			body.last_hit_by_bullet = false
 			body.health -= 15000 / distance.length()
 			body.check_health()
-		elif body is CharacterBody2D:
-			#body.stats_node.health -= 10000 / distance.length()
-			pass
+		elif body is Tank:
+			var damage = 13000 / distance.length()
+			var stats_component: StatsBasic = body.components["stats"]
+			stats_component.damage_tank(damage)
 		elif body.has_meta("is_canister") and body != self:
 			body.health -= 25000 / distance.length()
 			body.check_health()

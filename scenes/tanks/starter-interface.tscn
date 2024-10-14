@@ -421,6 +421,7 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(1.1725, 1.1725)
 pivot_offset = Vector2(620.715, 223.085)
+max_value = 135.0
 step = 0.1
 value = 100.0
 fill_mode = 6

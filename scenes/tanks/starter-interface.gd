@@ -42,6 +42,9 @@ var time := 0.0
 func _process(delta):
 	time += delta
 	
+	health_percent = stats.health * 100 / stats.max_health
+	%HealthBar.value = max(health_percent, 0.1)
+	
 	smooth_health += ((health_percent - smooth_health) / 10) * delta * 70
 	%HealthBarOffset.value = smooth_health
 
@@ -60,10 +63,7 @@ func _process(delta):
 	
 	%CoreBar.tint_progress.a = max(abs(sin(time * 3)), 0.75)
 #
-func _on_health_change(value):
-	health_percent = value * 100 / stats.max_health
-	%HealthBar.value = max(health_percent, 0.1)
-	
+func _on_health_change(value):	
 	if value <= 0 and not is_dying:
 		on_death()
 	
@@ -72,7 +72,7 @@ func _on_mana_change(value):
 	%ManaBar.value = mana_percent
 
 func _on_points_change(value):	
-	points_percent = value * 100 / stats.max_core_points
+	points_percent = value * 100 / float(stats.max_core_points)
 
 func on_death():
 	is_dying = true	

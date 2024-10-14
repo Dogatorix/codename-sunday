@@ -267,6 +267,7 @@ _data = {
 [node name="Rapid" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite", "sprite_node") groups=["tank"]]
 script = ExtResource("1_ontu8")
 tank_name = "Rapid Fire"
+username = "Silly Billy"
 core_tier = 2
 default_zoom = 1.3
 component_container = NodePath("Components")
