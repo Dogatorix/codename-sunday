@@ -1,11 +1,14 @@
 extends Control
 
 @export var stats: StatsBasic
+@export var animation_player: AnimationPlayer
 
 var health_percent := 100.0
 var rust_percent := 0.0
 var mana_percent := 100.0
 var points_percent := 0.0
+
+var is_dying := false
 
 @onready var smooth_health: = health_percent
 @onready var smooth_rust := rust_percent
@@ -14,6 +17,8 @@ var points_percent := 0.0
 @onready var smooth_core := 0.0
 
 func _ready():
+	visible = true
+	
 	if not stats:
 		push_error(str(self) + " Missing reference to stats component")
 		queue_free()
@@ -30,6 +35,8 @@ func _ready():
 	
 	%PointsLeft.modulate = stats.tank.tank_color
 	%TankName.modulate = stats.tank.tank_color
+	
+	Overlay.hide_bars()
 
 var time := 0.0
 func _process(delta):
@@ -55,7 +62,10 @@ func _process(delta):
 #
 func _on_health_change(value):
 	health_percent = value * 100 / stats.max_health
-	%HealthBar.value = health_percent
+	%HealthBar.value = max(health_percent, 0.1)
+	
+	if value <= 0 and not is_dying:
+		on_death()
 	
 func _on_mana_change(value):
 	mana_percent = value * 100 / stats.max_mana
@@ -63,3 +73,7 @@ func _on_mana_change(value):
 
 func _on_points_change(value):	
 	points_percent = value * 100 / stats.max_core_points
+
+func on_death():
+	is_dying = true	
+	animation_player.play("hide")

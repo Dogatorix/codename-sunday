@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0bvm4ekcnm0q"]
+[gd_scene load_steps=12 format=3 uid="uid://d0bvm4ekcnm0q"]
 
 [ext_resource type="Script" path="res://scripts/player-overlay.gd" id="1_2ddac"]
 [ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="1_af1me"]
@@ -7,8 +7,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_h3d5d"]
 font = ExtResource("3_aqecx")
-font_size = 60
-font_color = Color(0.581033, 0.581033, 0.581033, 1)
+font_size = 50
 outline_size = 22
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
@@ -17,7 +16,102 @@ shadow_size = 0
 texture = ExtResource("2_imnuk")
 modulate_color = Color(0.04, 0.04, 0.04, 0.486275)
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_semh6"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_skvdp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BarTop:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -456)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BarBottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_mamno"]
+resource_name = "bar-close"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BarTop:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0, -306), Vector2(0, -456)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BarBottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0, 930), Vector2(0, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_qrxn5"]
+resource_name = "bar-open"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BarTop:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.4, 1),
+"update": 0,
+"values": [Vector2(0, -456), Vector2(0, -306)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BarBottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.4, 1),
+"update": 0,
+"values": [Vector2(0, 1080), Vector2(0, 930)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_saydy"]
+_data = {
+"RESET": SubResource("Animation_skvdp"),
+"bar-close": SubResource("Animation_mamno"),
+"bar-open": SubResource("Animation_qrxn5")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_2ddac")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="PlayerOverlay" type="Control" parent="."]
 layout_mode = 3
@@ -26,17 +120,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2ddac")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="GameVersion" type="Label" parent="PlayerOverlay"]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.247059)
+z_index = 15
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -881.0
+offset_left = -954.0
 offset_top = 8.0
-offset_right = 3113.0
+offset_right = 3040.0
 offset_bottom = 103.0
 grow_horizontal = 2
 scale = Vector2(0.44, 0.44)
@@ -44,9 +141,8 @@ theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1
 theme_override_constants/outline_size = 26
 theme_override_fonts/font = ExtResource("1_af1me")
 theme_override_font_sizes/font_size = 50
-text = "Alpha 1.0 - Game is in early development. Expect bugs and a bunch of other weirdness."
+text = "Alpha 1.0 - Game is in early development. Expect bugs and unfinished content."
 label_settings = SubResource("LabelSettings_h3d5d")
-horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="PlayerOverlay"]
 z_index = -2
@@ -57,3 +153,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_a7kwr")
+
+[node name="BarTop" type="Panel" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -456.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_semh6")
+
+[node name="BarBottom" type="Panel" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_semh6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_saydy")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true

@@ -3,6 +3,8 @@ extends Node
 var clients: Array[Tank] = []
 var cameras: Array[GameCamera] = []
 
+var player_lives := 5
+
 var game_camera: GameCamera = null:
 	get:
 		if cameras.size() == 0:

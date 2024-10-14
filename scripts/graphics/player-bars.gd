@@ -42,7 +42,7 @@ func _process(delta):
 	%HealthBarUnder.value = smooth_health
 	%ManaBarUnder.value = smooth_mana
 
-func _on_health_change(_value):
+func _on_health_change(_value):	
 	health_opacity = 1.5
 	
 func _on_mana_change(_value):

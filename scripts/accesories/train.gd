@@ -5,7 +5,7 @@ extends Node
 @onready var activator: Area2D = get_node_or_null("TrainActivator")
 
 @export var train_scene: PackedScene
-var train_instance: StaticBody2D
+var train_instance: Node2D
 
 var is_activator_on := false
 

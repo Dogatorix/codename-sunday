@@ -32,7 +32,7 @@ script = ExtResource("3_tyffs")
 external = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.0
 autostart = true
 
 [node name="Shake2D" type="Marker2D" parent="."]
@@ -42,8 +42,8 @@ duration = 1.5
 auto_start = true
 intensity_decay = 5.0
 
-[node name="Particle2D2" type="CPUParticles2D" parent="."]
-amount = 32
+[node name="Particle2D" type="CPUParticles2D" parent="."]
+amount = 80
 explosiveness = 1.0
 texture = ExtResource("5_xv7um")
 spread = 180.0

@@ -1,7 +1,7 @@
-extends StaticBody2D
+extends Node2D
 
 @export var sprite_mask: Control
-@export var hitbox: CollisionShape2D
+#@export var hitbox: CollisionShape2D
 @export var animation_player: AnimationPlayer
 @export var train_sprite: Sprite2D
 
@@ -12,7 +12,7 @@ signal loop_end()
 
 func _ready():
 	sprite_mask.size.y = mask_height
-	hitbox.shape.size.y = mask_height
+	#hitbox.shape.size.y = mask_height
 
 func drive_loop_start():
 	animation_player.play("emerge")

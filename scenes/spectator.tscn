@@ -1,13 +1,164 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkuuvwgfdon5r"]
+[gd_scene load_steps=11 format=3 uid="uid://dkuuvwgfdon5r"]
 
 [ext_resource type="Script" path="res://tank-spectator.gd" id="1_yccdq"]
 [ext_resource type="Script" path="res://scripts/helper-components/GameCamera.gd" id="2_gmt2q"]
+[ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="3_7rtqm"]
+[ext_resource type="AudioStream" uid="uid://d083xgrceomhr" path="res://assets/audio/spectator/respawn-ready.mp3" id="4_n8abg"]
+[ext_resource type="AudioStream" uid="uid://crbmt5l31ha4o" path="res://assets/audio/spectator/zoom-change.mp3" id="5_4knqj"]
 
-[node name="Spectator" type="Marker2D" node_paths=PackedStringArray("camera")]
+[sub_resource type="LabelSettings" id="LabelSettings_r4wtr"]
+font = ExtResource("3_7rtqm")
+font_size = 70
+font_color = Color(0.377919, 0.377919, 0.377919, 1)
+
+[sub_resource type="Animation" id="Animation_ufeld"]
+resource_name = "text_fade"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Lives:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Time:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nyhb4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Lives:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Time:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Time:label_settings:font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.377919, 0.377919, 0.377919, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nvmuc"]
+resource_name = "text_pulse"
+length = 0.3
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Time:label_settings:font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.25098), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w7q6h"]
+_data = {
+"RESET": SubResource("Animation_nyhb4"),
+"text_fade": SubResource("Animation_ufeld"),
+"text_pulse": SubResource("Animation_nvmuc")
+}
+
+[node name="Spectator" type="Marker2D" node_paths=PackedStringArray("camera", "animation_player", "ready_audio", "zoom_audio")]
 gizmo_extents = 50.0
 script = ExtResource("1_yccdq")
 camera = NodePath("GameCamera")
+animation_player = NodePath("AnimationPlayer")
+ready_audio = NodePath("ReadyAudio")
+zoom_audio = NodePath("ZoomAudio")
 
 [node name="GameCamera" type="Camera2D" parent="."]
 zoom = Vector2(1.3, 1.3)
 script = ExtResource("2_gmt2q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Lives" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -421.5
+offset_top = 28.0
+offset_right = 421.5
+offset_bottom = 138.0
+grow_horizontal = 2
+text = "4 Lives remain"
+label_settings = SubResource("LabelSettings_r4wtr")
+horizontal_alignment = 1
+
+[node name="Time" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -633.0
+offset_top = -115.0
+offset_right = 633.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Respawning in 10 seconds"
+label_settings = SubResource("LabelSettings_r4wtr")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w7q6h")
+}
+autoplay = "text_fade"
+
+[node name="ReadyAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_n8abg")
+volume_db = -3.0
+
+[node name="ZoomAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_4knqj")
+volume_db = -6.0
