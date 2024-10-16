@@ -157,6 +157,7 @@ animation_player = NodePath("AnimationPlayer")
 train_sprite = NodePath("Control/Train-entity")
 
 [node name="Control" type="Control" parent="."]
+clip_contents = true
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5

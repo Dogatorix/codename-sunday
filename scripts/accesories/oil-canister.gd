@@ -22,7 +22,7 @@ func _on_area_2d_area_entered(bullet):
 	animation_player.play("hit")
 	health -= bullet.damage
 	check_health()
-	bullet.on_death()
+	bullet.damage_bullet()
 	
 func check_health():
 	if health <= 0:

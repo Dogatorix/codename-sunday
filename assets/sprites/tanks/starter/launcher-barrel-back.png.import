@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c858k56rvrjan"
-path="res://.godot/imported/gunner-barrel-1.png-b1aeae5d39ebf66149e2f00552889ad2.ctex"
+uid="uid://pt2slbrdrcgb"
+path="res://.godot/imported/launcher-barrel-back.png-97fa679b538b70fc93ceb9ce6617552d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tanks/gunner-barrel-1.png"
-dest_files=["res://.godot/imported/gunner-barrel-1.png-b1aeae5d39ebf66149e2f00552889ad2.ctex"]
+source_file="res://assets/sprites/tanks/starter/launcher-barrel-back.png"
+dest_files=["res://.godot/imported/launcher-barrel-back.png-97fa679b538b70fc93ceb9ce6617552d.ctex"]
 
 [params]
 

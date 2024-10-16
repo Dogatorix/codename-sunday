@@ -37,16 +37,24 @@ func _on_body_entered(body):
 		
 	audio_player.start()
 	
+	summon_particle()
 	if body.has_meta("bullet_target"):
 		body.on_bullet_hit(self)
+		damage_bullet()
+	else:
+		queue_free()
 		
-	on_death()
 
-func on_death():
+func summon_particle():
 	var particle_instance = particle_scene.instantiate()
 	particle_instance.position = position
 	add_sibling(particle_instance)
-	queue_free()
-	
+
+func damage_bullet():
+	penetration -= 1
+	if penetration <= 0:
+		summon_particle()
+		queue_free()
+
 func _on_timer_timeout():
 	queue_free()

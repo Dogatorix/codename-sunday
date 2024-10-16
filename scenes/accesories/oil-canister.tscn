@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://4xsv457rdngg" path="res://assets/audio/accesories/canister/canister-damage-1.mp3" id="2_0m10h"]
 [ext_resource type="Texture2D" uid="uid://c3shko63nrnlx" path="res://assets/sprites/accesories/oil-canister-lit.png" id="2_ild5y"]
 [ext_resource type="AudioStream" uid="uid://c1oedcielpnej" path="res://assets/audio/accesories/canister/canister-damage-2.mp3" id="3_qfdt5"]
-[ext_resource type="PackedScene" uid="uid://bw60ijk5yhl6r" path="res://scenes/tanks/other/bullet-death-particle.tscn" id="4_2yvri"]
+[ext_resource type="PackedScene" uid="uid://bw60ijk5yhl6r" path="res://scenes/tanks/starter/other/bullet-death-particle.tscn" id="4_2yvri"]
 [ext_resource type="AudioStream" uid="uid://dshknyqweyw2w" path="res://assets/audio/accesories/canister/canister-explode.mp3" id="5_cvpq2"]
 [ext_resource type="AudioStream" uid="uid://byc3dtp7lmqhu" path="res://assets/audio/accesories/canister/canister-fuse.mp3" id="5_thmav"]
 [ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="9_3lc52"]
@@ -143,8 +143,6 @@ polygon = PackedVector2Array(-27, -113, -27, -105, -30, -106, -30, -89, -27, -88
 
 [node name="OilCanister" type="StaticBody2D" node_paths=PackedStringArray("animation_player", "explosion_particles", "hit_zone", "explosion_shake", "hit_audio", "fuse_audio", "explosion_audio")]
 z_index = 1
-collision_layer = 3
-collision_mask = 3
 script = ExtResource("1_r07p2")
 animation_player = NodePath("AnimationPlayer")
 explosion_particles = NodePath("ExplosionParticles")
@@ -187,6 +185,7 @@ shape = SubResource("RectangleShape2D_8rbni")
 [node name="ExplosionParticles" parent="." instance=ExtResource("4_2yvri")]
 z_index = 10
 position = Vector2(0, -53)
+scale = Vector2(1.1, 1.1)
 emitting = false
 amount = 48
 lifetime = 1.0

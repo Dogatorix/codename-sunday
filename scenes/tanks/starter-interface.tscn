@@ -426,7 +426,7 @@ step = 0.1
 value = 100.0
 fill_mode = 6
 texture_progress = ExtResource("2_3y0uk")
-tint_progress = Color(0.904229, 0.490757, 0, 1)
+tint_progress = Color(0.0450001, 0.9, 0, 1)
 
 [node name="PointsLeft" type="Label" parent="Core"]
 unique_name_in_owner = true

@@ -19,6 +19,7 @@ var smooth_health := 0.0
 var smooth_mana := 0.0
 
 func _ready():
+	visible = true
 	stats.connect("health_change", _on_health_change)
 	stats.connect("mana_change", _on_mana_change)
 

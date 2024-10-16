@@ -8,6 +8,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.423729, 0.417582), -1.87025, -
 point_count = 3
 
 [node name="BulletDeathParticle" type="CPUParticles2D"]
+scale = Vector2(2, 2)
 lifetime = 0.5
 explosiveness = 1.0
 texture = ExtResource("1_lp0b1")
@@ -16,7 +17,7 @@ gravity = Vector2(0, 0)
 initial_velocity_min = 150.0
 initial_velocity_max = 400.0
 scale_amount_min = 0.0
-scale_amount_max = 0.1
+scale_amount_max = 0.2
 scale_amount_curve = SubResource("Curve_vjnkd")
 script = ExtResource("1_62ler")
 

@@ -4,8 +4,8 @@ class_name DashBasic
 const component_name = "dash"
 
 @export_group("General")
-@export var dash_strength := 3000
-@export var dash_consumption := 20
+@export var dash_strength := 1200
+@export var dash_consumption := 30
 
 @export_group("References")
 @export var movement: MovementBasic
@@ -14,25 +14,34 @@ const component_name = "dash"
 @export var dash_shake: Shake2D
 @export var dash_shockwave: Shockwave
 
+var dash_velocity := Vector2.ZERO
+@onready var dash_decay := float(dash_strength) * 2
+var dash_length := 0.0
+
 func _ready():
 	safety_check([movement])
 
-func on_process(_delta):
+func on_process(delta):
 	if Input.is_action_just_pressed("special_move") and tank_stats \
 	and movement.input_vector and Global.no_console:
 		if tank_stats.mana > dash_consumption:
 			tank_stats.set_mana(tank_stats.mana - dash_consumption)
 			
-			movement.velocity = Vector2.ZERO
-			var dash_velocity = movement.input_vector * (dash_strength + (movement.speed * 2)) / 90
-			movement.dash_velocity = dash_velocity
+			movement.normal_velocity = Vector2.ZERO
+			movement.reset_external_velocity()
 			
+			dash_velocity = movement.input_vector.normalized() * (dash_strength)
+			dash_length = dash_velocity.length()	
+				
 			audio_player.start()
 			dash_shake.start()
 			var shockwave_clone: Shockwave = dash_shockwave.duplicate()
 			tank.add_sibling(shockwave_clone)
 			shockwave_clone.start()
 			shockwave_clone.global_position = tank.global_position
-			
-	movement.dash_velocity /= 30
+	
+	dash_length = max(0, dash_length - (dash_decay * delta))
+	dash_velocity = dash_velocity.normalized() * dash_length
+	
+	movement.dash_velocity = dash_velocity
 	dash_shake.global_position = tank.global_position

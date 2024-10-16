@@ -16,7 +16,7 @@ const CORE_REQUIREMENT = {
 @export var max_mana = 100
 @export var mana_regeneration_rate := 20.0
 @export var health_regeneration_rate := 20.0
-@export var health_regeneration_delay := 5.0
+@export var health_regeneration_delay := 4.5
 
 @export_group("References")
 @export var animation_player: AnimationPlayer
@@ -47,8 +47,8 @@ func on_process(delta):
 	if regen_delay <= 0:
 		health = min(max_health, health + (delta * health_regeneration_rate))
 			
-	if Input.is_action_just_pressed("debug") and Global.no_console:
-		damage_tank(20)
+	if Input.is_action_pressed("debug") and Global.no_console:
+		set_points(points + 500 * delta)
 
 func set_health(value):
 	health = clamp(value, 0, max_health)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy3n4jejlsel3"
-path="res://.godot/imported/basic-bullet.png-cd9dabcd8e02acabe054413478a8848a.ctex"
+uid="uid://bg76v4dgiyq0e"
+path="res://.godot/imported/starter-barrel.png-e29d66e32894a0d09f7cbfeea7020c00.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tanks/basic-bullet.png"
-dest_files=["res://.godot/imported/basic-bullet.png-cd9dabcd8e02acabe054413478a8848a.ctex"]
+source_file="res://assets/sprites/tanks/starter/starter-barrel.png"
+dest_files=["res://.godot/imported/starter-barrel.png-e29d66e32894a0d09f7cbfeea7020c00.ctex"]
 
 [params]
 
