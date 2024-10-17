@@ -2,6 +2,7 @@ extends Control
 
 @export var stats: StatsBasic
 @export var animation_player: AnimationPlayer
+@export var upgrades_player: AnimationPlayer
 
 var health_percent := 100.0
 var rust_percent := 0.0
@@ -25,14 +26,15 @@ func _ready():
 	
 	stats.connect("health_change", _on_health_change)
 	stats.connect("points_change", _on_points_change)
+	stats.connect("max_points", _on_max_points)
 	
 	%ManaBar.value = mana_percent
 	%HealthBar.value = health_percent
 	%CoreBar.value = points_percent
-	%CoreBar.tint_progress = stats.tank.tank_color
 	
 	%TankName.text = stats.tank.username
 	
+	%CoreBar.tint_progress = stats.tank.tank_color
 	%PointsLeft.modulate = stats.tank.tank_color
 	%TankName.modulate = stats.tank.tank_color
 	
@@ -42,7 +44,7 @@ var time := 0.0
 func _process(delta):
 	time += delta
 	
-	health_percent = stats.health * 100 / stats.max_health
+	health_percent = stats.health * 100 / float(stats.max_health)
 	%HealthBar.value = max(health_percent, 0.1)
 	
 	smooth_health += ((health_percent - smooth_health) / 10) * delta * 70
@@ -62,6 +64,16 @@ func _process(delta):
 	%PointsLeft.text = str(smooth_points_left) + " XP LEFT"
 	
 	%CoreBar.tint_progress.a = max(abs(sin(time * 3)), 0.75)
+	
+	######
+	
+	%CoreBar.tint_progress = stats.tank.tank_color
+	%PointsLeft.modulate = stats.tank.tank_color
+	%TankName.modulate = stats.tank.tank_color
+	
+	%Tank1.modulate = stats.tank.tank_color
+	%Tank2.modulate = stats.tank.tank_color
+	%Tank3.modulate = stats.tank.tank_color
 #
 func _on_health_change(value):	
 	if value <= 0 and not is_dying:
@@ -77,3 +89,12 @@ func _on_points_change(value):
 func on_death():
 	is_dying = true	
 	animation_player.play("hide")
+
+func _on_max_points():
+	upgrades_player.play("show")
+
+############
+
+func _on_upgrade_pressed(id):
+	var tank: Tank = stats.tank
+	tank.upgrade_tank(tank.upgrades[id])

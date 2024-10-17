@@ -22,7 +22,7 @@ func on_process(_delta):
 		delay.start()
 		
 		summon_bullet(origin.global_position)
-
+		
 		if animation_player:
 			animation_player.stop()
 			animation_player.play("shoot")
@@ -34,6 +34,6 @@ func on_process(_delta):
 		if knockback > 0:
 			movement.apply_external_velocity(tank_rotation, knockback, 1000)
 			dash.dash_length -= knockback
-	
+			
 func _on_delay_timeout():
 	can_shoot = true

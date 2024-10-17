@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cjxqex8nwxfk0"]
+[gd_scene load_steps=22 format=3 uid="uid://cjxqex8nwxfk0"]
 
 [ext_resource type="Texture2D" uid="uid://cnge7j38hewl1" path="res://assets/sprites/ui/starter-ui/starter-core-points.png" id="1_2hh8u"]
 [ext_resource type="Script" path="res://scenes/tanks/starter-interface.gd" id="1_8pq04"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="4_m645k"]
 [ext_resource type="FontFile" uid="uid://cn7hc30kplvpo" path="res://assets/fonts/digital.otf" id="9_hjdot"]
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="10_6rvnl"]
+[ext_resource type="Texture2D" uid="uid://c2og2osdar5t7" path="res://assets/sprites/ui/starter-ui/starter-upgrade-button.png" id="10_8q4vo"]
 
 [sub_resource type="Curve" id="Curve_tnq5r"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -181,7 +182,61 @@ _data = {
 "show": SubResource("Animation_1us12")
 }
 
-[node name="TankInterface" type="Control" node_paths=PackedStringArray("animation_player")]
+[sub_resource type="Animation" id="Animation_1l6p7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Upgrades:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(169, -200)]
+}
+
+[sub_resource type="Animation" id="Animation_fde5p"]
+resource_name = "hide"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Upgrades:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(169, 37), Vector2(169, -293)]
+}
+
+[sub_resource type="Animation" id="Animation_0nuvh"]
+resource_name = "show"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Upgrades:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(169, -293), Vector2(169, 37)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xra1y"]
+_data = {
+"RESET": SubResource("Animation_1l6p7"),
+"hide": SubResource("Animation_fde5p"),
+"show": SubResource("Animation_0nuvh")
+}
+
+[node name="TankInterface" type="Control" node_paths=PackedStringArray("animation_player", "upgrades_player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -190,6 +245,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8pq04")
 animation_player = NodePath("AnimationPlayer")
+upgrades_player = NodePath("UpgradeAnimations")
 
 [node name="Health" type="Control" parent="."]
 z_index = 15
@@ -455,6 +511,86 @@ text = "Tank Name"
 label_settings = SubResource("LabelSettings_mtuiq")
 vertical_alignment = 3
 
+[node name="Upgrades" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -791.0
+offset_top = -200.0
+offset_right = 791.0
+offset_bottom = 38.0
+grow_horizontal = 2
+scale = Vector2(0.747432, 0.747432)
+pivot_offset = Vector2(812.292, 97.3534)
+metadata/_edit_group_ = true
+
+[node name="Tank1" type="TextureButton" parent="Upgrades"]
+layout_mode = 0
+offset_left = -62.0
+offset_top = 24.0
+offset_right = 484.0
+offset_bottom = 161.0
+texture_normal = ExtResource("10_8q4vo")
+
+[node name="Tank1" type="Label" parent="Upgrades/Tank1"]
+unique_name_in_owner = true
+modulate = Color(0.905882, 0.458824, 0, 1)
+layout_mode = 0
+offset_left = 13.0
+offset_top = 6.0
+offset_right = 305.0
+offset_bottom = 92.0
+scale = Vector2(1.87258, 1.49655)
+text = "Destroy"
+label_settings = SubResource("LabelSettings_mtuiq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tank2" type="TextureButton" parent="Upgrades"]
+layout_mode = 0
+offset_left = 533.0
+offset_top = 24.0
+offset_right = 1079.0
+offset_bottom = 161.0
+texture_normal = ExtResource("10_8q4vo")
+
+[node name="Tank2" type="Label" parent="Upgrades/Tank2"]
+unique_name_in_owner = true
+modulate = Color(0.905882, 0.458824, 0, 1)
+layout_mode = 0
+offset_left = 13.0
+offset_top = 6.0
+offset_right = 305.0
+offset_bottom = 92.0
+scale = Vector2(1.87258, 1.49655)
+text = "ASSAULT"
+label_settings = SubResource("LabelSettings_mtuiq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tank3" type="TextureButton" parent="Upgrades"]
+layout_mode = 0
+offset_left = 1129.0
+offset_top = 24.0
+offset_right = 1675.0
+offset_bottom = 161.0
+texture_normal = ExtResource("10_8q4vo")
+
+[node name="Tank3" type="Label" parent="Upgrades/Tank3"]
+unique_name_in_owner = true
+modulate = Color(0.905882, 0.458824, 0, 1)
+layout_mode = 0
+offset_left = 13.0
+offset_top = 6.0
+offset_right = 305.0
+offset_bottom = 92.0
+scale = Vector2(1.87258, 1.49655)
+text = "crush"
+label_settings = SubResource("LabelSettings_mtuiq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ShadowOverlay" type="TextureRect" parent="."]
 modulate = Color(0, 0, 0, 0.67451)
 layout_mode = 1
@@ -471,3 +607,12 @@ texture = ExtResource("10_6rvnl")
 libraries = {
 "": SubResource("AnimationLibrary_tpoov")
 }
+
+[node name="UpgradeAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xra1y")
+}
+
+[connection signal="pressed" from="Upgrades/Tank1" to="." method="_on_upgrade_pressed" binds= [0]]
+[connection signal="pressed" from="Upgrades/Tank2" to="." method="_on_upgrade_pressed" binds= [1]]
+[connection signal="pressed" from="Upgrades/Tank3" to="." method="_on_upgrade_pressed" binds= [2]]

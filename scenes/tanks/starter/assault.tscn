@@ -338,7 +338,6 @@ tank = NodePath("../..")
 
 [node name="DashBasic" type="Node" parent="Components" node_paths=PackedStringArray("movement", "tank_stats", "audio_player", "dash_shake", "dash_shockwave", "tank")]
 script = ExtResource("8_fwt6g")
-dash_strength = 3800
 movement = NodePath("../MovementBasic")
 tank_stats = NodePath("../StatsBasic")
 audio_player = NodePath("../../DashAudio")

@@ -178,7 +178,8 @@ theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1
 theme_override_constants/outline_size = 26
 theme_override_fonts/font = ExtResource("1_af1me")
 theme_override_font_sizes/font_size = 50
-text = "Alpha 1.0 - Game is in early development. Expect bugs and unfinished content."
+text = "Alpha 1.0 - Game is in early development. Expect bugs and unfinished content.
+Note: Tank upgrading is very finnicky. I was on a tight schedule. Expect a better rework."
 label_settings = SubResource("LabelSettings_h3d5d")
 
 [node name="Panel" type="Panel" parent="PlayerOverlay"]

@@ -17,6 +17,8 @@ enum TIERS {
 @export var default_zoom := 0.9
 @export var is_client: bool = false
 
+@export var upgrades: Array[PackedScene]
+
 @export_group("References")
 @export var component_container: ComponentList
 @export var core_sprite: Sprite2D
@@ -26,10 +28,9 @@ enum TIERS {
 var components := {}
 var camera: GameCamera
 
-var time_start = 0
-var time_now = 0
+var upgraded := false
 
-func _ready():		
+func _ready():
 	for component in component_list:
 		components[component.component_name] = component
 		
@@ -40,21 +41,43 @@ func _ready():
 		push_error(str(self) + " Overwriting client. Proprety reset.")
 		Global.clients.erase(self)
 		is_client = false
-			
-	if is_client:
-		var camera_instance = GameCamera.new()
-		camera_instance.zoom = Vector2(default_zoom, default_zoom)
-		add_child(camera_instance)
-		camera = camera_instance
 		
-	if core_sprite:
-		tank_color.a = 1
-		core_sprite.modulate = tank_color
+	if not upgraded:
+		check_data()
 		 
 func _physics_process(delta):
 	for component in component_list:
 		if component.has_method("on_process"):
 			component.on_process(delta)
+		
+func upgrade_tank(tank_scene: PackedScene):
+	var tank_instance: Tank = tank_scene.instantiate()
+	Global.clients.erase(self)
+	is_client = false
+	
+	tank_instance.is_client = true
+	tank_instance.upgraded = true
+	add_sibling(tank_instance)
+	
+	if sprite_node and tank_instance.sprite_node:
+		tank_instance.sprite_node.rotation_degrees = sprite_node.rotation_degrees
+	
+	tank_instance.tank_color = tank_color
+	tank_instance.username = username
+	
+	tank_instance.global_position = global_position
+	tank_instance.check_data()
+	queue_free()
+
+func check_data():
+	if is_client:
+		var camera_instance = GameCamera.new()
+		camera_instance.zoom = Vector2(default_zoom, default_zoom)
+		add_child(camera_instance)
+		camera = camera_instance
+	if core_sprite:
+		tank_color.a = 1
+		core_sprite.modulate = tank_color
 
 func _exit_tree():
 	Global.clients.erase(self)

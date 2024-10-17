@@ -26,12 +26,16 @@ func start():
 	clone.external = false
 	clone.is_summoned = true
 	clone.emitting = true
-	clone.global_position = self.global_position
 	
 	if external:
-		get_parent().add_sibling.call_deferred(clone)
+		i_hate_this.call_deferred(clone)
 	else:
 		add_sibling.call_deferred(clone)
+	clone.global_position = self.global_position
 	
 	if not permanent:
 		Global.timeout_destroy(clone, lifetime)
+
+func i_hate_this(clone):
+	add_sibling(clone)
+	clone.global_position = global_position

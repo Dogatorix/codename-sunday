@@ -72,6 +72,7 @@ radius = 200.0
 
 [node name="ExperienceOrb" type="Node2D" node_paths=PackedStringArray("glow", "animation_player")]
 z_index = -1
+position = Vector2(0, 1)
 script = ExtResource("1_7excv")
 glow = NodePath("Sprites/Glow")
 animation_player = NodePath("AnimationPlayer")

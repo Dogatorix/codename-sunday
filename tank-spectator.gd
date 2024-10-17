@@ -35,7 +35,7 @@ func _process(delta):
 		can_respawn = true
 		animation_player.play("text_pulse")
 		ready_audio.play()
-		%Time.text = "Click to respawn"
+		%Time.text = "Press R to respawn"
 	
 	if not Input.is_action_pressed("spectator_speedup"):
 		speed = speed_normal

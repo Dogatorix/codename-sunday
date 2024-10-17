@@ -34,7 +34,7 @@ var PRELOADS = {
 	"energy-triangle": load("res://scenes/containers/energy-triangle.tscn"),
 	"energy-pentagon": load("res://scenes/containers/energy-pentagon.tscn"),
 	"energy-octagon": load("res://scenes/containers/energy-octagon.tscn"),
-}
+}	
 
 func make_external(node: Node, clone: Node = null):
 	var dublicate: Node
@@ -45,8 +45,8 @@ func make_external(node: Node, clone: Node = null):
 		dublicate = node.duplicate()
 	
 	dublicate.external = false
-	dublicate.global_position = node.global_position
 	node.get_parent().add_sibling.call_deferred(dublicate)
+	dublicate.global_position = node.global_position
 	node.queue_free()
 	
 func timeout_destroy(target: Node, duration: float):

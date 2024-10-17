@@ -50,4 +50,4 @@ func switch_hinges():
 
 func _on_area_entered(area):
 	if area is BasicBullet:
-		area.on_death()
+		area.kill_bullet()

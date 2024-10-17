@@ -21,9 +21,9 @@ func _ready():
 	activator.connect("body_entered", _on_activator_entered)
 	
 	gate_end.position.x = gate_start.position.x
-	train_instance.global_position = gate_start.global_position
 	mask_height = gate_end.position.y - gate_start.position.y
 	add_child(train_instance)
+	train_instance.global_position = gate_start.global_position
 	
 func _on_activator_entered(body):
 	if is_activator_on or not body is CharacterBody2D:

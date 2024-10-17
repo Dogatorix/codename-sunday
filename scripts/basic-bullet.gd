@@ -21,7 +21,7 @@ var color: Color
 
 var bullet_velocity: Vector2
 
-func _ready():
+func _ready():	
 	scale = Vector2(size,size)
 	bullet_sprite.rotation_degrees = direction
 	bullet_velocity = Vector2(1,0).rotated(deg_to_rad(direction)) * speed
@@ -42,7 +42,7 @@ func _on_body_entered(body):
 		body.on_bullet_hit(self)
 		damage_bullet()
 	else:
-		queue_free()
+		kill_bullet()
 		
 
 func summon_particle():
@@ -54,7 +54,11 @@ func damage_bullet():
 	penetration -= 1
 	if penetration <= 0:
 		summon_particle()
-		queue_free()
+		kill_bullet()
+		
+func kill_bullet():
+	summon_particle()
+	queue_free()
 
 func _on_timer_timeout():
 	queue_free()

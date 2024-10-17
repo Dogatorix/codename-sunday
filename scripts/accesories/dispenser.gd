@@ -85,11 +85,11 @@ func spawn_container(type: CONTAINER_TYPE):
 	var container_instance = container.instantiate()
 	
 	container_instance.container_type = type
-	container_instance.global_position = global_position
 	container_instance.container_velocity_init = velocity_vector
 	container_instance.dispenser_owner = self
-	
 	add_sibling(container_instance)
+	container_instance.global_position = global_position
+	
 
 func seconds_to_clock(seconds):
 	var minutes = floor(seconds / 60)

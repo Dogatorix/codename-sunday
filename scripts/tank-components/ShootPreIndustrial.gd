@@ -10,7 +10,6 @@ class_name ShootPreIndustrial
 
 func summon_bullet(target_position: Vector2):
 	var bullet_instance: BasicBullet = bullet_scene.instantiate()
-	bullet_instance.global_position = target_position
 	
 	bullet_instance.tank = tank
 	bullet_instance.direction = tank.sprite_node.rotation_degrees - 90
@@ -22,3 +21,4 @@ func summon_bullet(target_position: Vector2):
 	bullet_instance.penetration = bullet_penetration
 		
 	tank.add_sibling(bullet_instance)
+	bullet_instance.global_position = target_position
