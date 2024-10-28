@@ -23,6 +23,9 @@ func _ready():
 	if not stats:
 		push_error(str(self) + " Missing reference to stats component")
 		queue_free()
+		
+	if not stats.tank.is_client:
+		queue_free()
 	
 	stats.connect("health_change", _on_health_change)
 	stats.connect("points_change", _on_points_change)

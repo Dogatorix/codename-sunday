@@ -265,6 +265,9 @@ _data = {
 }
 
 [node name="Assault" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite", "sprite_node") groups=["tank"]]
+motion_mode = 1
+platform_on_leave = 2
+platform_floor_layers = 4294901760
 script = ExtResource("1_g5diw")
 tank_name = "Assault"
 username = "Silly Billy"
@@ -275,6 +278,7 @@ core_sprite = NodePath("TankSprite/Core")
 sprite_node = NodePath("TankSprite")
 
 [node name="PlayerBars" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("2_x174s")]
+visible = false
 offset_left = -76.0
 offset_top = -74.0
 offset_right = -76.0

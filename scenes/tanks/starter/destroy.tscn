@@ -151,6 +151,7 @@ _data = {
 radius = 146.113
 
 [node name="Destroy" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite", "sprite_node") groups=["tank"]]
+motion_mode = 1
 script = ExtResource("1_4kleh")
 tank_name = "Destroy"
 core_tier = 2
@@ -241,6 +242,7 @@ tank = NodePath("../..")
 [node name="CanvasLayer" type="CanvasLayer" parent="Components/StatsBasic"]
 
 [node name="TankInterface" parent="Components/StatsBasic/CanvasLayer" node_paths=PackedStringArray("stats") instance=ExtResource("11_g2fhr")]
+visible = false
 stats = NodePath("../..")
 
 [node name="DeathBasic" type="Node" parent="Components" node_paths=PackedStringArray("stats", "animation_player", "predeath_sound", "tank")]

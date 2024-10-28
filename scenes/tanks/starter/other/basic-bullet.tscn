@@ -12,8 +12,8 @@ radius = 15.0333
 
 [node name="Bullet" type="Area2D" node_paths=PackedStringArray("audio_player", "bullet_sprite")]
 z_index = -5
-collision_layer = 2
-collision_mask = 2
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_nr2ty")
 particle_scene = ExtResource("2_d8b3y")
 audio_player = NodePath("Audio2D")

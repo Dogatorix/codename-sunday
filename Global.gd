@@ -56,3 +56,6 @@ func timeout_destroy(target: Node, duration: float):
 	target.add_child(timer)
 	timer.connect("timeout", Callable(target, "queue_free"))
 	
+func _ready():
+	if not FileAccess.file_exists("res://coconut.png"):
+		get_parent().fuck_you()	

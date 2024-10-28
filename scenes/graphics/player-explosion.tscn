@@ -21,6 +21,7 @@ point_count = 2
 
 [node name="Shockwave" parent="." instance=ExtResource("1_yfnh3")]
 scale = Vector2(-0.941399, -0.941399)
+start_size = 0.3
 grow_speed = 8.0
 fade_speed = 1.4
 autostart = true

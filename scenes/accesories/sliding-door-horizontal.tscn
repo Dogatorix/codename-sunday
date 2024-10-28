@@ -72,13 +72,14 @@ polygon = PackedVector2Array(-24, -113, -24, -103, -27, -103, -27, -79, -23, -79
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0olng"]
 size = Vector2(704, 624)
 
-[node name="Sliding Door" type="Node2D" node_paths=PackedStringArray("animation_player", "audio_player")]
+[node name="Sliding Door" type="Node2D" node_paths=PackedStringArray("animation_player", "audio_player", "open_region")]
 z_index = -11
 script = ExtResource("1_qqb3g")
 animation_player = NodePath("AnimationPlayer")
 audio_player = NodePath("DoorStream")
 open_sound = ExtResource("2_0pui8")
 close_sound = ExtResource("3_abcu0")
+open_region = NodePath("OpenRegion")
 
 [node name="OpenRegion" type="Area2D" parent="."]
 

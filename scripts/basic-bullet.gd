@@ -31,11 +31,15 @@ func _ready():
 func _process(delta):
 	global_position += bullet_velocity * delta
 
-func _on_body_entered(body):
+func _on_body_entered(body):	
 	if body is BasicBullet:
 		return
 		
-	audio_player.start()
+	if body is Tank:
+		var tank_stats: StatsBasic = body.components["stats"]
+		tank_stats.damage_tank(damage)
+	else:	
+		audio_player.start()
 	
 	summon_particle()
 	if body.has_meta("bullet_target"):

@@ -1,24 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://cbl0u5cu6wcg0"]
 
-[ext_resource type="Texture2D" uid="uid://di2ab3kkxnqls" path="res://assets/sprites/energy/energy-square.png" id="1_7eqij"]
+[ext_resource type="Texture2D" uid="uid://cbpya6nrjdox2" path="res://assets/sprites/ui/house-debug.png" id="1_srw5i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yu2bj"]
-size = Vector2(76, 74)
+size = Vector2(94, 88)
 
-[node name="DamageArea" type="Area2D"]
+[node name="SendHelpPlease" type="Area2D"]
 
-[node name="Label" type="Label" parent="."]
-offset_left = -22.0
-offset_top = -29.0
-offset_right = 23.0
-offset_bottom = -6.0
-text = "death"
-
-[node name="Energy-square" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0.0156863, 0.466667)
-position = Vector2(3, 3)
-scale = Vector2(0.4375, 0.416667)
-texture = ExtResource("1_7eqij")
+[node name="House" type="Sprite2D" parent="."]
+position = Vector2(1, -5)
+scale = Vector2(0.283701, 0.283701)
+texture = ExtResource("1_srw5i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_yu2bj")

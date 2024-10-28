@@ -17,7 +17,8 @@ var can_shoot: bool = true
 @export var movement: MovementBasic
 		
 func on_process(_delta):
-	if Input.is_action_pressed("shoot") and can_shoot and Global.no_console:
+	if Input.is_action_pressed("shoot") and can_shoot \
+	and Global.no_console and tank.is_client:
 		can_shoot = false
 		delay.start()
 		

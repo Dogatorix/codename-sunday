@@ -35,14 +35,14 @@ func on_process(delta):
 	external_velocity = Vector2(1,0).rotated(external_velocity_direction) * external_velocity_length 
 	external_velocity_length = max(0, external_velocity_length - (external_velocity_decay * delta) )
 	
-	input_vector = Vector2(
-		Input.get_axis("move_left", "move_right"),
-		Input.get_axis("move_up", "move_down")
-	)
+	if tank.is_client:
+		input_vector = Vector2(
+			Input.get_axis("move_left", "move_right"),
+			Input.get_axis("move_up", "move_down")
+		)
 	
 	if input_vector != Vector2.ZERO and Global.no_console:
-		input_vector = input_vector.normalized() * speed
-		normal_velocity = normal_velocity.move_toward(input_vector, acceleration * delta)
+		normal_velocity = normal_velocity.move_toward(input_vector.normalized() * speed, acceleration * delta)
 	else:
 		normal_velocity = normal_velocity.move_toward(Vector2.ZERO, friction * delta)
 	

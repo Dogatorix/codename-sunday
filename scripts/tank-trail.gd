@@ -10,15 +10,17 @@ func _ready():
 
 func update_color():
 	var color: Color = tank.tank_color
-	if gradient.get_point_count() >= 2:
-		gradient.remove_point(0)
-		gradient.remove_point(1)
-	gradient.add_point(0, Color(color.r,color.g,color.b, 0))
-	gradient.add_point(1, Color(color.r,color.g,color.b, 0.3))
+	
+	var new_gradient: Gradient = Gradient.new()
+
+	new_gradient.set_color(0, Color(color.r,color.g,color.b, 0))
+	new_gradient.set_color(1, Color(color.r,color.g,color.b, 0.3))
+	
+	gradient = new_gradient
 
 func _process(_delta):
 	global_position = Vector2.ZERO
-	point = get_parent().global_position
+	point = tank.global_position
 	
 	add_point(point)
 	

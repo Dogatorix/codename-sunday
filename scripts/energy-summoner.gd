@@ -70,9 +70,7 @@ func _on_death(energy, color):
 	
 	if dispenser_owner:
 		dispenser_owner.payload_power += 1
-	
-	call_deferred("add_experience")
-	
+	add_experience.call_deferred()
 
 func add_experience():
 	add_sibling(experience_instance)
