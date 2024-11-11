@@ -142,7 +142,8 @@ radius = 450.01
 polygon = PackedVector2Array(-27, -113, -27, -105, -30, -106, -30, -89, -27, -88, -27, -26, -30, -26, -30, -10, -20, -4, -7, -1, 7, 0, 20, -4, 30, -10, 30, -26, 27, -32, 27, -89, 30, -90, 30, -106, 27, -107, 27, -114, 16, -118, 5, -120, -7, -120, -20, -117)
 
 [node name="OilCanister" type="StaticBody2D" node_paths=PackedStringArray("animation_player", "explosion_particles", "hit_zone", "explosion_shake", "hit_audio", "fuse_audio", "explosion_audio")]
-z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_r07p2")
 animation_player = NodePath("AnimationPlayer")
 explosion_particles = NodePath("ExplosionParticles")
@@ -153,8 +154,10 @@ hit_audio = NodePath("HitAudio")
 fuse_audio = NodePath("FuseAudio")
 explosion_audio = NodePath("ExplosionAudio")
 metadata/is_canister = true
+metadata/can_be_dragged = true
 
 [node name="Oil-canister" type="Sprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, -60)
 texture = ExtResource("1_lrwvv")
 

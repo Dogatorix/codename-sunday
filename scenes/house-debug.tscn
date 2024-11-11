@@ -1,0 +1,114 @@
+[gd_scene load_steps=13 format=3 uid="uid://dgjvtryibg6xd"]
+
+[ext_resource type="Texture2D" uid="uid://cbpya6nrjdox2" path="res://assets/sprites/ui/house-debug.png" id="1_em6gv"]
+[ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="2_4egiy"]
+[ext_resource type="AudioStream" uid="uid://2cl720jksfrn" path="res://assets/audio/spawn-curse.mp3" id="3_khdkb"]
+[ext_resource type="Texture2D" uid="uid://dxpnselomfq68" path="res://assets/sprites/ui/ui-bar-half-circle.png" id="4_qvqio"]
+[ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="5_g6fah"]
+[ext_resource type="AudioStream" uid="uid://ebd23l3da1bx" path="res://assets/audio/spawn-ost.mp3" id="6_5hxi7"]
+
+[sub_resource type="GDScript" id="GDScript_wpdpd"]
+resource_name = "agent-test"
+script/source = "extends Area2D
+
+var speed = 650
+
+@export var nav_agent: NavigationAgent2D 
+@export var target: Node2D
+
+var velocity := Vector2.ZERO
+
+func _on_body_entered(body):
+	if body is Tank:
+		body.components[\"death\"].instant_death()
+
+func _process(delta):
+	var direction = to_local(nav_agent.get_next_path_position()).normalized()
+	velocity = direction * delta * speed
+	global_position += velocity
+	
+	$Sprite.position = Vector2(randi_range(-5,5),randi_range(-5,5))
+
+func _ready():
+	target = Global.client
+	nav_agent.target_position = target.global_position
+		
+func _on_timer_timeout():
+	if not target:
+		target = self
+	nav_agent.target_position = target.global_position
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gakv"]
+size = Vector2(134, 126)
+
+[sub_resource type="Curve" id="Curve_4dpxu"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0.0078125, -5.86322), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_gtjjh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_wfwfh"]
+
+[sub_resource type="Curve" id="Curve_3jqx7"]
+min_value = -1.0
+_data = [Vector2(0, -0.884365), 0.0, 0.0, 0, 0, Vector2(0.964844, 0.809446), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="KillMe" type="Area2D" node_paths=PackedStringArray("nav_agent")]
+script = SubResource("GDScript_wpdpd")
+nav_agent = NodePath("NavigationAgent2D")
+metadata/can_be_dragged = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.411536, 0.411536)
+texture = ExtResource("1_em6gv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5gakv")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 1.0
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="Audio2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_khdkb")
+autoplay = true
+script = ExtResource("2_4egiy")
+
+[node name="Particle2D" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+amount = 80
+texture = ExtResource("4_qvqio")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 14.49
+initial_velocity_max = 195.65
+angle_max = 360.0
+angle_curve = SubResource("Curve_4dpxu")
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_gtjjh")
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("Gradient_wfwfh")
+hue_variation_min = -0.14
+hue_variation_max = 0.12
+hue_variation_curve = SubResource("Curve_3jqx7")
+script = ExtResource("5_g6fah")
+permanent = true
+autostart = true
+
+[node name="Spawn-ost" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_5hxi7")
+volume_db = 8.3
+autoplay = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

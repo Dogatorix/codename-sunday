@@ -1,6 +1,8 @@
 extends TankComponent
 class_name ShootPreIndustrial
 
+var prevent_shoot := false
+
 @export var bullet_scene: PackedScene
 
 @export var bullet_speed := 500.0

@@ -18,3 +18,8 @@ func hide_bars():
 func damage():
 	overlay_animations.stop()
 	overlay_animations.play("damage")
+
+func _process(_delta):
+	%FPS.text = "FPS:" + str(Engine.get_frames_per_second())
+	var memory_usage = OS.get_static_memory_usage() / 1000000.0
+	%Memory.text = "Memory: " + str(int(memory_usage)) + "MB"

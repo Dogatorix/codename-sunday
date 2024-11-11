@@ -1,0 +1,256 @@
+[gd_scene load_steps=18 format=3 uid="uid://028mh64yj0jl"]
+
+[ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/tanks/starter/tank.tscn" id="1_0heoj"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="1_sqeu2"]
+[ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="2_a8a74"]
+[ext_resource type="PackedScene" uid="uid://cpdu42h25sfri" path="res://scenes/tanks/starter/assault.tscn" id="2_kjivg"]
+[ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="3_kva3v"]
+[ext_resource type="PackedScene" uid="uid://dgr03r0uc34mn" path="res://scenes/tanks/starter/destroy.tscn" id="3_u4ugn"]
+[ext_resource type="PackedScene" uid="uid://bseebh1gtwmak" path="res://scenes/tanks/starter/crush.tscn" id="4_0qnt0"]
+[ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="4_jvonn"]
+
+[sub_resource type="GDScript" id="GDScript_2v1qa"]
+script/source = "extends CanvasLayer
+
+@export var animation_player: AnimationPlayer 
+@export var upgrade_scenes: Array[PackedScene]
+
+func _ready():
+	$Control.mouse_filter = $Control.MOUSE_FILTER_IGNORE
+
+func show_menu():
+	animation_player.play(\"show\")
+	$Control.mouse_filter = $Control.MOUSE_FILTER_PASS
+	
+func hide_menu():
+	animation_player.play(\"hide\")
+	$Control.mouse_filter = $Control.MOUSE_FILTER_IGNORE
+
+func _on_color_picker_color_changed(color):
+	if not Global.client:
+		return
+	Global.client.update_color(color)
+
+func upgrade_tank(index):
+	Global.client.upgrade_tank(upgrade_scenes[index])
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o683o"]
+shader = ExtResource("1_sqeu2")
+shader_parameter/lod = 2.05
+shader_parameter/mix_percentage = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7vnl"]
+bg_color = Color(0.07329, 0, 0.711534, 0.196078)
+
+[sub_resource type="LabelSettings" id="LabelSettings_00psr"]
+font = ExtResource("3_kva3v")
+font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_xtc5o"]
+font = ExtResource("3_kva3v")
+font_size = 32
+
+[sub_resource type="Animation" id="Animation_oc05l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yu1gl"]
+resource_name = "hide"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bv27k"]
+resource_name = "show"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0j443"]
+_data = {
+"RESET": SubResource("Animation_oc05l"),
+"hide": SubResource("Animation_yu1gl"),
+"show": SubResource("Animation_bv27k")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
+layer = 20
+script = SubResource("GDScript_2v1qa")
+animation_player = NodePath("AnimationPlayer")
+upgrade_scenes = Array[PackedScene]([ExtResource("1_0heoj"), ExtResource("2_kjivg"), ExtResource("3_u4ugn"), ExtResource("4_0qnt0")])
+
+[node name="Control" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="BlurOverlay" type="Panel" parent="Control"]
+material = SubResource("ShaderMaterial_o683o")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RedOverlay" type="Panel" parent="Control"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r7vnl")
+
+[node name="Unpleasant-gradient2" type="Sprite2D" parent="Control"]
+modulate = Color(0, 0, 0, 0.686275)
+position = Vector2(2895.04, 2697.3)
+scale = Vector2(4.36682, 4.36682)
+texture = ExtResource("2_a8a74")
+
+[node name="Unpleasant-gradient" type="Sprite2D" parent="Control"]
+modulate = Color(0, 0, 0, 0.686275)
+position = Vector2(942, 195)
+rotation = -3.14159
+scale = Vector2(2.08969, 2.08969)
+texture = ExtResource("2_a8a74")
+
+[node name="Label" type="Label" parent="Control"]
+z_index = 10
+layout_mode = 0
+offset_left = 986.0
+offset_top = 33.0
+offset_right = 1892.0
+offset_bottom = 185.0
+text = "PAUSE MENU?"
+label_settings = SubResource("LabelSettings_00psr")
+
+[node name="Label2" type="Label" parent="Control"]
+z_index = 10
+layout_mode = 0
+offset_left = 22.0
+offset_top = 975.0
+offset_right = 1826.0
+offset_bottom = 1127.0
+text = "This will eventually become the pause menu in a later update.
+But for now, this will be used as a general debug menu."
+label_settings = SubResource("LabelSettings_xtc5o")
+
+[node name="Label3" type="Label" parent="Control"]
+z_index = 10
+layout_mode = 0
+offset_left = 1603.0
+offset_top = 453.0
+offset_right = 1853.0
+offset_bottom = 505.0
+scale = Vector2(1.14663, 1.14663)
+text = "Tank Upgrades"
+label_settings = SubResource("LabelSettings_xtc5o")
+horizontal_alignment = 2
+
+[node name="ColorPicker" type="ColorPicker" parent="Control"]
+offset_left = 46.0
+offset_top = 32.0
+offset_right = 344.0
+offset_bottom = 304.0
+scale = Vector2(1.39344, 1.39344)
+sampler_visible = false
+color_modes_visible = false
+sliders_visible = false
+hex_visible = false
+presets_visible = false
+
+[node name="Basic" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1624.0
+offset_top = 543.0
+offset_right = 1880.0
+offset_bottom = 594.0
+theme_override_colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
+theme_override_fonts/font = ExtResource("4_jvonn")
+theme_override_font_sizes/font_size = 32
+text = "Basic"
+
+[node name="Assault" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1624.0
+offset_top = 756.0
+offset_right = 1880.0
+offset_bottom = 807.0
+theme_override_colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
+theme_override_fonts/font = ExtResource("4_jvonn")
+theme_override_font_sizes/font_size = 32
+text = "Assault"
+
+[node name="Destroy" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1624.0
+offset_top = 684.0
+offset_right = 1880.0
+offset_bottom = 735.0
+theme_override_colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
+theme_override_fonts/font = ExtResource("4_jvonn")
+theme_override_font_sizes/font_size = 32
+text = "Destroy"
+
+[node name="Crush" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1624.0
+offset_top = 612.0
+offset_right = 1880.0
+offset_bottom = 663.0
+theme_override_colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
+theme_override_fonts/font = ExtResource("4_jvonn")
+theme_override_font_sizes/font_size = 32
+text = "Crush"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0j443")
+}
+
+[connection signal="color_changed" from="Control/ColorPicker" to="." method="_on_color_picker_color_changed"]
+[connection signal="button_down" from="Control/Basic" to="." method="upgrade_tank" binds= [0]]
+[connection signal="button_down" from="Control/Assault" to="." method="upgrade_tank" binds= [1]]
+[connection signal="button_down" from="Control/Destroy" to="." method="upgrade_tank" binds= [2]]
+[connection signal="button_down" from="Control/Crush" to="." method="upgrade_tank" binds= [3]]

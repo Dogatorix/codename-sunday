@@ -13,7 +13,7 @@ func _ready():
 		one_shot = true
 	
 	if autostart:
-		start()
+		start.call_deferred()
 
 func start():
 	if permanent:
@@ -28,14 +28,11 @@ func start():
 	clone.emitting = true
 	
 	if external:
-		i_hate_this.call_deferred(clone)
+		get_parent().add_sibling(clone)
 	else:
-		add_sibling.call_deferred(clone)
+		add_sibling(clone)
 	clone.global_position = self.global_position
 	
 	if not permanent:
 		Global.timeout_destroy(clone, lifetime)
-
-func i_hate_this(clone):
-	add_sibling(clone)
-	clone.global_position = global_position
+		

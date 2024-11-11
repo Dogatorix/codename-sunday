@@ -10,10 +10,6 @@ const CORE_REQUIREMENT = {
 	4: 16000
 }
 
-### THIS IS REALLY STUPID, PLEASE REWORK IN FUTURE VERSIONS
-@export var is_basic := false
-
-
 @export_group("General")
 @export var max_health = 100
 @export var max_rust = 100
@@ -52,12 +48,6 @@ func on_process(delta):
 	
 	if regen_delay <= 0:
 		health = min(max_health, health + (delta * health_regeneration_rate))
-			
-	if Input.is_action_pressed("debug") and Global.no_console:
-		set_points(points + 500 * delta)
-	
-	if Input.is_action_just_pressed("debug-2"):
-		set_health(0)
 
 func set_health(value):
 	health = clamp(value, 0, max_health)
@@ -74,10 +64,6 @@ func set_mana(value):
 func set_points(value):
 	points = clamp(value, 0, max_core_points)
 	points_change.emit(value)
-	
-	if points == max_core_points and not reached_max_points and is_basic:
-		reached_max_points = true
-		max_points.emit()
 
 func damage_tank(amount):
 	set_health(health - abs(amount))

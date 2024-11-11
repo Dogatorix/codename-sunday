@@ -265,6 +265,7 @@ _data = {
 }
 
 [node name="Assault" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite", "sprite_node") groups=["tank"]]
+y_sort_enabled = true
 motion_mode = 1
 platform_on_leave = 2
 platform_floor_layers = 4294901760

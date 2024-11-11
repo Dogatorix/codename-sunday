@@ -44,7 +44,6 @@ auto_start = true
 intensity_decay = 5.0
 
 [node name="Particle2D" type="CPUParticles2D" parent="."]
-position = Vector2(410, 228)
 amount = 80
 explosiveness = 1.0
 texture = ExtResource("5_xv7um")

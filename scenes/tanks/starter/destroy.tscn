@@ -151,6 +151,7 @@ _data = {
 radius = 146.113
 
 [node name="Destroy" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite", "sprite_node") groups=["tank"]]
+y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_4kleh")
 tank_name = "Destroy"
@@ -224,7 +225,7 @@ delay = NodePath("Delay")
 audio_player = NodePath("../../Audio2D")
 movement = NodePath("../Movement")
 bullet_scene = ExtResource("9_0ap6l")
-bullet_speed = 700.0
+bullet_speed = 925.0
 bullet_damage = 15.0
 bullet_penetration = 3
 tank = NodePath("../..")

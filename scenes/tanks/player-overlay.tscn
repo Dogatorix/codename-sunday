@@ -157,8 +157,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
 
 [node name="GameVersion" type="Label" parent="PlayerOverlay"]
 unique_name_in_owner = true
@@ -170,7 +168,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -954.0
 offset_top = 8.0
-offset_right = 3040.0
+offset_right = 805.0
 offset_bottom = 103.0
 grow_horizontal = 2
 scale = Vector2(0.44, 0.44)
@@ -179,6 +177,48 @@ theme_override_constants/outline_size = 26
 theme_override_fonts/font = ExtResource("1_af1me")
 theme_override_font_sizes/font_size = 50
 text = "Alpha 1.1 - Game is in early development. Expect bugs and unfinished content."
+label_settings = SubResource("LabelSettings_h3d5d")
+
+[node name="FPS" type="Label" parent="PlayerOverlay"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.247059)
+z_index = 15
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 668.0
+offset_top = 13.0
+offset_right = 1020.0
+offset_bottom = 108.0
+grow_horizontal = 2
+scale = Vector2(0.44, 0.44)
+theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("1_af1me")
+theme_override_font_sizes/font_size = 50
+text = "FPS: 60"
+label_settings = SubResource("LabelSettings_h3d5d")
+
+[node name="Memory" type="Label" parent="PlayerOverlay"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.247059)
+z_index = 15
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 791.0
+offset_top = 13.0
+offset_right = 1391.0
+offset_bottom = 108.0
+grow_horizontal = 2
+scale = Vector2(0.44, 0.44)
+theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("1_af1me")
+theme_override_font_sizes/font_size = 50
+text = "Memory: 60"
 label_settings = SubResource("LabelSettings_h3d5d")
 
 [node name="Panel" type="Panel" parent="PlayerOverlay"]
@@ -191,6 +231,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_a7kwr")
+metadata/_edit_lock_ = true
 
 [node name="BarTop" type="Panel" parent="."]
 anchors_preset = 10

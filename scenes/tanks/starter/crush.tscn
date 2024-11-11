@@ -223,6 +223,7 @@ _data = {
 radius = 155.0
 
 [node name="Crush" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite", "sprite_node") groups=["tank"]]
+y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_4m5sl")
 tank_name = "Crush"
@@ -308,7 +309,7 @@ movement = NodePath("../Movement")
 bullet_scene = ExtResource("9_t3epw")
 bullet_speed = 550.0
 bullet_size = 1.25
-bullet_damage = 30.0
+bullet_damage = 45.0
 tank = NodePath("../..")
 
 [node name="Delay" type="Timer" parent="Components/ShootBasic"]

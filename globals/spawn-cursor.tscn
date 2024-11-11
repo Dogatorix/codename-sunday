@@ -1,0 +1,91 @@
+[gd_scene load_steps=16 format=3 uid="uid://iqk1qndurvjj"]
+
+[ext_resource type="Texture2D" uid="uid://oiajdi8v6g0j" path="res://assets/sprites/shockwave.png" id="1_f1vga"]
+[ext_resource type="Script" path="res://globals/spawn-cursor.gd" id="1_n3dvj"]
+[ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/tanks/starter/tank.tscn" id="2_ln1y2"]
+[ext_resource type="PackedScene" uid="uid://dgr03r0uc34mn" path="res://scenes/tanks/starter/destroy.tscn" id="3_hijwq"]
+[ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="3_udekg"]
+[ext_resource type="PackedScene" uid="uid://bseebh1gtwmak" path="res://scenes/tanks/starter/crush.tscn" id="4_gaey8"]
+[ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="4_hprva"]
+[ext_resource type="PackedScene" uid="uid://cpdu42h25sfri" path="res://scenes/tanks/starter/assault.tscn" id="5_xiu8d"]
+[ext_resource type="PackedScene" uid="uid://dkre21e8af47i" path="res://scenes/accesories/oil-canister.tscn" id="6_1imwj"]
+[ext_resource type="PackedScene" uid="uid://dgjvtryibg6xd" path="res://scenes/house-debug.tscn" id="7_2y4hg"]
+[ext_resource type="Texture2D" uid="uid://p0f8bauc3ltr" path="res://assets/sprites/ui/spawn-circle.png" id="11_svnif"]
+
+[sub_resource type="Curve" id="Curve_y5bw4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_jtiqq"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_a3o20"]
+font = ExtResource("4_hprva")
+font_size = 36
+outline_size = 22
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ordy6"]
+font = ExtResource("4_hprva")
+font_size = 25
+font_color = Color(1, 1, 1, 0.752941)
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="SpawnCursor" type="Node2D"]
+z_index = 500
+script = ExtResource("1_n3dvj")
+spawn_scenes = Array[PackedScene]([ExtResource("2_ln1y2"), ExtResource("3_hijwq"), ExtResource("4_gaey8"), ExtResource("5_xiu8d"), ExtResource("6_1imwj"), ExtResource("7_2y4hg")])
+
+[node name="SpawnParticles" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(1.21642, 1.21642)
+amount = 2
+lifetime = 0.65
+local_coords = true
+texture = ExtResource("1_f1vga")
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_y5bw4")
+color = Color(0, 0.15, 1, 1)
+color_ramp = SubResource("Gradient_jtiqq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Unpleasant-gradient" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 0.831373)
+position = Vector2(1651, 121)
+rotation = -2.57265
+scale = Vector2(2.12644, 2.10288)
+texture = ExtResource("3_udekg")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 613.0
+offset_top = 25.0
+offset_right = 1890.0
+offset_bottom = 113.0
+text = "You are in spawn mode"
+label_settings = SubResource("LabelSettings_a3o20")
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 1230.0
+offset_top = 70.0
+offset_right = 1912.0
+offset_bottom = 158.0
+text = "Use 1 / 2 to scroll, Press E to Summon"
+label_settings = SubResource("LabelSettings_ordy6")
+horizontal_alignment = 2
+
+[node name="SummonLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 1230.0
+offset_top = 104.0
+offset_right = 1912.0
+offset_bottom = 192.0
+text = "Selected: None"
+label_settings = SubResource("LabelSettings_ordy6")
+horizontal_alignment = 2
+
+[node name="Spawn-circle" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("11_svnif")

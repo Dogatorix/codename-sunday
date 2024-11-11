@@ -23,6 +23,7 @@ var health = 20:
 var rotation_delta = randi_range(-45, 45)
 
 func _ready():
+	set_meta("can_be_dragged", true)
 	set_gravity_scale(0)
 	contact_monitor = true
 	max_contacts_reported = 10

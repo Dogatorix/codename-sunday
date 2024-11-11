@@ -17,8 +17,6 @@ enum TIERS {
 @export var default_zoom := 0.9
 @export var is_client: bool = false
 
-@export var upgrades: Array[PackedScene]
-
 @export_group("References")
 @export var component_container: ComponentList
 @export var core_sprite: Sprite2D
@@ -31,11 +29,15 @@ var camera: GameCamera
 var upgraded := false
 
 func _ready():
+	set_meta("can_be_dragged", true)
+	
 	for component in component_list:
 		components[component.component_name] = component
 		
 	if is_client:
 		Global.clients.push_front(self)
+	else:
+		$PointLight2D.queue_free()
 		
 	if Global.clients.size() > 1:
 		push_error(str(self) + " Overwriting client. Proprety reset.")
@@ -78,6 +80,11 @@ func check_data():
 	if core_sprite:
 		tank_color.a = 1
 		core_sprite.modulate = tank_color
+
+func update_color(color: Color):
+	tank_color = color
+	core_sprite.modulate = tank_color
+	$TankTrail.update_color()
 
 func _exit_tree():
 	Global.clients.erase(self)

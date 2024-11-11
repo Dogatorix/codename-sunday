@@ -60,7 +60,7 @@ func _process(delta):
 	camera_zoom = clamp(camera_zoom, 0.3, 1.5)
 	camera.zoom = camera.zoom.move_toward(Vector2(camera_zoom, camera_zoom), 3 * delta)
 	
-	if input_vector != Vector2.ZERO and Global.no_console:
+	if input_vector != Vector2.ZERO and Global.active_input:
 		input_vector = input_vector.normalized() * speed * delta
 		velocity = velocity.move_toward(input_vector, acceleration * delta)
 	else:

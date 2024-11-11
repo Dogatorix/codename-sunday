@@ -18,6 +18,7 @@ var color: Color
 @export var particle_scene: PackedScene 
 @export var audio_player: Audio2D
 @export var bullet_sprite: Sprite2D
+@export var burnout_particle: Particle2D
 
 var bullet_velocity: Vector2
 
@@ -32,7 +33,7 @@ func _process(delta):
 	global_position += bullet_velocity * delta
 
 func _on_body_entered(body):	
-	if body is BasicBullet:
+	if body is BasicBullet or body == tank:
 		return
 		
 	if body is Tank:
@@ -65,4 +66,5 @@ func kill_bullet():
 	queue_free()
 
 func _on_timer_timeout():
+	burnout_particle.start()
 	queue_free()

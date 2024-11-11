@@ -1,16 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbdruvih6st8j"]
+[gd_scene load_steps=12 format=3 uid="uid://dbdruvih6st8j"]
 
 [ext_resource type="Script" path="res://scripts/basic-bullet.gd" id="1_nr2ty"]
 [ext_resource type="PackedScene" uid="uid://bw60ijk5yhl6r" path="res://scenes/tanks/starter/other/bullet-death-particle.tscn" id="2_d8b3y"]
 [ext_resource type="Texture2D" uid="uid://cy3n4jejlsel3" path="res://assets/sprites/tanks/starter/basic-bullet.png" id="2_qbj7q"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="6_mdv3n"]
+[ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/sprites/circle-particle.png" id="7_02sdb"]
 [ext_resource type="AudioStream" uid="uid://ditsxgppsyypj" path="res://assets/audio/tanks/bullet-hit-1.mp3" id="7_wfb1x"]
 [ext_resource type="AudioStream" uid="uid://g3ph7l463t15" path="res://assets/audio/tanks/bullet-hit-2.mp3" id="8_4k658"]
+[ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="8_l8eka"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m0co3"]
 radius = 15.0333
 
-[node name="Bullet" type="Area2D" node_paths=PackedStringArray("audio_player", "bullet_sprite")]
+[sub_resource type="Curve" id="Curve_14xit"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, -37.1335), 0.0, -108.404, 0, 0, Vector2(0.984375, 5.21173), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_2nlyf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Bullet" type="Area2D" node_paths=PackedStringArray("audio_player", "bullet_sprite", "burnout_particle")]
 z_index = -5
 collision_layer = 3
 collision_mask = 3
@@ -18,6 +30,7 @@ script = ExtResource("1_nr2ty")
 particle_scene = ExtResource("2_d8b3y")
 audio_player = NodePath("Audio2D")
 bullet_sprite = NodePath("Bullet")
+burnout_particle = NodePath("Particle2D")
 metadata/is_bullet = true
 
 [node name="Bullet" type="Sprite2D" parent="."]
@@ -25,7 +38,7 @@ scale = Vector2(0.32, 0.315789)
 texture = ExtResource("2_qbj7q")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 autostart = true
 
 [node name="Audio2D" type="AudioStreamPlayer2D" parent="."]
@@ -37,6 +50,25 @@ external = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_m0co3")
+
+[node name="Particle2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 12
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("7_02sdb")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 161.28
+linear_accel_max = 15.25
+linear_accel_curve = SubResource("Curve_14xit")
+scale_amount_min = 0.05
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_2nlyf")
+color = Color(0.277528, 0.277528, 0.277528, 1)
+script = ExtResource("8_l8eka")
+external = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

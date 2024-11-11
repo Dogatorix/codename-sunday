@@ -43,7 +43,6 @@ func _on_activator_entered(body):
 	$Delay.start()
 	
 func _on_loop_end():
-	Console.append("test")
 	gate_start.get_node("AnimationPlayer").play("end")
 	$ButtonDelay.start()
 

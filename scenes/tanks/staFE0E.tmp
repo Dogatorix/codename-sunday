@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/sprites/circle-particle.png" id="4_6yajm"]
 [ext_resource type="Texture2D" uid="uid://c2vstp2rvic5" path="res://assets/sprites/ui/starter-ui/stat-wheel-progress.png" id="4_jrmr1"]
 [ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="4_m645k"]
-[ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="9_0enj5"]
+[ext_resource type="FontFile" uid="uid://cn7hc30kplvpo" path="res://assets/fonts/digital.otf" id="9_hjdot"]
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="10_6rvnl"]
 
 [sub_resource type="Curve" id="Curve_tnq5r"]
@@ -16,7 +16,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_mtuiq"]
-font = ExtResource("9_0enj5")
+font = ExtResource("9_hjdot")
 font_size = 33
 
 [sub_resource type="Animation" id="Animation_icu2a"]
@@ -450,11 +450,11 @@ tint_progress = Color(0.0450001, 0.9, 0, 1)
 unique_name_in_owner = true
 modulate = Color(0.905882, 0.458824, 0, 1)
 layout_mode = 0
-offset_left = 547.0
-offset_top = 920.0
-offset_right = 768.0
-offset_bottom = 975.0
-scale = Vector2(0.861434, 0.68845)
+offset_left = 526.0
+offset_top = 918.0
+offset_right = 747.0
+offset_bottom = 973.0
+scale = Vector2(1, 0.79919)
 text = "1000 XP LEFT"
 label_settings = SubResource("LabelSettings_mtuiq")
 horizontal_alignment = 2

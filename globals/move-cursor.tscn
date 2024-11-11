@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://bc45nv2yqgvlc"]
+
+[ext_resource type="Script" path="res://globals/move-cursor.gd" id="1_nhmha"]
+[ext_resource type="Texture2D" uid="uid://oiajdi8v6g0j" path="res://assets/sprites/shockwave.png" id="8_77yso"]
+[ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="9_5q1xy"]
+[ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="10_ivqo8"]
+
+[sub_resource type="Curve" id="Curve_y5bw4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_jtiqq"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_a3o20"]
+font = ExtResource("10_ivqo8")
+font_size = 36
+outline_size = 22
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ordy6"]
+font = ExtResource("10_ivqo8")
+font_size = 25
+font_color = Color(1, 1, 1, 0.752941)
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ewngd"]
+radius = 29.0172
+
+[node name="MoveCursor" type="Node2D"]
+z_index = 500
+script = ExtResource("1_nhmha")
+
+[node name="SpawnParticles" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(1.21642, 1.21642)
+amount = 2
+lifetime = 0.65
+preprocess = 1.0
+local_coords = true
+texture = ExtResource("8_77yso")
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_y5bw4")
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("Gradient_jtiqq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Unpleasant-gradient" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 0.831373)
+position = Vector2(1651, 121)
+rotation = -2.57265
+scale = Vector2(2.12644, 2.10288)
+texture = ExtResource("9_5q1xy")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 613.0
+offset_top = 25.0
+offset_right = 1890.0
+offset_bottom = 113.0
+text = "You are in move mode"
+label_settings = SubResource("LabelSettings_a3o20")
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 1230.0
+offset_top = 70.0
+offset_right = 1912.0
+offset_bottom = 158.0
+text = "Hover over certain objects and hold click to drag"
+label_settings = SubResource("LabelSettings_ordy6")
+horizontal_alignment = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ewngd")

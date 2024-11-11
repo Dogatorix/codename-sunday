@@ -41,7 +41,7 @@ func on_process(delta):
 			Input.get_axis("move_up", "move_down")
 		)
 	
-	if input_vector != Vector2.ZERO and Global.no_console:
+	if input_vector != Vector2.ZERO and Global.active_input:
 		normal_velocity = normal_velocity.move_toward(input_vector.normalized() * speed, acceleration * delta)
 	else:
 		normal_velocity = normal_velocity.move_toward(Vector2.ZERO, friction * delta)
