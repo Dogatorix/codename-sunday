@@ -40,7 +40,7 @@ var PRELOADS = {
 	"energy-octagon": load("res://scenes/containers/energy-octagon.tscn"),
 }	
 
-func make_external(node: Node, clone: Node = null):
+func make_external(node: Node, root, clone: Node = null):
 	var dublicate: Node
 	
 	if clone:
@@ -49,7 +49,7 @@ func make_external(node: Node, clone: Node = null):
 		dublicate = node.duplicate()
 	
 	dublicate.external = false
-	node.get_parent().add_sibling.call_deferred(dublicate)
+	root.add_sibling.call_deferred(dublicate)
 	dublicate.global_position = node.global_position
 	node.queue_free()
 	

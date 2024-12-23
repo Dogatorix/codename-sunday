@@ -37,7 +37,7 @@ func _ready():
 	if is_client:
 		Global.clients.push_front(self)
 	else:
-		$TankLight.queue_free()
+		%TankLight.queue_free()
 		
 	if Global.clients.size() > 1:
 		push_error(str(self) + " Overwriting client. Proprety reset.")
@@ -84,7 +84,7 @@ func check_data():
 func update_color(color: Color):
 	tank_color = color
 	core_sprite.modulate = tank_color
-	$TankTrail.update_color()
+	%TankTrail.update_color()
 
 func _exit_tree():
 	Global.clients.erase(self)

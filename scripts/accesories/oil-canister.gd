@@ -1,9 +1,8 @@
 extends StaticBody2D
 
 @export var animation_player: AnimationPlayer
-@export var explosion_particles: CPUParticles2D
+@export var explosion_particles: Particle2D
 
-@export var nodes_to_remove: Array
 @export var hit_zone: Area2D
 
 @export var explosion_shake: Shake2D
@@ -35,29 +34,26 @@ func check_health():
 		hit_audio.start()
 
 func _on_fuse_timer_timeout():
-	explosion_particles.emitting = true
+	explosion_particles.start()
 	explosion_audio.start()
 	explosion_shake.start()
-	
-	for current_node in nodes_to_remove:
-		get_node(current_node).queue_free()
-	
+
 	for body in hit_zone.get_overlapping_bodies():
 		var distance = body.global_position - global_position
+		
 		if body.has_meta("is_container"):
 			body.linear_velocity = distance.normalized() * distance.length() * 3
 			body.last_hit_by_bullet = false
 			body.health -= 15000 / distance.length()
 			body.check_health()
+			
 		elif body is Tank:
 			var damage = 13000 / distance.length()
 			var stats_component: StatsBasic = body.components["stats"]
 			stats_component.damage_tank(damage)
+			
 		elif body.has_meta("is_canister") and body != self:
 			body.health -= 25000 / distance.length()
 			body.check_health()
-	
-	$DeathTimer.start()
-	
-func _on_death_timer_timeout():
+
 	queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://cxao8qdey576c"]
+[gd_scene load_steps=32 format=4 uid="uid://cxao8qdey576c"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_pgfjv"]
 [ext_resource type="Texture2D" uid="uid://bnltglx2hv07" path="res://assets/sprites/tilesets/wall-decorations.png" id="4_a1min"]
@@ -682,10 +682,6 @@ tile_size = Vector2i(75, 75)
 navigation_layer_0/layers = 1
 sources/2 = SubResource("TileSetAtlasSource_7a4b4")
 
-[sub_resource type="LabelSettings" id="LabelSettings_a1ymu"]
-font_size = 64
-font_color = Color(0, 0, 0, 1)
-
 [node name="Arena" type="Node2D"]
 z_index = 10
 position = Vector2(-429, -240)
@@ -891,17 +887,7 @@ rotation = -4.71239
 position = Vector2(889, 2378)
 rotation = 3.14159
 
-[node name="Label" type="Label" parent="."]
-offset_left = 714.0
-offset_top = -2965.0
-offset_right = 2910.0
-offset_bottom = -2877.0
-scale = Vector2(0.397099, 0.397099)
-text = "LOOK INTO THIS - TIMERS WITH AUTOSTARTq CAUSING LOOPS"
-label_settings = SubResource("LabelSettings_a1ymu")
-
 [node name="Crush" parent="." instance=ExtResource("16_bnyq7")]
-y_sort_enabled = false
 position = Vector2(2652, -2033)
 tank_color = Color(0, 0.666667, 1, 1)
 is_client = true

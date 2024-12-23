@@ -1,15 +1,16 @@
-[gd_scene load_steps=22 format=3 uid="uid://dkre21e8af47i"]
+[gd_scene load_steps=24 format=3 uid="uid://dkre21e8af47i"]
 
 [ext_resource type="Texture2D" uid="uid://c48c7fo8f60ul" path="res://assets/sprites/accesories/oil-canister.png" id="1_lrwvv"]
 [ext_resource type="Script" path="res://scripts/accesories/oil-canister.gd" id="1_r07p2"]
 [ext_resource type="AudioStream" uid="uid://4xsv457rdngg" path="res://assets/audio/accesories/canister/canister-damage-1.mp3" id="2_0m10h"]
 [ext_resource type="Texture2D" uid="uid://c3shko63nrnlx" path="res://assets/sprites/accesories/oil-canister-lit.png" id="2_ild5y"]
 [ext_resource type="AudioStream" uid="uid://c1oedcielpnej" path="res://assets/audio/accesories/canister/canister-damage-2.mp3" id="3_qfdt5"]
-[ext_resource type="PackedScene" uid="uid://bw60ijk5yhl6r" path="res://scenes/tanks/starter/sub-components/bullet-death-particle.tscn" id="4_2yvri"]
 [ext_resource type="AudioStream" uid="uid://dshknyqweyw2w" path="res://assets/audio/accesories/canister/canister-explode.mp3" id="5_cvpq2"]
 [ext_resource type="AudioStream" uid="uid://byc3dtp7lmqhu" path="res://assets/audio/accesories/canister/canister-fuse.mp3" id="5_thmav"]
 [ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="9_3lc52"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="10_bcbls"]
+[ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/sprites/circle-particle.png" id="11_rbct6"]
+[ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="12_e7hrf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vr873"]
 size = Vector2(54, 39)
@@ -120,26 +121,29 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8rbni"]
 size = Vector2(58, 114)
 
-[sub_resource type="Curve" id="Curve_lits1"]
-min_value = -200.0
-max_value = 200.0
-_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(1, -59.3407), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_3n0o8"]
-interpolation_mode = 2
-colors = PackedColorArray(1, 1, 1, 1, 0.305199, 0, 0.0399136, 1)
-
-[sub_resource type="Curve" id="Curve_8aj26"]
-min_value = -1.0
-_data = [Vector2(0, 0.538462), 0.0, 0.0, 0, 0, Vector2(1, -0.560439), 0.0, 0.0, 0, 0]
-point_count = 2
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_r0l8d"]
 radius = 450.01
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f1kol"]
 polygon = PackedVector2Array(-27, -113, -27, -105, -30, -106, -30, -89, -27, -88, -27, -26, -30, -26, -30, -10, -20, -4, -7, -1, 7, 0, 20, -4, 30, -10, 30, -26, 27, -32, 27, -89, 30, -90, 30, -106, 27, -107, 27, -114, 16, -118, 5, -120, -7, -120, -20, -117)
+
+[sub_resource type="Curve" id="Curve_y3d07"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(1, -22.3448), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ry11w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ght0f"]
+colors = PackedColorArray(1, 1, 1, 1, 0.305882, 0, 0.0392157, 1)
+
+[sub_resource type="Curve" id="Curve_5g17y"]
+min_value = -1.0
+_data = [Vector2(0, 0.748966), 0.0, 0.0, 0, 0, Vector2(1, -0.398621), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="OilCanister" type="StaticBody2D" node_paths=PackedStringArray("animation_player", "explosion_particles", "hit_zone", "explosion_shake", "hit_audio", "fuse_audio", "explosion_audio")]
 z_as_relative = false
@@ -147,7 +151,6 @@ y_sort_enabled = true
 script = ExtResource("1_r07p2")
 animation_player = NodePath("AnimationPlayer")
 explosion_particles = NodePath("ExplosionParticles")
-nodes_to_remove = [NodePath("Oil-canister"), NodePath("CollisionShape2D"), NodePath("Area2D"), NodePath("LightOccluder2D")]
 hit_zone = NodePath("HitZone")
 explosion_shake = NodePath("Shake2D")
 hit_audio = NodePath("HitAudio")
@@ -185,33 +188,8 @@ visible = false
 position = Vector2(0, -58)
 shape = SubResource("RectangleShape2D_8rbni")
 
-[node name="ExplosionParticles" parent="." instance=ExtResource("4_2yvri")]
-z_index = 10
-position = Vector2(0, -53)
-scale = Vector2(1.1, 1.1)
-emitting = false
-amount = 48
-lifetime = 1.0
-initial_velocity_min = 2000.0
-initial_velocity_max = 2000.0
-linear_accel_min = -143.9
-linear_accel_curve = SubResource("Curve_lits1")
-damping_min = 16.327
-damping_max = 100.0
-scale_amount_max = 3.0
-color = Color(1, 0.516667, 0, 1)
-color_ramp = SubResource("Gradient_3n0o8")
-hue_variation_max = 0.15
-hue_variation_curve = SubResource("Curve_8aj26")
-script = null
-
-[node name="DeathTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="FuseTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="Body" type="Node2D" parent="."]
 
 [node name="HitZone" type="Area2D" parent="."]
 position = Vector2(0, -48)
@@ -248,6 +226,28 @@ external = true
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_f1kol")
 
+[node name="ExplosionParticles" type="CPUParticles2D" parent="."]
+z_index = 30
+z_as_relative = false
+emitting = false
+amount = 48
+explosiveness = 1.0
+texture = ExtResource("11_rbct6")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 2000.0
+initial_velocity_max = 2000.0
+linear_accel_min = -143.9
+linear_accel_curve = SubResource("Curve_y3d07")
+scale_amount_min = 0.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_ry11w")
+color = Color(1, 0.517647, 0, 1)
+color_ramp = SubResource("Gradient_ght0f")
+hue_variation_max = 0.15
+hue_variation_curve = SubResource("Curve_5g17y")
+script = ExtResource("12_e7hrf")
+external = true
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="timeout" from="FuseTimer" to="." method="_on_fuse_timer_timeout"]

@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cag531s1xv1f8"]
-
-[ext_resource type="AudioStream" uid="uid://br8extpl5yukj" path="res://assets/audio/tanks/player-give-up.mp3" id="1_3qvnm"]
-[ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="2_1f28a"]
-
-[node name="GiveUpSound" type="AudioStreamPlayer2D"]
-stream = ExtResource("1_3qvnm")
-script = ExtResource("2_1f28a")

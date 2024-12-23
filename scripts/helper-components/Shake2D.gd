@@ -9,11 +9,15 @@ class_name Shake2D
 @export var intensity_decay := 0.0
 @export var interpolation = 1
 @export var external := false
+@export var root: Node
 
 @onready var id = randi_range(0, 100000)
 @onready var max_intensity = intensity
 
 func _ready():
+	if not root:
+		root = get_parent()
+	
 	if auto_start:
 		start()
 
@@ -22,7 +26,7 @@ func start():
 	intensity = max_intensity
 	
 	if external and one_shot:
-		Global.make_external(self)
+		Global.make_external(self, root)
 		return
 	
 	if duration > 0 and one_shot:

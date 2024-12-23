@@ -15,7 +15,7 @@ warnings/check_angle_interpolation_type_conflicting=false
 
 [application]
 
-config/name="Sunday in Hell"
+config/name="Codename Sunday"
 config/version="ALPHA 1.0"
 run/main_scene="res://scenes/arena.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")

@@ -4,10 +4,14 @@ class_name Particle2D
 @export var external := false
 @export var permanent := false
 @export var autostart := false
+@export var root: Node
 
 var is_summoned := false
 
 func _ready():
+	if not root:
+		root = get_parent()
+	
 	if not is_summoned:
 		emitting = false
 		one_shot = true
@@ -28,7 +32,7 @@ func start():
 	clone.emitting = true
 	
 	if external:
-		get_parent().add_sibling(clone)
+		root.add_sibling(clone)
 	else:
 		add_sibling(clone)
 	clone.global_position = self.global_position

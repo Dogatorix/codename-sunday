@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bh88ukfdwq11l"]
-
-[ext_resource type="PackedScene" uid="uid://dc1vcm54gphhw" path="res://scenes/graphics/shockwave.tscn" id="1_8lh5u"]
-
-[node name="DashShockwave" instance=ExtResource("1_8lh5u")]
-start_size = 0.1
-grow_speed = 6.0
-fade_speed = 5.0

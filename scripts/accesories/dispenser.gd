@@ -24,6 +24,7 @@ var payload_cooldown := 0
 @export var display_text: Label
 
 func _ready():
+	$PayloadTimer.start()
 	display_text.text = str(energy_power)
 	
 	var degrees_offset = (floor(rotation_degrees / 90)) * -90
