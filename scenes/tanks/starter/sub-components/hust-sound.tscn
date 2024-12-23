@@ -1,0 +1,11 @@
+[gd_scene load_steps=5 format=3 uid="uid://brfbefuahs44x"]
+
+[ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="1_s2lx5"]
+[ext_resource type="AudioStream" uid="uid://db0ckwnvk7vmh" path="res://assets/audio/tanks/player-damage-1.mp3" id="2_gha2x"]
+[ext_resource type="AudioStream" uid="uid://essypfdqc73m" path="res://assets/audio/tanks/player-damage-2.mp3" id="3_2i1kn"]
+[ext_resource type="AudioStream" uid="uid://jriq00fwc1ui" path="res://assets/audio/tanks/player-damage-3.mp3" id="4_mdbu6"]
+
+[node name="HurtSound" type="AudioStreamPlayer2D"]
+script = ExtResource("1_s2lx5")
+sounds = Array[AudioStream]([ExtResource("2_gha2x"), ExtResource("3_2i1kn"), ExtResource("4_mdbu6")])
+pitch_range = 0.02

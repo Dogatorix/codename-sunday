@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://tg86jcs0270c"]
+[gd_scene load_steps=30 format=3 uid="uid://tg86jcs0270c"]
 
 [ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_gnasx"]
 [ext_resource type="PackedScene" uid="uid://bjbp1eyywcerx" path="res://scenes/tanks/player-bars.tscn" id="2_og0p0"]
@@ -8,26 +8,23 @@
 [ext_resource type="Script" path="res://scripts/tank-components/MovementBasic.gd" id="6_eg1jj"]
 [ext_resource type="Script" path="res://scripts/tank-components/DashBasic.gd" id="7_nvmji"]
 [ext_resource type="Script" path="res://scripts/tank-components/ShootingBasic.gd" id="8_w3elj"]
-[ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/tanks/starter/other/basic-bullet.tscn" id="9_3q8yj"]
+[ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/tanks/starter/sub-components/basic-bullet.tscn" id="9_3q8yj"]
 [ext_resource type="Script" path="res://scripts/tank-components/StatsBasic.gd" id="10_l46h0"]
 [ext_resource type="PackedScene" uid="uid://cjxqex8nwxfk0" path="res://scenes/tanks/starter-interface.tscn" id="11_carpq"]
 [ext_resource type="Script" path="res://scripts/tank-components/DeathBasic.gd" id="12_uhd13"]
 [ext_resource type="PackedScene" uid="uid://dkuuvwgfdon5r" path="res://scenes/spectator.tscn" id="13_bxs64"]
 [ext_resource type="PackedScene" uid="uid://blyxbp5brb462" path="res://scenes/graphics/player-explosion.tscn" id="14_llwwj"]
+[ext_resource type="PackedScene" uid="uid://bbaic0es4e5ib" path="res://scenes/tanks/starter/sub-components/damage-animations.tscn" id="15_a048t"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="15_obfqw"]
-[ext_resource type="AudioStream" uid="uid://db41fnatc8fwa" path="res://assets/audio/tanks/player-dash-1.mp3" id="16_sh1ma"]
-[ext_resource type="AudioStream" uid="uid://b08cew7xnwfqi" path="res://assets/audio/tanks/player-dash-2.mp3" id="17_m2m0n"]
-[ext_resource type="AudioStream" uid="uid://c7v7qyq56nm4o" path="res://assets/audio/tanks/player-dash-3.mp3" id="18_bg2g2"]
+[ext_resource type="PackedScene" uid="uid://1yjnvyrh8jlw" path="res://scenes/tanks/starter/sub-components/dash-audio.tscn" id="15_oodmx"]
 [ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="19_n6xr3"]
+[ext_resource type="PackedScene" uid="uid://d0g6cip1qjojh" path="res://scenes/tanks/starter/sub-components/tank-light.tscn" id="19_w6njv"]
 [ext_resource type="AudioStream" uid="uid://ooiku30st7ax" path="res://assets/audio/tanks/starter/basic-shot.mp3" id="20_tfnit"]
-[ext_resource type="Texture2D" uid="uid://v1h867arh4l5" path="res://assets/sprites/light.png" id="21_bg2p7"]
-[ext_resource type="PackedScene" uid="uid://6p84ixeqpp0f" path="res://scenes/tanks/starter/other/tank-trail.tscn" id="22_dom8q"]
-[ext_resource type="AudioStream" uid="uid://db0ckwnvk7vmh" path="res://assets/audio/tanks/player-damage-1.mp3" id="23_tfpjw"]
-[ext_resource type="AudioStream" uid="uid://essypfdqc73m" path="res://assets/audio/tanks/player-damage-2.mp3" id="24_dswhl"]
-[ext_resource type="AudioStream" uid="uid://jriq00fwc1ui" path="res://assets/audio/tanks/player-damage-3.mp3" id="25_rdbet"]
-[ext_resource type="AudioStream" uid="uid://br8extpl5yukj" path="res://assets/audio/tanks/player-give-up.mp3" id="26_uyk77"]
-[ext_resource type="PackedScene" uid="uid://v0gryapwl2rt" path="res://scenes/graphics/damage-particle.tscn" id="27_5ccad"]
-[ext_resource type="PackedScene" uid="uid://dc1vcm54gphhw" path="res://scenes/graphics/shockwave.tscn" id="28_d0cy2"]
+[ext_resource type="PackedScene" uid="uid://brfbefuahs44x" path="res://scenes/tanks/starter/sub-components/hust-sound.tscn" id="21_sgwg1"]
+[ext_resource type="PackedScene" uid="uid://cag531s1xv1f8" path="res://scenes/tanks/starter/sub-components/give-up-sound.tscn" id="22_58aih"]
+[ext_resource type="PackedScene" uid="uid://6p84ixeqpp0f" path="res://scenes/tanks/starter/sub-components/tank-trail.tscn" id="22_dom8q"]
+[ext_resource type="PackedScene" uid="uid://bh88ukfdwq11l" path="res://scenes/tanks/starter/sub-components/dash-shockwave.tscn" id="24_sm527"]
+[ext_resource type="PackedScene" uid="uid://v0gryapwl2rt" path="res://scenes/tanks/starter/sub-components/damage-particle.tscn" id="27_5ccad"]
 
 [sub_resource type="Animation" id="Animation_wga42"]
 length = 0.001
@@ -64,61 +61,6 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_wga42"),
 "shoot": SubResource("Animation_bvg2f")
-}
-
-[sub_resource type="Animation" id="Animation_x37e6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TankSprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_6mmyr"]
-resource_name = "damage"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TankSprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_7jurx"]
-resource_name = "death"
-length = 0.2
-step = 0.02
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TankSprite:modulate")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0lit1"]
-_data = {
-"RESET": SubResource("Animation_x37e6"),
-"damage": SubResource("Animation_6mmyr"),
-"death": SubResource("Animation_7jurx")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bbwtc"]
@@ -176,8 +118,8 @@ tank = NodePath("../..")
 script = ExtResource("7_nvmji")
 movement = NodePath("../Movement")
 tank_stats = NodePath("../StatsBasic")
-audio_player = NodePath("../../DashAudio")
-dash_shake = NodePath("../../Shake2D")
+audio_player = NodePath("../../HurtSound")
+dash_shake = NodePath("../../DashShake")
 dash_shockwave = NodePath("../../DashShockwave")
 tank = NodePath("../..")
 
@@ -188,7 +130,7 @@ animation_player = NodePath("../../AnimationPlayer")
 origin = NodePath("../../TankSprite/ShootOrigin")
 tank_sprite = NodePath("../../TankSprite")
 delay = NodePath("Delay")
-audio_player = NodePath("../../Audio2D")
+audio_player = NodePath("../../Shoot")
 movement = NodePath("../Movement")
 bullet_scene = ExtResource("9_3q8yj")
 bullet_speed = 525.0
@@ -202,7 +144,7 @@ wait_time = 0.5
 script = ExtResource("10_l46h0")
 animation_player = NodePath("../../DamageAnimation")
 damage_sounds = NodePath("../../HurtSound")
-damage_particle = NodePath("../../HurtParticle")
+damage_particle = NodePath("../../DamageParticle")
 tank = NodePath("../..")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Components/StatsBasic"]
@@ -225,22 +167,16 @@ libraries = {
 "": SubResource("AnimationLibrary_h1kpr")
 }
 
-[node name="DamageAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_0lit1")
-}
+[node name="DamageAnimation" parent="." instance=ExtResource("15_a048t")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 scale = Vector2(0.2, 0.2)
 shape = SubResource("CircleShape2D_bbwtc")
 
-[node name="DashAudio" type="AudioStreamPlayer2D" parent="."]
-script = ExtResource("15_obfqw")
-sounds = Array[AudioStream]([ExtResource("16_sh1ma"), ExtResource("17_m2m0n"), ExtResource("18_bg2g2")])
-pitch_range = 0.05
+[node name="DashAudio" parent="." instance=ExtResource("15_oodmx")]
 
-[node name="Shake2D" type="Marker2D" parent="."]
+[node name="DashShake" type="Marker2D" parent="."]
 scale = Vector2(0.997009, 1)
 script = ExtResource("19_n6xr3")
 shake_range = 1000
@@ -248,40 +184,23 @@ auto_start = true
 intensity = 2.0
 intensity_decay = 15.0
 
-[node name="Audio2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Shoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("20_tfnit")
 volume_db = -3.0
 script = ExtResource("15_obfqw")
 pitch_range = 0.1
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-scale = Vector2(1.76172, 1.51172)
-energy = 0.3
-shadow_enabled = true
-texture = ExtResource("21_bg2p7")
-metadata/_edit_lock_ = true
+[node name="TankLight" parent="." instance=ExtResource("19_w6njv")]
 
 [node name="TankTrail" parent="." node_paths=PackedStringArray("tank") instance=ExtResource("22_dom8q")]
 tank = NodePath("..")
 
-[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
-script = ExtResource("15_obfqw")
-sounds = Array[AudioStream]([ExtResource("23_tfpjw"), ExtResource("24_dswhl"), ExtResource("25_rdbet")])
-pitch_range = 0.02
+[node name="HurtSound" parent="." instance=ExtResource("21_sgwg1")]
 
-[node name="GiveUpSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("26_uyk77")
-script = ExtResource("15_obfqw")
+[node name="GiveUpSound" parent="." instance=ExtResource("22_58aih")]
 
-[node name="HurtParticle" parent="." instance=ExtResource("27_5ccad")]
-emitting = false
+[node name="DashShockwave" parent="." instance=ExtResource("24_sm527")]
 
-[node name="DashShockwave" parent="." instance=ExtResource("28_d0cy2")]
-visible = false
-z_index = 5
-z_as_relative = false
-scale = Vector2(0.347177, 0.347177)
-grow_speed = 4.0
-fade_speed = 5.0
+[node name="DamageParticle" parent="." instance=ExtResource("27_5ccad")]
 
 [connection signal="timeout" from="Components/ShootBasic/Delay" to="Components/ShootBasic" method="_on_delay_timeout"]

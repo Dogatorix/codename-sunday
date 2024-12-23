@@ -72,7 +72,7 @@ offset_left = 1230.0
 offset_top = 70.0
 offset_right = 1912.0
 offset_bottom = 158.0
-text = "Use 1 / 2 to scroll, Press E to Summon"
+text = "Use Period / Comma to scroll, Press E to Summon"
 label_settings = SubResource("LabelSettings_ordy6")
 horizontal_alignment = 2
 

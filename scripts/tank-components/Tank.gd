@@ -37,7 +37,7 @@ func _ready():
 	if is_client:
 		Global.clients.push_front(self)
 	else:
-		$PointLight2D.queue_free()
+		$TankLight.queue_free()
 		
 	if Global.clients.size() > 1:
 		push_error(str(self) + " Overwriting client. Proprety reset.")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dbdruvih6st8j"]
 
 [ext_resource type="Script" path="res://scripts/basic-bullet.gd" id="1_nr2ty"]
-[ext_resource type="PackedScene" uid="uid://bw60ijk5yhl6r" path="res://scenes/tanks/starter/other/bullet-death-particle.tscn" id="2_d8b3y"]
+[ext_resource type="PackedScene" uid="uid://bw60ijk5yhl6r" path="res://scenes/tanks/starter/sub-components/bullet-death-particle.tscn" id="2_d8b3y"]
 [ext_resource type="Texture2D" uid="uid://cy3n4jejlsel3" path="res://assets/sprites/tanks/starter/basic-bullet.png" id="2_qbj7q"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="6_mdv3n"]
 [ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/sprites/circle-particle.png" id="7_02sdb"]
