@@ -14,17 +14,27 @@ script/source = "extends CanvasLayer
 
 @export var animation_player: AnimationPlayer 
 @export var upgrade_scenes: Array[PackedScene]
+@export var tank_buttons: Array[Button]
 
 func _ready():
 	$Control.mouse_filter = $Control.MOUSE_FILTER_IGNORE
+	for btn in tank_buttons:
+		btn.disabled = true
 
 func show_menu():
 	animation_player.play(\"show\")
 	$Control.mouse_filter = $Control.MOUSE_FILTER_PASS
 	
+	for btn in tank_buttons:
+		btn.disabled = false
+	
 func hide_menu():
 	animation_player.play(\"hide\")
 	$Control.mouse_filter = $Control.MOUSE_FILTER_IGNORE
+	
+	for btn in tank_buttons:
+		btn.disabled = true
+	
 
 func _on_color_picker_color_changed(color):
 	if not Global.client:
@@ -107,11 +117,12 @@ _data = {
 "show": SubResource("Animation_bv27k")
 }
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("animation_player", "tank_buttons")]
 layer = 20
 script = SubResource("GDScript_2v1qa")
 animation_player = NodePath("AnimationPlayer")
 upgrade_scenes = Array[PackedScene]([ExtResource("1_0heoj"), ExtResource("2_kjivg"), ExtResource("3_u4ugn"), ExtResource("4_0qnt0")])
+tank_buttons = [NodePath("Control/Basic"), NodePath("Control/Assault"), NodePath("Control/Destroy"), NodePath("Control/Crush")]
 
 [node name="Control" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -189,6 +200,7 @@ label_settings = SubResource("LabelSettings_xtc5o")
 horizontal_alignment = 2
 
 [node name="ColorPicker" type="ColorPicker" parent="Control"]
+layout_mode = 0
 offset_left = 46.0
 offset_top = 32.0
 offset_right = 344.0

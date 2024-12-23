@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dkre21e8af47i"]
+[gd_scene load_steps=25 format=3 uid="uid://dkre21e8af47i"]
 
 [ext_resource type="Texture2D" uid="uid://c48c7fo8f60ul" path="res://assets/sprites/accesories/oil-canister.png" id="1_lrwvv"]
 [ext_resource type="Script" path="res://scripts/accesories/oil-canister.gd" id="1_r07p2"]
@@ -145,9 +145,12 @@ min_value = -1.0
 _data = [Vector2(0, 0.748966), 0.0, 0.0, 0, 0, Vector2(1, -0.398621), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1mei3"]
+size = Vector2(132, 220)
+
 [node name="OilCanister" type="StaticBody2D" node_paths=PackedStringArray("animation_player", "explosion_particles", "hit_zone", "explosion_shake", "hit_audio", "fuse_audio", "explosion_audio")]
+z_index = 1
 z_as_relative = false
-y_sort_enabled = true
 script = ExtResource("1_r07p2")
 animation_player = NodePath("AnimationPlayer")
 explosion_particles = NodePath("ExplosionParticles")
@@ -248,6 +251,18 @@ hue_variation_max = 0.15
 hue_variation_curve = SubResource("Curve_5g17y")
 script = ExtResource("12_e7hrf")
 external = true
+
+[node name="PlayerSort" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSort"]
+visible = false
+position = Vector2(0, -27)
+shape = SubResource("RectangleShape2D_1mei3")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+visible = false
+vertices = PackedVector2Array(-36, -1, -36, -119, 37, -119, 37, 1)
+affect_navigation_mesh = true
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="FuseTimer" to="." method="_on_fuse_timer_timeout"]

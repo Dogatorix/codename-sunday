@@ -254,15 +254,14 @@ _data = {
 }
 
 [node name="Assault" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite", "sprite_node") groups=["tank"]]
-y_sort_enabled = true
 motion_mode = 1
 platform_on_leave = 2
 platform_floor_layers = 4294901760
 script = ExtResource("1_g5diw")
 tank_name = "Assault"
-username = "Silly Billy"
+username = "Dummy"
 core_tier = 2
-default_zoom = 1.3
+default_zoom = 1.2
 component_container = NodePath("Components")
 core_sprite = NodePath("TankSprite/Core")
 sprite_node = NodePath("TankSprite")
@@ -325,7 +324,7 @@ script = ExtResource("6_b4kjq")
 
 [node name="MovementBasic" type="Node" parent="Components" node_paths=PackedStringArray("tank_sprite", "tank")]
 script = ExtResource("7_4wamv")
-speed = 600.0
+speed = 500.0
 acceleration = 2000.0
 tank_sprite = NodePath("../../TankSprite")
 tank = NodePath("../..")
@@ -361,7 +360,7 @@ origin_right = NodePath("../../TankSprite/ShootOriginRight")
 delay = NodePath("Delay")
 audio_player = NodePath("../../ShootSound")
 bullet_scene = ExtResource("12_42gbe")
-bullet_speed = 600.0
+bullet_speed = 725.0
 bullet_size = 0.85
 bullet_damage = 10.0
 tank = NodePath("../..")
@@ -408,6 +407,9 @@ root = NodePath("../..")
 
 [node name="DashShake" parent="StarterSubcomponents" index="2" node_paths=PackedStringArray("root")]
 root = NodePath("../..")
+
+[node name="TankLight" parent="StarterSubcomponents" index="3" node_paths=PackedStringArray("tank")]
+tank = NodePath("../..")
 
 [node name="TankTrail" parent="StarterSubcomponents" index="4" node_paths=PackedStringArray("tank")]
 tank = NodePath("../..")

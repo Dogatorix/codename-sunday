@@ -54,16 +54,19 @@ func on_process(delta):
 			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
 
 	if tank_sprite and camera and can_look:
-		rotate_tank()
+		rotate_tank_camera()
 		camera_control()
 
-func rotate_tank():
+func rotate_tank_camera():
 	var mouse_position = tank.get_global_mouse_position() - camera.shake_vector
 	var direction = (mouse_position - tank.global_position).normalized()
 	var angle = atan2(direction.y, direction.x)
 	var final_angle = rad_to_deg(angle) + 90
 	
 	tank_sprite.rotation_degrees = final_angle
+
+func rotate_tank(degrees: float):
+	tank_sprite.rotation_degrees = degrees 
 
 func camera_control():
 	var distance = (tank.get_global_mouse_position() - tank.global_position) / camera_offset_scale

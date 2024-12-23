@@ -247,4 +247,10 @@ volume_db = -7.0
 script = ExtResource("4_sa1eu")
 external = true
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+visible = false
+position = Vector2(-35, 17)
+vertices = PackedVector2Array(-8, -3, 10, -52, 63, -54, 77, -1, 37, 30)
+affect_navigation_mesh = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

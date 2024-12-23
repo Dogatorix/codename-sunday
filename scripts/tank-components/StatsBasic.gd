@@ -42,6 +42,7 @@ var reached_max_points := false
 
 func _ready():	
 	max_core_points = CORE_REQUIREMENT[tank.core_tier]
+	
 
 func on_process(delta):
 	regen_delay -= delta

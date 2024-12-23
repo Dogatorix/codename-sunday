@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://tg86jcs0270c"]
+[gd_scene load_steps=28 format=3 uid="uid://tg86jcs0270c"]
 
 [ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_gnasx"]
 [ext_resource type="PackedScene" uid="uid://bjbp1eyywcerx" path="res://scenes/tanks/player-bars.tscn" id="2_og0p0"]
@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://blyxbp5brb462" path="res://scenes/graphics/player-explosion.tscn" id="14_llwwj"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="15_obfqw"]
 [ext_resource type="PackedScene" uid="uid://cgywk5irhng6f" path="res://scenes/tanks/starter/sub-components/starter-subcomponents.tscn" id="17_h63i7"]
+[ext_resource type="Script" path="res://scripts/tank-components/AIComponentList.gd" id="18_mwhf6"]
+[ext_resource type="Script" path="res://scripts/ai-components/Roaming.gd" id="19_nifrv"]
 [ext_resource type="AudioStream" uid="uid://ooiku30st7ax" path="res://assets/audio/tanks/starter/basic-shot.mp3" id="20_tfnit"]
 
 [sub_resource type="Animation" id="Animation_wga42"]
@@ -113,13 +115,14 @@ _data = {
 "death": SubResource("Animation_7jurx")
 }
 
-[node name="Tank" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "core_sprite", "sprite_node") groups=["tank"]]
-y_sort_enabled = true
+[node name="Tank" type="CharacterBody2D" node_paths=PackedStringArray("component_container", "ai_component_container", "core_sprite", "sprite_node") groups=["tank"]]
 motion_mode = 1
 script = ExtResource("1_gnasx")
 tank_name = "Basic"
-default_zoom = 1.3
+username = "Dummy"
+default_zoom = 1.2
 component_container = NodePath("Components")
+ai_component_container = NodePath("AIComponentList")
 core_sprite = NodePath("TankSprite/Core")
 sprite_node = NodePath("TankSprite")
 
@@ -157,7 +160,7 @@ script = ExtResource("5_jrnul")
 
 [node name="Movement" type="Node" parent="Components" node_paths=PackedStringArray("tank_sprite", "tank")]
 script = ExtResource("6_eg1jj")
-speed = 650.0
+speed = 550.0
 tank_sprite = NodePath("../../TankSprite")
 tank = NodePath("../..")
 
@@ -239,6 +242,9 @@ root = NodePath("../..")
 [node name="DashShake" parent="StarterSubcomponents" index="2" node_paths=PackedStringArray("root")]
 root = NodePath("../..")
 
+[node name="TankLight" parent="StarterSubcomponents" index="3" node_paths=PackedStringArray("tank")]
+tank = NodePath("../..")
+
 [node name="TankTrail" parent="StarterSubcomponents" index="4" node_paths=PackedStringArray("tank")]
 tank = NodePath("../..")
 
@@ -251,6 +257,24 @@ root = NodePath("../..")
 [node name="DamageParticle" parent="StarterSubcomponents" index="8" node_paths=PackedStringArray("root")]
 root = NodePath("../..")
 
+[node name="AIComponentList" type="Node2D" parent="."]
+script = ExtResource("18_mwhf6")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="AIComponentList"]
+path_desired_distance = 100.0
+target_desired_distance = 100.0
+path_postprocessing = 1
+
+[node name="Roaming" type="Node" parent="AIComponentList" node_paths=PackedStringArray("navigation_agent", "tank")]
+script = ExtResource("19_nifrv")
+navigation_agent = NodePath("../NavigationAgent2D")
+tank = NodePath("../..")
+
+[node name="Timer" type="Timer" parent="AIComponentList/Roaming"]
+wait_time = 0.3
+autostart = true
+
 [connection signal="timeout" from="Components/ShootBasic/Delay" to="Components/ShootBasic" method="_on_delay_timeout"]
+[connection signal="timeout" from="AIComponentList/Roaming/Timer" to="AIComponentList/Roaming" method="_on_timer_timeout"]
 
 [editable path="StarterSubcomponents"]

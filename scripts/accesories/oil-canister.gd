@@ -14,6 +14,7 @@ extends StaticBody2D
 var health := 150
 var is_igniting := false
 
+
 func _on_area_2d_area_entered(bullet):
 	if is_igniting or not bullet is BasicBullet:
 		return

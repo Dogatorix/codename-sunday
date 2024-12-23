@@ -207,4 +207,9 @@ external = true
 position = Vector2(-1, 1)
 shape = SubResource("CircleShape2D_wy4og")
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+visible = false
+vertices = PackedVector2Array(-25, -23, -24, 28, 24, 27, 25, -23)
+affect_navigation_mesh = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cgywk5irhng6f"]
+[gd_scene load_steps=26 format=3 uid="uid://cgywk5irhng6f"]
 
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="2_3sroq"]
 [ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="3_1n1ks"]
@@ -71,6 +71,20 @@ _data = {
 "death": SubResource("Animation_7jurx")
 }
 
+[sub_resource type="GDScript" id="GDScript_wd5tt"]
+resource_name = "tank-light"
+script/source = "extends PointLight2D
+
+@export var tank: Tank
+
+func _ready():
+	if not tank:
+		return
+		
+	if not tank.is_client:
+		queue_free()
+"
+
 [sub_resource type="Curve" id="Curve_nrhmj"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -118,6 +132,7 @@ scale = Vector2(1.76172, 1.51172)
 energy = 0.3
 shadow_enabled = true
 texture = ExtResource("7_8quxn")
+script = SubResource("GDScript_wd5tt")
 metadata/_edit_lock_ = true
 
 [node name="TankTrail" type="Line2D" parent="."]

@@ -19,6 +19,8 @@ enum TIERS {
 
 @export_group("References")
 @export var component_container: ComponentList
+@export var ai_component_container: AIComponentList
+	
 @export var core_sprite: Sprite2D
 @export var sprite_node: Node2D
 @onready var component_list = component_container.get_children()
@@ -34,10 +36,8 @@ func _ready():
 	for component in component_list:
 		components[component.component_name] = component
 		
-	if is_client:
+	if is_client: 
 		Global.clients.push_front(self)
-	else:
-		%TankLight.queue_free()
 		
 	if Global.clients.size() > 1:
 		push_error(str(self) + " Overwriting client. Proprety reset.")
@@ -46,6 +46,9 @@ func _ready():
 		
 	if not upgraded:
 		check_data()
+		
+	if is_client and ai_component_container:
+		ai_component_container.queue_free()
 		 
 func _physics_process(delta):
 	for component in component_list:
@@ -84,7 +87,11 @@ func check_data():
 func update_color(color: Color):
 	tank_color = color
 	core_sprite.modulate = tank_color
-	%TankTrail.update_color()
+	
+	# FIXME - MAKE TANK COLORS UPDATE
+
+func component(name: String):
+	return components[name]
 
 func _exit_tree():
 	Global.clients.erase(self)
