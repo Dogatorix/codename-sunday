@@ -10,7 +10,12 @@ enum CONTAINER_TYPE {
 @export var container_type: CONTAINER_TYPE = CONTAINER_TYPE.SQUARE
 @export var healthbar: TextureProgressBar
 @export var placeholder_node: Sprite2D
-	
+
+@export var square_scene: PackedScene
+@export var triangle_scene: PackedScene
+@export var octagon_scene: PackedScene
+@export var pentagon_scene: PackedScene
+
 var container_scene: PackedScene
 var container_instance
 var healthbar_opacity: float = 1
@@ -27,13 +32,13 @@ func _ready():
 	
 	match container_type:
 		CONTAINER_TYPE.SQUARE:
-			container_scene = Global.PRELOADS["energy-square"]
+			container_scene = square_scene
 		CONTAINER_TYPE.TRIANGLE:
-			container_scene = Global.PRELOADS["energy-triangle"]
+			container_scene = triangle_scene
 		CONTAINER_TYPE.PENTAGON:
-			container_scene = Global.PRELOADS["energy-pentagon"]
+			container_scene = pentagon_scene
 		CONTAINER_TYPE.OCTAGON:
-			container_scene = Global.PRELOADS["energy-octagon"]
+			container_scene = octagon_scene
 			
 	if container_scene:
 		container_instance = container_scene.instantiate()

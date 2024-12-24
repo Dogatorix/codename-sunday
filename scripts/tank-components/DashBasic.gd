@@ -24,7 +24,7 @@ func _ready():
 
 func on_process(delta):
 	if Input.is_action_just_pressed("special_move") and tank_stats \
-	and movement.input_vector and Global.active_input and tank.is_client:
+	and movement.input_vector and Global.Game.active_input and tank.is_client:
 		if tank_stats.mana > dash_consumption:
 			tank_stats.set_mana(tank_stats.mana - dash_consumption)
 			

@@ -1,13 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://028mh64yj0jl"]
+[gd_scene load_steps=16 format=3 uid="uid://028mh64yj0jl"]
 
-[ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/tanks/starter/tank.tscn" id="1_0heoj"]
-[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="1_sqeu2"]
-[ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="2_a8a74"]
-[ext_resource type="PackedScene" uid="uid://cpdu42h25sfri" path="res://scenes/tanks/starter/assault.tscn" id="2_kjivg"]
-[ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="3_kva3v"]
-[ext_resource type="PackedScene" uid="uid://dgr03r0uc34mn" path="res://scenes/tanks/starter/destroy.tscn" id="3_u4ugn"]
-[ext_resource type="PackedScene" uid="uid://bseebh1gtwmak" path="res://scenes/tanks/starter/crush.tscn" id="4_0qnt0"]
-[ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="4_jvonn"]
+[ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/tanks/starter/tank.tscn" id="1_1t5cy"]
+[ext_resource type="PackedScene" uid="uid://cpdu42h25sfri" path="res://scenes/tanks/starter/assault.tscn" id="2_01dcy"]
+[ext_resource type="PackedScene" uid="uid://dgr03r0uc34mn" path="res://scenes/tanks/starter/destroy.tscn" id="3_7rajd"]
+[ext_resource type="PackedScene" uid="uid://bseebh1gtwmak" path="res://scenes/tanks/starter/crush.tscn" id="4_dd2ed"]
+[ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="5_43h7r"]
+[ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="6_58ogl"]
+[ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="7_37hte"]
 
 [sub_resource type="GDScript" id="GDScript_2v1qa"]
 script/source = "extends CanvasLayer
@@ -27,38 +26,27 @@ func show_menu():
 	
 	for btn in tank_buttons:
 		btn.disabled = false
-	
+		
 func hide_menu():
 	animation_player.play(\"hide\")
 	$Control.mouse_filter = $Control.MOUSE_FILTER_IGNORE
 	
 	for btn in tank_buttons:
 		btn.disabled = true
-	
-
-func _on_color_picker_color_changed(color):
-	if not Global.client:
-		return
-	Global.client.update_color(color)
 
 func upgrade_tank(index):
-	Global.client.upgrade_tank(upgrade_scenes[index])
+	Global.Game.client.upgrade_tank(upgrade_scenes[index])
 "
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o683o"]
-shader = ExtResource("1_sqeu2")
-shader_parameter/lod = 2.05
-shader_parameter/mix_percentage = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7vnl"]
 bg_color = Color(0.07329, 0, 0.711534, 0.196078)
 
 [sub_resource type="LabelSettings" id="LabelSettings_00psr"]
-font = ExtResource("3_kva3v")
+font = ExtResource("6_58ogl")
 font_size = 128
 
 [sub_resource type="LabelSettings" id="LabelSettings_xtc5o"]
-font = ExtResource("3_kva3v")
+font = ExtResource("6_58ogl")
 font_size = 32
 
 [sub_resource type="Animation" id="Animation_oc05l"]
@@ -121,7 +109,7 @@ _data = {
 layer = 20
 script = SubResource("GDScript_2v1qa")
 animation_player = NodePath("AnimationPlayer")
-upgrade_scenes = Array[PackedScene]([ExtResource("1_0heoj"), ExtResource("2_kjivg"), ExtResource("3_u4ugn"), ExtResource("4_0qnt0")])
+upgrade_scenes = Array[PackedScene]([ExtResource("1_1t5cy"), ExtResource("2_01dcy"), ExtResource("3_7rajd"), ExtResource("4_dd2ed")])
 tank_buttons = [NodePath("Control/Basic"), NodePath("Control/Assault"), NodePath("Control/Destroy"), NodePath("Control/Crush")]
 
 [node name="Control" type="Control" parent="."]
@@ -133,15 +121,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-
-[node name="BlurOverlay" type="Panel" parent="Control"]
-material = SubResource("ShaderMaterial_o683o")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="RedOverlay" type="Panel" parent="Control"]
 z_index = -1
@@ -157,14 +136,14 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_r7vnl")
 modulate = Color(0, 0, 0, 0.686275)
 position = Vector2(2895.04, 2697.3)
 scale = Vector2(4.36682, 4.36682)
-texture = ExtResource("2_a8a74")
+texture = ExtResource("5_43h7r")
 
 [node name="Unpleasant-gradient" type="Sprite2D" parent="Control"]
 modulate = Color(0, 0, 0, 0.686275)
 position = Vector2(942, 195)
 rotation = -3.14159
 scale = Vector2(2.08969, 2.08969)
-texture = ExtResource("2_a8a74")
+texture = ExtResource("5_43h7r")
 
 [node name="Label" type="Label" parent="Control"]
 z_index = 10
@@ -199,19 +178,6 @@ text = "Tank Upgrades"
 label_settings = SubResource("LabelSettings_xtc5o")
 horizontal_alignment = 2
 
-[node name="ColorPicker" type="ColorPicker" parent="Control"]
-layout_mode = 0
-offset_left = 46.0
-offset_top = 32.0
-offset_right = 344.0
-offset_bottom = 304.0
-scale = Vector2(1.39344, 1.39344)
-sampler_visible = false
-color_modes_visible = false
-sliders_visible = false
-hex_visible = false
-presets_visible = false
-
 [node name="Basic" type="Button" parent="Control"]
 layout_mode = 0
 offset_left = 1624.0
@@ -219,7 +185,7 @@ offset_top = 543.0
 offset_right = 1880.0
 offset_bottom = 594.0
 theme_override_colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
-theme_override_fonts/font = ExtResource("4_jvonn")
+theme_override_fonts/font = ExtResource("7_37hte")
 theme_override_font_sizes/font_size = 32
 text = "Basic"
 
@@ -230,7 +196,7 @@ offset_top = 756.0
 offset_right = 1880.0
 offset_bottom = 807.0
 theme_override_colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
-theme_override_fonts/font = ExtResource("4_jvonn")
+theme_override_fonts/font = ExtResource("7_37hte")
 theme_override_font_sizes/font_size = 32
 text = "Assault"
 
@@ -241,7 +207,7 @@ offset_top = 684.0
 offset_right = 1880.0
 offset_bottom = 735.0
 theme_override_colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
-theme_override_fonts/font = ExtResource("4_jvonn")
+theme_override_fonts/font = ExtResource("7_37hte")
 theme_override_font_sizes/font_size = 32
 text = "Destroy"
 
@@ -252,7 +218,7 @@ offset_top = 612.0
 offset_right = 1880.0
 offset_bottom = 663.0
 theme_override_colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
-theme_override_fonts/font = ExtResource("4_jvonn")
+theme_override_fonts/font = ExtResource("7_37hte")
 theme_override_font_sizes/font_size = 32
 text = "Crush"
 
@@ -261,7 +227,6 @@ libraries = {
 "": SubResource("AnimationLibrary_0j443")
 }
 
-[connection signal="color_changed" from="Control/ColorPicker" to="." method="_on_color_picker_color_changed"]
 [connection signal="button_down" from="Control/Basic" to="." method="upgrade_tank" binds= [0]]
 [connection signal="button_down" from="Control/Assault" to="." method="upgrade_tank" binds= [1]]
 [connection signal="button_down" from="Control/Destroy" to="." method="upgrade_tank" binds= [2]]

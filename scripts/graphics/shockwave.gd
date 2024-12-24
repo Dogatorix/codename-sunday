@@ -24,20 +24,12 @@ func _ready():
 func start():			
 	if external:
 		var clone = self.duplicate()
-		Global.make_external(self, root, clone)
+		Global.Game.make_external(self, root, clone)
 		clone.start()
 		return
 		
 	visible = true
 	autostart = true
-	
-	#if not one_shot:
-	#var clone = self.duplicate()
-	#clone.one_shot = true
-	#clone.autostart = true
-	#add_sibling(clone)
-	#clone.start()
-	#return
 	
 func _process(delta):
 	if not autostart:

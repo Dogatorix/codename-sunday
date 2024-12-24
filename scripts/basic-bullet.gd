@@ -37,7 +37,7 @@ func _on_body_entered(body):
 		return
 		
 	if body is Tank:
-		var tank_stats: StatsBasic = body.components["stats"]
+		var tank_stats: StatsBasic = body.behaviour("stats")
 		tank_stats.damage_tank(damage)
 	else:	
 		audio_player.start()

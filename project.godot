@@ -29,9 +29,7 @@ buses/default_bus_layout=""
 
 [autoload]
 
-Global="*res://globals/Global.gd"
-Overlay="*res://scenes/tanks/player-overlay.tscn"
-FunMenu="*res://globals/fun-menu.tscn"
+Global="*res://globals/Global.tscn"
 
 [display]
 

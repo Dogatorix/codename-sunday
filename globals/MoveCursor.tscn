@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bc45nv2yqgvlc"]
 
-[ext_resource type="Script" path="res://globals/move-cursor.gd" id="1_nhmha"]
+[ext_resource type="Script" path="res://globals/scripts/move-cursor.gd" id="1_nhmha"]
 [ext_resource type="Texture2D" uid="uid://oiajdi8v6g0j" path="res://assets/sprites/shockwave.png" id="8_77yso"]
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="9_5q1xy"]
 [ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="10_ivqo8"]

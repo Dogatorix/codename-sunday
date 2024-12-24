@@ -18,7 +18,7 @@ var can_shoot: bool = true
 		
 func on_process(_delta):
 	if Input.is_action_pressed("shoot") and can_shoot \
-	and Global.active_input and tank.is_client and not prevent_shoot:
+	and Global.Game.active_input and tank.is_client and not prevent_shoot:
 		can_shoot = false
 		delay.start()
 		

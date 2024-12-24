@@ -38,4 +38,4 @@ func play_sound():
 	pitch_scale += randf_range(-pitch_range, pitch_range)
 	play()
 	
-	Global.timeout_destroy(self, stream.get_length())
+	Global.Game.timeout_destroy(self, stream.get_length())

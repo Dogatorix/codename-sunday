@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://l5po6sn7y21h"]
+
+[ext_resource type="Script" path="res://globals/scripts/game.gd" id="1_7e2b8"]
+[ext_resource type="PackedScene" uid="uid://d0bvm4ekcnm0q" path="res://scenes/tanks/player-overlay.tscn" id="2_1vsr1"]
+[ext_resource type="PackedScene" uid="uid://vvvnnm2dl73x" path="res://globals/Sandbox.tscn" id="2_i0l27"]
+[ext_resource type="PackedScene" uid="uid://028mh64yj0jl" path="res://globals/PauseMenu.tscn" id="4_4q0bl"]
+
+[node name="Game" type="Node" node_paths=PackedStringArray("Overlay", "PauseMenu")]
+script = ExtResource("1_7e2b8")
+Overlay = NodePath("PlayerOverlay")
+PauseMenu = NodePath("PauseMenu")
+sandbox_scene = ExtResource("2_i0l27")
+
+[node name="PlayerOverlay" parent="." instance=ExtResource("2_1vsr1")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_4q0bl")]

@@ -22,7 +22,7 @@ func _on_health_change(health):
 	animation_player.play("death")
 	
 	if tank.is_client:
-		Overlay.show_bars()
+		Global.Game.Overlay.show_bars()
 	
 	var timer: Timer = Timer.new()
 	timer.wait_time = 0.35
@@ -45,9 +45,8 @@ func death():
 		spectator_instance.camera_zoom = tank.default_zoom
 		tank.add_sibling(spectator_instance)
 		spectator_instance.global_position = tank.global_position
-		Global.player_lives -= 1
 
 func instant_death():
 	if tank.is_client:
-		Overlay.show_bars()
+		Global.Game.Overlay.show_bars()
 	death()

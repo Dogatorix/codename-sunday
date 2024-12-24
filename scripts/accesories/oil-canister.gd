@@ -50,7 +50,7 @@ func _on_fuse_timer_timeout():
 			
 		elif body is Tank:
 			var damage = 13000 / distance.length()
-			var stats_component: StatsBasic = body.components["stats"]
+			var stats_component: StatsBasic = body.behaviour("stats")
 			stats_component.damage_tank(damage)
 			
 		elif body.has_meta("is_canister") and body != self:

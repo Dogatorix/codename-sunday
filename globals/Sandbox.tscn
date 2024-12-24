@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://vvvnnm2dl73x"]
+
+[ext_resource type="Script" path="res://globals/scripts/sandbox.gd" id="1_an82m"]
+[ext_resource type="PackedScene" uid="uid://iqk1qndurvjj" path="res://globals/SpawnCursor.tscn" id="2_saejm"]
+[ext_resource type="PackedScene" uid="uid://bc45nv2yqgvlc" path="res://globals/MoveCursor.tscn" id="3_05mgl"]
+
+[node name="Sandbox" type="Node"]
+script = ExtResource("1_an82m")
+spawn_cursor_scene = ExtResource("2_saejm")
+move_cursor_scene = ExtResource("3_05mgl")

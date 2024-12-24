@@ -3,7 +3,8 @@ extends Node2D
 var chosen_node: Node2D = null
 var is_being_dragged := false
 var drag_offset := Vector2.ZERO
-@onready var shoot_component = Global.client.components["shoot"]
+
+@onready var shoot_component = Global.Game.client.behaviour("shoot")
 
 func _process(_delta):
 	global_position = get_global_mouse_position()

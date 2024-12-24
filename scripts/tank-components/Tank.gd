@@ -23,25 +23,34 @@ enum TIERS {
 	
 @export var core_sprite: Sprite2D
 @export var sprite_node: Node2D
+
 @onready var component_list = component_container.get_children()
-	
+@onready var ai_component_list = ai_component_container.get_children()	
+
 var components := {}
+var ai_components := {}
+
 var camera: GameCamera
 
 var upgraded := false
+
+var Game:
+	get():
+		return Global.Game
 
 func _ready():
 	set_meta("can_be_dragged", true)
 	
 	for component in component_list:
 		components[component.component_name] = component
+
 		
 	if is_client: 
-		Global.clients.push_front(self)
+		Game.clients.push_front(self)
 		
-	if Global.clients.size() > 1:
+	if Game.clients.size() > 1:
 		push_error(str(self) + " Overwriting client. Proprety reset.")
-		Global.clients.erase(self)
+		Game.clients.erase(self)
 		is_client = false
 		
 	if not upgraded:
@@ -49,7 +58,11 @@ func _ready():
 		
 	if is_client and ai_component_container:
 		ai_component_container.queue_free()
-		 
+	
+	if not is_client: 
+		for component in ai_component_list:
+			ai_components[component.component_name] = component
+		
 func _physics_process(delta):
 	for component in component_list:
 		if component.has_method("on_process"):
@@ -57,7 +70,7 @@ func _physics_process(delta):
 		
 func upgrade_tank(tank_scene: PackedScene):
 	var tank_instance: Tank = tank_scene.instantiate()
-	Global.clients.erase(self)
+	Game.clients.erase(self)
 	is_client = false
 	
 	tank_instance.is_client = true
@@ -89,9 +102,12 @@ func update_color(color: Color):
 	core_sprite.modulate = tank_color
 	
 	# FIXME - MAKE TANK COLORS UPDATE
-
-func component(name: String):
+	
+func behaviour(name: String):
 	return components[name]
+	
+func ai(name: String):
+	return ai_components[name]
 
 func _exit_tree():
-	Global.clients.erase(self)
+	Game.clients.erase(self)

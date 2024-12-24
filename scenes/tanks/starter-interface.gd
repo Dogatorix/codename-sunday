@@ -39,7 +39,7 @@ func _ready():
 	%PointsLeft.modulate = stats.tank.tank_color
 	%TankName.modulate = stats.tank.tank_color
 	
-	Overlay.hide_bars()
+	Global.Game.Overlay.hide_bars()
 
 var time := 0.0
 func _process(delta):

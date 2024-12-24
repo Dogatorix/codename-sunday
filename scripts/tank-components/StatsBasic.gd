@@ -74,7 +74,7 @@ func damage_tank(amount):
 		return
 	
 	if tank.is_client:
-		Overlay.damage()
+		Global.Game.Overlay.damage()
 	if animation_player:
 		animation_player.play("damage")
 	if damage_sounds:

@@ -14,6 +14,10 @@ class_name Shake2D
 @onready var id = randi_range(0, 100000)
 @onready var max_intensity = intensity
 
+var Game:
+	get():
+		return Global.Game
+
 func _ready():
 	if not root:
 		root = get_parent()
@@ -26,7 +30,7 @@ func start():
 	intensity = max_intensity
 	
 	if external and one_shot:
-		Global.make_external(self, root)
+		Game.make_external(self, root)
 		return
 	
 	if duration > 0 and one_shot:
@@ -37,25 +41,25 @@ func start():
 		timer.start()
 
 func _process(delta):
-	if not Global.game_camera or not auto_start:
+	if not Game.game_camera or not auto_start:
 		return
 	
-	var distance = (Global.game_camera.global_position - global_position).length()
+	var distance = (Game.game_camera.global_position - global_position).length()
 	
 	if distance <= shake_range:
 		var relative_intensity = ((shake_range - distance) / 500) * intensity
-		Global.game_camera.shake_nodes.intensity[id] = relative_intensity
-		Global.game_camera.shake_nodes.interpolation[id] = interpolation
+		Game.game_camera.shake_nodes.intensity[id] = relative_intensity
+		Game.game_camera.shake_nodes.interpolation[id] = interpolation
 	else:
-		Global.game_camera.shake_nodes.intensity.erase(id)
-		Global.game_camera.shake_nodes.interpolation.erase(id)
+		Game.game_camera.shake_nodes.intensity.erase(id)
+		Game.game_camera.shake_nodes.interpolation.erase(id)
 		
 	intensity -= intensity_decay * delta
 	intensity = max(0, intensity)
 	
 func _exit_tree():
-	if not Global.game_camera:
+	if not Game.game_camera:
 		return
 		
-	Global.game_camera.shake_nodes.intensity.erase(id)
-	Global.game_camera.shake_nodes.interpolation.erase(id)
+	Game.game_camera.shake_nodes.intensity.erase(id)
+	Game.game_camera.shake_nodes.interpolation.erase(id)

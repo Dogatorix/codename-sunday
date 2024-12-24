@@ -156,7 +156,7 @@ username = "Dummy"
 core_tier = 2
 default_zoom = 1.2
 component_container = NodePath("StarterSubcomponents/BehaviourComponents")
-ai_component_container = NodePath("StarterAIComponents")
+ai_component_container = NodePath("StarterAIComponents/AIComponentList")
 core_sprite = NodePath("TankSprite/Core")
 sprite_node = NodePath("TankSprite")
 
@@ -213,7 +213,7 @@ shape = SubResource("CircleShape2D_bbwtc")
 tank = NodePath("../..")
 
 [node name="Movement" parent="StarterSubcomponents/BehaviourComponents" index="0" node_paths=PackedStringArray("tank_sprite", "tank")]
-speed = 475.0
+speed = 450.0
 tank_sprite = NodePath("../../../TankSprite")
 tank = NodePath("../../..")
 
@@ -221,6 +221,7 @@ tank = NodePath("../../..")
 tank = NodePath("../../..")
 
 [node name="Dash" parent="StarterSubcomponents/BehaviourComponents" index="2" node_paths=PackedStringArray("tank")]
+dash_strength = 1400
 tank = NodePath("../../..")
 
 [node name="DeathBasic" parent="StarterSubcomponents/BehaviourComponents" index="3" node_paths=PackedStringArray("tank")]
@@ -236,7 +237,7 @@ delay = NodePath("Delay")
 audio_player = NodePath("../../GraphicComponents/ShootSound")
 movement = NodePath("../Movement")
 bullet_scene = ExtResource("8_ea1k8")
-bullet_speed = 700.0
+bullet_speed = 800.0
 bullet_size = 1.25
 bullet_damage = 45.0
 tank = NodePath("../../..")
@@ -267,7 +268,7 @@ pitch_range = 0.1
 
 [node name="StarterAIComponents" parent="." instance=ExtResource("11_fmk0f")]
 
-[node name="Roaming" parent="StarterAIComponents" index="1" node_paths=PackedStringArray("tank")]
+[node name="SharedData" parent="StarterAIComponents" index="0" node_paths=PackedStringArray("tank")]
 tank = NodePath("../..")
 
 [connection signal="timeout" from="StarterSubcomponents/BehaviourComponents/ShootBasic/Delay" to="StarterSubcomponents/BehaviourComponents/ShootBasic" method="_on_delay_timeout"]

@@ -20,7 +20,7 @@ func _process(_delta):
 		position -= distance.normalized() * (400.0 / distance.length())
 		
 		if distance.length() <= 20:
-			var stats = chosen_player.components.get("stats")
+			var stats = chosen_player.behaviour("stats")
 			stats.set_points(stats.points + value)
 			queue_free()
 

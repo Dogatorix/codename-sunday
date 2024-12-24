@@ -201,7 +201,7 @@ username = "Dummy"
 core_tier = 2
 default_zoom = 1.2
 component_container = NodePath("StarterSubcomponents/BehaviourComponents")
-ai_component_container = NodePath("StarterAIComponents")
+ai_component_container = NodePath("StarterAIComponents/AIComponentList")
 core_sprite = NodePath("TankSprite/Core")
 sprite_node = NodePath("TankSprite")
 
@@ -311,7 +311,7 @@ root = NodePath("../../..")
 
 [node name="StarterAIComponents" parent="." instance=ExtResource("10_4ysbx")]
 
-[node name="Roaming" parent="StarterAIComponents" index="1" node_paths=PackedStringArray("tank")]
+[node name="SharedData" parent="StarterAIComponents" index="0" node_paths=PackedStringArray("tank")]
 tank = NodePath("../..")
 
 [connection signal="timeout" from="StarterSubcomponents/BehaviourComponents/ShootingRapid/Delay" to="StarterSubcomponents/BehaviourComponents/ShootingRapid" method="_on_delay_timeout"]

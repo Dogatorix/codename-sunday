@@ -38,5 +38,5 @@ func start():
 	clone.global_position = self.global_position
 	
 	if not permanent:
-		Global.timeout_destroy(clone, lifetime)
+		Global.Game.timeout_destroy(clone, lifetime)
 		

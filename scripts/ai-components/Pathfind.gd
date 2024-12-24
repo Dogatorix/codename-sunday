@@ -1,18 +1,24 @@
-extends TankBehaviourComponent
-class_name Roaming
+extends TankAIComponent
+class_name Pathfind
+
+const component_name = "pathfind"
 
 @export var navigation_agent: NavigationAgent2D
 var target: Node2D
-var movement: MovementBasic
 
+var movement: MovementBasic
 var direction_smooth: Vector2
+
+var disable := false
 
 func _ready():
 	target = get_tree().get_nodes_in_group("ai_node").pick_random()
-
+	
 func _process(delta):
+	var tank: Tank = data_node.tank
+	
 	var direction = tank.to_local(navigation_agent.get_next_path_position()).normalized()
-	movement = tank.component("movement")
+	movement = tank.behaviour("movement")
 	movement.input_vector = direction
 	
 	direction_smooth += ((direction - direction_smooth) / 10) * delta * 90

@@ -23,7 +23,7 @@ func _ready():
 		return
 		
 	camera.zoom = Vector2(camera_zoom, camera_zoom)
-	%Lives.text = str(Global.player_lives) + " Lives remain"
+	%Lives.text = str(Global.Game.player_lives) + " Lives remain"
 
 func _process(delta):
 	wait_time -= delta
@@ -60,7 +60,7 @@ func _process(delta):
 	camera_zoom = clamp(camera_zoom, 0.3, 1.5)
 	camera.zoom = camera.zoom.move_toward(Vector2(camera_zoom, camera_zoom), 3 * delta)
 	
-	if input_vector != Vector2.ZERO and Global.active_input:
+	if input_vector != Vector2.ZERO and Global.Game.active_input:
 		input_vector = input_vector.normalized() * speed * delta
 		velocity = velocity.move_toward(input_vector, acceleration * delta)
 	else:

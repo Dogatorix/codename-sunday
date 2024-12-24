@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://iqk1qndurvjj"]
 
 [ext_resource type="Texture2D" uid="uid://oiajdi8v6g0j" path="res://assets/sprites/shockwave.png" id="1_f1vga"]
-[ext_resource type="Script" path="res://globals/spawn-cursor.gd" id="1_n3dvj"]
+[ext_resource type="Script" path="res://globals/scripts/spawn-cursor.gd" id="1_n3dvj"]
 [ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/tanks/starter/tank.tscn" id="2_ln1y2"]
 [ext_resource type="PackedScene" uid="uid://dgr03r0uc34mn" path="res://scenes/tanks/starter/destroy.tscn" id="3_hijwq"]
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="3_udekg"]

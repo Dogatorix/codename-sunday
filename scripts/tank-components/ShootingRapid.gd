@@ -19,7 +19,7 @@ func _ready():
 	barrel = origin_left
 
 func on_process(_delta):
-	if Input.is_action_pressed("shoot") and can_shoot and Global.active_input \
+	if Input.is_action_pressed("shoot") and can_shoot and Global.Game.active_input \
 	and tank.is_client and not prevent_shoot:
 		can_shoot = false
 		delay.start()
