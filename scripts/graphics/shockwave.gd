@@ -6,9 +6,13 @@ class_name Shockwave
 @export var fade_speed := 1.0
 @export var external := false
 @export var autostart := false
-#@export var one_shot := true
+@export var root: Node 
+
 
 func _ready():
+	if not root:
+		root = get_parent()
+	
 	visible = false
 	
 	if start_size:	
@@ -20,7 +24,7 @@ func _ready():
 func start():			
 	if external:
 		var clone = self.duplicate()
-		Global.make_external(self, clone)
+		Global.make_external(self, root, clone)
 		clone.start()
 		return
 		

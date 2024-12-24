@@ -1,4 +1,4 @@
-extends TankComponent
+extends TankBehaviourComponent
 class_name ShootPreIndustrial
 
 var prevent_shoot := false

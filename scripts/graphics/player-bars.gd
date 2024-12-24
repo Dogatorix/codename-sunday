@@ -23,6 +23,7 @@ func _ready():
 		queue_free()
 	
 	visible = true
+	print(stats)
 	stats.connect("health_change", _on_health_change)
 	stats.connect("mana_change", _on_mana_change)
 	

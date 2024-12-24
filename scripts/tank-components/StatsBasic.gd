@@ -1,4 +1,4 @@
-extends TankComponent
+extends TankBehaviourComponent
 class_name StatsBasic
 
 const component_name = "stats"

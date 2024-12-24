@@ -1,4 +1,4 @@
-extends TankComponent
+extends TankBehaviourComponent
 class_name DeathBasic
 
 const component_name = "death"

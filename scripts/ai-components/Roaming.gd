@@ -1,4 +1,4 @@
-extends TankComponent
+extends TankBehaviourComponent
 class_name Roaming
 
 @export var navigation_agent: NavigationAgent2D

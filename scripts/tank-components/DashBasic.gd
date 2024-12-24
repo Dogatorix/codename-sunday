@@ -1,4 +1,4 @@
-extends TankComponent
+extends TankBehaviourComponent
 class_name DashBasic
 
 const component_name = "dash"
@@ -8,6 +8,7 @@ const component_name = "dash"
 @export var dash_consumption := 30
 
 @export_group("References")
+
 @export var movement: MovementBasic
 @export var tank_stats: StatsBasic
 @export var audio_player: Audio2D

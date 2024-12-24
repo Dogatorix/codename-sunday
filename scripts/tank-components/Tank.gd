@@ -18,7 +18,7 @@ enum TIERS {
 @export var is_client: bool = false
 
 @export_group("References")
-@export var component_container: ComponentList
+@export var component_container: BehaviourComponentList
 @export var ai_component_container: AIComponentList
 	
 @export var core_sprite: Sprite2D

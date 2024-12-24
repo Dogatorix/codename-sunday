@@ -1,5 +1,5 @@
 extends Node
-class_name TankComponent
+class_name TankBehaviourComponent
 
 @export var tank: Tank
 
@@ -13,6 +13,6 @@ func safety_check(nodes: Array):
 func _ready():
 	safety_check([tank])
 	
-	if not get_parent() is ComponentList:
+	if not get_parent() is BehaviourComponentList:
 		push_error(str(self) + " Invalid component placement")
 		queue_free()

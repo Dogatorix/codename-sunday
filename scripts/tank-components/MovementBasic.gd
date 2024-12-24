@@ -1,18 +1,18 @@
-extends TankComponent
+extends TankBehaviourComponent
 class_name MovementBasic
 
 const component_name = "movement"
 
 var camera: GameCamera
-@export_group("Camera")
-@export var camera_offset_scale := 40
-@export var can_look := true
 
-@export_group("General")
 @export var speed: float = 1000
-@export var acceleration: float = 2500
-@export var friction: float = 2000
-@export var push_force: float = 80
+@export var camera_offset_scale := 40
+
+var can_look := true
+
+const acceleration: float = 2500
+const friction: float = 2000
+const push_force: float = 80
 
 @export_group("References")
 @export var tank_sprite: Node2D
