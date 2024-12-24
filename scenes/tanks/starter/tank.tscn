@@ -1,14 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://tg86jcs0270c"]
+[gd_scene load_steps=14 format=3 uid="uid://tg86jcs0270c"]
 
 [ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_gnasx"]
 [ext_resource type="Texture2D" uid="uid://bg76v4dgiyq0e" path="res://assets/sprites/tanks/starter/starter-barrel.png" id="3_ip8ps"]
 [ext_resource type="Texture2D" uid="uid://b3rx5mjjudhk3" path="res://assets/sprites/tanks/starter/starter-core-1.png" id="4_7uuxc"]
 [ext_resource type="Script" path="res://scripts/tank-components/ShootingBasic.gd" id="8_w3elj"]
 [ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/tanks/starter/sub-components/basic-bullet.tscn" id="9_3q8yj"]
+[ext_resource type="PackedScene" uid="uid://bae55p0tdb4ok" path="res://scenes/tanks/starter/sub-components/starter-ai-components.tscn" id="9_cv61v"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="15_obfqw"]
-[ext_resource type="PackedScene" uid="uid://cgywk5irhng6f" path="res://scenes/tanks/starter/sub-components/starter-subcomponents.tscn" id="17_h63i7"]
-[ext_resource type="Script" path="res://scripts/tank-components/AIComponentList.gd" id="18_mwhf6"]
-[ext_resource type="Script" path="res://scripts/ai-components/Roaming.gd" id="19_nifrv"]
+[ext_resource type="PackedScene" uid="uid://cgywk5irhng6f" path="res://scenes/tanks/starter/sub-components/starter-component-list.tscn" id="17_h63i7"]
 [ext_resource type="AudioStream" uid="uid://ooiku30st7ax" path="res://assets/audio/tanks/starter/basic-shot.mp3" id="20_tfnit"]
 
 [sub_resource type="Animation" id="Animation_wga42"]
@@ -58,7 +57,7 @@ tank_name = "Basic"
 username = "Dummy"
 default_zoom = 1.2
 component_container = NodePath("StarterSubcomponents/BehaviourComponents")
-ai_component_container = NodePath("AIComponentList")
+ai_component_container = NodePath("StarterAIComponents")
 core_sprite = NodePath("TankSprite/Core")
 sprite_node = NodePath("TankSprite")
 
@@ -92,8 +91,10 @@ visible = false
 scale = Vector2(0.2, 0.2)
 shape = SubResource("CircleShape2D_bbwtc")
 
-[node name="StarterSubcomponents" parent="." node_paths=PackedStringArray("Tank") instance=ExtResource("17_h63i7")]
-Tank = NodePath("..")
+[node name="StarterSubcomponents" parent="." instance=ExtResource("17_h63i7")]
+
+[node name="SharedData" parent="StarterSubcomponents" index="0" node_paths=PackedStringArray("tank")]
+tank = NodePath("../..")
 
 [node name="Movement" parent="StarterSubcomponents/BehaviourComponents" index="0" node_paths=PackedStringArray("tank_sprite", "tank")]
 tank_sprite = NodePath("../../../TankSprite")
@@ -141,33 +142,18 @@ root = NodePath("../../..")
 [node name="TankLight" parent="StarterSubcomponents/GraphicComponents" index="4" node_paths=PackedStringArray("tank")]
 tank = NodePath("../../..")
 
-[node name="TankTrail" parent="StarterSubcomponents/GraphicComponents" index="5" node_paths=PackedStringArray("tank")]
-tank = NodePath("../../..")
-
 [node name="DashShockwave" parent="StarterSubcomponents/GraphicComponents" index="8" node_paths=PackedStringArray("root")]
 root = NodePath("../../..")
 
 [node name="DamageParticle" parent="StarterSubcomponents/GraphicComponents" index="9" node_paths=PackedStringArray("root")]
 root = NodePath("../../..")
 
-[node name="AIComponentList" type="Node2D" parent="."]
-script = ExtResource("18_mwhf6")
+[node name="StarterAIComponents" parent="." instance=ExtResource("9_cv61v")]
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="AIComponentList"]
-path_desired_distance = 100.0
-target_desired_distance = 100.0
-path_postprocessing = 1
-
-[node name="Roaming" type="Node" parent="AIComponentList" node_paths=PackedStringArray("navigation_agent", "tank")]
-script = ExtResource("19_nifrv")
-navigation_agent = NodePath("../NavigationAgent2D")
+[node name="Roaming" parent="StarterAIComponents" index="1" node_paths=PackedStringArray("tank")]
 tank = NodePath("../..")
 
-[node name="Timer" type="Timer" parent="AIComponentList/Roaming"]
-wait_time = 0.3
-autostart = true
-
 [connection signal="timeout" from="StarterSubcomponents/BehaviourComponents/Shoot/Delay" to="StarterSubcomponents/BehaviourComponents/Shoot" method="_on_delay_timeout"]
-[connection signal="timeout" from="AIComponentList/Roaming/Timer" to="AIComponentList/Roaming" method="_on_timer_timeout"]
 
 [editable path="StarterSubcomponents"]
+[editable path="StarterAIComponents"]

@@ -1,6 +1,6 @@
 extends Line2D
 
-@export var tank: Tank 
+@export var tank: Tank
 
 var length = 50
 var point: Vector2
