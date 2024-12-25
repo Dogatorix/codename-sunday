@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdl4m5wiq7k04"]
+
+[ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="1_m5thi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6jbqg"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wg4lv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="MenuInput" type="LineEdit"]
+z_index = 5
+offset_right = 192.0
+offset_bottom = 35.0
+theme_override_colors/caret_color = Color(0, 0.596078, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0.211202, 0.377353, 1)
+theme_override_colors/font_color = Color(0, 0.596078, 1, 1)
+theme_override_fonts/font = ExtResource("1_m5thi")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/focus = SubResource("StyleBoxFlat_6jbqg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wg4lv")
+placeholder_text = "This is a tale of..."

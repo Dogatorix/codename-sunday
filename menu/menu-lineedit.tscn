@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://j755iqqo80gc"]
+
+[ext_resource type="Texture2D" uid="uid://brd1g3f2v8bku" path="res://menu/menu-lineedit.png" id="1_4t7t4"]
+[ext_resource type="PackedScene" uid="uid://cdl4m5wiq7k04" path="res://menu/menu-line-edit.tscn" id="2_pdir3"]
+[ext_resource type="PackedScene" uid="uid://c246vgbhs36u8" path="res://menu/menu-light.tscn" id="3_hibwe"]
+
+[sub_resource type="GDScript" id="GDScript_5p171"]
+script/source = "extends Sprite2D
+
+@onready var original_scale := scale
+
+var is_focused := false
+
+var time := 0.0
+func _process(delta):
+	time += delta
+	
+	if is_focused:
+		var colorval = abs(sin(time * 5)) + 0.5
+		
+		$MenuInput.modulate = Color(colorval,colorval,colorval)
+
+func focus():
+	is_focused = true
+	
+	var tween: Tween = create_tween()
+	
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, \"scale\", original_scale + Vector2(0.1,0.1), 0.3)
+	
+func unfocus():
+	is_focused = false
+	$MenuInput.modulate = Color.WHITE
+
+	var tween: Tween = create_tween()
+	
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, \"scale\", original_scale, 0.3)
+"
+
+[node name="Menu-lineedit" type="Sprite2D"]
+modulate = Color(0, 0.596078, 0.996078, 1)
+z_index = 12
+texture = ExtResource("1_4t7t4")
+script = SubResource("GDScript_5p171")
+
+[node name="MenuInput" parent="." instance=ExtResource("2_pdir3")]
+z_index = 15
+offset_left = -191.0
+offset_top = -18.0
+offset_bottom = 17.0
+alignment = 1
+max_length = 24
+
+[node name="Light" parent="." instance=ExtResource("3_hibwe")]
+
+[connection signal="focus_entered" from="MenuInput" to="." method="focus"]
+[connection signal="focus_exited" from="MenuInput" to="." method="unfocus"]
