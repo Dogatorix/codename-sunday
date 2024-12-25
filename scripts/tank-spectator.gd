@@ -23,8 +23,7 @@ func _ready():
 		return
 		
 	camera.zoom = Vector2(camera_zoom, camera_zoom)
-	%Lives.text = str(Global.Game.player_lives) + " Lives remain"
-
+	
 func _process(delta):
 	wait_time -= delta
 	var speed: int

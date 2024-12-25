@@ -12,7 +12,7 @@ enum GAMEMODES {
 signal restarted()
 signal menu_updated(mode: bool)
 
-var gamemode: GAMEMODES = GAMEMODES.SANDBOX
+var gamemode: GAMEMODES = GAMEMODES.ADVANCED_TRAINING
 
 var clients: Array[Tank] = []
 var cameras: Array[GameCamera] = []
@@ -69,10 +69,6 @@ func _ready():
 		add_child(Sandbox)
 	
 func _process(_delta):
-	if Input.is_action_just_pressed("restart") and active_input:
-		restarted.emit()
-		get_tree().reload_current_scene()
-	
 	if Input.is_action_just_pressed("fun-menu-show"):
 		paused = !paused
 		Global.Game.update_menu()

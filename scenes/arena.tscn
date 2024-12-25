@@ -1,6 +1,5 @@
-[gd_scene load_steps=33 format=4 uid="uid://cxao8qdey576c"]
+[gd_scene load_steps=32 format=4 uid="uid://cxao8qdey576c"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_pgfjv"]
 [ext_resource type="Texture2D" uid="uid://bnltglx2hv07" path="res://assets/sprites/tilesets/wall-decorations.png" id="4_a1min"]
 [ext_resource type="Texture2D" uid="uid://ca2wc5a0r2wrw" path="res://assets/sprites/tilesets/wall-tiles-full.png" id="5_cing7"]
 [ext_resource type="Texture2D" uid="uid://cgo8wxdab5r3h" path="res://assets/sprites/tilesets/wall-texture.png" id="5_qg472"]
@@ -686,7 +685,6 @@ sources/2 = SubResource("TileSetAtlasSource_7a4b4")
 [node name="Arena" type="Node2D"]
 z_index = 10
 position = Vector2(-429, -240)
-script = ExtResource("1_pgfjv")
 
 [node name="Tiles" type="Node" parent="."]
 

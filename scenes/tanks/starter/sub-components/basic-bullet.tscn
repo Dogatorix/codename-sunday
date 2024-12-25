@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bw60ijk5yhl6r" path="res://scenes/tanks/starter/sub-components/bullet-death-particle.tscn" id="2_d8b3y"]
 [ext_resource type="Texture2D" uid="uid://cy3n4jejlsel3" path="res://assets/sprites/tanks/starter/basic-bullet.png" id="2_qbj7q"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="6_mdv3n"]
-[ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/sprites/circle-particle.png" id="7_02sdb"]
+[ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/particles/circle-particle.png" id="7_02sdb"]
 [ext_resource type="AudioStream" uid="uid://ditsxgppsyypj" path="res://assets/audio/tanks/bullet-hit-1.mp3" id="7_wfb1x"]
 [ext_resource type="AudioStream" uid="uid://g3ph7l463t15" path="res://assets/audio/tanks/bullet-hit-2.mp3" id="8_4k658"]
 [ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="8_l8eka"]

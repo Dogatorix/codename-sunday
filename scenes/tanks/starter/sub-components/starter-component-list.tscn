@@ -22,7 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://br8extpl5yukj" path="res://assets/audio/tanks/player-give-up.mp3" id="20_g7ldv"]
 [ext_resource type="Texture2D" uid="uid://oiajdi8v6g0j" path="res://assets/sprites/shockwave.png" id="21_m6887"]
 [ext_resource type="Script" path="res://scripts/graphics/shockwave.gd" id="22_0pj55"]
-[ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/sprites/circle-particle.png" id="23_5u338"]
+[ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/particles/circle-particle.png" id="23_5u338"]
 [ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="24_21j64"]
 [ext_resource type="PackedScene" uid="uid://bjbp1eyywcerx" path="res://scenes/tanks/player-bars.tscn" id="25_la4lk"]
 

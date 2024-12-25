@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="3_tyffs"]
 [ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="4_2x3ik"]
 [ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="5_4hmik"]
-[ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/sprites/circle-particle.png" id="5_xv7um"]
+[ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/particles/circle-particle.png" id="5_xv7um"]
 
 [sub_resource type="Curve" id="Curve_8e3ty"]
 min_value = -200.0

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dfxc72incxgji" path="res://assets/sprites/ui/starter-ui/starter-core-points-progress.png" id="2_3y0uk"]
 [ext_resource type="Texture2D" uid="uid://cgyiu2ng00cjp" path="res://assets/sprites/ui/starter-ui/stat-wheel-progress-trail.png" id="3_cb3h1"]
 [ext_resource type="Texture2D" uid="uid://24ocp888cr45" path="res://assets/sprites/ui/starter-ui/stat-wheel.png" id="3_dw501"]
-[ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/sprites/circle-particle.png" id="4_6yajm"]
+[ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/particles/circle-particle.png" id="4_6yajm"]
 [ext_resource type="Texture2D" uid="uid://c2vstp2rvic5" path="res://assets/sprites/ui/starter-ui/stat-wheel-progress.png" id="4_jrmr1"]
 [ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="4_m645k"]
 [ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="9_0enj5"]

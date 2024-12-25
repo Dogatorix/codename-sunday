@@ -15,13 +15,13 @@ var paused: bool:
 
 func _ready():
 	Global.Game.connect("menu_updated", _on_menu_update)
-	Global.Game.connect("restarted", _on_menu_restarted)
+	Global.connect("restarted", _on_menu_restarted)
 
 func _on_menu_update(_mode):
 	spawn_mode = false
 	update_spawner()
 	move_mode = false
-	update_move()
+	update_move()	
 	
 func _on_menu_restarted():
 	spawn_mode = false
