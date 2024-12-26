@@ -11,7 +11,6 @@ const component_name = "shoot"
 @export var delay: Timer
 @export var audio_player: AudioStreamPlayer2D
 
-var can_shoot := true
 var barrel: Node2D
 var animation := "shoot_left"
 
@@ -19,8 +18,7 @@ func _ready():
 	barrel = origin_left
 
 func on_process(_delta):
-	if Input.is_action_pressed("shoot") and can_shoot and Global.Game.active_input \
-	and tank.is_client and not prevent_shoot:
+	if shoot_condition:
 		can_shoot = false
 		delay.start()
 		

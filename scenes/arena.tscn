@@ -925,5 +925,5 @@ position = Vector2(3152, 3745)
 position = Vector2(533, 4601)
 
 [node name="Assault" parent="." instance=ExtResource("16_ikryk")]
-position = Vector2(2522, -1816)
+position = Vector2(2388, -2001)
 is_client = true

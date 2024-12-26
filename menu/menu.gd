@@ -1,4 +1,5 @@
 extends Node2D
+# I know the main menu code is a bit messy but ahh i dont care at this point
 
 @onready var menu_start_button = %MenuStartButton
 
@@ -6,6 +7,8 @@ func _ready():
 	menu_start_button.disable()
 
 func _on_menu_button_pressed():
+	Global.username = %NameEdit.text_value
+
 	menu_start_button.disabled = true
 	%MenuAnimations.play("open")
 

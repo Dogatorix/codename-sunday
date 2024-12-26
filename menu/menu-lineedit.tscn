@@ -10,10 +10,12 @@ script/source = "extends Sprite2D
 @onready var original_scale := scale
 
 var is_focused := false
+var text_value: String
 
 var time := 0.0
 func _process(delta):
 	time += delta
+	text_value = $MenuInput.text
 	
 	if is_focused:
 		var colorval = abs(sin(time * 5)) + 0.5

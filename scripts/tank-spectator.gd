@@ -24,6 +24,9 @@ func _ready():
 		
 	camera.zoom = Vector2(camera_zoom, camera_zoom)
 	
+	if Global.is_mobile:
+		Global.Game.Mobile.enable_spectator_controls()
+	
 func _process(delta):
 	wait_time -= delta
 	var speed: int

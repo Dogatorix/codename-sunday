@@ -3,8 +3,6 @@ class_name ShootBasic
 
 const component_name = "shoot"
 
-var can_shoot: bool = true
-
 @export var knockback = 0.0
 @export var dash: DashBasic
 
@@ -17,8 +15,7 @@ var can_shoot: bool = true
 @export var movement: MovementBasic
 		
 func on_process(_delta):
-	if Input.is_action_pressed("shoot") and can_shoot \
-	and Global.Game.active_input and tank.is_client and not prevent_shoot:
+	if shoot_condition:
 		can_shoot = false
 		delay.start()
 		

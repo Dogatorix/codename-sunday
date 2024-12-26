@@ -39,6 +39,8 @@ var Game:
 		return Global.Game
 
 func _ready():
+	print(Global.device)
+	
 	set_meta("can_be_dragged", true)
 	
 	for component in component_list:
@@ -58,6 +60,9 @@ func _ready():
 		
 	if is_client and ai_component_container:
 		ai_component_container.queue_free()
+		
+	if is_client and Global.is_mobile:
+		Global.Game.Mobile.enable_tank_controls()
 	
 	if not is_client: 
 		for component in ai_component_list:
@@ -67,7 +72,10 @@ func _physics_process(delta):
 	for component in component_list:
 		if component.has_method("on_process"):
 			component.on_process(delta)
-		
+	
+	if Input.is_action_just_pressed("debug"):
+		behaviour("stats").damage_tank(100)
+	
 func upgrade_tank(tank_scene: PackedScene):
 	var tank_instance: Tank = tank_scene.instantiate()
 	Game.clients.erase(self)

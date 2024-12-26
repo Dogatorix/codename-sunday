@@ -53,9 +53,16 @@ func on_process(delta):
 		if c.get_collider() is RigidBody2D:
 			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
 
-	if tank_sprite and camera and can_look:
+	if tank_sprite and camera and can_look and not Global.is_mobile:
 		rotate_tank_camera()
 		camera_control()
+		
+	if Global.is_mobile:
+		var joystick: VirtualJoystick = Global.Game.Mobile.direction_joystick
+		var direction = joystick.output.angle()
+		
+		if joystick.is_pressed:
+			rotate_tank(rad_to_deg(direction) + 90)
 
 func rotate_tank_camera():
 	var mouse_position = tank.get_global_mouse_position() - camera.shake_vector
@@ -68,7 +75,7 @@ func rotate_tank_camera():
 func rotate_tank(degrees: float):
 	tank_sprite.rotation_degrees = degrees 
 
-func camera_control():
+func camera_control():		
 	var distance = (tank.get_global_mouse_position() - tank.global_position) / camera_offset_scale
 	camera.offset_vector = distance
 

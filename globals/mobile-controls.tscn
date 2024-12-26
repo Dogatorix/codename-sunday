@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=3 uid="uid://dtotvuap01cus"]
+
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="1_o8y58"]
+[ext_resource type="Script" path="res://globals/scripts/mobile_controls.gd" id="1_t7d1k"]
+[ext_resource type="Texture2D" uid="uid://dwm5u7pfd54ns" path="res://assets/sprites/ui/ui-mobile-dash.png" id="3_isc7v"]
+[ext_resource type="Texture2D" uid="uid://i0aqgq23kp2d" path="res://assets/sprites/ui/ui-mobile-shoot.png" id="4_6hte4"]
+[ext_resource type="Script" path="res://globals/scripts/touchscreen-button.gd" id="4_agj44"]
+[ext_resource type="Texture2D" uid="uid://do2t4w3naqr02" path="res://assets/sprites/ui/ui-mobile-minus.png" id="6_2g35g"]
+[ext_resource type="Texture2D" uid="uid://bx0jev2peq5ui" path="res://assets/sprites/ui/ui-mobile-dot.png" id="7_5nwer"]
+[ext_resource type="Texture2D" uid="uid://bh2tir4qt2ck4" path="res://assets/sprites/ui/ui-mobile-plus.png" id="7_8e7f5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nyv5q"]
+size = Vector2(170, 170)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdhu2"]
+size = Vector2(170, 160)
+
+[node name="Mobile" type="CanvasLayer" node_paths=PackedStringArray("direction_joystick", "tank_controls", "spectator_controls")]
+script = ExtResource("1_t7d1k")
+direction_joystick = NodePath("PlayerControls/Looking")
+tank_controls = [NodePath("PlayerControls/Movement"), NodePath("PlayerControls/Looking"), NodePath("PlayerControls/DashButton"), NodePath("PlayerControls/ShootButton")]
+spectator_controls = [NodePath("SpectatorControls/Movement"), NodePath("SpectatorControls/Minus"), NodePath("SpectatorControls/Plus"), NodePath("SpectatorControls/Speedup")]
+
+[node name="PlayerControls" type="Node" parent="."]
+
+[node name="Movement" parent="PlayerControls" instance=ExtResource("1_o8y58")]
+visible = false
+modulate = Color(1, 1, 1, 0.164706)
+offset_left = -21.0
+offset_top = -774.0
+offset_right = 279.0
+offset_bottom = -474.0
+scale = Vector2(1.5, 1.5)
+clampzone_size = 100.0
+action_left = "move_left"
+action_right = "move_right"
+action_up = "move_up"
+action_down = "move_down"
+
+[node name="Looking" parent="PlayerControls" instance=ExtResource("1_o8y58")]
+visible = false
+modulate = Color(1, 1, 1, 0.164706)
+offset_left = 1467.0
+offset_top = -774.0
+offset_right = 1767.0
+offset_bottom = -474.0
+scale = Vector2(1.5, 1.5)
+clampzone_size = 100.0
+
+[node name="DashButton" type="TouchScreenButton" parent="PlayerControls"]
+visible = false
+modulate = Color(1, 1, 1, 0.164706)
+position = Vector2(130, 117)
+texture_normal = ExtResource("3_isc7v")
+texture_pressed = ExtResource("3_isc7v")
+shape = SubResource("RectangleShape2D_nyv5q")
+action = "special_move"
+script = ExtResource("4_agj44")
+
+[node name="ShootButton" type="TouchScreenButton" parent="PlayerControls"]
+visible = false
+modulate = Color(1, 1, 1, 0.164706)
+position = Vector2(1612, 137)
+texture_normal = ExtResource("4_6hte4")
+texture_pressed = ExtResource("4_6hte4")
+shape = SubResource("RectangleShape2D_rdhu2")
+action = "shoot_mobile"
+script = ExtResource("4_agj44")
+
+[node name="SpectatorControls" type="Node" parent="."]
+
+[node name="Movement" parent="SpectatorControls" instance=ExtResource("1_o8y58")]
+modulate = Color(1, 1, 1, 0.164706)
+offset_left = 24.0
+offset_top = -542.0
+offset_right = 324.0
+offset_bottom = -242.0
+scale = Vector2(1.5, 1.5)
+clampzone_size = 100.0
+action_left = "move_left"
+action_right = "move_right"
+action_up = "move_up"
+action_down = "move_down"
+disabled = true
+
+[node name="Minus" type="TouchScreenButton" parent="SpectatorControls"]
+modulate = Color(1, 1, 1, 0.164706)
+position = Vector2(1396, 669)
+texture_normal = ExtResource("6_2g35g")
+texture_pressed = ExtResource("6_2g35g")
+shape = SubResource("RectangleShape2D_nyv5q")
+action = "spectator_zoomout"
+script = ExtResource("4_agj44")
+
+[node name="Speedup" type="TouchScreenButton" parent="SpectatorControls"]
+modulate = Color(1, 1, 1, 0.164706)
+position = Vector2(174, 163)
+texture_normal = ExtResource("7_5nwer")
+texture_pressed = ExtResource("7_5nwer")
+shape = SubResource("RectangleShape2D_nyv5q")
+action = "spectator_speedup"
+script = ExtResource("4_agj44")
+
+[node name="Plus" type="TouchScreenButton" parent="SpectatorControls"]
+modulate = Color(1, 1, 1, 0.164706)
+position = Vector2(1616, 669)
+texture_normal = ExtResource("7_8e7f5")
+texture_pressed = ExtResource("7_8e7f5")
+shape = SubResource("RectangleShape2D_nyv5q")
+action = "spectator_zoomin"
+script = ExtResource("4_agj44")

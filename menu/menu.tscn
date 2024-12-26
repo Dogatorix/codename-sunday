@@ -16,6 +16,261 @@
 [ext_resource type="AudioStream" uid="uid://cbulqgtpld56p" path="res://menu/gates-open.mp3" id="11_y0pkp"]
 [ext_resource type="AudioStream" uid="uid://yrd1mpvcvm3f" path="res://menu/light-humming.mp3" id="15_ewebw"]
 
+[sub_resource type="Animation" id="Animation_f0akj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dropdown/DropdownTop:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(962, 289)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dropdown/DropdownBottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(963, 866)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dropdown/MenuStartButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(806, 708)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dropdown/NameEdit:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(946, 423)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Dropdown/LightHumming:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Dropdown/ColorRect:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Dropdown/ColorRect:mouse_filter")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Dropdown/ColorRect:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_jlsa3"]
+resource_name = "init"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dropdown/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dropdown/ColorRect:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dropdown/ColorRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4ku0t"]
+resource_name = "open"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dropdown/DropdownTop:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 0.8),
+"transitions": PackedFloat32Array(1.93187, 1),
+"update": 0,
+"values": [Vector2(962, 289), Vector2(962, -340)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dropdown/DropdownBottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.8),
+"transitions": PackedFloat32Array(1.93187, 1),
+"update": 0,
+"values": [Vector2(963, 866), Vector2(963, 1450)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dropdown/AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("11_y0pkp")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MenuMusic")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Dropdown/MenuStartButton:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2.2974, 1),
+"update": 0,
+"values": [Vector2(806, 708), Vector2(806, 1137)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Dropdown/NameEdit:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2.2974, 1),
+"update": 0,
+"values": [Vector2(946, 423), Vector2(946, -84)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Dropdown/LightHumming:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"menu_cleanup"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p75vl"]
+_data = {
+"RESET": SubResource("Animation_f0akj"),
+"init": SubResource("Animation_jlsa3"),
+"open": SubResource("Animation_4ku0t")
+}
+
 [sub_resource type="Animation" id="Animation_p7raa"]
 length = 0.001
 tracks/0/type = "value"
@@ -137,263 +392,15 @@ _data = {
 offsets = PackedFloat32Array(0, 0.373016, 0.503968, 0.623016, 1)
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="Animation" id="Animation_f0akj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DropdownTop:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(962, 289)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DropdownBottom:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(963, 866)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MenuStartButton:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(806, 708)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("NameEdit:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(946, 423)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("LightHumming:volume_db")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("ColorRect:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("ColorRect:mouse_filter")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("ColorRect:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_4ku0t"]
-resource_name = "open"
-length = 3.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DropdownTop:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.5, 0.8),
-"transitions": PackedFloat32Array(1.93187, 1),
-"update": 0,
-"values": [Vector2(962, 289), Vector2(962, -340)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DropdownBottom:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5, 0.8),
-"transitions": PackedFloat32Array(1.93187, 1),
-"update": 0,
-"values": [Vector2(963, 866), Vector2(963, 1450)]
-}
-tracks/2/type = "audio"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("11_y0pkp")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/2/use_blend = true
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MenuMusic")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(1.7),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [0.0],
-"method": &"play"
-}]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MenuStartButton:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(2.2974, 1),
-"update": 0,
-"values": [Vector2(806, 708), Vector2(806, 1137)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("NameEdit:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(2.2974, 1),
-"update": 0,
-"values": [Vector2(946, 423), Vector2(946, -84)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("LightHumming:volume_db")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -80.0]
-}
-tracks/7/type = "method"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath(".")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(2.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"menu_cleanup"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_jlsa3"]
-resource_name = "init"
-length = 0.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:mouse_filter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 2]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_p75vl"]
-_data = {
-"RESET": SubResource("Animation_f0akj"),
-"init": SubResource("Animation_jlsa3"),
-"open": SubResource("Animation_4ku0t")
-}
-
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_vm3l5")
+
+[node name="MenuAnimations" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_p75vl")
+}
+autoplay = "init"
 
 [node name="Scenery" type="Node" parent="."]
 
@@ -421,9 +428,9 @@ texture = ExtResource("1_37ec0")
 
 [node name="BuildingsFront" type="TextureRect" parent="Scenery"]
 z_index = -10
-offset_left = -4618.0
+offset_left = -546.0
 offset_top = -94.0
-offset_right = -1377.0
+offset_right = 2695.0
 offset_bottom = 496.0
 scale = Vector2(2.09874, 2.09874)
 texture = ExtResource("1_by6mv")
@@ -509,14 +516,20 @@ color_ramp = SubResource("Gradient_oxr14")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(959, 538)
 
-[node name="DropdownTop" type="Sprite2D" parent="."]
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_qayjv")
+volume_db = -6.0
+
+[node name="Dropdown" type="Node" parent="."]
+
+[node name="DropdownTop" type="Sprite2D" parent="Dropdown"]
 unique_name_in_owner = true
 z_index = 10
 position = Vector2(962, 289)
 scale = Vector2(1.62237, 1.62237)
 texture = ExtResource("8_b6du1")
 
-[node name="DropdownBottom" type="Sprite2D" parent="."]
+[node name="DropdownBottom" type="Sprite2D" parent="Dropdown"]
 unique_name_in_owner = true
 z_index = 10
 position = Vector2(963, 866)
@@ -524,17 +537,14 @@ scale = Vector2(1.62237, 1.62237)
 texture = ExtResource("9_3o2nr")
 flip_v = true
 
-[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_qayjv")
-volume_db = -6.0
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Dropdown"]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-
-[node name="NameEdit" parent="." instance=ExtResource("10_uafp6")]
+[node name="NameEdit" parent="Dropdown" instance=ExtResource("10_uafp6")]
+unique_name_in_owner = true
 position = Vector2(946, 423)
 scale = Vector2(1.25603, 1.25603)
 
-[node name="MenuStartButton" parent="." instance=ExtResource("11_p3ial")]
+[node name="MenuStartButton" parent="Dropdown" instance=ExtResource("11_p3ial")]
 unique_name_in_owner = true
 z_index = 20
 offset_left = 806.0
@@ -543,19 +553,12 @@ offset_right = 1061.0
 offset_bottom = 801.0
 scale = Vector2(1.5339, 1.5339)
 
-[node name="MenuAnimations" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_p75vl")
-}
-autoplay = "init"
-
-[node name="LightHumming" type="AudioStreamPlayer" parent="."]
+[node name="LightHumming" type="AudioStreamPlayer" parent="Dropdown"]
 unique_name_in_owner = true
 stream = ExtResource("15_ewebw")
 autoplay = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="Dropdown"]
 z_index = 50
 offset_left = -112.0
 offset_top = -47.0
@@ -564,8 +567,8 @@ offset_bottom = 1171.0
 color = Color(0, 0, 0, 1)
 
 [connection signal="finished" from="MenuMusic" to="MenuMusic" method="play"]
-[connection signal="text_changed" from="NameEdit/MenuInput" to="." method="_on_menu_input_text_changed"]
-[connection signal="pressed" from="MenuStartButton" to="." method="_on_menu_button_pressed"]
-[connection signal="finished" from="LightHumming" to="LightHumming" method="play"]
+[connection signal="text_changed" from="Dropdown/NameEdit/MenuInput" to="." method="_on_menu_input_text_changed"]
+[connection signal="pressed" from="Dropdown/MenuStartButton" to="." method="_on_menu_button_pressed"]
+[connection signal="finished" from="Dropdown/LightHumming" to="Dropdown/LightHumming" method="play"]
 
-[editable path="NameEdit"]
+[editable path="Dropdown/NameEdit"]

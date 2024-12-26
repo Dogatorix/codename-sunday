@@ -2,7 +2,9 @@ extends Node
 
 @export var Overlay: CanvasLayer
 @export var PauseMenu: CanvasLayer
+
 @export var sandbox_scene: PackedScene
+@export var mobile_controls_scene: PackedScene
 
 enum GAMEMODES {
 	SANDBOX,
@@ -12,7 +14,7 @@ enum GAMEMODES {
 signal restarted()
 signal menu_updated(mode: bool)
 
-var gamemode: GAMEMODES = GAMEMODES.ADVANCED_TRAINING
+var gamemode: GAMEMODES = GAMEMODES.SANDBOX
 
 var clients: Array[Tank] = []
 var cameras: Array[GameCamera] = []
@@ -62,13 +64,21 @@ func update_menu():
 		PauseMenu.hide_menu()
 		active_input = true
 		
-var Sandbox: Node 
+var Sandbox: Node
+var Mobile: Node
 func _ready():
 	if gamemode == GAMEMODES.SANDBOX:
 		Sandbox = sandbox_scene.instantiate()
 		add_child(Sandbox)
+		
+	if Global.is_mobile:
+		Mobile = mobile_controls_scene.instantiate()
+		add_child(Mobile) 
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("fun-menu-show"):
 		paused = !paused
 		Global.Game.update_menu()
+
+func input_autherization():
+	return active_input and client.is_client
