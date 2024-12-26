@@ -1,0 +1,145 @@
+[gd_scene load_steps=13 format=3 uid="uid://w00ftckwmye0"]
+
+[ext_resource type="PackedScene" uid="uid://cgywk5irhng6f" path="res://scenes/tanks/starter/sub-components/starter-component-list.tscn" id="1_e3mle"]
+[ext_resource type="Script" path="res://scripts/tank-components/ShootingBasic.gd" id="2_f7mk1"]
+[ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/tanks/starter/sub-components/basic-bullet.tscn" id="3_ollee"]
+[ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="5_hr2ga"]
+[ext_resource type="AudioStream" uid="uid://c2h84tolxdka2" path="res://assets/audio/tanks/starter/destroy-shot-1.mp3" id="5_p8gtq"]
+[ext_resource type="AudioStream" uid="uid://fe30ktqisay7" path="res://assets/audio/tanks/starter/destroy-shot-2.mp3" id="6_6lov5"]
+[ext_resource type="Texture2D" uid="uid://b1e2i3pys8k7k" path="res://assets/sprites/tanks/starter/rifle-barrel.png" id="6_h7axu"]
+[ext_resource type="Texture2D" uid="uid://b3rx5mjjudhk3" path="res://assets/sprites/tanks/starter/starter-core-1.png" id="7_bfadi"]
+[ext_resource type="Texture2D" uid="uid://bq3drblq6s8pv" path="res://assets/sprites/tanks/starter/rifle-barrel-back.png" id="7_tx5g0"]
+
+[sub_resource type="Animation" id="Animation_ap7fi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TankSprite/Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, -19)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TankSprite/Barrel/Back:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-59.0997, -177.299)]
+}
+
+[sub_resource type="Animation" id="Animation_pmp2i"]
+resource_name = "shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TankSprite/Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.353553, 1),
+"update": 0,
+"values": [Vector2(-1, -8), Vector2(-1, -19)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TankSprite/Barrel/Back:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(0.31864, 0.450625, 1),
+"update": 0,
+"values": [Vector2(-59.0997, -177.299), Vector2(-59.0997, -62.0439), Vector2(-59.0997, -177.299)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qmcfj"]
+_data = {
+"RESET": SubResource("Animation_ap7fi"),
+"shoot": SubResource("Animation_pmp2i")
+}
+
+[node name="DestroyContent" type="Node2D"]
+
+[node name="ComponentList" parent="." instance=ExtResource("1_e3mle")]
+
+[node name="Movement" parent="ComponentList/BehaviourComponents" index="0" node_paths=PackedStringArray("tank_sprite")]
+tank_sprite = NodePath("../../../TankSprite")
+
+[node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("colored_nodes")]
+core_tier = 2
+colored_nodes = [NodePath("../../../TankSprite/Core")]
+
+[node name="Shoot" type="Node" parent="ComponentList/BehaviourComponents" index="4" node_paths=PackedStringArray("dash", "animation_player", "origin", "tank_sprite", "delay", "audio_player", "movement", "sprite_node", "data_node")]
+script = ExtResource("2_f7mk1")
+dash = NodePath("../Dash")
+animation_player = NodePath("../../../TankSprite/AnimationPlayer")
+origin = NodePath("../../../TankSprite/ShootOrigin")
+tank_sprite = NodePath("../../../TankSprite")
+delay = NodePath("Delay")
+audio_player = NodePath("../../GraphicComponents/Shoot")
+movement = NodePath("../Movement")
+sprite_node = NodePath("../../../TankSprite")
+bullet_scene = ExtResource("3_ollee")
+bullet_speed = 1200.0
+bullet_damage = 25.0
+bullet_penetration = 3
+data_node = NodePath("../../SharedData")
+
+[node name="Delay" type="Timer" parent="ComponentList/BehaviourComponents/Shoot"]
+wait_time = 0.65
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="ComponentList/GraphicComponents" index="9"]
+volume_db = -3.0
+script = ExtResource("5_hr2ga")
+sounds = Array[AudioStream]([ExtResource("5_p8gtq"), ExtResource("6_6lov5")])
+pitch_range = 0.05
+
+[node name="TankSprite" type="Node2D" parent="."]
+
+[node name="ShootOrigin" type="Node2D" parent="TankSprite"]
+unique_name_in_owner = true
+position = Vector2(5.96046e-08, -81)
+scale = Vector2(0.999999, 0.999999)
+
+[node name="Barrel" type="Sprite2D" parent="TankSprite"]
+show_behind_parent = true
+position = Vector2(-1, -19)
+scale = Vector2(0.321491, 0.321491)
+texture = ExtResource("6_h7axu")
+offset = Vector2(3.11051, -112.442)
+
+[node name="Back" type="Sprite2D" parent="TankSprite/Barrel"]
+show_behind_parent = true
+position = Vector2(-59.0997, -177.299)
+scale = Vector2(1.1374, 1.1374)
+texture = ExtResource("7_tx5g0")
+flip_v = true
+
+[node name="Core" type="Sprite2D" parent="TankSprite"]
+position = Vector2(5.96046e-08, 1.19209e-07)
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("7_bfadi")
+offset = Vector2(3.0303, 6.06061)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TankSprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_qmcfj")
+}
+
+[connection signal="timeout" from="ComponentList/BehaviourComponents/Shoot/Delay" to="ComponentList/BehaviourComponents/Shoot" method="_on_delay_timeout"]
+
+[editable path="ComponentList"]

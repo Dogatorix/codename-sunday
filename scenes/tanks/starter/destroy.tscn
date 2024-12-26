@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dgr03r0uc34mn"]
+[gd_scene load_steps=12 format=3 uid="uid://dgr03r0uc34mn"]
 
 [ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_4kleh"]
 [ext_resource type="Texture2D" uid="uid://b1e2i3pys8k7k" path="res://assets/sprites/tanks/starter/rifle-barrel.png" id="3_m3txy"]
@@ -11,79 +11,15 @@
 [ext_resource type="AudioStream" uid="uid://c2h84tolxdka2" path="res://assets/audio/tanks/starter/destroy-shot-1.mp3" id="21_yn207"]
 [ext_resource type="AudioStream" uid="uid://fe30ktqisay7" path="res://assets/audio/tanks/starter/destroy-shot-2.mp3" id="22_n2681"]
 
-[sub_resource type="Animation" id="Animation_ap7fi"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TankSprite/Barrel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1, -19)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TankSprite/Barrel/Back:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-59.0997, -177.299)]
-}
-
-[sub_resource type="Animation" id="Animation_pmp2i"]
-resource_name = "shoot"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TankSprite/Barrel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(0.353553, 1),
-"update": 0,
-"values": [Vector2(-1, -8), Vector2(-1, -19)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TankSprite/Barrel/Back:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.4),
-"transitions": PackedFloat32Array(0.31864, 0.450625, 1),
-"update": 0,
-"values": [Vector2(-59.0997, -177.299), Vector2(-59.0997, -62.0439), Vector2(-59.0997, -177.299)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qmcfj"]
-_data = {
-"RESET": SubResource("Animation_ap7fi"),
-"shoot": SubResource("Animation_pmp2i")
-}
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_bbwtc"]
 radius = 146.113
 
-[node name="Destroy" type="CharacterBody2D" node_paths=PackedStringArray("core_sprite", "sprite_node") groups=["tank"]]
+[node name="Destroy" type="CharacterBody2D" groups=["tank"]]
 motion_mode = 1
 script = ExtResource("1_4kleh")
 tank_name = "Destroy"
 username = "Dummy"
-core_tier = 2
 default_zoom = 1.2
-core_sprite = NodePath("TankSprite/Core")
-sprite_node = NodePath("TankSprite")
 
 [node name="TankSprite" type="Node2D" parent="."]
 
@@ -112,11 +48,6 @@ scale = Vector2(0.33, 0.33)
 texture = ExtResource("4_tvs6m")
 offset = Vector2(3.0303, 6.06061)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_qmcfj")
-}
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 scale = Vector2(0.2, 0.2)
@@ -131,10 +62,9 @@ pitch_range = 0.1
 
 [node name="StarterSubcomponents" parent="." instance=ExtResource("19_dp3xc")]
 
-[node name="ShootBasic" type="Node" parent="StarterSubcomponents/BehaviourComponents" index="0" node_paths=PackedStringArray("dash", "animation_player", "origin", "tank_sprite", "delay", "audio_player", "movement", "data_node")]
+[node name="ShootBasic" type="Node" parent="StarterSubcomponents/BehaviourComponents" index="0" node_paths=PackedStringArray("dash", "origin", "tank_sprite", "delay", "audio_player", "movement")]
 script = ExtResource("8_mhrxj")
 dash = NodePath("../Dash")
-animation_player = NodePath("../../../AnimationPlayer")
 origin = NodePath("../../../TankSprite/ShootOrigin")
 tank_sprite = NodePath("../../../TankSprite")
 delay = NodePath("Delay")
@@ -144,7 +74,6 @@ bullet_scene = ExtResource("9_0ap6l")
 bullet_speed = 1200.0
 bullet_damage = 25.0
 bullet_penetration = 3
-data_node = NodePath("../../SharedData")
 
 [node name="Delay" type="Timer" parent="StarterSubcomponents/BehaviourComponents/ShootBasic"]
 wait_time = 0.65

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cgywk5irhng6f"]
+[gd_scene load_steps=36 format=3 uid="uid://cgywk5irhng6f"]
 
 [ext_resource type="Script" path="res://scenes/tanks/starter/sub-components/ComponentList.gd" id="1_tr3ji"]
 [ext_resource type="Script" path="res://scripts/tank-components/BehaviourComponentList.gd" id="2_qj7ni"]
@@ -24,12 +24,11 @@
 [ext_resource type="Script" path="res://scripts/graphics/shockwave.gd" id="22_0pj55"]
 [ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/particles/circle-particle.png" id="23_5u338"]
 [ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="24_21j64"]
-[ext_resource type="PackedScene" uid="uid://bjbp1eyywcerx" path="res://scenes/tanks/player-bars.tscn" id="25_la4lk"]
 
-[sub_resource type="GDScript" id="GDScript_rrpmc"]
+[sub_resource type="GDScript" id="GDScript_tnxt8"]
 script/source = "extends Node
 
-@onready var tank: Tank = get_parent().get_parent()
+@onready var tank: Tank = get_parent().get_parent().get_parent()
 
 func _ready():
 	%DamageParticle.root = tank
@@ -132,7 +131,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.59, 0.59, 0.59, 1)
 script = ExtResource("1_tr3ji")
 
 [node name="SharedData" type="Node" parent="."]
-script = SubResource("GDScript_rrpmc")
+script = SubResource("GDScript_tnxt8")
 
 [node name="BehaviourComponents" type="Node" parent="." node_paths=PackedStringArray("data_node")]
 script = ExtResource("2_qj7ni")
@@ -245,15 +244,6 @@ color = Color(1, 0, 0, 1)
 color_ramp = SubResource("Gradient_bxq7m")
 script = ExtResource("24_21j64")
 external = true
-
-[node name="PlayerBars" parent="GraphicComponents" node_paths=PackedStringArray("stats") instance=ExtResource("25_la4lk")]
-visible = false
-offset_left = -76.0
-offset_top = -74.0
-offset_right = -76.0
-offset_bottom = -74.0
-pivot_offset = Vector2(76, 74)
-stats = NodePath("../../BehaviourComponents/StatsBasic")
 
 [node name="DashSounds" type="AudioStreamPlayer2D" parent="GraphicComponents"]
 script = ExtResource("10_l17xd")

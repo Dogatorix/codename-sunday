@@ -5,12 +5,21 @@ const component_name = "stats"
 
 @onready var tank = data_node.tank
 
+enum TIERS {
+	BASIC = 1,
+	STARTER = 2,
+	INDUSTRIAL = 3,
+	PIONEER = 4,
+}
+
 const CORE_REQUIREMENT = {
 	1: 500,
 	2: 2000,
 	3: 8000,
 	4: 16000
 }
+
+@export var core_tier: TIERS
 
 @export_group("General")
 @export var max_health = 100
@@ -24,6 +33,7 @@ const CORE_REQUIREMENT = {
 @export var animation_player: AnimationPlayer
 @export var damage_sounds: Audio2D
 @export var damage_particle: Particle2D
+@export var colored_nodes: Array[Node]
 
 var max_core_points := 1000
 
@@ -43,13 +53,21 @@ var points = 0
 var reached_max_points := false
 
 func _ready():	
-	max_core_points = CORE_REQUIREMENT[data_node.tank.core_tier]
+	max_core_points = CORE_REQUIREMENT[core_tier]
+	
+	tank.player_bars.stats = self
+	tank.player_bars.on_ready()
+	
+	for node in colored_nodes:
+		node.modulate = tank.tank_color
 
 func on_process(delta):
 	regen_delay -= delta
 	
 	if regen_delay <= 0:
 		health = min(max_health, health + (delta * health_regeneration_rate))
+		
+	tank.player_bars.on_process(delta)
 
 func set_health(value):
 	health = clamp(value, 0, max_health)

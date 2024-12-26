@@ -1,10 +1,12 @@
 extends Node
-
+	
 @export var Overlay: CanvasLayer
 @export var PauseMenu: CanvasLayer
 
 @export var sandbox_scene: PackedScene
 @export var mobile_controls_scene: PackedScene
+
+@export var tank_scenes: Array[TankScene]
 
 enum GAMEMODES {
 	SANDBOX,
@@ -18,7 +20,6 @@ var gamemode: GAMEMODES = GAMEMODES.SANDBOX
 
 var clients: Array[Tank] = []
 var cameras: Array[GameCamera] = []
-
 
 var game_camera: GameCamera = null:
 	get:

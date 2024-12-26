@@ -1,6 +1,6 @@
 extends Control
 
-@export var stats: StatsBasic
+var stats: StatsBasic
 
 var health_opacity := 0.0
 var mana_opacity := 0.0
@@ -18,7 +18,7 @@ var mana_percent: float:
 var smooth_health := 0.0
 var smooth_mana := 0.0
 
-func _ready():
+func on_ready():
 	if not stats:
 		queue_free()
 	
@@ -35,7 +35,7 @@ func _ready():
 		$Mana.visible = false
 		$Label.visible = true
 
-func _process(delta):
+func on_process(delta):
 	@warning_ignore("integer_division")
 	%HealthBar.value = (stats.health * 100) / stats.max_health
 	@warning_ignore("integer_division")

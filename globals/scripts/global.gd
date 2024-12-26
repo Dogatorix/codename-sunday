@@ -9,6 +9,13 @@ enum DEVICE {
 	DESKTOP
 }
 
+enum TANKS {
+	BASIC,
+	CRUSH,
+	ASSAULT,
+	DESTROY,
+}
+
 var Game: Node
 var username := "Slow Joe"
 var device: DEVICE

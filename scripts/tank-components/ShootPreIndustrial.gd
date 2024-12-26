@@ -2,6 +2,7 @@ extends TankBehaviourComponent
 class_name ShootPreIndustrial
 
 @onready var tank = data_node.tank
+@export var sprite_node: Node2D
 
 var prevent_shoot := false
 var can_shoot := true
@@ -27,7 +28,7 @@ func summon_bullet(target_position: Vector2):
 	var bullet_instance: BasicBullet = bullet_scene.instantiate()
 	
 	bullet_instance.tank = tank
-	bullet_instance.direction = tank.sprite_node.rotation_degrees - 90
+	bullet_instance.direction = sprite_node.rotation_degrees - 90
 	bullet_instance.color = tank.tank_color
 	
 	bullet_instance.speed = bullet_speed

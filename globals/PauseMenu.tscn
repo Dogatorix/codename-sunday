@@ -1,9 +1,5 @@
-[gd_scene load_steps=16 format=3 uid="uid://028mh64yj0jl"]
+[gd_scene load_steps=12 format=3 uid="uid://028mh64yj0jl"]
 
-[ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/tanks/starter/tank.tscn" id="1_1t5cy"]
-[ext_resource type="PackedScene" uid="uid://cpdu42h25sfri" path="res://scenes/tanks/starter/assault.tscn" id="2_01dcy"]
-[ext_resource type="PackedScene" uid="uid://dgr03r0uc34mn" path="res://scenes/tanks/starter/destroy.tscn" id="3_7rajd"]
-[ext_resource type="PackedScene" uid="uid://bseebh1gtwmak" path="res://scenes/tanks/starter/crush.tscn" id="4_dd2ed"]
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="5_43h7r"]
 [ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="6_58ogl"]
 [ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="7_37hte"]
@@ -12,7 +8,6 @@
 script/source = "extends CanvasLayer
 
 @export var animation_player: AnimationPlayer 
-@export var upgrade_scenes: Array[PackedScene]
 @export var tank_buttons: Array[Button]
 
 func _ready():
@@ -35,7 +30,7 @@ func hide_menu():
 		btn.disabled = true
 
 func upgrade_tank(index):
-	Global.Game.client.upgrade_tank(upgrade_scenes[index])
+	Global.Game.client.upgrade_tank(index)
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7vnl"]
@@ -109,7 +104,6 @@ _data = {
 layer = 20
 script = SubResource("GDScript_2v1qa")
 animation_player = NodePath("AnimationPlayer")
-upgrade_scenes = Array[PackedScene]([ExtResource("1_1t5cy"), ExtResource("2_01dcy"), ExtResource("3_7rajd"), ExtResource("4_dd2ed")])
 tank_buttons = [NodePath("Control/Basic"), NodePath("Control/Assault"), NodePath("Control/Destroy"), NodePath("Control/Crush")]
 
 [node name="Control" type="Control" parent="."]

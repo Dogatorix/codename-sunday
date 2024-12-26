@@ -1,15 +1,6 @@
 extends Node2D
 
-@export var spawn_scenes: Array[PackedScene]
-
-var spawn_names := [
-	"Tank - Basic",
-	"Tank - Destroy",
-	"Tank - Crush",
-	"Tank - Assault",
-	"Object - Oil Canister",
-	"CHARTER REVOKED"
-]
+@export var spawn_scenes: Array[StringScene]
 
 var selected_scene: PackedScene
 var selection_pointer := 0
@@ -34,5 +25,5 @@ func _process(delta):
 	
 func update_scene():
 	selection_pointer = clamp(selection_pointer, 0, spawn_scenes.size() - 1)
-	selected_scene = spawn_scenes[selection_pointer]
-	%SummonLabel.text = "Selected: " + spawn_names[selection_pointer]
+	selected_scene = spawn_scenes[selection_pointer].scene
+	%SummonLabel.text = "Selected: " + spawn_scenes[selection_pointer].name

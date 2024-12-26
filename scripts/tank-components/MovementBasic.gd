@@ -16,7 +16,7 @@ const acceleration: float = 2500
 const friction: float = 2000
 const push_force: float = 80
 
-@onready var tank_sprite = data_node.tank.sprite_node
+@export var tank_sprite: Node2D
 
 var normal_velocity := Vector2.ZERO
 var dash_velocity := Vector2.ZERO
