@@ -3,6 +3,8 @@ class_name StatsBasic
 
 const component_name = "stats"
 
+@onready var tank = data_node.tank
+
 const CORE_REQUIREMENT = {
 	1: 500,
 	2: 2000,
@@ -41,8 +43,7 @@ var points = 0
 var reached_max_points := false
 
 func _ready():	
-	max_core_points = CORE_REQUIREMENT[tank.core_tier]
-	
+	max_core_points = CORE_REQUIREMENT[data_node.tank.core_tier]
 
 func on_process(delta):
 	regen_delay -= delta

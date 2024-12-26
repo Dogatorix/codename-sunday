@@ -1,6 +1,8 @@
 extends TankBehaviourComponent
 class_name DeathBasic
 
+@onready var tank = data_node.tank
+
 const component_name = "death"
 
 @export var stats: StatsBasic

@@ -3,6 +3,8 @@ extends Control
 @export var stats: StatsBasic
 @export var animation_player: AnimationPlayer
 
+@onready var tank = stats.data_node.tank
+
 var health_percent := 100.0
 var rust_percent := 0.0
 var mana_percent := 100.0
@@ -23,7 +25,7 @@ func _ready():
 		push_error(str(self) + " Missing reference to stats component")
 		queue_free()
 		
-	if not stats.tank.is_client:
+	if not tank.is_client:
 		queue_free()
 	
 	stats.connect("health_change", _on_health_change)
@@ -33,11 +35,11 @@ func _ready():
 	%HealthBar.value = health_percent
 	%CoreBar.value = points_percent
 	
-	%TankName.text = stats.tank.username
+	%TankName.text = tank.username
 	
-	%CoreBar.tint_progress = stats.tank.tank_color
-	%PointsLeft.modulate = stats.tank.tank_color
-	%TankName.modulate = stats.tank.tank_color
+	%CoreBar.tint_progress = tank.tank_color
+	%PointsLeft.modulate = tank.tank_color
+	%TankName.modulate = tank.tank_color
 	
 	Global.Game.Overlay.hide_bars()
 
@@ -68,9 +70,9 @@ func _process(delta):
 	
 	######
 	
-	%CoreBar.tint_progress = stats.tank.tank_color
-	%PointsLeft.modulate = stats.tank.tank_color
-	%TankName.modulate = stats.tank.tank_color
+	%CoreBar.tint_progress = tank.tank_color
+	%PointsLeft.modulate = tank.tank_color
+	%TankName.modulate = tank.tank_color
 #
 func _on_health_change(value):	
 	if value <= 0 and not is_dying:
@@ -90,5 +92,5 @@ func on_death():
 ############
 
 func _on_upgrade_pressed(id):
-	var tank: Tank = stats.tank
+	var tank: Tank = tank
 	tank.upgrade_tank(tank.upgrades[id])

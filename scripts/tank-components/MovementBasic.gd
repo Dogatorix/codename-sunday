@@ -1,6 +1,8 @@
 extends TankBehaviourComponent
 class_name MovementBasic
 
+@onready var tank = data_node.tank
+
 const component_name = "movement"
 
 var camera: GameCamera
@@ -14,8 +16,7 @@ const acceleration: float = 2500
 const friction: float = 2000
 const push_force: float = 80
 
-@export_group("References")
-@export var tank_sprite: Node2D
+@onready var tank_sprite = data_node.tank.sprite_node
 
 var normal_velocity := Vector2.ZERO
 var dash_velocity := Vector2.ZERO

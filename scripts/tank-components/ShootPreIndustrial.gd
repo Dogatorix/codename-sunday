@@ -1,6 +1,8 @@
 extends TankBehaviourComponent
 class_name ShootPreIndustrial
 
+@onready var tank = data_node.tank
+
 var prevent_shoot := false
 var can_shoot := true
 

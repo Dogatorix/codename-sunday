@@ -18,14 +18,8 @@ enum TIERS {
 @export var is_client: bool = false
 
 @export_group("References")
-@export var component_container: BehaviourComponentList
-@export var ai_component_container: AIComponentList
-	
 @export var core_sprite: Sprite2D
 @export var sprite_node: Node2D
-
-@onready var component_list = component_container.get_children()
-@onready var ai_component_list = ai_component_container.get_children()	
 
 var components := {}
 var ai_components := {}
@@ -42,10 +36,6 @@ func _ready():
 	print(Global.device)
 	
 	set_meta("can_be_dragged", true)
-	
-	for component in component_list:
-		components[component.component_name] = component
-
 		
 	if is_client: 
 		Game.clients.push_front(self)
@@ -58,21 +48,10 @@ func _ready():
 	if not upgraded:
 		check_data()
 		
-	if is_client and ai_component_container:
-		ai_component_container.queue_free()
-		
 	if is_client and Global.is_mobile:
 		Global.Game.Mobile.enable_tank_controls()
-	
-	if not is_client: 
-		for component in ai_component_list:
-			ai_components[component.component_name] = component
 		
 func _physics_process(delta):
-	for component in component_list:
-		if component.has_method("on_process"):
-			component.on_process(delta)
-	
 	if Input.is_action_just_pressed("debug"):
 		behaviour("stats").damage_tank(100)
 	

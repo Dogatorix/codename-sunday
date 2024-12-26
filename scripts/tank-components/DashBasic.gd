@@ -1,6 +1,8 @@
 extends TankBehaviourComponent
 class_name DashBasic
 
+@onready var tank = data_node.tank
+
 const component_name = "dash"
 
 @export_group("General")
