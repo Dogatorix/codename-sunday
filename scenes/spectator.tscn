@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkuuvwgfdon5r"]
+[gd_scene load_steps=16 format=3 uid="uid://dkuuvwgfdon5r"]
 
 [ext_resource type="Script" path="res://scripts/tank-spectator.gd" id="1_yccdq"]
 [ext_resource type="Script" path="res://scripts/helper-components/GameCamera.gd" id="2_gmt2q"]
@@ -11,12 +11,16 @@ font = ExtResource("3_7rtqm")
 font_size = 70
 font_color = Color(0.377919, 0.377919, 0.377919, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_m2a0s"]
+font = ExtResource("3_7rtqm")
+font_size = 70
+
 [sub_resource type="Animation" id="Animation_nyhb4"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/Lives:modulate")
+tracks/0/path = NodePath("CanvasLayer/Time:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -28,22 +32,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/Time:modulate")
+tracks/1/path = NodePath("CanvasLayer/Time:label_settings:font_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayer/Time:label_settings:font_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -56,7 +48,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/Lives:modulate")
+tracks/0/path = NodePath("CanvasLayer/Time:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -68,14 +60,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/Time:modulate")
+tracks/1/path = NodePath("CanvasLayer/Time:label_settings:font_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(0.377919, 0.377919, 0.377919, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_nvmuc"]
@@ -103,11 +95,53 @@ _data = {
 "text_pulse": SubResource("Animation_nvmuc")
 }
 
-[node name="Spectator" type="Marker2D" node_paths=PackedStringArray("camera", "animation_player", "ready_audio", "zoom_audio")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_xfjms"]
+radius = 378.082
+
+[sub_resource type="Animation" id="Animation_m51t5"]
+resource_name = "pulse"
+length = 0.25
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Location:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.376471, 0.376471, 0.376471, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yblvw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Location:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.376471, 0.376471, 0.376471, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wekqm"]
+_data = {
+"RESET": SubResource("Animation_yblvw"),
+"pulse": SubResource("Animation_m51t5")
+}
+
+[node name="Spectator" type="Marker2D" node_paths=PackedStringArray("camera", "animation_player", "location_pulse", "ready_audio", "zoom_audio")]
 gizmo_extents = 50.0
 script = ExtResource("1_yccdq")
 camera = NodePath("GameCamera")
 animation_player = NodePath("AnimationPlayer")
+location_pulse = NodePath("LocationPulse")
 ready_audio = NodePath("ReadyAudio")
 zoom_audio = NodePath("ZoomAudio")
 
@@ -117,21 +151,6 @@ script = ExtResource("2_gmt2q")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
-
-[node name="Lives" type="Label" parent="CanvasLayer"]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -421.5
-offset_top = 28.0
-offset_right = 421.5
-offset_bottom = 138.0
-grow_horizontal = 2
-text = "4 Lives remain"
-label_settings = SubResource("LabelSettings_r4wtr")
-horizontal_alignment = 1
 
 [node name="Time" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -150,6 +169,23 @@ text = "Respawning in 10 seconds"
 label_settings = SubResource("LabelSettings_r4wtr")
 horizontal_alignment = 1
 
+[node name="Location" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+modulate = Color(0.376471, 0.376471, 0.376471, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -633.0
+offset_top = -1049.0
+offset_right = 633.0
+offset_bottom = -939.0
+grow_horizontal = 2
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_m2a0s")
+horizontal_alignment = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_w7q6h")
@@ -163,3 +199,17 @@ volume_db = -3.0
 [node name="ZoomAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_4knqj")
 volume_db = -6.0
+
+[node name="MouseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseArea"]
+visible = false
+shape = SubResource("CircleShape2D_xfjms")
+
+[node name="LocationPulse" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wekqm")
+}
+
+[connection signal="area_entered" from="MouseArea" to="." method="_area_entered"]
+[connection signal="area_exited" from="MouseArea" to="." method="_area_exited"]

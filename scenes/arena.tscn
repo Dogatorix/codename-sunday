@@ -897,41 +897,29 @@ rotation = 3.14159
 [node name="TargetNodes" type="Node" parent="."]
 
 [node name="AITargetNode" parent="TargetNodes" instance=ExtResource("16_7t0wj")]
+position = Vector2(1865, -2141)
 
 [node name="AITargetNode2" parent="TargetNodes" instance=ExtResource("16_7t0wj")]
-position = Vector2(2246, -2704)
+position = Vector2(681, -2746)
 
 [node name="AITargetNode3" parent="TargetNodes" instance=ExtResource("16_7t0wj")]
-position = Vector2(678, -2696)
+position = Vector2(-2863, -2514)
 
 [node name="AITargetNode4" parent="TargetNodes" instance=ExtResource("16_7t0wj")]
-position = Vector2(-619, -2603)
+position = Vector2(-2271, -1242)
 
 [node name="AITargetNode5" parent="TargetNodes" instance=ExtResource("16_7t0wj")]
-position = Vector2(-2272, -3654)
+position = Vector2(1953, 342)
 
 [node name="AITargetNode6" parent="TargetNodes" instance=ExtResource("16_7t0wj")]
-position = Vector2(-2772, -1128)
+position = Vector2(3273, 2711)
 
 [node name="AITargetNode7" parent="TargetNodes" instance=ExtResource("16_7t0wj")]
-position = Vector2(-2899, -2306)
+position = Vector2(-2613, 2116)
 
 [node name="AITargetNode8" parent="TargetNodes" instance=ExtResource("16_7t0wj")]
-position = Vector2(-2696, 1550)
-
-[node name="AITargetNode9" parent="TargetNodes" instance=ExtResource("16_7t0wj")]
-position = Vector2(1169, 2609)
-
-[node name="AITargetNode10" parent="TargetNodes" instance=ExtResource("16_7t0wj")]
-position = Vector2(3152, 3745)
-
-[node name="AITargetNode11" parent="TargetNodes" instance=ExtResource("16_7t0wj")]
-position = Vector2(533, 4601)
+position = Vector2(802, 3643)
 
 [node name="Tank" parent="." instance=ExtResource("15_ddjka")]
-position = Vector2(2485, -1996)
+position = Vector2(1959, -1792)
 is_client = true
-
-[node name="Tank2" parent="." instance=ExtResource("15_ddjka")]
-position = Vector2(3066, -2105)
-tank_id = 2

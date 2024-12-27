@@ -86,14 +86,14 @@ func on_process(delta):
 	
 	if not reached_max_points and points >= max_core_points:
 		reached_max_points = true
-		%UpgradeShake.start()
-		%UpgradeSound.start()
 		max_points.emit()
 		var shoot_component = tank.behaviour("shoot")
 		shoot_component.disable_shoot()
 		
 		if tank.is_client:
 			Global.Game.add_upgrade_menu(upgrades, 2)
+			%UpgradeShake.start()
+			%UpgradeSound.start()
 		
 func set_health(value):
 	health = clamp(value, 0, max_health)

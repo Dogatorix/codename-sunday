@@ -2,6 +2,7 @@ extends Marker2D
 
 @export var camera: Camera2D
 @export var animation_player: AnimationPlayer
+@export var location_pulse: AnimationPlayer
 @export var ready_audio: AudioStreamPlayer
 @export var zoom_audio: AudioStreamPlayer
 
@@ -13,15 +14,20 @@ var speed_normal := 900
 
 var camera_zoom := 0.7
 
-var is_client := false
-var can_respawn := false
+var is_client := true
 var wait_time := 10.0
+
+var timer_finished := false
 
 func _ready():
 	if not is_client:
 		queue_free()
 		return
-		
+	
+	Global.Game.Overlay.show_bars()
+	
+	get_tree().call_group("spawn_locations", "show_location")
+	
 	camera.zoom = Vector2(camera_zoom, camera_zoom)
 	
 	if Global.is_mobile:
@@ -33,11 +39,13 @@ func _process(delta):
 	
 	if int(wait_time) > 0:
 		%Time.text = "Respawning in %s seconds" % [int(wait_time)]
-	elif not can_respawn:
-		can_respawn = true
+	elif not selected_location and not timer_finished:
+		timer_finished = true
 		animation_player.play("text_pulse")
-		ready_audio.play()
-		%Time.text = "Press R to respawn"
+		%Time.text = "Select respawning location"
+	elif selected_location and not timer_finished:
+		timer_finished = true
+		restart()
 	
 	if not Input.is_action_pressed("spectator_speedup"):
 		speed = speed_normal
@@ -53,14 +61,15 @@ func _process(delta):
 		if camera_zoom < 1.5:
 			zoom_audio.play()	
 		camera_zoom += 0.3
+		camera_zoom = clamp(camera_zoom, 0.3, 1.5)
+		update_camera_zoom()
 		
 	if Input.is_action_just_pressed("spectator_zoomout"):
 		if camera_zoom > 0.3:
 			zoom_audio.play()
 		camera_zoom -= 0.3
-		
-	camera_zoom = clamp(camera_zoom, 0.3, 1.5)
-	camera.zoom = camera.zoom.move_toward(Vector2(camera_zoom, camera_zoom), 3 * delta)
+		camera_zoom = clamp(camera_zoom, 0.3, 1.5)
+		update_camera_zoom()
 	
 	if input_vector != Vector2.ZERO and Global.Game.active_input:
 		input_vector = input_vector.normalized() * speed * delta
@@ -69,3 +78,47 @@ func _process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	
 	global_position += velocity
+	
+	$MouseArea.global_position = get_global_mouse_position()
+	
+	if Input.is_action_just_pressed("click") and location_in_area and not location_in_area == selected_location:
+		if selected_location:
+			selected_location.unclick()
+		
+		ready_audio.pitch_scale = 1 + randf_range(0.06, -0.06)
+		ready_audio.play()
+		selected_location = location_in_area
+		selected_location.click()
+		
+		if timer_finished:
+			restart()
+			
+		%Location.text = "Selected: Location " + str(selected_location.index)
+		location_pulse.play("pulse")
+			
+func update_camera_zoom():
+	var tween: Tween = create_tween()
+	
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_EXPO)
+	tween.tween_property(camera, "zoom", Vector2(camera_zoom, camera_zoom), .5)
+
+var location_in_area: SpawnLocation
+var selected_location: SpawnLocation
+
+func _area_entered(area):	
+	if not area is SpawnLocation or area == selected_location:
+		return
+	
+	area.focus()
+	location_in_area = area
+
+func _area_exited(area):
+	if not area is SpawnLocation or area == selected_location:
+		return
+
+	area.unfocus()
+	location_in_area = null
+
+func restart():
+	print('test')
