@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cgywk5irhng6f"]
+[gd_scene load_steps=33 format=3 uid="uid://cgywk5irhng6f"]
 
 [ext_resource type="Script" path="res://scenes/tanks/starter/sub-components/ComponentList.gd" id="1_tr3ji"]
 [ext_resource type="Script" path="res://scripts/tank-components/BehaviourComponentList.gd" id="2_qj7ni"]
@@ -8,13 +8,12 @@
 [ext_resource type="Script" path="res://scripts/tank-components/DeathBasic.gd" id="7_tdgkg"]
 [ext_resource type="PackedScene" uid="uid://dkuuvwgfdon5r" path="res://scenes/spectator.tscn" id="8_2drfr"]
 [ext_resource type="PackedScene" uid="uid://blyxbp5brb462" path="res://scenes/graphics/player-explosion.tscn" id="9_dnvuq"]
+[ext_resource type="AudioStream" uid="uid://buf27o44g854d" path="res://assets/audio/tanks/player-max-points.mp3" id="10_20n16"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="10_l17xd"]
 [ext_resource type="AudioStream" uid="uid://db41fnatc8fwa" path="res://assets/audio/tanks/player-dash-1.mp3" id="11_3ryci"]
 [ext_resource type="AudioStream" uid="uid://b08cew7xnwfqi" path="res://assets/audio/tanks/player-dash-2.mp3" id="12_qpq8r"]
 [ext_resource type="AudioStream" uid="uid://c7v7qyq56nm4o" path="res://assets/audio/tanks/player-dash-3.mp3" id="13_ti5qw"]
 [ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="14_vksei"]
-[ext_resource type="Texture2D" uid="uid://v1h867arh4l5" path="res://assets/sprites/light.png" id="15_rvm26"]
-[ext_resource type="Script" path="res://scripts/tank-trail.gd" id="16_6koev"]
 [ext_resource type="AudioStream" uid="uid://db0ckwnvk7vmh" path="res://assets/audio/tanks/player-damage-1.mp3" id="17_pffnt"]
 [ext_resource type="AudioStream" uid="uid://essypfdqc73m" path="res://assets/audio/tanks/player-damage-2.mp3" id="18_0sdsy"]
 [ext_resource type="AudioStream" uid="uid://jriq00fwc1ui" path="res://assets/audio/tanks/player-damage-3.mp3" id="19_gm6gp"]
@@ -33,8 +32,6 @@ script/source = "extends Node
 
 func _ready():
 	%DamageParticle.root = tank
-	%TankLight.tank = tank
-	%TankTrail.tank = tank
 "
 
 [sub_resource type="Animation" id="Animation_x37e6"]
@@ -92,28 +89,6 @@ _data = {
 "death": SubResource("Animation_7jurx")
 }
 
-[sub_resource type="GDScript" id="GDScript_wd5tt"]
-resource_name = "tank-light"
-script/source = "extends PointLight2D
-
-@export var tank: Tank
-
-func _ready():
-	if not tank:
-		return
-		
-	if not tank.is_client:
-		queue_free()
-"
-
-[sub_resource type="Curve" id="Curve_nrhmj"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_2m5ma"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 1, 1, 0)
-
 [sub_resource type="Curve" id="Curve_la3i4"]
 min_value = -200.0
 max_value = 200.0
@@ -149,12 +124,11 @@ damage_sounds = NodePath("../../GraphicComponents/HurtSound")
 damage_particle = NodePath("../../GraphicComponents/DamageParticle")
 data_node = NodePath("../../SharedData")
 
-[node name="Dash" type="Node" parent="BehaviourComponents" node_paths=PackedStringArray("movement", "tank_stats", "audio_player", "dash_shake", "dash_shockwave", "data_node")]
+[node name="Dash" type="Node" parent="BehaviourComponents" node_paths=PackedStringArray("movement", "tank_stats", "audio_player", "dash_shockwave", "data_node")]
 script = ExtResource("6_w0uyr")
 movement = NodePath("../Movement")
 tank_stats = NodePath("../StatsBasic")
 audio_player = NodePath("../../GraphicComponents/DashSounds")
-dash_shake = NodePath("../../GraphicComponents/DashShake")
 dash_shockwave = NodePath("../../GraphicComponents/DashShockwave")
 data_node = NodePath("../../SharedData")
 
@@ -176,30 +150,19 @@ libraries = {
 "": SubResource("AnimationLibrary_0lit1")
 }
 
-[node name="DashShake" type="Marker2D" parent="GraphicComponents"]
+[node name="UpgradeShake" type="Marker2D" parent="GraphicComponents"]
+unique_name_in_owner = true
 scale = Vector2(0.997009, 1)
 script = ExtResource("14_vksei")
 shake_range = 1000
-intensity = 2.0
-intensity_decay = 15.0
+intensity_decay = 5.0
 
-[node name="TankLight" type="PointLight2D" parent="GraphicComponents"]
+[node name="UpgradeSound" type="AudioStreamPlayer2D" parent="GraphicComponents"]
 unique_name_in_owner = true
-scale = Vector2(1.76172, 1.51172)
-energy = 0.3
-shadow_enabled = true
-texture = ExtResource("15_rvm26")
-script = SubResource("GDScript_wd5tt")
-metadata/_edit_lock_ = true
-
-[node name="TankTrail" type="Line2D" parent="GraphicComponents"]
-unique_name_in_owner = true
-show_behind_parent = true
-z_index = -1
-width = 30.0
-width_curve = SubResource("Curve_nrhmj")
-gradient = SubResource("Gradient_2m5ma")
-script = ExtResource("16_6koev")
+stream = ExtResource("10_20n16")
+volume_db = -6.0
+script = ExtResource("10_l17xd")
+pitch_range = 0.05
 
 [node name="HurtSound" type="AudioStreamPlayer2D" parent="GraphicComponents"]
 script = ExtResource("10_l17xd")

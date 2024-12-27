@@ -20,7 +20,6 @@ var is_dying := false
 
 func on_ready():
 	visible = true
-	
 	if not stats:
 		push_error(str(self) + " Missing reference to stats component")
 		queue_free()

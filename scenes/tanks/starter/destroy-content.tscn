@@ -38,34 +38,6 @@ tracks/1/keys = {
 "values": [Vector2(-59.0997, -177.299)]
 }
 
-[sub_resource type="Animation" id="Animation_pmp2i"]
-resource_name = "shoot"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TankSprite/BarrelClip/Barrel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(0.353553, 1),
-"update": 0,
-"values": [Vector2(-1, 33.7375), Vector2(-1, 27.216)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TankSprite/BarrelClip/Barrel/Back:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.4),
-"transitions": PackedFloat32Array(0.31864, 0.450625, 1),
-"update": 0,
-"values": [Vector2(-59.0997, -177.299), Vector2(-59.0997, -62.0439), Vector2(-59.0997, -177.299)]
-}
-
 [sub_resource type="Animation" id="Animation_y1imc"]
 resource_name = "init"
 length = 0.3
@@ -197,6 +169,34 @@ tracks/4/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_pmp2i"]
+resource_name = "shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TankSprite/BarrelClip/Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.353553, 1),
+"update": 0,
+"values": [Vector2(-1, 33.7375), Vector2(-1, 27.216)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TankSprite/BarrelClip/Barrel/Back:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(0.31864, 0.450625, 1),
+"update": 0,
+"values": [Vector2(-59.0997, -177.299), Vector2(-59.0997, -62.0439), Vector2(-59.0997, -177.299)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qmcfj"]
 _data = {
 "RESET": SubResource("Animation_ap7fi"),
@@ -213,7 +213,8 @@ _data = {
 tank_sprite = NodePath("../../../TankSprite")
 
 [node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("tank_animations", "colored_nodes")]
-core_tier = 2
+core_tier = 1
+upgrades = Array[int]([0, 1, 2, 3])
 tank_animations = NodePath("../../../TankSprite/AnimationPlayer")
 colored_nodes = [NodePath("../../../TankSprite/Core")]
 
@@ -239,15 +240,15 @@ wait_time = 0.65
 [node name="DamageAnimation" parent="ComponentList/GraphicComponents" index="0"]
 root_node = NodePath("../../..")
 
+[node name="TransitionSound" parent="ComponentList/GraphicComponents" index="8" node_paths=PackedStringArray("root")]
+external = true
+root = NodePath("../../..")
+
 [node name="Shoot" type="AudioStreamPlayer2D" parent="ComponentList/GraphicComponents" index="9"]
 volume_db = -3.0
 script = ExtResource("5_hr2ga")
 sounds = Array[AudioStream]([ExtResource("5_p8gtq"), ExtResource("6_6lov5")])
 pitch_range = 0.05
-
-[node name="TransitionSound" parent="ComponentList/GraphicComponents" index="10" node_paths=PackedStringArray("root")]
-external = true
-root = NodePath("../../..")
 
 [node name="TankSprite" type="Node2D" parent="."]
 
@@ -276,18 +277,18 @@ scale = Vector2(1.1374, 1.1374)
 texture = ExtResource("7_tx5g0")
 flip_v = true
 
-[node name="Core" type="Sprite2D" parent="TankSprite"]
-position = Vector2(5.96046e-08, 1.19209e-07)
-scale = Vector2(0.33, 0.33)
-texture = ExtResource("7_bfadi")
-offset = Vector2(3.0303, 6.06061)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TankSprite"]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_qmcfj")
 }
 autoplay = "init"
+
+[node name="Core" type="Sprite2D" parent="TankSprite"]
+position = Vector2(5.96046e-08, 1.19209e-07)
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("7_bfadi")
+offset = Vector2(3.0303, 6.06061)
 
 [connection signal="timeout" from="ComponentList/BehaviourComponents/Shoot/Delay" to="ComponentList/BehaviourComponents/Shoot" method="_on_delay_timeout"]
 

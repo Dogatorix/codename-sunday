@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://028mh64yj0jl"]
+[gd_scene load_steps=11 format=3 uid="uid://028mh64yj0jl"]
 
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="5_43h7r"]
 [ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="6_58ogl"]
-[ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="7_37hte"]
 
 [sub_resource type="GDScript" id="GDScript_2v1qa"]
 script/source = "extends CanvasLayer
@@ -12,10 +11,12 @@ script/source = "extends CanvasLayer
 
 func _ready():
 	$Control.mouse_filter = $Control.MOUSE_FILTER_IGNORE
+	layer = -1
 	for btn in tank_buttons:
 		btn.disabled = true
 
 func show_menu():
+	layer = 20
 	animation_player.play(\"show\")
 	$Control.mouse_filter = $Control.MOUSE_FILTER_PASS
 	
@@ -28,9 +29,6 @@ func hide_menu():
 	
 	for btn in tank_buttons:
 		btn.disabled = true
-
-func upgrade_tank(index):
-	Global.Game.client.upgrade_tank.emit(index)
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7vnl"]
@@ -58,6 +56,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:layer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [20]
+}
 
 [sub_resource type="Animation" id="Animation_yu1gl"]
 resource_name = "hide"
@@ -74,6 +84,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:layer")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [20, -1]
 }
 
 [sub_resource type="Animation" id="Animation_bv27k"]
@@ -100,11 +122,10 @@ _data = {
 "show": SubResource("Animation_bv27k")
 }
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("animation_player", "tank_buttons")]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
 layer = 20
 script = SubResource("GDScript_2v1qa")
 animation_player = NodePath("AnimationPlayer")
-tank_buttons = [NodePath("Control/Basic"), NodePath("Control/Assault"), NodePath("Control/Destroy"), NodePath("Control/Crush")]
 
 [node name="Control" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -172,56 +193,7 @@ text = "Tank Upgrades"
 label_settings = SubResource("LabelSettings_xtc5o")
 horizontal_alignment = 2
 
-[node name="Basic" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 1624.0
-offset_top = 543.0
-offset_right = 1880.0
-offset_bottom = 594.0
-theme_override_colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
-theme_override_fonts/font = ExtResource("7_37hte")
-theme_override_font_sizes/font_size = 32
-text = "Basic"
-
-[node name="Assault" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 1624.0
-offset_top = 756.0
-offset_right = 1880.0
-offset_bottom = 807.0
-theme_override_colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
-theme_override_fonts/font = ExtResource("7_37hte")
-theme_override_font_sizes/font_size = 32
-text = "Assault"
-
-[node name="Destroy" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 1624.0
-offset_top = 684.0
-offset_right = 1880.0
-offset_bottom = 735.0
-theme_override_colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
-theme_override_fonts/font = ExtResource("7_37hte")
-theme_override_font_sizes/font_size = 32
-text = "Destroy"
-
-[node name="Crush" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 1624.0
-offset_top = 612.0
-offset_right = 1880.0
-offset_bottom = 663.0
-theme_override_colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
-theme_override_fonts/font = ExtResource("7_37hte")
-theme_override_font_sizes/font_size = 32
-text = "Crush"
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_0j443")
 }
-
-[connection signal="button_down" from="Control/Basic" to="." method="upgrade_tank" binds= [0]]
-[connection signal="button_down" from="Control/Assault" to="." method="upgrade_tank" binds= [1]]
-[connection signal="button_down" from="Control/Destroy" to="." method="upgrade_tank" binds= [2]]
-[connection signal="button_down" from="Control/Crush" to="." method="upgrade_tank" binds= [3]]

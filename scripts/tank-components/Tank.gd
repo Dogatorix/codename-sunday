@@ -1,19 +1,12 @@
 extends CharacterBody2D
 class_name Tank
 
-signal upgrade_tank(tank: TANKS)
-
-enum TANKS {
-	BASIC,
-	CRUSH,
-	ASSAULT,
-	DESTROY,
-}
+signal on_upgrade_tank(tank: Enums.TANKS)
 
 @export var tank_name := "Tank"
 @export var tank_color := Color(1,1,1)
 @export var username := "Slow Joe"
-@export var tank_id: TANKS = TANKS.BASIC
+@export var tank_id: Enums.TANKS
 
 @onready var player_bars = $PlayerBars
 
@@ -32,6 +25,8 @@ var Game:
 		return Global.Game
 
 func _ready():
+	$Icon.queue_free()
+	
 	if is_client: 
 		Game.clients.push_front(self)
 		
@@ -54,22 +49,25 @@ func _ready():
 	current_content_instance = tank_content_scene.instantiate()
 	add_child(current_content_instance)
 	
-func switch_tank_scene(tank: TANKS):
+func switch_tank_scene(tank: Enums.TANKS):
 	var tank_content_scene: PackedScene = Global.Game.tank_scenes[tank].scene
 	var new_content_instance = tank_content_scene.instantiate()
 	add_child(new_content_instance)
 	current_content_instance.queue_free()
 	current_content_instance = new_content_instance
 	
+func upgrade_tank(tank: Enums.TANKS):
+	on_upgrade_tank.emit(tank)
+	
 func _process(_delta):
 	if Input.is_action_just_pressed("debug-1") and is_client:
-		upgrade_tank.emit(TANKS.CRUSH)
+		upgrade_tank(Enums.TANKS.CRUSH)
 		
 	if Input.is_action_just_pressed("debug-2") and is_client:
-		upgrade_tank.emit(TANKS.ASSAULT)
+		upgrade_tank(Enums.TANKS.ASSAULT)
 		
 	if Input.is_action_just_pressed("debug-3") and is_client:
-		upgrade_tank.emit(TANKS.DESTROY)
+		upgrade_tank(Enums.TANKS.DESTROY)
 	
 func behaviour(name: String):
 	return components[name]

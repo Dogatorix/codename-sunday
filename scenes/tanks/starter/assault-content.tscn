@@ -96,88 +96,6 @@ tracks/6/keys = {
 "values": [Vector2(1, 4)]
 }
 
-[sub_resource type="Animation" id="Animation_l46qf"]
-resource_name = "shoot_left"
-length = 0.18
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TankSprite/Node2D/BarrelLeft:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.18),
-"transitions": PackedFloat32Array(0.329877, 1),
-"update": 0,
-"values": [Vector2(-60, -137.5), Vector2(-60, -140)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TankSprite/Node2D/BarrelLeft:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.18),
-"transitions": PackedFloat32Array(0.329877, 1),
-"update": 0,
-"values": [Vector2(1.134, 0.7), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TankSprite/Node2D/BarrelRight/CooldownRight:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.18),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1e-05, 0.857), Vector2(0.619337, 0.857355)]
-}
-
-[sub_resource type="Animation" id="Animation_7mv10"]
-resource_name = "shoot_right"
-length = 0.18
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TankSprite/Node2D/BarrelRight:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.18),
-"transitions": PackedFloat32Array(0.31864, 1),
-"update": 0,
-"values": [Vector2(55, -137.5), Vector2(55, -140)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TankSprite/Node2D/BarrelRight:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.18),
-"transitions": PackedFloat32Array(0.31864, 1),
-"update": 0,
-"values": [Vector2(1.134, 0.7), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TankSprite/Node2D/BarrelLeft/CooldownLeft:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.18),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1e-05, 0.857), Vector2(0.619337, 0.857356)]
-}
-
 [sub_resource type="Animation" id="Animation_rdamm"]
 resource_name = "init"
 length = 0.3
@@ -285,6 +203,88 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_l46qf"]
+resource_name = "shoot_left"
+length = 0.18
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TankSprite/Node2D/BarrelLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(0.329877, 1),
+"update": 0,
+"values": [Vector2(-60, -137.5), Vector2(-60, -140)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TankSprite/Node2D/BarrelLeft:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(0.329877, 1),
+"update": 0,
+"values": [Vector2(1.134, 0.7), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TankSprite/Node2D/BarrelRight/CooldownRight:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 0.857), Vector2(0.619337, 0.857355)]
+}
+
+[sub_resource type="Animation" id="Animation_7mv10"]
+resource_name = "shoot_right"
+length = 0.18
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TankSprite/Node2D/BarrelRight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(0.31864, 1),
+"update": 0,
+"values": [Vector2(55, -137.5), Vector2(55, -140)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TankSprite/Node2D/BarrelRight:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(0.31864, 1),
+"update": 0,
+"values": [Vector2(1.134, 0.7), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TankSprite/Node2D/BarrelLeft/CooldownLeft:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 0.857), Vector2(0.619337, 0.857356)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ebg0v"]
 _data = {
 "RESET": SubResource("Animation_ilcse"),
@@ -302,7 +302,8 @@ _data = {
 tank_sprite = NodePath("../../../TankSprite")
 
 [node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("tank_animations", "colored_nodes")]
-core_tier = 2
+core_tier = 1
+upgrades = Array[int]([0, 1, 2, 3])
 tank_animations = NodePath("../../../TankSprite/AnimationPlayer")
 colored_nodes = [NodePath("../../../TankSprite/Core")]
 
@@ -327,15 +328,15 @@ wait_time = 0.2
 [node name="DamageAnimation" parent="ComponentList/GraphicComponents" index="0"]
 root_node = NodePath("../../..")
 
+[node name="TransitionSound" parent="ComponentList/GraphicComponents" index="8" node_paths=PackedStringArray("root")]
+external = true
+root = NodePath("../../..")
+
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="ComponentList/GraphicComponents" index="9"]
 stream = ExtResource("4_he5s2")
 volume_db = -8.0
 script = ExtResource("5_c45ps")
 pitch_range = 0.1
-
-[node name="TransitionSound" parent="ComponentList/GraphicComponents" index="10" node_paths=PackedStringArray("root")]
-external = true
-root = NodePath("../../..")
 
 [node name="TankSprite" type="Node2D" parent="."]
 

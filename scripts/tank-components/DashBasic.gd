@@ -14,7 +14,6 @@ const component_name = "dash"
 @export var movement: MovementBasic
 @export var tank_stats: StatsBasic
 @export var audio_player: Audio2D
-@export var dash_shake: Shake2D
 @export var dash_shockwave: Shockwave
 
 var dash_velocity := Vector2.ZERO
@@ -37,7 +36,6 @@ func on_process(delta):
 			dash_length = dash_velocity.length()	
 				
 			audio_player.start()
-			dash_shake.start()
 			var shockwave_clone: Shockwave = dash_shockwave.duplicate()
 			tank.add_sibling(shockwave_clone)
 			shockwave_clone.start()
@@ -47,4 +45,3 @@ func on_process(delta):
 	dash_velocity = dash_velocity.normalized() * dash_length
 	
 	movement.dash_velocity = dash_velocity
-	dash_shake.global_position = tank.global_position

@@ -5,21 +5,15 @@ const component_name = "stats"
 
 @onready var tank: Tank = data_node.tank
 
-enum TIERS {
-	BASIC = 1,
-	STARTER = 2,
-	INDUSTRIAL = 3,
-	PIONEER = 4,
-}
-
 const CORE_REQUIREMENT = {
-	1: 500,
-	2: 2000,
-	3: 8000,
-	4: 16000
+	0: 300,
+	1: 2000,
+	2: 8000,
+	3: 16000
 }
 
-@export var core_tier: TIERS
+@export var core_tier: Enums.TANK_TIERS
+@export var upgrades: Array[Enums.TANKS]
 
 @export_group("General")
 @export var max_health = 100
@@ -54,11 +48,11 @@ var points = 0
 var reached_max_points := false
 
 func on_ready():	
-	max_core_points = CORE_REQUIREMENT[core_tier + 1]
+	max_core_points = CORE_REQUIREMENT[core_tier]
 	
 	tank.player_bars.stats = self
 	tank.player_bars.on_ready()
-	tank.connect("upgrade_tank", tank_upgrade_init)
+	tank.connect("on_upgrade_tank", tank_upgrade_init)
 	
 	for node in colored_nodes:
 		node.modulate = tank.tank_color
@@ -86,7 +80,21 @@ func on_process(delta):
 		
 	mana = min(100, mana + mana_regeneration_rate * delta)
 	tank.player_bars.on_process(delta)
-
+	
+	if Input.is_action_just_pressed("debug") and tank.is_client:
+		points = max_core_points
+	
+	if not reached_max_points and points >= max_core_points:
+		reached_max_points = true
+		%UpgradeShake.start()
+		%UpgradeSound.start()
+		max_points.emit()
+		var shoot_component = tank.behaviour("shoot")
+		shoot_component.disable_shoot()
+		
+		if tank.is_client:
+			Global.Game.add_upgrade_menu(upgrades, 2)
+		
 func set_health(value):
 	health = clamp(value, 0, max_health)
 	health_change.emit(value)
@@ -119,9 +127,9 @@ func damage_tank(amount):
 	if damage_particle:
 		damage_particle.start()
 
-var upgrade_id := 0
+var upgrade_id: Enums.TANKS = Enums.TANKS.BASIC
 
-func tank_upgrade_init(tank_id):
+func tank_upgrade_init(tank_id: Enums.TANKS):
 	upgrade_id = tank_id
 	tank_animations.play("retract")
 	

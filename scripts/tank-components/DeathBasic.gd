@@ -25,6 +25,9 @@ func _on_health_change(health):
 	
 	if tank.is_client:
 		Global.Game.Overlay.show_bars()
+		
+	if tank.is_client and Global.Game.upgrade_menu:
+		Global.Game.upgrade_menu.close()
 	
 	var timer: Timer = Timer.new()
 	timer.wait_time = 0.35

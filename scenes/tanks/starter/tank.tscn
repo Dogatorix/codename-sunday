@@ -1,10 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://tg86jcs0270c"]
+[gd_scene load_steps=10 format=3 uid="uid://tg86jcs0270c"]
 
 [ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_gnasx"]
 [ext_resource type="PackedScene" uid="uid://bjbp1eyywcerx" path="res://scenes/tanks/player-bars.tscn" id="2_ahk3x"]
+[ext_resource type="Texture2D" uid="uid://c8j5si6u42hca" path="res://icon.png" id="3_8g6dr"]
+[ext_resource type="Script" path="res://scripts/tank-trail.gd" id="4_7ajdp"]
+[ext_resource type="Texture2D" uid="uid://v1h867arh4l5" path="res://assets/sprites/light.png" id="5_2faec"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bbwtc"]
 radius = 146.113
+
+[sub_resource type="Curve" id="Curve_s8dgb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_xl87d"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 0)
+
+[sub_resource type="GDScript" id="GDScript_a4ss0"]
+resource_name = "tank-light"
+script/source = "extends PointLight2D
+
+@export var tank: Tank
+
+func _ready():
+	if not tank:
+		return
+		
+	if not tank.is_client:
+		queue_free()
+"
 
 [node name="Tank" type="CharacterBody2D" groups=["tank"]]
 motion_mode = 1
@@ -27,3 +52,27 @@ offset_top = -74.0
 offset_right = -76.0
 offset_bottom = -74.0
 pivot_offset = Vector2(76, 74)
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.655, 0.655)
+texture = ExtResource("3_8g6dr")
+
+[node name="TankTrail" type="Line2D" parent="." node_paths=PackedStringArray("tank")]
+unique_name_in_owner = true
+show_behind_parent = true
+z_index = -1
+width = 30.0
+width_curve = SubResource("Curve_s8dgb")
+gradient = SubResource("Gradient_xl87d")
+script = ExtResource("4_7ajdp")
+tank = NodePath("..")
+
+[node name="TankLight" type="PointLight2D" parent="." node_paths=PackedStringArray("tank")]
+unique_name_in_owner = true
+scale = Vector2(1.76172, 1.51172)
+energy = 0.3
+shadow_enabled = true
+texture = ExtResource("5_2faec")
+script = SubResource("GDScript_a4ss0")
+tank = NodePath("..")
+metadata/_edit_lock_ = true

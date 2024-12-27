@@ -9,11 +9,11 @@ enum DEVICE {
 	DESKTOP
 }
 
-enum TANKS {
-	BASIC,
-	CRUSH,
-	ASSAULT,
-	DESTROY,
+const TANK_NAMES := {
+	Enums.TANKS.BASIC: "Basic",
+	Enums.TANKS.ASSAULT: "Assault",
+	Enums.TANKS.DESTROY: "Destroy",
+	Enums.TANKS.CRUSH: "Crush"
 }
 
 var Game: Node

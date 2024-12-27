@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cjxqex8nwxfk0"]
+[gd_scene load_steps=18 format=3 uid="uid://cjxqex8nwxfk0"]
 
 [ext_resource type="Texture2D" uid="uid://cnge7j38hewl1" path="res://assets/sprites/ui/starter-ui/starter-core-points.png" id="1_2hh8u"]
 [ext_resource type="Script" path="res://scenes/tanks/starter-interface.gd" id="1_8pq04"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="4_m645k"]
 [ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="9_0enj5"]
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="10_6rvnl"]
+[ext_resource type="AudioStream" uid="uid://buf27o44g854d" path="res://assets/audio/tanks/player-max-points.mp3" id="11_7ekh4"]
 
 [sub_resource type="Curve" id="Curve_tnq5r"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -475,3 +476,8 @@ texture = ExtResource("10_6rvnl")
 libraries = {
 "": SubResource("AnimationLibrary_tpoov")
 }
+
+[node name="UpgradeSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("11_7ekh4")
+volume_db = -4.0

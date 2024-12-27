@@ -6,8 +6,10 @@ extends Node
 @export var sandbox_scene: PackedScene
 @export var mobile_controls_scene: PackedScene
 
-@export var tank_scenes: Array[TankScene]
 @export var player_interface_scene: PackedScene
+@export var tank_upgrade_scene: PackedScene
+
+@export var tank_scenes: Array[TankScene]
 
 enum GAMEMODES {
 	SANDBOX,
@@ -83,6 +85,14 @@ var player_interface: CanvasLayer
 func add_player_interface():
 	player_interface = player_interface_scene.instantiate()
 	client.add_child(player_interface)
+	
+var upgrade_menu: CanvasLayer
+
+func add_upgrade_menu(upgrades: Array[Enums.TANKS], tier: Enums.TANK_TIERS):
+	upgrade_menu = tank_upgrade_scene.instantiate()
+	upgrade_menu.upgrades = upgrades
+	upgrade_menu.upgrade_tier = tier
+	client.add_child(upgrade_menu)
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("fun-menu-show"):
