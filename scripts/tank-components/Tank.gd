@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Tank
 
+signal upgrade_tank(tank: TANKS)
+
 enum TANKS {
 	BASIC,
 	CRUSH,
@@ -23,6 +25,8 @@ var ai_components := {}
 
 var camera: GameCamera
 
+var current_content_instance: Node2D
+
 var Game:
 	get():
 		return Global.Game
@@ -44,17 +48,28 @@ func _ready():
 		camera_instance.zoom = Vector2(default_zoom, default_zoom)
 		add_child(camera_instance)
 		camera = camera_instance
+		Game.Overlay.hide_bars()
 	
 	var tank_content_scene: PackedScene = Global.Game.tank_scenes[tank_id].scene
-	var tank_content_instance = tank_content_scene.instantiate()
-	add_child(tank_content_instance)
+	current_content_instance = tank_content_scene.instantiate()
+	add_child(current_content_instance)
 	
-func upgrade_tank(tank: TANKS):
-	return
+func switch_tank_scene(tank: TANKS):
+	var tank_content_scene: PackedScene = Global.Game.tank_scenes[tank].scene
+	var new_content_instance = tank_content_scene.instantiate()
+	add_child(new_content_instance)
+	current_content_instance.queue_free()
+	current_content_instance = new_content_instance
 	
-func _physics_process(delta):
-	if Input.is_action_just_pressed("debug"):
-		behaviour("stats").damage_tank(100)
+func _process(_delta):
+	if Input.is_action_just_pressed("debug-1") and is_client:
+		upgrade_tank.emit(TANKS.CRUSH)
+		
+	if Input.is_action_just_pressed("debug-2") and is_client:
+		upgrade_tank.emit(TANKS.ASSAULT)
+		
+	if Input.is_action_just_pressed("debug-3") and is_client:
+		upgrade_tank.emit(TANKS.DESTROY)
 	
 func behaviour(name: String):
 	return components[name]

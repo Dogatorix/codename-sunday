@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhv4ahtufnb51"]
+[gd_scene load_steps=15 format=3 uid="uid://dhv4ahtufnb51"]
 
 [ext_resource type="PackedScene" uid="uid://cgywk5irhng6f" path="res://scenes/tanks/starter/sub-components/starter-component-list.tscn" id="1_snltb"]
 [ext_resource type="Script" path="res://scripts/tank-components/ShootingRapid.gd" id="2_lbfnm"]
@@ -86,14 +86,14 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("TankSprite:modulate")
+tracks/6/path = NodePath("TankSprite/Node2D:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(1, 4)]
 }
 
 [sub_resource type="Animation" id="Animation_l46qf"]
@@ -178,9 +178,118 @@ tracks/2/keys = {
 "values": [Vector2(1e-05, 0.857), Vector2(0.619337, 0.857356)]
 }
 
+[sub_resource type="Animation" id="Animation_rdamm"]
+resource_name = "init"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TankSprite/Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.450625, 1),
+"update": 0,
+"values": [Vector2(1, 49), Vector2(1, 4)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ComponentList/BehaviourComponents/ShootingRapid")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"disable_shoot"
+}, {
+"args": [],
+"method": &"enable_shoot"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ComponentList/GraphicComponents/TransitionSound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ybphk"]
+resource_name = "retract"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TankSprite/Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(2.63902, 1),
+"update": 0,
+"values": [Vector2(1, 4), Vector2(1, 49)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ComponentList/BehaviourComponents/ShootingRapid")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"disable_shoot"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ComponentList/BehaviourComponents/StatsBasic")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"tank_upgrade_post"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ComponentList/GraphicComponents/TransitionSound")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ebg0v"]
 _data = {
 "RESET": SubResource("Animation_ilcse"),
+"init": SubResource("Animation_rdamm"),
+"retract": SubResource("Animation_ybphk"),
 "shoot_left": SubResource("Animation_l46qf"),
 "shoot_right": SubResource("Animation_7mv10")
 }
@@ -192,27 +301,31 @@ _data = {
 [node name="Movement" parent="ComponentList/BehaviourComponents" index="0" node_paths=PackedStringArray("tank_sprite")]
 tank_sprite = NodePath("../../../TankSprite")
 
-[node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("colored_nodes")]
+[node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("tank_animations", "colored_nodes")]
 core_tier = 2
+tank_animations = NodePath("../../../TankSprite/AnimationPlayer")
 colored_nodes = [NodePath("../../../TankSprite/Core")]
 
 [node name="ShootingRapid" type="Node" parent="ComponentList/BehaviourComponents" index="4" node_paths=PackedStringArray("tank_sprite", "animation_player", "origin_left", "origin_right", "delay", "audio_player", "sprite_node", "data_node")]
 script = ExtResource("2_lbfnm")
 tank_sprite = NodePath("../../../TankSprite")
 animation_player = NodePath("../../../TankSprite/AnimationPlayer")
-origin_left = NodePath("../../../TankSprite/ShootOriginLeft")
-origin_right = NodePath("../../../TankSprite/ShootOriginRight")
+origin_left = NodePath("../../../TankSprite/Node2D/ShootOriginLeft")
+origin_right = NodePath("../../../TankSprite/Node2D/ShootOriginRight")
 delay = NodePath("Delay")
 audio_player = NodePath("../../GraphicComponents/ShootSound")
 sprite_node = NodePath("../../../TankSprite")
 bullet_scene = ExtResource("3_2xhx8")
 bullet_speed = 725.0
 bullet_size = 0.85
-bullet_damage = 15.0
+bullet_damage = 10.0
 data_node = NodePath("../../SharedData")
 
 [node name="Delay" type="Timer" parent="ComponentList/BehaviourComponents/ShootingRapid"]
 wait_time = 0.2
+
+[node name="DamageAnimation" parent="ComponentList/GraphicComponents" index="0"]
+root_node = NodePath("../../..")
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="ComponentList/GraphicComponents" index="9"]
 stream = ExtResource("4_he5s2")
@@ -220,20 +333,15 @@ volume_db = -8.0
 script = ExtResource("5_c45ps")
 pitch_range = 0.1
 
+[node name="TransitionSound" parent="ComponentList/GraphicComponents" index="10" node_paths=PackedStringArray("root")]
+external = true
+root = NodePath("../../..")
+
 [node name="TankSprite" type="Node2D" parent="."]
-
-[node name="Core" type="Sprite2D" parent="TankSprite"]
-scale = Vector2(0.351487, 0.351487)
-texture = ExtResource("7_ejdj4")
-
-[node name="ShootOriginLeft" type="Node2D" parent="TankSprite"]
-position = Vector2(-12, -64)
-
-[node name="ShootOriginRight" type="Node2D" parent="TankSprite"]
-position = Vector2(11, -64)
 
 [node name="Node2D" type="Node2D" parent="TankSprite"]
 z_index = -1
+position = Vector2(1, 4)
 scale = Vector2(0.2, 0.2)
 
 [node name="BarrelRight" type="Sprite2D" parent="TankSprite/Node2D"]
@@ -264,12 +372,27 @@ scale = Vector2(0.619337, 0.857356)
 texture = ExtResource("8_ycbd3")
 offset = Vector2(104, 0)
 
+[node name="ShootOriginLeft" type="Node2D" parent="TankSprite/Node2D"]
+position = Vector2(-60, -320)
+scale = Vector2(5, 5)
+
+[node name="ShootOriginRight" type="Node2D" parent="TankSprite/Node2D"]
+position = Vector2(55, -320)
+scale = Vector2(5, 5)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TankSprite"]
 unique_name_in_owner = true
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_ebg0v")
 }
+autoplay = "init"
+
+[node name="Core" type="Sprite2D" parent="TankSprite"]
+position = Vector2(5.96046e-08, 1.19209e-07)
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("7_ejdj4")
+offset = Vector2(3.0303, 6.06061)
 
 [connection signal="timeout" from="ComponentList/BehaviourComponents/ShootingRapid/Delay" to="ComponentList/BehaviourComponents/ShootingRapid" method="_on_delay_timeout"]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dctw8f2xybpt8"]
+[gd_scene load_steps=13 format=3 uid="uid://dctw8f2xybpt8"]
 
 [ext_resource type="PackedScene" uid="uid://cgywk5irhng6f" path="res://scenes/tanks/starter/sub-components/starter-component-list.tscn" id="1_xnl1o"]
 [ext_resource type="AudioStream" uid="uid://ooiku30st7ax" path="res://assets/audio/tanks/starter/basic-shot.mp3" id="2_0ngo4"]
@@ -38,6 +38,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_dv1rt"]
 resource_name = "retract"
 length = 0.2
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -62,28 +63,118 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0.3, 0.3)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../ComponentList/BehaviourComponents/Shoot")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"disable_shoot"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../ComponentList/BehaviourComponents/StatsBasic")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"tank_upgrade_post"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../ComponentList/GraphicComponents/TransitionSound")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start"
+}]
+}
 
-[sub_resource type="Animation" id="Animation_bvg2f"]
-resource_name = "shoot"
-length = 0.3
+[sub_resource type="Animation" id="Animation_3p83m"]
+resource_name = "init"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Barrel:scale")
+tracks/0/path = NodePath("Barrel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.517632, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.406126, 1),
 "update": 0,
-"values": [Vector2(0.38, 0.237701), Vector2(0.3, 0.3)]
+"values": [Vector2(5.96046e-08, 31), Vector2(5.96046e-08, -7)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ComponentList/BehaviourComponents/Shoot")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"disable_shoot"
+}, {
+"args": [],
+"method": &"enable_shoot"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../ComponentList/GraphicComponents/TransitionSound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_stqm8"]
+resource_name = "shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.406126, 1),
+"update": 0,
+"values": [Vector2(0, 10), Vector2(5.96046e-08, -7)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h1kpr"]
 _data = {
 "RESET": SubResource("Animation_wga42"),
+"init": SubResource("Animation_3p83m"),
 "retract": SubResource("Animation_dv1rt"),
-"shoot": SubResource("Animation_bvg2f")
+"shoot": SubResource("Animation_stqm8")
 }
 
 [node name="BasicContent" type="Node2D"]
@@ -93,7 +184,8 @@ _data = {
 [node name="Movement" parent="ComponentList/BehaviourComponents" index="0" node_paths=PackedStringArray("tank_sprite")]
 tank_sprite = NodePath("../../../TankSprite")
 
-[node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("colored_nodes")]
+[node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("tank_animations", "colored_nodes")]
+tank_animations = NodePath("../../../TankSprite/AnimationPlayer")
 colored_nodes = [NodePath("../../../TankSprite/Core")]
 
 [node name="Shoot" type="Node" parent="ComponentList/BehaviourComponents" index="4" node_paths=PackedStringArray("dash", "animation_player", "origin", "tank_sprite", "delay", "audio_player", "movement", "sprite_node", "data_node")]
@@ -114,11 +206,18 @@ data_node = NodePath("../../SharedData")
 [node name="Delay" type="Timer" parent="ComponentList/BehaviourComponents/Shoot"]
 wait_time = 0.5
 
+[node name="DamageAnimation" parent="ComponentList/GraphicComponents" index="0"]
+root_node = NodePath("../../..")
+
 [node name="Shoot" type="AudioStreamPlayer2D" parent="ComponentList/GraphicComponents" index="9"]
 stream = ExtResource("2_0ngo4")
 volume_db = -3.0
 script = ExtResource("3_pr6u1")
 pitch_range = 0.1
+
+[node name="TransitionSound" parent="ComponentList/GraphicComponents" index="10" node_paths=PackedStringArray("root")]
+external = true
+root = NodePath("../../..")
 
 [node name="TankSprite" type="Node2D" parent="."]
 
@@ -144,6 +243,7 @@ offset = Vector2(3.0303, 6.06061)
 libraries = {
 "": SubResource("AnimationLibrary_h1kpr")
 }
+autoplay = "init"
 
 [connection signal="timeout" from="ComponentList/BehaviourComponents/Shoot/Delay" to="ComponentList/BehaviourComponents/Shoot" method="_on_delay_timeout"]
 

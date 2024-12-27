@@ -1,10 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://cgywk5irhng6f"]
+[gd_scene load_steps=37 format=3 uid="uid://cgywk5irhng6f"]
 
 [ext_resource type="Script" path="res://scenes/tanks/starter/sub-components/ComponentList.gd" id="1_tr3ji"]
 [ext_resource type="Script" path="res://scripts/tank-components/BehaviourComponentList.gd" id="2_qj7ni"]
 [ext_resource type="Script" path="res://scripts/tank-components/MovementBasic.gd" id="3_f3txk"]
 [ext_resource type="Script" path="res://scripts/tank-components/StatsBasic.gd" id="4_rru3p"]
-[ext_resource type="PackedScene" uid="uid://cjxqex8nwxfk0" path="res://scenes/tanks/starter-interface.tscn" id="5_8jdxa"]
 [ext_resource type="Script" path="res://scripts/tank-components/DashBasic.gd" id="6_w0uyr"]
 [ext_resource type="Script" path="res://scripts/tank-components/DeathBasic.gd" id="7_tdgkg"]
 [ext_resource type="PackedScene" uid="uid://dkuuvwgfdon5r" path="res://scenes/spectator.tscn" id="8_2drfr"]
@@ -23,7 +22,9 @@
 [ext_resource type="Texture2D" uid="uid://oiajdi8v6g0j" path="res://assets/sprites/shockwave.png" id="21_m6887"]
 [ext_resource type="Script" path="res://scripts/graphics/shockwave.gd" id="22_0pj55"]
 [ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/particles/circle-particle.png" id="23_5u338"]
+[ext_resource type="AudioStream" uid="uid://bfmedhjhjk5xa" path="res://assets/audio/tanks/player-transition-1.mp3" id="24_6ppow"]
 [ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="24_21j64"]
+[ext_resource type="AudioStream" uid="uid://bxy6du8bio4oy" path="res://assets/audio/tanks/player-transition-2.mp3" id="25_clpf8"]
 
 [sub_resource type="GDScript" id="GDScript_tnxt8"]
 script/source = "extends Node
@@ -32,7 +33,6 @@ script/source = "extends Node
 
 func _ready():
 	%DamageParticle.root = tank
-	%DamageAnimation.root_node = tank.get_path()
 	%TankLight.tank = tank
 	%TankTrail.tank = tank
 "
@@ -149,12 +149,6 @@ damage_sounds = NodePath("../../GraphicComponents/HurtSound")
 damage_particle = NodePath("../../GraphicComponents/DamageParticle")
 data_node = NodePath("../../SharedData")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="BehaviourComponents/StatsBasic"]
-
-[node name="TankInterface" parent="BehaviourComponents/StatsBasic/CanvasLayer" node_paths=PackedStringArray("stats") instance=ExtResource("5_8jdxa")]
-visible = false
-stats = NodePath("../..")
-
 [node name="Dash" type="Node" parent="BehaviourComponents" node_paths=PackedStringArray("movement", "tank_stats", "audio_player", "dash_shake", "dash_shockwave", "data_node")]
 script = ExtResource("6_w0uyr")
 movement = NodePath("../Movement")
@@ -186,7 +180,6 @@ libraries = {
 scale = Vector2(0.997009, 1)
 script = ExtResource("14_vksei")
 shake_range = 1000
-auto_start = true
 intensity = 2.0
 intensity_decay = 15.0
 
@@ -248,3 +241,9 @@ external = true
 [node name="DashSounds" type="AudioStreamPlayer2D" parent="GraphicComponents"]
 script = ExtResource("10_l17xd")
 sounds = Array[AudioStream]([ExtResource("11_3ryci"), ExtResource("12_qpq8r"), ExtResource("13_ti5qw")])
+
+[node name="TransitionSound" type="AudioStreamPlayer2D" parent="GraphicComponents"]
+pitch_scale = 0.8
+script = ExtResource("10_l17xd")
+sounds = Array[AudioStream]([ExtResource("24_6ppow"), ExtResource("25_clpf8")])
+pitch_range = 0.05

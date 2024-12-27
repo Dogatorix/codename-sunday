@@ -1,8 +1,81 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb5ee7gdy0vct"]
+[gd_scene load_steps=6 format=3 uid="uid://bb5ee7gdy0vct"]
 
 [ext_resource type="Script" path="res://globals/scripts/global.gd" id="1_5p711"]
 [ext_resource type="PackedScene" uid="uid://l5po6sn7y21h" path="res://globals/Game.tscn" id="2_4esrs"]
+[ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="3_c7tfy"]
+[ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="4_kxwgd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s1clx"]
+font = ExtResource("4_kxwgd")
+font_size = 50
+outline_size = 22
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
 
 [node name="Global" type="Node"]
 script = ExtResource("1_5p711")
 game_scene = ExtResource("2_4esrs")
+
+[node name="DebugOverlay" type="CanvasLayer" parent="."]
+
+[node name="GameVersion" type="Label" parent="DebugOverlay"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.247059)
+z_index = 15
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -946.0
+offset_top = 8.0
+offset_right = 813.0
+offset_bottom = 103.0
+grow_horizontal = 2
+scale = Vector2(0.44, 0.44)
+theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("3_c7tfy")
+theme_override_font_sizes/font_size = 50
+text = "Alpha 1.2 - Game is in early development. Expect bugs and unfinished content."
+label_settings = SubResource("LabelSettings_s1clx")
+
+[node name="FPS" type="Label" parent="DebugOverlay"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.247059)
+z_index = 15
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 797.0
+offset_top = 12.0
+offset_right = 1149.0
+offset_bottom = 107.0
+grow_horizontal = 2
+scale = Vector2(0.44, 0.44)
+theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("3_c7tfy")
+theme_override_font_sizes/font_size = 50
+text = "FPS: 60"
+label_settings = SubResource("LabelSettings_s1clx")
+horizontal_alignment = 2
+
+[node name="Memory" type="Label" parent="DebugOverlay"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.247059)
+z_index = 15
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 687.0
+offset_top = 43.0
+offset_right = 1287.0
+offset_bottom = 138.0
+grow_horizontal = 2
+scale = Vector2(0.44, 0.44)
+theme_override_colors/font_outline_color = Color(0.113725, 0.113725, 0.113725, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("3_c7tfy")
+theme_override_font_sizes/font_size = 50
+text = "Memory: 60"
+label_settings = SubResource("LabelSettings_s1clx")
+horizontal_alignment = 2

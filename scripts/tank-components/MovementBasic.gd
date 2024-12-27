@@ -29,6 +29,8 @@ var external_velocity_direction := 0.0
 
 var input_vector := Vector2.ZERO
 
+var can_move := true
+
 func on_process(delta):
 	tank.move_and_slide()
 	camera = tank.camera
@@ -42,7 +44,7 @@ func on_process(delta):
 			Input.get_axis("move_up", "move_down")
 		)
 	
-	if input_vector != Vector2.ZERO and Global.Game.active_input:
+	if input_vector != Vector2.ZERO and Global.Game.active_input and can_move:
 		normal_velocity = normal_velocity.move_toward(input_vector.normalized() * speed, acceleration * delta)
 	else:
 		normal_velocity = normal_velocity.move_toward(Vector2.ZERO, friction * delta)

@@ -30,7 +30,7 @@ func hide_menu():
 		btn.disabled = true
 
 func upgrade_tank(index):
-	Global.Game.client.upgrade_tank(index)
+	Global.Game.client.upgrade_tank.emit(index)
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7vnl"]

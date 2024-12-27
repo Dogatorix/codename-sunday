@@ -33,6 +33,10 @@ func _process(_delta):
 		restarted.emit()
 		get_tree().reload_current_scene()
 		
+	%FPS.text = "FPS:" + str(Engine.get_frames_per_second())
+	var memory_usage = OS.get_static_memory_usage() / 1000000.0
+	%Memory.text = "Memory: " + str(int(memory_usage)) + "MB"
+		
 func _ready():
 	var os_name = OS.get_name()
 	if os_name == "Windows" or os_name == "macOS" or os_name == "Linux":

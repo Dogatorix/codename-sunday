@@ -7,6 +7,7 @@ extends Node
 @export var mobile_controls_scene: PackedScene
 
 @export var tank_scenes: Array[TankScene]
+@export var player_interface_scene: PackedScene
 
 enum GAMEMODES {
 	SANDBOX,
@@ -67,6 +68,7 @@ func update_menu():
 		
 var Sandbox: Node
 var Mobile: Node
+
 func _ready():
 	if gamemode == GAMEMODES.SANDBOX:
 		Sandbox = sandbox_scene.instantiate()
@@ -74,7 +76,13 @@ func _ready():
 		
 	if Global.is_mobile:
 		Mobile = mobile_controls_scene.instantiate()
-		add_child(Mobile) 
+		add_child(Mobile)
+
+var player_interface: CanvasLayer
+
+func add_player_interface():
+	player_interface = player_interface_scene.instantiate()
+	client.add_child(player_interface)
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("fun-menu-show"):

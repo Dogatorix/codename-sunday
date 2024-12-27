@@ -12,6 +12,9 @@ func _ready():
 		
 	for component in get_children():
 		tank.components[component.component_name] = component
+		
+		if component.has_method("on_ready"):
+			component.on_ready()
 
 func _process(delta):
 	for component in get_children():

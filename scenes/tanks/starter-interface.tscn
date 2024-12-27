@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cjxqex8nwxfk0"]
+[gd_scene load_steps=17 format=3 uid="uid://cjxqex8nwxfk0"]
 
 [ext_resource type="Texture2D" uid="uid://cnge7j38hewl1" path="res://assets/sprites/ui/starter-ui/starter-core-points.png" id="1_2hh8u"]
 [ext_resource type="Script" path="res://scenes/tanks/starter-interface.gd" id="1_8pq04"]
@@ -181,42 +181,26 @@ _data = {
 "show": SubResource("Animation_1us12")
 }
 
-[sub_resource type="Animation" id="Animation_1l6p7"]
-length = 0.001
+[node name="TankInterface" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_8pq04")
+animation_player = NodePath("TankInterface/AnimationPlayer")
 
-[sub_resource type="Animation" id="Animation_fde5p"]
-resource_name = "hide"
-length = 0.4
-
-[sub_resource type="Animation" id="Animation_0nuvh"]
-resource_name = "show"
-length = 0.4
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xra1y"]
-_data = {
-"RESET": SubResource("Animation_1l6p7"),
-"hide": SubResource("Animation_fde5p"),
-"show": SubResource("Animation_0nuvh")
-}
-
-[node name="TankInterface" type="Control" node_paths=PackedStringArray("animation_player")]
+[node name="TankInterface" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_8pq04")
-animation_player = NodePath("AnimationPlayer")
 
-[node name="Health" type="Control" parent="."]
+[node name="Health" type="Control" parent="TankInterface"]
 z_index = 15
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_group_ = true
 
-[node name="HealthBarContainer" type="TextureProgressBar" parent="Health"]
+[node name="HealthBarContainer" type="TextureProgressBar" parent="TankInterface/Health"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -236,7 +220,7 @@ texture_under = ExtResource("3_dw501")
 texture_progress = ExtResource("4_jrmr1")
 tint_progress = Color(0.33, 0, 0, 1)
 
-[node name="HealthBar" type="TextureProgressBar" parent="Health"]
+[node name="HealthBar" type="TextureProgressBar" parent="TankInterface/Health"]
 unique_name_in_owner = true
 clip_children = 2
 z_index = 5
@@ -258,7 +242,7 @@ radial_fill_degrees = 180.0
 texture_progress = ExtResource("4_jrmr1")
 tint_progress = Color(1, 0.271, 0.19, 1)
 
-[node name="Particle2D" type="CPUParticles2D" parent="Health/HealthBar"]
+[node name="Particle2D" type="CPUParticles2D" parent="TankInterface/Health/HealthBar"]
 position = Vector2(324.548, 469.038)
 rotation = -1.5708
 amount = 32
@@ -278,7 +262,7 @@ script = ExtResource("4_m645k")
 permanent = true
 autostart = true
 
-[node name="HealthBarOffset" type="TextureProgressBar" parent="Health"]
+[node name="HealthBarOffset" type="TextureProgressBar" parent="TankInterface/Health"]
 unique_name_in_owner = true
 z_index = 2
 layout_mode = 1
@@ -298,14 +282,14 @@ radial_initial_angle = 180.0
 radial_fill_degrees = 180.0
 texture_progress = ExtResource("3_cb3h1")
 
-[node name="Mana" type="Control" parent="."]
+[node name="Mana" type="Control" parent="TankInterface"]
 z_index = 15
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_group_ = true
 
-[node name="ManaBar" type="TextureProgressBar" parent="Mana"]
+[node name="ManaBar" type="TextureProgressBar" parent="TankInterface/Mana"]
 unique_name_in_owner = true
 clip_children = 2
 z_index = 5
@@ -331,7 +315,7 @@ radial_fill_degrees = 180.0
 texture_progress = ExtResource("4_jrmr1")
 tint_progress = Color(0, 0.518554, 0.994809, 1)
 
-[node name="Particle2D2" type="CPUParticles2D" parent="Mana/ManaBar"]
+[node name="Particle2D2" type="CPUParticles2D" parent="TankInterface/Mana/ManaBar"]
 position = Vector2(232.667, 464.592)
 rotation = -1.5708
 amount = 32
@@ -351,7 +335,7 @@ script = ExtResource("4_m645k")
 permanent = true
 autostart = true
 
-[node name="ManaBarOffset" type="TextureProgressBar" parent="Mana"]
+[node name="ManaBarOffset" type="TextureProgressBar" parent="TankInterface/Mana"]
 unique_name_in_owner = true
 z_index = 3
 layout_mode = 1
@@ -374,7 +358,7 @@ radial_initial_angle = 180.0
 radial_fill_degrees = 180.0
 texture_progress = ExtResource("3_cb3h1")
 
-[node name="ManaBarContainer" type="TextureProgressBar" parent="Mana"]
+[node name="ManaBarContainer" type="TextureProgressBar" parent="TankInterface/Mana"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -397,7 +381,7 @@ texture_under = ExtResource("3_dw501")
 texture_progress = ExtResource("4_jrmr1")
 tint_progress = Color(0, 0.250065, 0.503387, 1)
 
-[node name="Core" type="Control" parent="."]
+[node name="Core" type="Control" parent="TankInterface"]
 z_index = 15
 anchors_preset = 0
 offset_top = 8.0
@@ -405,7 +389,7 @@ offset_right = 40.0
 offset_bottom = 48.0
 metadata/_edit_group_ = true
 
-[node name="CorePointsContainer" type="TextureProgressBar" parent="Core"]
+[node name="CorePointsContainer" type="TextureProgressBar" parent="TankInterface/Core"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -424,7 +408,7 @@ step = 0.1
 fill_mode = 6
 texture_under = ExtResource("1_2hh8u")
 
-[node name="CoreBar" type="TextureProgressBar" parent="Core"]
+[node name="CoreBar" type="TextureProgressBar" parent="TankInterface/Core"]
 unique_name_in_owner = true
 z_index = 4
 layout_mode = 1
@@ -448,7 +432,7 @@ fill_mode = 6
 texture_progress = ExtResource("2_3y0uk")
 tint_progress = Color(0.0450001, 0.9, 0, 1)
 
-[node name="PointsLeft" type="Label" parent="Core"]
+[node name="PointsLeft" type="Label" parent="TankInterface/Core"]
 unique_name_in_owner = true
 modulate = Color(0.905882, 0.458824, 0, 1)
 layout_mode = 0
@@ -462,7 +446,7 @@ label_settings = SubResource("LabelSettings_mtuiq")
 horizontal_alignment = 2
 vertical_alignment = 3
 
-[node name="TankName" type="Label" parent="Core"]
+[node name="TankName" type="Label" parent="TankInterface/Core"]
 unique_name_in_owner = true
 modulate = Color(0.905882, 0.458824, 0, 1)
 layout_mode = 0
@@ -475,7 +459,7 @@ text = "Tank Name"
 label_settings = SubResource("LabelSettings_mtuiq")
 vertical_alignment = 3
 
-[node name="ShadowOverlay" type="TextureRect" parent="."]
+[node name="ShadowOverlay" type="TextureRect" parent="TankInterface"]
 modulate = Color(0, 0, 0, 0.67451)
 layout_mode = 1
 anchors_preset = 12
@@ -487,12 +471,7 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("10_6rvnl")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TankInterface"]
 libraries = {
 "": SubResource("AnimationLibrary_tpoov")
-}
-
-[node name="UpgradeAnimations" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_xra1y")
 }

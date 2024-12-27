@@ -532,8 +532,7 @@ texture_region_size = Vector2i(75, 75)
 [sub_resource type="TileSet" id="TileSet_umcpy"]
 tile_size = Vector2i(75, 75)
 occlusion_layer_0/light_mask = 1
-physics_layer_0/collision_layer = 3
-physics_layer_0/collision_mask = 3
+physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Autotile"
 terrain_set_0/terrain_0/color = Color(0.957883, 0.049279, 0.296081, 1)
@@ -931,5 +930,8 @@ position = Vector2(533, 4601)
 
 [node name="Tank" parent="." instance=ExtResource("15_ddjka")]
 position = Vector2(2485, -1996)
-tank_id = 2
 is_client = true
+
+[node name="Tank2" parent="." instance=ExtResource("15_ddjka")]
+position = Vector2(3066, -2105)
+tank_id = 2
