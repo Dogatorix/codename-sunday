@@ -1,6 +1,7 @@
 extends Node
 
 signal restarted()
+signal fade_in_complete()
 
 @export var game_scene: PackedScene
 
@@ -27,6 +28,15 @@ var is_mobile: bool:
 var is_desktop: bool:
 	get:
 		return device == DEVICE.DESKTOP
+
+func on_fade_in_finished():
+	fade_in_complete.emit()
+
+func fade_in():
+	%FadeAnimations.play("fade_in")
+	
+func fade_out():
+	%FadeAnimations.play("fade_out")
 
 func _process(_delta):
 	if Input.is_action_just_pressed("restart-debug") or Input.is_action_just_pressed("respawn"):

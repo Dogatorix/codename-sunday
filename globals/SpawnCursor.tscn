@@ -1,13 +1,34 @@
-[gd_scene load_steps=15 format=3 uid="uid://iqk1qndurvjj"]
+[gd_scene load_steps=20 format=3 uid="uid://iqk1qndurvjj"]
 
 [ext_resource type="Texture2D" uid="uid://oiajdi8v6g0j" path="res://assets/sprites/shockwave.png" id="1_f1vga"]
 [ext_resource type="Script" path="res://globals/scripts/spawn-cursor.gd" id="1_n3dvj"]
 [ext_resource type="Script" path="res://scripts/resources/string-scene.gd" id="2_am758"]
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="3_udekg"]
 [ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="4_hprva"]
+[ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/starter/tank.tscn" id="5_dqwoy"]
 [ext_resource type="PackedScene" uid="uid://dkre21e8af47i" path="res://scenes/accesories/oil-canister.tscn" id="6_1imwj"]
 [ext_resource type="PackedScene" uid="uid://dgjvtryibg6xd" path="res://scenes/house-debug.tscn" id="7_2y4hg"]
 [ext_resource type="Texture2D" uid="uid://p0f8bauc3ltr" path="res://assets/sprites/ui/spawn-circle.png" id="11_svnif"]
+
+[sub_resource type="Resource" id="Resource_ijk4i"]
+script = ExtResource("2_am758")
+name = "Tank - Basic"
+scene = ExtResource("5_dqwoy")
+
+[sub_resource type="Resource" id="Resource_o6221"]
+script = ExtResource("2_am758")
+name = "Tank - Assault"
+scene = ExtResource("5_dqwoy")
+
+[sub_resource type="Resource" id="Resource_y8kec"]
+script = ExtResource("2_am758")
+name = "Tank - Destroy"
+scene = ExtResource("5_dqwoy")
+
+[sub_resource type="Resource" id="Resource_khu0b"]
+script = ExtResource("2_am758")
+name = "Tank - Crush"
+scene = ExtResource("5_dqwoy")
 
 [sub_resource type="Resource" id="Resource_l7n2t"]
 script = ExtResource("2_am758")
@@ -42,7 +63,7 @@ outline_color = Color(0, 0, 0, 1)
 [node name="SpawnCursor" type="Node2D"]
 z_index = 500
 script = ExtResource("1_n3dvj")
-spawn_scenes = Array[ExtResource("2_am758")]([SubResource("Resource_l7n2t"), SubResource("Resource_ylf8r")])
+spawn_scenes = Array[ExtResource("2_am758")]([SubResource("Resource_ijk4i"), SubResource("Resource_o6221"), SubResource("Resource_y8kec"), SubResource("Resource_khu0b"), SubResource("Resource_l7n2t"), SubResource("Resource_ylf8r")])
 
 [node name="SpawnParticles" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true

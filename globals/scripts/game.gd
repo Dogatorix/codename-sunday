@@ -23,6 +23,7 @@ var gamemode: GAMEMODES = GAMEMODES.SANDBOX
 
 var clients: Array[Tank] = []
 var cameras: Array[GameCamera] = []
+var spawn_location: SpawnLocation
 
 var game_camera: GameCamera = null:
 	get:

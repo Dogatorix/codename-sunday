@@ -9,6 +9,7 @@ point_count = 3
 
 [node name="BulletDeathParticle" type="CPUParticles2D"]
 scale = Vector2(2, 2)
+amount = 16
 lifetime = 0.5
 explosiveness = 1.0
 texture = ExtResource("1_lp0b1")
@@ -19,6 +20,7 @@ initial_velocity_max = 400.0
 scale_amount_min = 0.0
 scale_amount_max = 0.2
 scale_amount_curve = SubResource("Curve_vjnkd")
+color = Color(0.446777, 0.446777, 0.446777, 1)
 script = ExtResource("1_62ler")
 
 [node name="Timer" type="Timer" parent="."]

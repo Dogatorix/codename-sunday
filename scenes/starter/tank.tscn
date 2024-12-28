@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://tg86jcs0270c"]
 
-[ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_gnasx"]
-[ext_resource type="PackedScene" uid="uid://bjbp1eyywcerx" path="res://scenes/tanks/player-bars.tscn" id="2_ahk3x"]
-[ext_resource type="Texture2D" uid="uid://c8j5si6u42hca" path="res://icon.png" id="3_8g6dr"]
-[ext_resource type="Script" path="res://scripts/tank-trail.gd" id="4_7ajdp"]
-[ext_resource type="Texture2D" uid="uid://v1h867arh4l5" path="res://assets/sprites/light.png" id="5_2faec"]
+[ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_crf14"]
+[ext_resource type="PackedScene" uid="uid://bjbp1eyywcerx" path="res://scenes/tanks/player-bars.tscn" id="2_fpj2l"]
+[ext_resource type="Texture2D" uid="uid://c8j5si6u42hca" path="res://icon.png" id="3_jkwhb"]
+[ext_resource type="Script" path="res://scripts/tank-trail.gd" id="4_dsp2w"]
+[ext_resource type="Texture2D" uid="uid://v1h867arh4l5" path="res://assets/sprites/light.png" id="5_7etdb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bbwtc"]
 radius = 146.113
@@ -33,10 +33,11 @@ func _ready():
 
 [node name="Tank" type="CharacterBody2D" groups=["tank"]]
 motion_mode = 1
-script = ExtResource("1_gnasx")
+script = ExtResource("1_crf14")
 tank_name = "Basic"
 tank_color = Color(0, 0.505882, 1, 1)
 username = "Dummy"
+tank_id = 2
 default_zoom = 1.2
 metadata/can_be_dragged = false
 
@@ -45,7 +46,7 @@ visible = false
 scale = Vector2(0.2, 0.2)
 shape = SubResource("CircleShape2D_bbwtc")
 
-[node name="PlayerBars" parent="." instance=ExtResource("2_ahk3x")]
+[node name="PlayerBars" parent="." instance=ExtResource("2_fpj2l")]
 visible = false
 offset_left = -76.0
 offset_top = -74.0
@@ -55,7 +56,7 @@ pivot_offset = Vector2(76, 74)
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(0.655, 0.655)
-texture = ExtResource("3_8g6dr")
+texture = ExtResource("3_jkwhb")
 
 [node name="TankTrail" type="Line2D" parent="." node_paths=PackedStringArray("tank")]
 unique_name_in_owner = true
@@ -64,7 +65,7 @@ z_index = -1
 width = 30.0
 width_curve = SubResource("Curve_s8dgb")
 gradient = SubResource("Gradient_xl87d")
-script = ExtResource("4_7ajdp")
+script = ExtResource("4_dsp2w")
 tank = NodePath("..")
 
 [node name="TankLight" type="PointLight2D" parent="." node_paths=PackedStringArray("tank")]
@@ -72,7 +73,7 @@ unique_name_in_owner = true
 scale = Vector2(1.76172, 1.51172)
 energy = 0.3
 shadow_enabled = true
-texture = ExtResource("5_2faec")
+texture = ExtResource("5_7etdb")
 script = SubResource("GDScript_a4ss0")
 tank = NodePath("..")
 metadata/_edit_lock_ = true

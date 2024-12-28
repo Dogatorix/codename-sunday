@@ -6,6 +6,8 @@ extends Marker2D
 @export var ready_audio: AudioStreamPlayer
 @export var zoom_audio: AudioStreamPlayer
 
+@export var tank_scene: PackedScene
+
 var velocity: Vector2
 
 var acceleration = 100
@@ -45,7 +47,7 @@ func _process(delta):
 		%Time.text = "Select respawning location"
 	elif selected_location and not timer_finished:
 		timer_finished = true
-		restart()
+		restart_animation()
 	
 	if not Input.is_action_pressed("spectator_speedup"):
 		speed = speed_normal
@@ -91,7 +93,7 @@ func _process(delta):
 		selected_location.click()
 		
 		if timer_finished:
-			restart()
+			restart_animation()
 			
 		%Location.text = "Selected: Location " + str(selected_location.index)
 		location_pulse.play("pulse")
@@ -120,5 +122,23 @@ func _area_exited(area):
 	area.unfocus()
 	location_in_area = null
 
+const respawn_offset = 100
+
+func restart_animation():
+	%Time.text = "Respawning..."
+	Global.fade_in()
+	Global.connect("fade_in_complete", restart)
+
 func restart():
-	print('test')
+	Global.Game.spawn_location = selected_location
+	selected_location.unclick()
+	var tank_instance: Tank = tank_scene.instantiate()
+	tank_instance.tank_id = Enums.TANKS.BASIC
+	tank_instance.is_client = true
+	
+	var position_offset = Vector2(randi_range(respawn_offset, -respawn_offset), randi_range(respawn_offset, -respawn_offset))
+	
+	get_tree().call_group("spawn_locations", "hide_location")
+	get_tree().current_scene.add_child(tank_instance)
+	tank_instance.global_position = selected_location.global_position + position_offset
+	queue_free()

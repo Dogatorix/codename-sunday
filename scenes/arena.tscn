@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://2ndw07jp2xgm" path="res://scenes/accesories/train-activator.tscn" id="11_py40o"]
 [ext_resource type="PackedScene" uid="uid://t1poiajqrasi" path="res://scenes/accesories/train-gate-end.tscn" id="12_0bosm"]
 [ext_resource type="PackedScene" uid="uid://dkre21e8af47i" path="res://scenes/accesories/oil-canister.tscn" id="14_xad84"]
-[ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/tanks/starter/tank.tscn" id="15_ddjka"]
+[ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/starter/tank.tscn" id="15_ddjka"]
 [ext_resource type="PackedScene" uid="uid://c0a8q5gvtc40p" path="res://scenes/ai-target-node.tscn" id="16_7t0wj"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_igv0n"]
@@ -921,5 +921,6 @@ position = Vector2(-2613, 2116)
 position = Vector2(802, 3643)
 
 [node name="Tank" parent="." instance=ExtResource("15_ddjka")]
-position = Vector2(1959, -1792)
+position = Vector2(2384, -1961)
+tank_id = 1
 is_client = true

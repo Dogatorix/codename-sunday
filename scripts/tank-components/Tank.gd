@@ -44,6 +44,7 @@ func _ready():
 		add_child(camera_instance)
 		camera = camera_instance
 		Game.Overlay.hide_bars()
+		Global.fade_out()
 	
 	var tank_content_scene: PackedScene = Global.Game.tank_scenes[tank_id].scene
 	current_content_instance = tank_content_scene.instantiate()
@@ -55,19 +56,10 @@ func switch_tank_scene(tank: Enums.TANKS):
 	add_child(new_content_instance)
 	current_content_instance.queue_free()
 	current_content_instance = new_content_instance
+	tank_id = tank
 	
 func upgrade_tank(tank: Enums.TANKS):
 	on_upgrade_tank.emit(tank)
-	
-func _process(_delta):
-	if Input.is_action_just_pressed("debug-1") and is_client:
-		upgrade_tank(Enums.TANKS.CRUSH)
-		
-	if Input.is_action_just_pressed("debug-2") and is_client:
-		upgrade_tank(Enums.TANKS.ASSAULT)
-		
-	if Input.is_action_just_pressed("debug-3") and is_client:
-		upgrade_tank(Enums.TANKS.DESTROY)
 	
 func behaviour(name: String):
 	return components[name]

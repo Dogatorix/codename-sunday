@@ -51,6 +51,7 @@ func death():
 		tank.add_sibling(spectator_instance)
 		spectator_instance.global_position = tank.global_position
 
+
 func instant_death():
 	if tank.is_client:
 		Global.Game.Overlay.show_bars()

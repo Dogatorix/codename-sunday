@@ -47,6 +47,12 @@ var points = 0
 @onready var regen_delay := health_regeneration_delay
 var reached_max_points := false
 
+var time := 0.0
+
+var is_immune: bool:
+	get:
+		return time <= 2.5
+
 func on_ready():	
 	max_core_points = CORE_REQUIREMENT[core_tier]
 	
@@ -67,6 +73,7 @@ func on_ready():
 		Global.Game.player_interface.on_ready()
 
 func on_process(delta):
+	time += delta
 	var player_interface = Global.Game.player_interface
 	
 	if player_interface != null:
@@ -82,7 +89,7 @@ func on_process(delta):
 	tank.player_bars.on_process(delta)
 	
 	if Input.is_action_just_pressed("debug") and tank.is_client:
-		points = max_core_points
+		damage_tank(1000)
 	
 	if not reached_max_points and points >= max_core_points:
 		reached_max_points = true
@@ -112,7 +119,11 @@ func set_points(value):
 	points_change.emit(value)
 
 func damage_tank(amount):
-	set_health(health - abs(amount))
+	if is_immune:
+		set_health(health - abs(amount / 4))
+	else:
+		set_health(health - abs(amount))
+		
 	regen_delay = health_regeneration_delay
 	
 	if health == 0:

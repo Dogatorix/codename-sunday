@@ -10,6 +10,9 @@ func show_location():
 	visible = true
 	$FadeIn.play("fadein")
 
+func hide_location():
+	visible = false
+
 func focus():
 	$AnimationPlayer.play("focus")
 	

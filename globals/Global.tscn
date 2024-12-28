@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bb5ee7gdy0vct"]
+[gd_scene load_steps=11 format=3 uid="uid://bb5ee7gdy0vct"]
 
 [ext_resource type="Script" path="res://globals/scripts/global.gd" id="1_5p711"]
 [ext_resource type="PackedScene" uid="uid://l5po6sn7y21h" path="res://globals/Game.tscn" id="2_4esrs"]
 [ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="3_c7tfy"]
 [ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="4_kxwgd"]
+[ext_resource type="Texture2D" uid="uid://boby5sv0pp0i8" path="res://assets/sprites/ui/fade-block.png" id="5_3nbmf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s1clx"]
 font = ExtResource("4_kxwgd")
@@ -12,11 +13,118 @@ outline_size = 22
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
 
+[sub_resource type="Animation" id="Animation_e41a8"]
+resource_name = "fade_out"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade-block:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.420448, 1),
+"update": 0,
+"values": [Vector2(975, 484), Vector2(975, -515)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fade-block2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.420448, 1),
+"update": 0,
+"values": [Vector2(975, 588), Vector2(975, 1613)]
+}
+
+[sub_resource type="Animation" id="Animation_c5iba"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade-block:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(975, 484)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fade-block2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(975, 588)]
+}
+
+[sub_resource type="Animation" id="Animation_q5oli"]
+resource_name = "fade_in"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade-block:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.420448, 1),
+"update": 0,
+"values": [Vector2(975, -515), Vector2(975, 484)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fade-block2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.420448, 1),
+"update": 0,
+"values": [Vector2(975, 1613), Vector2(975, 588)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_fade_in_finished"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7fp5i"]
+_data = {
+"RESET": SubResource("Animation_c5iba"),
+"fade_in": SubResource("Animation_q5oli"),
+"fade_out": SubResource("Animation_e41a8")
+}
+
 [node name="Global" type="Node"]
 script = ExtResource("1_5p711")
 game_scene = ExtResource("2_4esrs")
 
 [node name="DebugOverlay" type="CanvasLayer" parent="."]
+layer = 50
 
 [node name="GameVersion" type="Label" parent="DebugOverlay"]
 unique_name_in_owner = true
@@ -79,3 +187,26 @@ theme_override_font_sizes/font_size = 50
 text = "Memory: 60"
 label_settings = SubResource("LabelSettings_s1clx")
 horizontal_alignment = 2
+
+[node name="FadeScreen" type="CanvasLayer" parent="."]
+layer = 40
+
+[node name="Fade-block" type="Sprite2D" parent="FadeScreen"]
+z_index = 5
+position = Vector2(975, 484)
+rotation = 1.57079
+scale = Vector2(1.44799, 3.45961)
+texture = ExtResource("5_3nbmf")
+
+[node name="Fade-block2" type="Sprite2D" parent="FadeScreen"]
+z_index = 5
+position = Vector2(975, 588)
+rotation = -1.57079
+scale = Vector2(1.44799, 3.45961)
+texture = ExtResource("5_3nbmf")
+
+[node name="FadeAnimations" type="AnimationPlayer" parent="FadeScreen"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_7fp5i")
+}

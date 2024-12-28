@@ -1,6 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://cgywk5irhng6f"]
 
-[ext_resource type="Script" path="res://scenes/tanks/starter/sub-components/ComponentList.gd" id="1_tr3ji"]
+[ext_resource type="Script" path="res://scenes/starter/sub-components/ComponentList.gd" id="1_tr3ji"]
 [ext_resource type="Script" path="res://scripts/tank-components/BehaviourComponentList.gd" id="2_qj7ni"]
 [ext_resource type="Script" path="res://scripts/tank-components/MovementBasic.gd" id="3_f3txk"]
 [ext_resource type="Script" path="res://scripts/tank-components/StatsBasic.gd" id="4_rru3p"]
@@ -119,7 +119,7 @@ data_node = NodePath("../../SharedData")
 
 [node name="StatsBasic" type="Node" parent="BehaviourComponents" node_paths=PackedStringArray("animation_player", "damage_sounds", "damage_particle", "data_node")]
 script = ExtResource("4_rru3p")
-animation_player = NodePath("../../GraphicComponents/DamageAnimation")
+animation_player = NodePath("../../GraphicComponents/SpriteAnimations")
 damage_sounds = NodePath("../../GraphicComponents/HurtSound")
 damage_particle = NodePath("../../GraphicComponents/DamageParticle")
 data_node = NodePath("../../SharedData")
@@ -136,16 +136,15 @@ data_node = NodePath("../../SharedData")
 script = ExtResource("7_tdgkg")
 stats = NodePath("../StatsBasic")
 spectator_scene = ExtResource("8_2drfr")
-animation_player = NodePath("../../GraphicComponents/DamageAnimation")
+animation_player = NodePath("../../GraphicComponents/SpriteAnimations")
 death_scene = ExtResource("9_dnvuq")
 predeath_sound = NodePath("../../GraphicComponents/GiveUpSound")
 data_node = NodePath("../../SharedData")
 
 [node name="GraphicComponents" type="Node2D" parent="."]
 
-[node name="DamageAnimation" type="AnimationPlayer" parent="GraphicComponents"]
+[node name="SpriteAnimations" type="AnimationPlayer" parent="GraphicComponents"]
 unique_name_in_owner = true
-root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_0lit1")
 }

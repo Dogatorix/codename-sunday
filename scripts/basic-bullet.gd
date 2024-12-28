@@ -21,6 +21,7 @@ var color: Color
 @export var burnout_particle: Particle2D
 
 var bullet_velocity: Vector2
+var collision_body: CollisionObject2D
 
 func _ready():	
 	scale = Vector2(size,size)
@@ -37,20 +38,24 @@ func _on_body_entered(body):
 		return
 		
 	if body is Tank:
+		collision_body = body
+	
+	if body is Tank:
 		var tank_stats: StatsBasic = body.behaviour("stats")
 		tank_stats.damage_tank(damage)
 	else:	
 		audio_player.start()
 	
-	summon_particle()
+	
 	if body.has_meta("bullet_target"):
 		body.on_bullet_hit(self)
 		damage_bullet()
 	else:
 		kill_bullet()
-		
 
 func summon_particle():
+	if collision_body is Tank:
+		return
 	var particle_instance = particle_scene.instantiate()
 	particle_instance.position = position
 	add_sibling(particle_instance)

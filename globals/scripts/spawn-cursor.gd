@@ -19,7 +19,18 @@ func _process(delta):
 		update_scene()
 		
 	if Input.is_action_just_pressed("spawn-cursor-summon"):
+		var scene_name = spawn_scenes[selection_pointer].name
 		var scene_instance = selected_scene.instantiate()
+		
+		if scene_name == "Tank - Basic":
+			scene_instance.tank_id = Enums.TANKS.BASIC
+		if scene_name == "Tank - Assault":
+			scene_instance.tank_id = Enums.TANKS.ASSAULT
+		if scene_name == "Tank - Destroy":
+			scene_instance.tank_id = Enums.TANKS.DESTROY
+		if scene_name == "Tank - Crush":
+			scene_instance.tank_id = Enums.TANKS.CRUSH
+			
 		get_tree().current_scene.add_child(scene_instance)
 		scene_instance.global_position = global_position
 	

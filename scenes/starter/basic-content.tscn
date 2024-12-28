@@ -1,43 +1,78 @@
-[gd_scene load_steps=13 format=3 uid="uid://dctw8f2xybpt8"]
+[gd_scene load_steps=16 format=3 uid="uid://dctw8f2xybpt8"]
 
-[ext_resource type="PackedScene" uid="uid://cgywk5irhng6f" path="res://scenes/tanks/starter/sub-components/starter-component-list.tscn" id="1_xnl1o"]
+[ext_resource type="PackedScene" uid="uid://cgywk5irhng6f" path="res://scenes/starter/sub-components/starter-component-list.tscn" id="1_xnl1o"]
 [ext_resource type="AudioStream" uid="uid://ooiku30st7ax" path="res://assets/audio/tanks/starter/basic-shot.mp3" id="2_0ngo4"]
 [ext_resource type="Script" path="res://scripts/tank-components/ShootingBasic.gd" id="2_f0mn2"]
-[ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/tanks/starter/sub-components/basic-bullet.tscn" id="3_ck1sk"]
+[ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/starter/sub-components/basic-bullet.tscn" id="3_ck1sk"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="3_pr6u1"]
 [ext_resource type="Texture2D" uid="uid://bg76v4dgiyq0e" path="res://assets/sprites/tanks/starter/starter-barrel.png" id="6_avrqh"]
 [ext_resource type="Texture2D" uid="uid://b3rx5mjjudhk3" path="res://assets/sprites/tanks/starter/starter-core-1.png" id="7_xk216"]
 
-[sub_resource type="Animation" id="Animation_wga42"]
+[sub_resource type="Animation" id="Animation_t3ylw"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Barrel:scale")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.3, 0.3)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Barrel:position")
+tracks/1/path = NodePath(".:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(5.96046e-08, -7)]
+"values": [Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_3p83m"]
+[sub_resource type="Animation" id="Animation_70f7r"]
+resource_name = "respawn"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.34151, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.34151, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_quw8b"]
+_data = {
+"RESET": SubResource("Animation_t3ylw"),
+"respawn": SubResource("Animation_70f7r")
+}
+
+[sub_resource type="Animation" id="Animation_mciyq"]
 resource_name = "init"
-length = 0.2
+length = 0.3
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,10 +80,10 @@ tracks/0/path = NodePath("Barrel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(0.406126, 1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.378929, 1),
 "update": 0,
-"values": [Vector2(5.96046e-08, 31), Vector2(5.96046e-08, -7)]
+"values": [Vector2(5.96046e-08, 29), Vector2(0, -7)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -57,7 +92,7 @@ tracks/1/path = NodePath("../ComponentList/BehaviourComponents/Shoot")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -67,23 +102,24 @@ tracks/1/keys = {
 "method": &"enable_shoot"
 }]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../ComponentList/GraphicComponents/TransitionSound")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+
+[sub_resource type="Animation" id="Animation_lnnq8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"start"
-}]
+"update": 0,
+"values": [Vector2(5.96046e-08, 29)]
 }
 
-[sub_resource type="Animation" id="Animation_dv1rt"]
-resource_name = "retract"
+[sub_resource type="Animation" id="Animation_bdlr0"]
+resource_name = "shoot"
 length = 0.2
 step = 0.1
 tracks/0/type = "value"
@@ -94,68 +130,15 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(2.46229, 1),
+"transitions": PackedFloat32Array(0.378929, 1),
 "update": 0,
-"values": [Vector2(5.96046e-08, -7), Vector2(5.96046e-08, 31)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Barrel:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.3, 0.3)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../ComponentList/BehaviourComponents/Shoot")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"disable_shoot"
-}]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../ComponentList/BehaviourComponents/StatsBasic")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"tank_upgrade_post"
-}]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../ComponentList/GraphicComponents/TransitionSound")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"start"
-}]
+"values": [Vector2(0, 6), Vector2(0, -7)]
 }
 
-[sub_resource type="Animation" id="Animation_stqm8"]
-resource_name = "shoot"
-length = 0.2
+[sub_resource type="Animation" id="Animation_6pkmb"]
+resource_name = "retract"
+length = 0.3
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -163,18 +146,32 @@ tracks/0/path = NodePath("Barrel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(0.406126, 1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(2.2974, 1),
 "update": 0,
-"values": [Vector2(0, 10), Vector2(5.96046e-08, -7)]
+"values": [Vector2(0, -7), Vector2(5.96046e-08, 29)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ComponentList/BehaviourComponents/Shoot")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"disable_shoot"
+}]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h1kpr"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ac6ne"]
 _data = {
-"RESET": SubResource("Animation_wga42"),
-"init": SubResource("Animation_3p83m"),
-"retract": SubResource("Animation_dv1rt"),
-"shoot": SubResource("Animation_stqm8")
+"RESET": SubResource("Animation_lnnq8"),
+"init": SubResource("Animation_mciyq"),
+"retract": SubResource("Animation_6pkmb"),
+"shoot": SubResource("Animation_bdlr0")
 }
 
 [node name="BasicContent" type="Node2D"]
@@ -186,7 +183,7 @@ tank_sprite = NodePath("../../../TankSprite")
 
 [node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("tank_animations", "colored_nodes")]
 upgrades = Array[int]([1, 2, 3])
-tank_animations = NodePath("../../../TankSprite/AnimationPlayer")
+tank_animations = NodePath("../../GraphicComponents/SpriteAnimations")
 colored_nodes = [NodePath("../../../TankSprite/Core")]
 
 [node name="Shoot" type="Node" parent="ComponentList/BehaviourComponents" index="4" node_paths=PackedStringArray("dash", "animation_player", "origin", "tank_sprite", "delay", "audio_player", "movement", "sprite_node", "data_node")]
@@ -207,9 +204,6 @@ data_node = NodePath("../../SharedData")
 [node name="Delay" type="Timer" parent="ComponentList/BehaviourComponents/Shoot"]
 wait_time = 0.5
 
-[node name="DamageAnimation" parent="ComponentList/GraphicComponents" index="0"]
-root_node = NodePath("../../..")
-
 [node name="TransitionSound" parent="ComponentList/GraphicComponents" index="8" node_paths=PackedStringArray("root")]
 external = true
 root = NodePath("../../..")
@@ -229,22 +223,28 @@ scale = Vector2(0.999999, 0.999999)
 
 [node name="Barrel" type="Sprite2D" parent="TankSprite"]
 show_behind_parent = true
-position = Vector2(5.96046e-08, -7)
+position = Vector2(5.96046e-08, 29)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("6_avrqh")
 offset = Vector2(0, -100)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TankSprite"]
-libraries = {
-"": SubResource("AnimationLibrary_h1kpr")
-}
-autoplay = "init"
 
 [node name="Core" type="Sprite2D" parent="TankSprite"]
 position = Vector2(5.96046e-08, 1.19209e-07)
 scale = Vector2(0.33, 0.33)
 texture = ExtResource("7_xk216")
 offset = Vector2(3.0303, 6.06061)
+
+[node name="Respawn" type="AnimationPlayer" parent="TankSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_quw8b")
+}
+autoplay = "respawn"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TankSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_ac6ne")
+}
+autoplay = "init"
 
 [connection signal="timeout" from="ComponentList/BehaviourComponents/Shoot/Delay" to="ComponentList/BehaviourComponents/Shoot" method="_on_delay_timeout"]
 
