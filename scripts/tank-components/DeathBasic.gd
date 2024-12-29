@@ -48,7 +48,9 @@ func death():
 		var spectator_instance = spectator_scene.instantiate()
 		spectator_instance.is_client = tank.is_client
 		spectator_instance.camera_zoom = tank.default_zoom
-		tank.add_sibling(spectator_instance)
+		tank.add_sibling.call_deferred(spectator_instance)
+		
+		await spectator_instance.ready
 		spectator_instance.global_position = tank.global_position
 
 

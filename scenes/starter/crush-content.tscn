@@ -330,6 +330,7 @@ respawn_animation = NodePath("../../../TankSprite/Respawn")
 
 [node name="Shoot" type="Node" parent="ComponentList/BehaviourComponents" index="4" node_paths=PackedStringArray("dash", "animation_player", "origin", "tank_sprite", "delay", "audio_player", "movement", "sprite_node", "data_node")]
 script = ExtResource("2_3lsk0")
+knockback = 400.0
 dash = NodePath("../Dash")
 animation_player = NodePath("../../../TankSprite/AnimationPlayer")
 origin = NodePath("../../../TankSprite/ShootOrigin")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/tank-spectator.gd" id="1_yccdq"]
 [ext_resource type="Script" path="res://scripts/helper-components/GameCamera.gd" id="2_gmt2q"]
-[ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/starter/tank.tscn" id="2_ia6p0"]
+[ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/tank.tscn" id="2_ia6p0"]
 [ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="3_7rtqm"]
 [ext_resource type="AudioStream" uid="uid://d083xgrceomhr" path="res://assets/audio/spectator/respawn-ready.mp3" id="4_n8abg"]
 [ext_resource type="AudioStream" uid="uid://crbmt5l31ha4o" path="res://assets/audio/spectator/zoom-change.mp3" id="5_4knqj"]

@@ -14,5 +14,9 @@ texture_focused = ExtResource("2_wmynq")
 text = "Button Medium"
 
 [node name="Light" parent="." index="2"]
-position = Vector2(232, 49)
-scale = Vector2(1.647, 0.326)
+position = Vector2(146, 345)
+scale = Vector2(1.69531, 0.332031)
+offset = Vector2(50.7281, -903.529)
+
+[node name="ClickSound" parent="." index="3"]
+volume_db = -10.0

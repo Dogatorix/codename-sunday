@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/resources/string-scene.gd" id="2_am758"]
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="3_udekg"]
 [ext_resource type="FontFile" uid="uid://02hymxbvrclm" path="res://assets/fonts/rubik-bold.ttf" id="4_hprva"]
-[ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/starter/tank.tscn" id="5_dqwoy"]
+[ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/tank.tscn" id="5_dqwoy"]
 [ext_resource type="PackedScene" uid="uid://dkre21e8af47i" path="res://scenes/accesories/oil-canister.tscn" id="6_1imwj"]
 [ext_resource type="PackedScene" uid="uid://dgjvtryibg6xd" path="res://scenes/house-debug.tscn" id="7_2y4hg"]
 [ext_resource type="Texture2D" uid="uid://p0f8bauc3ltr" path="res://assets/sprites/ui/spawn-circle.png" id="11_svnif"]

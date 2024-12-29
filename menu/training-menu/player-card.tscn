@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b42iq26re5kxi"]
+
+[ext_resource type="Texture2D" uid="uid://bqu47weof2f0x" path="res://menu/training-menu/player-card.png" id="1_e5v7v"]
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(260, 270)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 293.0
+offset_bottom = 320.0
+
+[node name="Player-card" type="Sprite2D" parent="."]
+position = Vector2(125, 161)
+texture = ExtResource("1_e5v7v")

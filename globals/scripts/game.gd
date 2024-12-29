@@ -11,15 +11,24 @@ extends Node
 
 @export var tank_scenes: Array[TankScene]
 
-enum GAMEMODES {
-	SANDBOX,
-	ADVANCED_TRAINING
-}
+@export var gamemode: Enums.GAMEMODES = Enums.GAMEMODES.SANDBOX
+
+const TANK_DEFAULT_COLORS: Array[Color] = [
+	Color.RED,
+	Color.BLUE,
+	Color.GREEN,
+	Color.AQUA,
+	Color.CYAN,
+	Color.ORANGE,
+	Color.ORANGE_RED,
+	Color.YELLOW,
+	Color.PURPLE,
+	Color.HOT_PINK
+]
 
 signal restarted()
 signal menu_updated(mode: bool)
 
-var gamemode: GAMEMODES = GAMEMODES.SANDBOX
 
 var clients: Array[Tank] = []
 var cameras: Array[GameCamera] = []
@@ -73,7 +82,7 @@ var Sandbox: Node
 var Mobile: Node
 
 func _ready():
-	if gamemode == GAMEMODES.SANDBOX:
+	if gamemode == Enums.GAMEMODES.SANDBOX:
 		Sandbox = sandbox_scene.instantiate()
 		add_child(Sandbox)
 		
@@ -99,6 +108,11 @@ func _process(_delta):
 	if Input.is_action_just_pressed("fun-menu-show"):
 		paused = !paused
 		Global.Game.update_menu()
-
+		
 func input_autherization():
 	return active_input and client.is_client
+	
+@export var tank_scene: PackedScene
+func create_tank():
+	var tank_instance: Tank = tank_scene.instantiate()
+	return tank_instance

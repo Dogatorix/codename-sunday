@@ -5,6 +5,10 @@ extends Node2D
 
 func _ready():
 	menu_start_button.disable()
+	
+	
+	_on_menu_input_text_changed("kill yourself")
+	#_on_menu_button_pressed()
 
 func _on_menu_button_pressed():
 	Global.username = %NameEdit.text_value
@@ -31,7 +35,27 @@ func _on_menu_input_text_changed(new_text):
 
 func _on_quit_game_pressed():
 	Global.fade_in()
-	Global.connect("fade_in_complete", quit_game)
+	await Global.fade_in_complete
+	quit_game()
 
 func quit_game():
 	get_tree().quit()
+
+func _on__sandbox_pressed():
+	disable_menu_buttons()	
+	Global.fade_in()
+	await Global.fade_in_complete
+	
+	var sandbox_scene: PackedScene = load("res://scenes/maps/sandbox.tscn")
+	get_tree().current_scene.queue_free()
+
+	var instances_scene := sandbox_scene.instantiate()
+	get_tree().root.add_child(instances_scene)
+	get_tree().current_scene = instances_scene
+	
+	Global.create_game(Enums.GAMEMODES.SANDBOX)
+
+func disable_menu_buttons():
+	%TheSandbox.disable()
+	%QuitGame.disable()
+	%MachineTraining.disable()

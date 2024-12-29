@@ -3,8 +3,6 @@ extends Node
 signal restarted()
 signal fade_in_complete()
 
-@export var game_scene: PackedScene
-
 enum DEVICE {
 	MOBILE,
 	DESKTOP
@@ -54,9 +52,6 @@ func _ready():
 	else:
 		device = DEVICE.MOBILE 
 	
-	Game = game_scene.instantiate()
-	add_child(Game)
-	
 	this_is_necessary_pinky_promise_do_not_remove()
 
 func this_is_necessary_pinky_promise_do_not_remove():
@@ -70,3 +65,9 @@ func tween(target: Object, property, final_value, duration: float, transition: T
 	tween.tween_property(target, property, final_value, duration)
 	
 	return tween
+	
+@export var game_scene: PackedScene
+func create_game(gamemode: Enums.GAMEMODES):
+	Game = game_scene.instantiate()
+	Game.gamemode = gamemode
+	add_child(Game)
