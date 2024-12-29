@@ -13,35 +13,6 @@ outline_size = 22
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
 
-[sub_resource type="Animation" id="Animation_e41a8"]
-resource_name = "fade_out"
-length = 0.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Fade-block:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.420448, 1),
-"update": 0,
-"values": [Vector2(975, 484), Vector2(975, -515)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Fade-block2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.420448, 1),
-"update": 0,
-"values": [Vector2(975, 588), Vector2(975, 1613)]
-}
-
 [sub_resource type="Animation" id="Animation_c5iba"]
 length = 0.001
 tracks/0/type = "value"
@@ -54,7 +25,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(975, 484)]
+"values": [Vector2(975, -562)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -66,7 +37,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(975, 588)]
+"values": [Vector2(975, 1624)]
 }
 
 [sub_resource type="Animation" id="Animation_q5oli"]
@@ -110,6 +81,35 @@ tracks/2/keys = {
 "args": [],
 "method": &"on_fade_in_finished"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_e41a8"]
+resource_name = "fade_out"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade-block:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.420448, 1),
+"update": 0,
+"values": [Vector2(975, 484), Vector2(975, -515)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fade-block2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.420448, 1),
+"update": 0,
+"values": [Vector2(975, 588), Vector2(975, 1613)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7fp5i"]
@@ -193,14 +193,14 @@ layer = 40
 
 [node name="Fade-block" type="Sprite2D" parent="FadeScreen"]
 z_index = 5
-position = Vector2(975, 484)
+position = Vector2(975, -562)
 rotation = 1.57079
 scale = Vector2(1.44799, 3.45961)
 texture = ExtResource("5_3nbmf")
 
 [node name="Fade-block2" type="Sprite2D" parent="FadeScreen"]
 z_index = 5
-position = Vector2(975, 588)
+position = Vector2(975, 1624)
 rotation = -1.57079
 scale = Vector2(1.44799, 3.45961)
 texture = ExtResource("5_3nbmf")

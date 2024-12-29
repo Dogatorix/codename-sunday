@@ -13,10 +13,7 @@ func _ready():
 	%TierText.text = "Upgrade to Tier " + str(upgrade_tier)
 	
 	var camera: GameCamera = Global.Game.client.camera
-	var camera_tween: Tween = camera.create_tween()
-	camera_tween.set_ease(Tween.EASE_OUT)
-	camera_tween.set_trans(Tween.TRANS_EXPO)
-	camera_tween.tween_property(camera, "offset", Vector2(0, -60), 1)
+	Global.tween(camera, "offset", Vector2(0, -60), 1)
 
 	var upgrade_size = upgrades.size()
 	
@@ -33,21 +30,14 @@ func _ready():
 		splash_button_instance.tank_id = upgrade
 		splash_button_instance.position = Vector2(center.x, target_position.y)
 		
-		var tween: Tween = splash_button_instance.create_tween()
-		
-		tween.set_ease(Tween.EASE_OUT)
-		tween.set_trans(Tween.TRANS_EXPO)
-		tween.tween_property(splash_button_instance,"position",target_position, 1)
+		Global.tween(splash_button_instance, "position", target_position, 1)
 		
 		$Buttons.add_child(splash_button_instance)
 		splash_button_instance.connect("on_click", close)
 
 func close():
 	var camera: GameCamera = Global.Game.client.camera
-	var camera_tween: Tween = camera.create_tween()
-	camera_tween.set_ease(Tween.EASE_OUT)
-	camera_tween.set_trans(Tween.TRANS_EXPO)
-	camera_tween.tween_property(camera, "offset", Vector2(0, -0), 1)	
+	Global.tween(camera, "offset", Vector2(0, 0), 1)
 
 	$AnimationPlayer.play("destroy")
 	for button in $Buttons.get_children():

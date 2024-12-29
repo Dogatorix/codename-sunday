@@ -62,3 +62,11 @@ func _ready():
 func this_is_necessary_pinky_promise_do_not_remove():
 	if not FileAccess.file_exists("res://coconut.png"):
 		get_parent().fuck_you()
+
+func tween(target: Object, property, final_value, duration: float, transition: Tween.TransitionType = Tween.TransitionType.TRANS_EXPO, easing: Tween.EaseType = Tween.EaseType.EASE_OUT):
+	var tween: Tween = create_tween()
+	tween.set_ease(easing)
+	tween.set_trans(transition)
+	tween.tween_property(target, property, final_value, duration)
+	
+	return tween

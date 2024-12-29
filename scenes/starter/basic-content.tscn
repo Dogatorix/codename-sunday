@@ -69,10 +69,25 @@ _data = {
 "respawn": SubResource("Animation_70f7r")
 }
 
+[sub_resource type="Animation" id="Animation_lnnq8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5.96046e-08, 29)]
+}
+
 [sub_resource type="Animation" id="Animation_mciyq"]
 resource_name = "init"
 length = 0.3
-step = 0.01
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -102,37 +117,19 @@ tracks/1/keys = {
 "method": &"enable_shoot"
 }]
 }
-
-[sub_resource type="Animation" id="Animation_lnnq8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Barrel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../ComponentList/GraphicComponents/TransitionSound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(5.96046e-08, 29)]
-}
-
-[sub_resource type="Animation" id="Animation_bdlr0"]
-resource_name = "shoot"
-length = 0.2
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Barrel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(0.378929, 1),
-"update": 0,
-"values": [Vector2(0, 6), Vector2(0, -7)]
+"values": [{
+"args": [],
+"method": &"start"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_6pkmb"]
@@ -165,6 +162,51 @@ tracks/1/keys = {
 "method": &"disable_shoot"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../ComponentList/BehaviourComponents/StatsBasic")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"tank_upgrade_post"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../ComponentList/GraphicComponents/TransitionSound")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_bdlr0"]
+resource_name = "shoot"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.378929, 1),
+"update": 0,
+"values": [Vector2(0, 6), Vector2(0, -7)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ac6ne"]
 _data = {
@@ -181,10 +223,11 @@ _data = {
 [node name="Movement" parent="ComponentList/BehaviourComponents" index="0" node_paths=PackedStringArray("tank_sprite")]
 tank_sprite = NodePath("../../../TankSprite")
 
-[node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("tank_animations", "colored_nodes")]
+[node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("tank_animations", "colored_nodes", "respawn_animation")]
 upgrades = Array[int]([1, 2, 3])
-tank_animations = NodePath("../../GraphicComponents/SpriteAnimations")
+tank_animations = NodePath("../../../TankSprite/AnimationPlayer")
 colored_nodes = [NodePath("../../../TankSprite/Core")]
+respawn_animation = NodePath("../../../TankSprite/Respawn")
 
 [node name="Shoot" type="Node" parent="ComponentList/BehaviourComponents" index="4" node_paths=PackedStringArray("dash", "animation_player", "origin", "tank_sprite", "delay", "audio_player", "movement", "sprite_node", "data_node")]
 script = ExtResource("2_f0mn2")
@@ -238,7 +281,6 @@ offset = Vector2(3.0303, 6.06061)
 libraries = {
 "": SubResource("AnimationLibrary_quw8b")
 }
-autoplay = "respawn"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TankSprite"]
 libraries = {

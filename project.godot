@@ -31,6 +31,7 @@ buses/default_bus_layout=""
 
 Global="*res://globals/Global.tscn"
 Enums="*res://globals/scripts/Enums.gd"
+Settings="*res://globals/scripts/Settings.gd"
 
 [display]
 

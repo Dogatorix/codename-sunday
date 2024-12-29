@@ -6,10 +6,9 @@ const component_name = "stats"
 @onready var tank: Tank = data_node.tank
 
 const CORE_REQUIREMENT = {
-	0: 300,
-	1: 2000,
-	2: 8000,
-	3: 16000
+	Enums.TANK_TIERS.BASIC: 300,
+	Enums.TANK_TIERS.STARTER: 2000,
+	Enums.TANK_TIERS.INDUSTRIAL: 8000,
 }
 
 @export var core_tier: Enums.TANK_TIERS
@@ -29,6 +28,9 @@ const CORE_REQUIREMENT = {
 @export var damage_sounds: Audio2D
 @export var damage_particle: Particle2D
 @export var colored_nodes: Array[Node]
+
+# this is cancer, please fix in 1.3
+@export var respawn_animation: AnimationPlayer
 
 var max_core_points := 1000
 
@@ -53,8 +55,11 @@ var is_immune: bool:
 	get:
 		return time <= 2.5
 
-func on_ready():	
+func on_ready():
 	max_core_points = CORE_REQUIREMENT[core_tier]
+	
+	if tank.is_spawning:
+		respawn_animation.play("respawn")
 	
 	tank.player_bars.stats = self
 	tank.player_bars.on_ready()
@@ -89,7 +94,7 @@ func on_process(delta):
 	tank.player_bars.on_process(delta)
 	
 	if Input.is_action_just_pressed("debug") and tank.is_client:
-		damage_tank(1000)
+		points = max_core_points
 	
 	if not reached_max_points and points >= max_core_points:
 		reached_max_points = true

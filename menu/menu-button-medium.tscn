@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch3mjwdcr0j3v"]
+
+[ext_resource type="PackedScene" uid="uid://c2pyqulhtegj4" path="res://menu/menu-button.tscn" id="1_06tuo"]
+[ext_resource type="Texture2D" uid="uid://l7jhuj3x57j7" path="res://menu/menu-button-medium.png" id="2_wmynq"]
+
+[node name="MenuButton" instance=ExtResource("1_06tuo")]
+texture_normal = ExtResource("2_wmynq")
+texture_pressed = ExtResource("2_wmynq")
+texture_hover = ExtResource("2_wmynq")
+texture_disabled = ExtResource("2_wmynq")
+texture_focused = ExtResource("2_wmynq")
+
+[node name="Label" parent="." index="0"]
+text = "Button Medium"
+
+[node name="Light" parent="." index="2"]
+position = Vector2(232, 49)
+scale = Vector2(1.647, 0.326)

@@ -99,11 +99,7 @@ func _process(delta):
 		location_pulse.play("pulse")
 			
 func update_camera_zoom():
-	var tween: Tween = create_tween()
-	
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_EXPO)
-	tween.tween_property(camera, "zoom", Vector2(camera_zoom, camera_zoom), .5)
+	Global.tween(camera, "zoom", Vector2(camera_zoom, camera_zoom), .5)
 
 var location_in_area: SpawnLocation
 var selected_location: SpawnLocation
@@ -130,6 +126,7 @@ func restart_animation():
 	Global.connect("fade_in_complete", restart)
 
 func restart():
+	Global.disconnect("fade_in_complete", restart)
 	Global.Game.spawn_location = selected_location
 	selected_location.unclick()
 	var tank_instance: Tank = tank_scene.instantiate()

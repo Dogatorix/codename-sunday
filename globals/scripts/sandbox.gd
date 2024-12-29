@@ -40,12 +40,10 @@ func update_spawner():
 		move_mode = false
 		update_move()
 		spawn_instance = spawn_cursor_scene.instantiate()
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		get_tree().current_scene.add_child(spawn_instance)
 	else:
 		if spawn_instance != null:
 			spawn_instance.queue_free()
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func update_move():
 	if move_mode:

@@ -7,10 +7,10 @@ var selection_pointer := 0
 
 func _ready():
 	update_scene()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _process(delta):
 	global_position = get_global_mouse_position()
-	
 	if Input.is_action_just_pressed("spawn-cursor-next"):
 		selection_pointer += 1
 		update_scene()
@@ -38,3 +38,6 @@ func update_scene():
 	selection_pointer = clamp(selection_pointer, 0, spawn_scenes.size() - 1)
 	selected_scene = spawn_scenes[selection_pointer].scene
 	%SummonLabel.text = "Selected: " + spawn_scenes[selection_pointer].name
+
+func _exit_tree():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

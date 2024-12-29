@@ -1,46 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://c2pyqulhtegj4"]
 
 [ext_resource type="Texture2D" uid="uid://cc57100mavvgi" path="res://menu/menu-button.png" id="1_u2ew3"]
+[ext_resource type="Script" path="res://menu/menu-button.gd" id="2_w361m"]
 [ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="3_fpw3y"]
 [ext_resource type="PackedScene" uid="uid://c246vgbhs36u8" path="res://menu/menu-light.tscn" id="4_pp85f"]
 [ext_resource type="AudioStream" uid="uid://d1hjfbbvxsf36" path="res://menu/button-click.mp3" id="5_j6ash"]
-
-[sub_resource type="GDScript" id="GDScript_oga2h"]
-script/source = "extends TextureButton
-
-var tween: Tween
-@onready var original_scale := scale
-
-func enable():
-	disabled = false
-	$AnimationPlayer.stop()
-	$AnimationPlayer.play(\"enable\")
-	
-func disable():
-	disabled = true
-	$AnimationPlayer.stop()
-	$AnimationPlayer.play(\"disable\")
-
-func _on_button_down():
-	if disabled:
-		return
-	
-	scale = original_scale + Vector2(0.2, 0.2)
-	
-	$ClickSound.play()
-
-	if tween:
-		tween.kill()
-		
-	$AnimationPlayer.stop()
-	$AnimationPlayer.play(\"press\")
-		
-	tween = create_tween()
-	
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(self, \"scale\", original_scale, 0.3)
-"
 
 [sub_resource type="LabelSettings" id="LabelSettings_11qsj"]
 font = ExtResource("3_fpw3y")
@@ -208,22 +172,27 @@ modulate = Color(0, 0.592157, 0.992157, 1)
 offset_right = 255.0
 offset_bottom = 93.0
 pivot_offset = Vector2(128, 46)
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("1_u2ew3")
 texture_pressed = ExtResource("1_u2ew3")
 texture_hover = ExtResource("1_u2ew3")
 texture_disabled = ExtResource("1_u2ew3")
 texture_focused = ExtResource("1_u2ew3")
-script = SubResource("GDScript_oga2h")
+stretch_mode = 0
+script = ExtResource("2_w361m")
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 48.0
-offset_top = 18.0
-offset_right = 201.0
-offset_bottom = 68.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Start"
 label_settings = SubResource("LabelSettings_11qsj")
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

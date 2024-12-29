@@ -362,11 +362,12 @@ _data = {
 [node name="Movement" parent="ComponentList/BehaviourComponents" index="0" node_paths=PackedStringArray("tank_sprite")]
 tank_sprite = NodePath("../../../TankSprite")
 
-[node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("tank_animations", "colored_nodes")]
+[node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("tank_animations", "colored_nodes", "respawn_animation")]
 core_tier = 1
 upgrades = Array[int]([0, 1, 2, 3])
 tank_animations = NodePath("../../../TankSprite/AnimationPlayer")
 colored_nodes = [NodePath("../../../TankSprite/Core")]
+respawn_animation = NodePath("../../../TankSprite/Respawn")
 
 [node name="ShootingRapid" type="Node" parent="ComponentList/BehaviourComponents" index="4" node_paths=PackedStringArray("tank_sprite", "animation_player", "origin_left", "origin_right", "delay", "audio_player", "sprite_node", "data_node")]
 script = ExtResource("2_lbfnm")
@@ -457,7 +458,6 @@ offset = Vector2(3.0303, 6.06061)
 libraries = {
 "": SubResource("AnimationLibrary_quw8b")
 }
-autoplay = "respawn"
 
 [connection signal="timeout" from="ComponentList/BehaviourComponents/ShootingRapid/Delay" to="ComponentList/BehaviourComponents/ShootingRapid" method="_on_delay_timeout"]
 

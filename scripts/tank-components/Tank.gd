@@ -20,12 +20,15 @@ var camera: GameCamera
 
 var current_content_instance: Node2D
 
+var is_spawning := true
+
 var Game:
 	get():
 		return Global.Game
 
 func _ready():
 	$Icon.queue_free()
+	#Input.visi
 	
 	if is_client: 
 		Game.clients.push_front(self)
@@ -51,6 +54,7 @@ func _ready():
 	add_child(current_content_instance)
 	
 func switch_tank_scene(tank: Enums.TANKS):
+	is_spawning = false
 	var tank_content_scene: PackedScene = Global.Game.tank_scenes[tank].scene
 	var new_content_instance = tank_content_scene.instantiate()
 	add_child(new_content_instance)
