@@ -1,11 +1,8 @@
 extends ShootPreIndustrial
 class_name ShootingRapid
 
-const component_name = "shoot"
-
-@export_group("References")
 @export var tank_sprite: Node2D
-@export var animation_player: AnimationPlayer
+@export var tank_animations: AnimationPlayer
 @export var origin_left: Node2D
 @export var origin_right: Node2D
 @export var delay: Timer
@@ -14,11 +11,16 @@ const component_name = "shoot"
 var barrel: Node2D
 var animation := "shoot_left"
 
-func _ready():
+func _setup_finished():
+	%TransitionSound.start()
+	
 	barrel = origin_left
+	
+	await tank_animations.animation_finished
+	enable_shoot()
 
-func on_process(_delta):
-	if shoot_condition:
+func _process(_delta):
+	if get_shoot_condition():
 		can_shoot = false
 		delay.start()
 		
@@ -31,9 +33,9 @@ func on_process(_delta):
 		
 		summon_bullet(barrel.global_position)
 		
-		if animation_player.is_playing():
-			animation_player.stop()
-		animation_player.play(animation)
+		if tank_animations.is_playing():
+			tank_animations.stop()
+		tank_animations.play(animation)
 		
 		audio_player.start()
 

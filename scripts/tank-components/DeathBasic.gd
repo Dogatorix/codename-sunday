@@ -1,19 +1,18 @@
 extends TankBehaviourComponent
 class_name DeathBasic
 
-@onready var tank = data_node.tank
+var stats: StatsBasic
 
-const component_name = "death"
-
-@export var stats: StatsBasic
 @export var spectator_scene: PackedScene
-@export var animation_player: AnimationPlayer
 @export var death_scene: PackedScene
-@export var predeath_sound: Audio2D
+
+@onready var predeath_sound: Audio2D = %GiveUpSound
+@onready var animation_player: AnimationPlayer = %SpriteAnimations
 
 var is_dying := false
 
-func _ready():
+func _setup_finished():
+	stats = tank.behaviour(Enums.COMPONENTS.STATS)
 	safety_check([stats, spectator_scene])
 	stats.connect("health_change", _on_health_change)
 		
@@ -52,7 +51,6 @@ func death():
 		
 		await spectator_instance.ready
 		spectator_instance.global_position = tank.global_position
-
 
 func instant_death():
 	if tank.is_client:

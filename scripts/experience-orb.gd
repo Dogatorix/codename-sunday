@@ -20,13 +20,20 @@ func _process(_delta):
 		position -= distance.normalized() * (400.0 / distance.length())
 		
 		if distance.length() <= 20:
-			var stats = chosen_player.behaviour("stats")
+			var stats = chosen_player.behaviour(Enums.COMPONENTS.STATS)
 			stats.set_points(stats.points + value)
 			queue_free()
 
 func _on_area_2d_body_entered(body):
 	if not body is Tank:
 		return
+		
+	if not chosen_player:
+		chosen_player = body
+		return
 
-	if body.components.has("stats"):
+	var distance_chosen = global_position.distance_to(chosen_player.global_position)
+	var distance_body = global_position.distance_to(body.global_position)
+
+	if body.behaviour(Enums.COMPONENTS.STATS) and distance_body < distance_chosen:
 		chosen_player = body

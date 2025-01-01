@@ -2,8 +2,8 @@ extends CanvasLayer
 
 @export var animation_player: AnimationPlayer
 
-@onready var tank = Global.Game.client
-var stats: StatsBasic
+@onready var tank: Tank = Global.Game.client
+@onready var stats: StatsBasic
 
 var health_percent := 100.0
 var rust_percent := 0.0
@@ -18,7 +18,16 @@ var is_dying := false
 @onready var smooth_points_left: int	
 @onready var smooth_core := 0.0
 
-func on_ready():
+func _ready():
+	tank.connect("tank_switched", update_stats)
+	update_stats()	
+	setup_bars()
+
+func update_stats():
+	stats = tank.behaviour(Enums.COMPONENTS.STATS)
+	setup_bars()
+
+func setup_bars():
 	visible = true
 	if not stats:
 		push_error(str(self) + " Missing reference to stats component")
@@ -35,7 +44,7 @@ func on_ready():
 	%TankName.modulate = tank.tank_color
 
 var time := 0.0
-func on_process(delta):
+func _process(delta):
 	time += delta
 	
 	health_percent = stats.health * 100 / float(stats.max_health)

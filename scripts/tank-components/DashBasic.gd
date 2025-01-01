@@ -1,29 +1,24 @@
 extends TankBehaviourComponent
 class_name DashBasic
 
-@onready var tank = data_node.tank
-
-const component_name = "dash"
-
-@export_group("General")
 @export var dash_strength := 1200
 @export var dash_consumption := 30
 
-@export_group("References")
+var movement: MovementBasic
+var tank_stats: StatsBasic
 
-@export var movement: MovementBasic
-@export var tank_stats: StatsBasic
-@export var audio_player: Audio2D
-@export var dash_shockwave: Shockwave
+@onready var audio_player: Audio2D = %DashSounds
+@onready var dash_shockwave: Shockwave = %DashShockwave
 
 var dash_velocity := Vector2.ZERO
 @onready var dash_decay := float(dash_strength) * 2
 var dash_length := 0.0
 
-func _ready():
-	safety_check([movement])
+func _setup_finished():
+	movement = tank.behaviour(Enums.COMPONENTS.MOVEMENT)
+	tank_stats = tank.behaviour(Enums.COMPONENTS.STATS)
 
-func on_process(delta):
+func _process(delta):
 	if Input.is_action_just_pressed("special_move") and tank_stats \
 	and movement.input_vector and Global.Game.input_autherization():
 		if tank_stats.mana > dash_consumption:

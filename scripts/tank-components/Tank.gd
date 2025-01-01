@@ -2,6 +2,8 @@ extends CharacterBody2D
 class_name Tank
 
 signal on_upgrade_tank(tank: Enums.TANKS)
+signal tank_switched()
+signal stats_init()
 
 @export var tank_name := "Tank"
 @export var tank_color := Color(1,1,1)
@@ -13,7 +15,7 @@ signal on_upgrade_tank(tank: Enums.TANKS)
 @export var default_zoom := 0.9
 @export var is_client: bool = false
 
-var components := {}
+var behaviour_components := {}
 var ai_components := {}
 
 var camera: GameCamera
@@ -28,8 +30,7 @@ var Game:
 
 func _ready():
 	$Icon.queue_free()
-	#Input.visi
-	
+
 	if is_client: 
 		Game.clients.push_front(self)
 		
@@ -62,14 +63,16 @@ func switch_tank_scene(tank: Enums.TANKS):
 	current_content_instance = new_content_instance
 	tank_id = tank
 	
+	tank_switched.emit()
+	
 func upgrade_tank(tank: Enums.TANKS):
 	on_upgrade_tank.emit(tank)
 	
-func behaviour(name: String):
-	return components[name]
+func behaviour(component_name: Enums.COMPONENTS):
+	return behaviour_components[component_name]
 	
-func ai(name: String):
-	return ai_components[name]
+func ai(component_name: String):
+	return ai_components[component_name]
 
 func _exit_tree():
 	Game.clients.erase(self)

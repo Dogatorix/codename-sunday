@@ -11,7 +11,7 @@ extends StaticBody2D
 @export var fuse_audio: Audio2D
 @export var explosion_audio: Audio2D
 
-var health := 150
+var health := 100
 var is_igniting := false
 
 
@@ -50,7 +50,7 @@ func _on_fuse_timer_timeout():
 			
 		elif body is Tank:
 			var damage = 13000 / distance.length()
-			var stats_component: StatsBasic = body.behaviour("stats")
+			var stats_component: StatsBasic = body.behaviour(Enums.COMPONENTS.STATS)
 			stats_component.damage_tank(damage)
 			
 		elif body.has_meta("is_canister") and body != self:

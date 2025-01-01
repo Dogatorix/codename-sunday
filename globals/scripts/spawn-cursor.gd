@@ -8,6 +8,7 @@ var selection_pointer := 0
 func _ready():
 	update_scene()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Global.Game.client.connect("tree_exiting", queue_free)
 
 func _process(delta):
 	global_position = get_global_mouse_position()
@@ -30,6 +31,9 @@ func _process(delta):
 			scene_instance.tank_id = Enums.TANKS.DESTROY
 		if scene_name == "Tank - Crush":
 			scene_instance.tank_id = Enums.TANKS.CRUSH
+			
+		if scene_instance is Tank:
+			scene_instance.tank_color = Global.Game.TANK_DEFAULT_COLORS.pick_random()
 			
 		get_tree().current_scene.add_child(scene_instance)
 		scene_instance.global_position = global_position

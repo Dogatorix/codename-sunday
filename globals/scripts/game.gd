@@ -1,5 +1,6 @@
 extends Node
-	
+class_name GameGlobal
+
 @export var Overlay: CanvasLayer
 @export var PauseMenu: CanvasLayer
 
@@ -42,6 +43,8 @@ var game_camera: GameCamera = null:
 
 var client: Tank:
 	get():
+		if clients.size() == 0:
+			return null
 		return clients[0]
 
 var	active_input := true

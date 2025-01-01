@@ -1,15 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://w00ftckwmye0"]
+[gd_scene load_steps=16 format=3 uid="uid://c5giyjrgql2yg"]
 
-[ext_resource type="PackedScene" uid="uid://cgywk5irhng6f" path="res://scenes/starter/sub-components/starter-component-list.tscn" id="1_e3mle"]
-[ext_resource type="Script" path="res://scripts/tank-components/ShootingBasic.gd" id="2_f7mk1"]
-[ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/starter/sub-components/basic-bullet.tscn" id="3_ollee"]
-[ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="5_hr2ga"]
-[ext_resource type="AudioStream" uid="uid://c2h84tolxdka2" path="res://assets/audio/tanks/starter/destroy-shot-1.mp3" id="5_p8gtq"]
-[ext_resource type="AudioStream" uid="uid://fe30ktqisay7" path="res://assets/audio/tanks/starter/destroy-shot-2.mp3" id="6_6lov5"]
-[ext_resource type="Texture2D" uid="uid://b1e2i3pys8k7k" path="res://assets/sprites/tanks/starter/rifle-barrel.png" id="6_h7axu"]
-[ext_resource type="Texture2D" uid="uid://b3rx5mjjudhk3" path="res://assets/sprites/tanks/starter/starter-core-1.png" id="7_bfadi"]
-[ext_resource type="Texture2D" uid="uid://dj1os1m43lno" path="res://assets/sprites/tilesets/pathfind-debug.png" id="7_sqrfa"]
-[ext_resource type="Texture2D" uid="uid://bq3drblq6s8pv" path="res://assets/sprites/tanks/starter/rifle-barrel-back.png" id="7_tx5g0"]
+[ext_resource type="PackedScene" uid="uid://x8gtkj6xeptj" path="res://scenes/starter/sub-components/starter-content.tscn" id="1_o7ohr"]
+[ext_resource type="Script" path="res://scripts/tank-components/ShootingBasic.gd" id="2_hs0r7"]
+[ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/starter/sub-components/basic-bullet.tscn" id="3_k4web"]
+[ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="5_4wafu"]
+[ext_resource type="AudioStream" uid="uid://c2h84tolxdka2" path="res://assets/audio/tanks/starter/destroy-shot-1.mp3" id="5_pcxeg"]
+[ext_resource type="Texture2D" uid="uid://dj1os1m43lno" path="res://assets/sprites/tilesets/pathfind-debug.png" id="6_0nnrt"]
+[ext_resource type="AudioStream" uid="uid://fe30ktqisay7" path="res://assets/audio/tanks/starter/destroy-shot-2.mp3" id="6_pai1u"]
+[ext_resource type="Texture2D" uid="uid://b1e2i3pys8k7k" path="res://assets/sprites/tanks/starter/rifle-barrel.png" id="7_heh5f"]
+[ext_resource type="Texture2D" uid="uid://b3rx5mjjudhk3" path="res://assets/sprites/tanks/starter/starter-core-1.png" id="7_j82bn"]
+[ext_resource type="Texture2D" uid="uid://bq3drblq6s8pv" path="res://assets/sprites/tanks/starter/rifle-barrel-back.png" id="8_00q8n"]
 
 [sub_resource type="Animation" id="Animation_ap7fi"]
 length = 0.001
@@ -205,155 +205,73 @@ _data = {
 "shoot": SubResource("Animation_pmp2i")
 }
 
-[sub_resource type="Animation" id="Animation_t3ylw"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
+[node name="StarterContent" instance=ExtResource("1_o7ohr")]
 
-[sub_resource type="Animation" id="Animation_70f7r"]
-resource_name = "respawn"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.34151, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.34151, 1),
-"update": 0,
-"values": [Vector2(0.2, 0.2), Vector2(1, 1)]
-}
+[node name="MasterComponent" parent="BehaviourComponents" index="0" node_paths=PackedStringArray("tank_animations", "colored_nodes")]
+upgrades = Array[int]([1, 0, 2, 3])
+tank_animations = NodePath("../../TankSprite/TankAnimations")
+colored_nodes = [NodePath("../../TankSprite/Core")]
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_quw8b"]
-_data = {
-"RESET": SubResource("Animation_t3ylw"),
-"respawn": SubResource("Animation_70f7r")
-}
-
-[node name="DestroyContent" type="Node2D"]
-
-[node name="ComponentList" parent="." instance=ExtResource("1_e3mle")]
-
-[node name="Movement" parent="ComponentList/BehaviourComponents" index="0" node_paths=PackedStringArray("tank_sprite")]
-tank_sprite = NodePath("../../../TankSprite")
-
-[node name="StatsBasic" parent="ComponentList/BehaviourComponents" index="1" node_paths=PackedStringArray("tank_animations", "colored_nodes", "respawn_animation")]
+[node name="StatsBasic" parent="BehaviourComponents" index="2"]
 core_tier = 1
-upgrades = Array[int]([0, 1, 2, 3])
-tank_animations = NodePath("../../../TankSprite/AnimationPlayer")
-colored_nodes = [NodePath("../../../TankSprite/Core")]
-respawn_animation = NodePath("../../../TankSprite/Respawn")
 
-[node name="Shoot" type="Node" parent="ComponentList/BehaviourComponents" index="4" node_paths=PackedStringArray("dash", "animation_player", "origin", "tank_sprite", "delay", "audio_player", "movement", "sprite_node", "data_node")]
-script = ExtResource("2_f7mk1")
-dash = NodePath("../Dash")
-animation_player = NodePath("../../../TankSprite/AnimationPlayer")
-origin = NodePath("../../../TankSprite/ShootOrigin")
-tank_sprite = NodePath("../../../TankSprite")
+[node name="Shoot" type="Node" parent="BehaviourComponents" index="5" node_paths=PackedStringArray("tank_animations", "origin", "shoot_sound", "delay")]
+script = ExtResource("2_hs0r7")
+tank_animations = NodePath("../../TankSprite/TankAnimations")
+origin = NodePath("../../TankSprite/ShootOrigin")
+shoot_sound = NodePath("../../GraphicComponents/Shoot")
 delay = NodePath("Delay")
-audio_player = NodePath("../../GraphicComponents/Shoot")
-movement = NodePath("../Movement")
-sprite_node = NodePath("../../../TankSprite")
-bullet_scene = ExtResource("3_ollee")
+bullet_scene = ExtResource("3_k4web")
 bullet_speed = 1200.0
 bullet_damage = 25.0
 bullet_penetration = 3
-data_node = NodePath("../../SharedData")
+component_type = 5
 
-[node name="Delay" type="Timer" parent="ComponentList/BehaviourComponents/Shoot"]
+[node name="Delay" type="Timer" parent="BehaviourComponents/Shoot" index="0"]
 wait_time = 0.65
 
-[node name="TransitionSound" parent="ComponentList/GraphicComponents" index="8" node_paths=PackedStringArray("root")]
-external = true
-root = NodePath("../../..")
-
-[node name="Shoot" type="AudioStreamPlayer2D" parent="ComponentList/GraphicComponents" index="9"]
+[node name="Shoot" type="AudioStreamPlayer2D" parent="GraphicComponents" index="8"]
 volume_db = -3.0
-script = ExtResource("5_hr2ga")
-sounds = Array[AudioStream]([ExtResource("5_p8gtq"), ExtResource("6_6lov5")])
-pitch_range = 0.05
+script = ExtResource("5_4wafu")
+sounds = Array[AudioStream]([ExtResource("5_pcxeg"), ExtResource("6_pai1u")])
+pitch_range = 0.1
 
-[node name="TankSprite" type="Node2D" parent="."]
-
-[node name="ShootOrigin" type="Node2D" parent="TankSprite"]
+[node name="ShootOrigin" type="Node2D" parent="TankSprite" index="1"]
 unique_name_in_owner = true
 position = Vector2(5.96046e-08, -81)
 scale = Vector2(0.999999, 0.999999)
 
-[node name="BarrelClip" type="Sprite2D" parent="TankSprite"]
+[node name="BarrelClip" type="Sprite2D" parent="TankSprite" index="2"]
 clip_children = 1
 position = Vector2(2, -74.25)
 scale = Vector2(1, 1.99333)
-texture = ExtResource("7_sqrfa")
+texture = ExtResource("6_0nnrt")
 
-[node name="Barrel" type="Sprite2D" parent="TankSprite/BarrelClip"]
+[node name="Barrel" type="Sprite2D" parent="TankSprite/BarrelClip" index="0"]
 show_behind_parent = true
 position = Vector2(-1, 27.216)
 scale = Vector2(0.321491, 0.161283)
-texture = ExtResource("6_h7axu")
+texture = ExtResource("7_heh5f")
 offset = Vector2(3.11051, -112.442)
 
-[node name="Back" type="Sprite2D" parent="TankSprite/BarrelClip/Barrel"]
+[node name="Back" type="Sprite2D" parent="TankSprite/BarrelClip/Barrel" index="0"]
 show_behind_parent = true
 position = Vector2(-59.0997, -177.299)
 scale = Vector2(1.1374, 1.1374)
-texture = ExtResource("7_tx5g0")
+texture = ExtResource("8_00q8n")
 flip_v = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TankSprite"]
+[node name="TankAnimations" type="AnimationPlayer" parent="TankSprite" index="3"]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_qmcfj")
 }
 autoplay = "init"
 
-[node name="Core" type="Sprite2D" parent="TankSprite"]
+[node name="Core" type="Sprite2D" parent="TankSprite" index="4"]
 position = Vector2(5.96046e-08, 1.19209e-07)
 scale = Vector2(0.33, 0.33)
-texture = ExtResource("7_bfadi")
+texture = ExtResource("7_j82bn")
 offset = Vector2(3.0303, 6.06061)
 
-[node name="Respawn" type="AnimationPlayer" parent="TankSprite"]
-libraries = {
-"": SubResource("AnimationLibrary_quw8b")
-}
-
-[connection signal="timeout" from="ComponentList/BehaviourComponents/Shoot/Delay" to="ComponentList/BehaviourComponents/Shoot" method="_on_delay_timeout"]
-
-[editable path="ComponentList"]
+[connection signal="timeout" from="BehaviourComponents/Shoot/Delay" to="BehaviourComponents/Shoot" method="_on_delay_timeout"]

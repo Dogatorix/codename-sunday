@@ -18,7 +18,7 @@ func _ready():
 	
 func _on_body_entered(body):
 	if body is Tank:
-		var death_component: DeathBasic = body.behaviour("death")
+		var death_component: DeathBasic = body.behaviour(Enums.COMPONENTS.DEATH)
 		death_component.instant_death()
 	if body.has_meta("is_container"):
 		body.health = 0

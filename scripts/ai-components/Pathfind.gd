@@ -18,7 +18,7 @@ func _process(delta):
 	var tank: Tank = data_node.tank
 	
 	var direction = tank.to_local(navigation_agent.get_next_path_position()).normalized()
-	movement = tank.behaviour("movement")
+	movement = tank.behaviour(Enums.COMPONENTS.MOVEMENT)
 	movement.input_vector = direction
 	
 	direction_smooth += ((direction - direction_smooth) / 10) * delta * 90

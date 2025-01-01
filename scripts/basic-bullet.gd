@@ -41,7 +41,7 @@ func _on_body_entered(body):
 		collision_body = body
 	
 	if body is Tank:
-		var tank_stats: StatsBasic = body.behaviour("stats")
+		var tank_stats: StatsBasic = body.behaviour(Enums.COMPONENTS.STATS)
 		tank_stats.damage_tank(damage)
 	else:	
 		audio_player.start()

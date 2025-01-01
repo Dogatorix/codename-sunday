@@ -1,13 +1,11 @@
 extends TankBehaviourComponent
 class_name MovementBasic
 
-@onready var tank = data_node.tank
-
-const component_name = "movement"
-
 var camera: GameCamera
 
-@export var speed: float = 1000
+@onready var tank_sprite: Node2D = %TankSprite
+
+@export var speed: float = 550
 @export var camera_offset_scale := 40
 
 var can_look := true
@@ -15,8 +13,6 @@ var can_look := true
 const acceleration: float = 2500
 const friction: float = 2000
 const push_force: float = 80
-
-@export var tank_sprite: Node2D
 
 var normal_velocity := Vector2.ZERO
 var dash_velocity := Vector2.ZERO
@@ -31,8 +27,9 @@ var input_vector := Vector2.ZERO
 
 var can_move := true
 
-func on_process(delta):
+func _process(delta):
 	tank.move_and_slide()
+	
 	camera = tank.camera
 	
 	external_velocity = Vector2(1,0).rotated(external_velocity_direction) * external_velocity_length 

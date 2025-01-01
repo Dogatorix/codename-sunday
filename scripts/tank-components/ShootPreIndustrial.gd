@@ -1,8 +1,7 @@
 extends TankBehaviourComponent
 class_name ShootPreIndustrial
 
-@onready var tank = data_node.tank
-@export var sprite_node: Node2D
+@onready var sprite_node: Node2D = %TankSprite
 
 var prevent_shoot := false
 var can_shoot := true
@@ -18,11 +17,13 @@ var init_can_shoot := false
 var input_condition: bool
 var shoot_condition: bool
 
-func _process(_delta):
-	input_condition = (Input.is_action_pressed("shoot") and Global.device == Global.DEVICE.DESKTOP) \
+func get_input_condition():
+	return (Input.is_action_pressed("shoot") and Global.device == Global.DEVICE.DESKTOP) \
 	or Input.is_action_pressed("shoot_mobile")
 	
-	shoot_condition = input_condition and can_shoot \
+func get_shoot_condition():
+	
+	return get_input_condition() and can_shoot \
 	and Global.Game.active_input and tank.is_client and not prevent_shoot and init_can_shoot
 
 func summon_bullet(target_position: Vector2):
