@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgjvtryibg6xd"]
+[gd_scene load_steps=17 format=3 uid="uid://dgjvtryibg6xd"]
 
 [ext_resource type="Texture2D" uid="uid://cbpya6nrjdox2" path="res://assets/sprites/ui/house-debug.png" id="1_em6gv"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="2_4egiy"]
@@ -6,12 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://dxpnselomfq68" path="res://assets/sprites/ui/ui-bar-half-circle.png" id="4_qvqio"]
 [ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="5_g6fah"]
 [ext_resource type="AudioStream" uid="uid://ebd23l3da1bx" path="res://assets/audio/spawn-ost.mp3" id="6_5hxi7"]
+[ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="7_g3rnd"]
+[ext_resource type="AudioStream" uid="uid://4xsv457rdngg" path="res://assets/audio/accesories/canister/canister-damage-1.mp3" id="8_d2odc"]
+[ext_resource type="AudioStream" uid="uid://c1oedcielpnej" path="res://assets/audio/accesories/canister/canister-damage-2.mp3" id="9_spf0c"]
 
 [sub_resource type="GDScript" id="GDScript_wpdpd"]
 resource_name = "agent-test"
 script/source = "extends Area2D
 
 var speed = 650
+var health = 5000
 
 @export var nav_agent: NavigationAgent2D 
 @export var target: Node2D
@@ -20,7 +24,7 @@ var velocity := Vector2.ZERO
 
 func _on_body_entered(body):
 	if body is Tank:
-		body.components[\"death\"].instant_death()
+		body.behaviour(Enums.COMPONENTS.DEATH).instant_death()
 
 func _process(delta):
 	var direction = to_local(nav_agent.get_next_path_position()).normalized()
@@ -30,13 +34,54 @@ func _process(delta):
 	$Sprite.position = Vector2(randi_range(-5,5),randi_range(-5,5))
 
 func _ready():
+	if get_tree().get_node_count_in_group(\"house\") < 2:
+		$\"Spawn-ost\".play()
+	else:
+		queue_free()
+
 	target = Global.Game.client
 	nav_agent.target_position = target.global_position
-		
+
+func find_closest():
+	if get_tree().get_node_count_in_group(\"tank\") <= 0:
+		return null
+	
+	var tanks = get_tree().get_nodes_in_group(\"tank\") 
+	
+	var contender: Tank = tanks[0]
+	for tank in tanks:
+		if global_position.distance_to(tank.global_position) < global_position.distance_to(contender.global_position):
+			contender = tank 
+	return contender
+
 func _on_timer_timeout():
+	target = find_closest()
+
 	if not target:
 		target = self
+		
 	nav_agent.target_position = target.global_position
+
+var current_tween: Tween
+func damage(amount: float):
+	$Health.scale = Vector2(1.8, 1.8)
+	
+	if current_tween:
+		current_tween.kill()
+	
+	current_tween = Global.tween($Health, \"scale\", Vector2(1,1), 0.2)
+	
+	$DamageSounds.start()
+	health -= amount
+	$Health.text = str(health)
+	
+	if health <= 0:
+		queue_free()
+
+func _on_area_entered(area):
+	if area.is_in_group(\"basic_bullet\"):
+		damage(area.damage)
+		area.kill_bullet()
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gakv"]
@@ -59,7 +104,14 @@ min_value = -1.0
 _data = [Vector2(0, -0.884365), 0.0, 0.0, 0, 0, Vector2(0.964844, 0.809446), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="KillMe" type="Area2D" node_paths=PackedStringArray("nav_agent")]
+[sub_resource type="LabelSettings" id="LabelSettings_e3g08"]
+font = ExtResource("7_g3rnd")
+font_size = 32
+font_color = Color(1, 0, 0, 1)
+outline_size = 22
+outline_color = Color(0, 0, 0, 1)
+
+[node name="KillMe" type="Area2D" node_paths=PackedStringArray("nav_agent") groups=["house"]]
 script = SubResource("GDScript_wpdpd")
 nav_agent = NodePath("NavigationAgent2D")
 metadata/can_be_dragged = false
@@ -108,7 +160,26 @@ autostart = true
 [node name="Spawn-ost" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_5hxi7")
 volume_db = 8.3
-autoplay = true
 
+[node name="Health" type="Label" parent="."]
+offset_left = -51.0
+offset_top = -108.0
+offset_right = 59.0
+offset_bottom = -51.0
+pivot_offset = Vector2(54, 18)
+text = "5000"
+label_settings = SubResource("LabelSettings_e3g08")
+horizontal_alignment = 1
+
+[node name="DamageSounds" type="AudioStreamPlayer2D" parent="." node_paths=PackedStringArray("root")]
+volume_db = 8.0
+pitch_scale = 0.8
+script = ExtResource("2_4egiy")
+sounds = Array[AudioStream]([ExtResource("8_d2odc"), ExtResource("9_spf0c")])
+pitch_range = 0.05
+external = true
+root = NodePath("..")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

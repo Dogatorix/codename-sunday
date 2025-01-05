@@ -18,11 +18,10 @@ var input_condition: bool
 var shoot_condition: bool
 
 func get_input_condition():
-	return (Input.is_action_pressed("shoot") and Global.device == Global.DEVICE.DESKTOP) \
+	return (Input.is_action_pressed("shoot") and Global.is_desktop) \
 	or Input.is_action_pressed("shoot_mobile")
 	
 func get_shoot_condition():
-	
 	return get_input_condition() and can_shoot \
 	and Global.Game.active_input and tank.is_client and not prevent_shoot and init_can_shoot
 

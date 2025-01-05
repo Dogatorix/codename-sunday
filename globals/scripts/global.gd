@@ -22,10 +22,12 @@ var device: DEVICE
 var is_mobile: bool:
 	get:
 		return device == DEVICE.MOBILE
+		#return true
 		
 var is_desktop: bool:
 	get:
 		return device == DEVICE.DESKTOP
+		#return false
 
 func on_fade_in_finished():
 	fade_in_complete.emit()
@@ -51,8 +53,6 @@ func _ready():
 		device = DEVICE.DESKTOP
 	else:
 		device = DEVICE.MOBILE 
-	
-	create_game(Enums.GAMEMODES.SANDBOX)
 	
 	this_is_necessary_pinky_promise_do_not_remove()
 

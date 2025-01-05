@@ -7,6 +7,7 @@ var drag_offset := Vector2.ZERO
 @onready var shoot_component: TankBehaviourComponent
 
 func _ready():
+	global_position = get_global_mouse_position()
 	Global.Game.client.connect("tree_exiting", queue_free)
 
 func _process(_delta):

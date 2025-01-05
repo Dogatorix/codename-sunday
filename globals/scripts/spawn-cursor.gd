@@ -7,6 +7,7 @@ var selection_pointer := 0
 
 func _ready():
 	update_scene()
+	global_position = get_global_mouse_position()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	Global.Game.client.connect("tree_exiting", queue_free)
 

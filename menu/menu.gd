@@ -5,10 +5,6 @@ extends Node2D
 
 func _ready():
 	menu_start_button.disable()
-	
-	
-	_on_menu_input_text_changed("kill yourself")
-	#_on_menu_button_pressed()
 
 func _on_menu_button_pressed():
 	Global.username = %NameEdit.text_value
@@ -17,7 +13,7 @@ func _on_menu_button_pressed():
 	%MenuAnimations.play("open")
 	%UserLabel.text = "User: " + Global.username
 	
-	%MachineTraining.enable()
+	#%MachineTraining.enable()
 	%TheSandbox.enable()
 	%QuitGame.enable()
 

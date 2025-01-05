@@ -1,11 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://blyxbp5brb462"]
+[gd_scene load_steps=11 format=3 uid="uid://blyxbp5brb462"]
 
 [ext_resource type="PackedScene" uid="uid://dc1vcm54gphhw" path="res://scenes/graphics/shockwave.tscn" id="1_yfnh3"]
+[ext_resource type="AudioStream" uid="uid://cv0f1det5u12k" path="res://assets/audio/death-brutal.mp3" id="2_mp4bs"]
 [ext_resource type="AudioStream" uid="uid://8ukahyfpgefa" path="res://assets/audio/tanks/player-explode.mp3" id="2_surp2"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="3_tyffs"]
 [ext_resource type="Script" path="res://scripts/helper-components/Particle2D.gd" id="4_2x3ik"]
 [ext_resource type="Script" path="res://scripts/helper-components/Shake2D.gd" id="5_4hmik"]
 [ext_resource type="Texture2D" uid="uid://5q63cgm3aynd" path="res://assets/particles/circle-particle.png" id="5_xv7um"]
+
+[sub_resource type="GDScript" id="GDScript_oqeis"]
+resource_name = "player-explosion"
+script/source = "extends Node2D
+
+@export var augh: AudioStream
+
+func _ready():
+	if randi_range(0, 100) > 95:
+		$Audio2D.stream = augh
+	$Audio2D.play()
+"
 
 [sub_resource type="Curve" id="Curve_8e3ty"]
 min_value = -200.0
@@ -18,6 +31,8 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="PlayerExplosion" type="Node2D"]
+script = SubResource("GDScript_oqeis")
+augh = ExtResource("2_mp4bs")
 
 [node name="Shockwave" parent="." instance=ExtResource("1_yfnh3")]
 scale = Vector2(-0.941399, -0.941399)

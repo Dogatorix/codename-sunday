@@ -571,7 +571,6 @@ position = Vector2(946, 423)
 scale = Vector2(1.25603, 1.25603)
 
 [node name="MenuInput" parent="Dropdown/NameEdit" index="0"]
-text = "Joe"
 metadata/_edit_use_anchors_ = true
 
 [node name="MenuStartButton" parent="Dropdown" instance=ExtResource("11_p3ial")]

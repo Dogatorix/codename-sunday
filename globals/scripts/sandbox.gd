@@ -22,8 +22,7 @@ func _ready():
 	tank.tank_color = Global.Game.TANK_DEFAULT_COLORS.pick_random()
 	tank.is_client = true
 	get_tree().current_scene.add_child(tank)
-	print(get_tree().current_scene)
-	print(tank)
+	tank.global_position = Vector2(-12, 0)
 
 func _on_menu_update(_mode):
 	spawn_mode = false

@@ -85,13 +85,14 @@ var Sandbox: Node
 var Mobile: Node
 
 func _ready():
+	if Global.is_mobile:
+		Mobile = mobile_controls_scene.instantiate()
+		add_child(Mobile)
+		
 	if gamemode == Enums.GAMEMODES.SANDBOX:
 		Sandbox = sandbox_scene.instantiate()
 		add_child(Sandbox)
 		
-	if Global.is_mobile:
-		Mobile = mobile_controls_scene.instantiate()
-		add_child(Mobile)
 
 var player_interface: CanvasLayer
 
