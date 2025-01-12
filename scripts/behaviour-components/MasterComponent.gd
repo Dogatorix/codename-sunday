@@ -13,12 +13,11 @@ func _setup_finished():
 	for node in colored_nodes:
 		node.modulate = tank.tank_color
 	
-	await tank.stats_init
+	await tank.stats_setup_finished
 	stats = tank.behaviour(Enums.COMPONENTS.STATS)
 	
 	if not Global.Game.player_interface:
 		Global.Game.add_player_interface()
-	#Global.Game.player_interface
 	
 	stats.connect("max_points", _on_max_points)
 	
@@ -28,7 +27,7 @@ func _on_max_points():
 	shoot_component.disable_shoot()
 		
 	if tank.is_client:
-		Global.Game.add_upgrade_menu(upgrades, 2)
+		Global.Game.add_upgrade_menu(upgrades, Enums.TANK_TIERS.STARTER)
 		%UpgradeShake.start()
 		%UpgradeSound.start()
 

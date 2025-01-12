@@ -3,7 +3,8 @@ class_name Tank
 
 signal on_upgrade_tank(tank: Enums.TANKS)
 signal tank_switched()
-signal stats_init()
+
+signal stats_setup_finished()
 
 @export var tank_name := "Tank"
 @export var tank_color := Color(1,1,1)
@@ -13,7 +14,12 @@ signal stats_init()
 @onready var player_bars = $PlayerBars
 
 @export var default_zoom := 0.9
-@export var is_client: bool = false
+@export var is_client: bool
+@export var is_ai: bool
+
+### THIS IS TEMPORARY!!!
+@export var ai_content_scene: PackedScene
+
 
 var behaviour_components := {}
 var ai_components := {}
@@ -23,6 +29,7 @@ var camera: GameCamera
 var current_content_instance: Node2D
 
 var is_spawning := true
+
 
 var Game:
 	get():
@@ -39,21 +46,33 @@ func _ready():
 		Game.clients.erase(self)
 		is_client = false
 		
-	if is_client and Global.is_mobile:
-		Global.Game.Mobile.enable_tank_controls()
-		
 	if is_client:
-		var camera_instance = GameCamera.new()
-		camera_instance.zoom = Vector2(default_zoom, default_zoom)
-		add_child(camera_instance)
-		camera = camera_instance
-		Game.Overlay.hide_bars()
-		Global.fade_out()
+		setup_client()
+	
+	if is_ai:
+		setup_ai()
 	
 	var tank_content_scene: PackedScene = Global.Game.tank_scenes[tank_id].scene
 	current_content_instance = tank_content_scene.instantiate()
 	add_child(current_content_instance)
+
+func setup_client():
+	if Global.is_mobile:
+		Global.Game.Mobile.enable_tank_controls()
+		
+	var camera_instance = GameCamera.new()
+	camera_instance.zoom = Vector2(default_zoom, default_zoom)
+	add_child(camera_instance)
+	camera = camera_instance
+	Game.Overlay.hide_bars()
+	Global.fade_out()
+	is_ai = false
+
+func setup_ai():
+	var ai_instance = ai_content_scene.instantiate()
+	add_child(ai_instance)
 	
+
 func switch_tank_scene(tank: Enums.TANKS):
 	is_spawning = false
 	var tank_content_scene: PackedScene = Global.Game.tank_scenes[tank].scene
@@ -71,7 +90,7 @@ func upgrade_tank(tank: Enums.TANKS):
 func behaviour(component_name: Enums.COMPONENTS):
 	return behaviour_components[component_name]
 	
-func ai(component_name: String):
+func ai(component_name: Enums.AI_COMPONENTS):
 	return ai_components[component_name]
 
 func _exit_tree():

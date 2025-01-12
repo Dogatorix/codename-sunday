@@ -41,7 +41,6 @@ func fade_out():
 func _process(_delta):
 	if Input.is_action_just_pressed("restart-debug") or Input.is_action_just_pressed("respawn"):
 		restarted.emit()
-		get_tree().reload_current_scene()
 		
 	%FPS.text = "FPS:" + str(Engine.get_frames_per_second())
 	var memory_usage = OS.get_static_memory_usage() / 1000000.0
@@ -49,10 +48,12 @@ func _process(_delta):
 		
 func _ready():
 	var os_name = OS.get_name()
-	if os_name == "Windows" or os_name == "macOS" or os_name == "Linux":
+	if os_name == "Windows" or os_name == "macOS" or os_name == "Linux" or os_name == "Web":
 		device = DEVICE.DESKTOP
 	else:
 		device = DEVICE.MOBILE 
+	
+	create_game(Enums.GAMEMODES.SANDBOX)
 	
 	this_is_necessary_pinky_promise_do_not_remove()
 
@@ -73,3 +74,15 @@ func create_game(gamemode: Enums.GAMEMODES):
 	Game = game_scene.instantiate()
 	Game.gamemode = gamemode
 	add_child(Game)
+	return Game
+
+func find_nearest_node(origin: Vector2, nodes: Array):
+	if nodes.size() <= 0:
+		return null
+	
+	var contender = nodes[0]
+	
+	for node in nodes:
+		if origin.distance_to(node.global_position) < origin.distance_to(contender.global_position):
+			contender = node 
+	return contender

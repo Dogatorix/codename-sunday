@@ -27,3 +27,8 @@ enum COMPONENTS {
 	STATS,
 	SHOOT
 }
+
+enum AI_COMPONENTS {
+	MASTER,
+	PATHFIND
+}

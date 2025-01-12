@@ -44,7 +44,7 @@ var is_immune: bool:
 		return time <= 2.5
 
 func _setup_finished():
-	tank.stats_init.emit()
+	tank.stats_setup_finished.emit()
 	
 	max_core_points = CORE_REQUIREMENT[core_tier]
 	

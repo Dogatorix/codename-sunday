@@ -47,12 +47,7 @@ func find_closest():
 		return null
 	
 	var tanks = get_tree().get_nodes_in_group(\"tank\") 
-	
-	var contender: Tank = tanks[0]
-	for tank in tanks:
-		if global_position.distance_to(tank.global_position) < global_position.distance_to(contender.global_position):
-			contender = tank 
-	return contender
+	return Global.find_nearest_node(global_position, tanks)
 
 func _on_timer_timeout():
 	target = find_closest()

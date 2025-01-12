@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://tg86jcs0270c"]
+[gd_scene load_steps=11 format=3 uid="uid://tg86jcs0270c"]
 
-[ext_resource type="Script" path="res://scripts/tank-components/Tank.gd" id="1_crf14"]
+[ext_resource type="Script" path="res://scripts/behaviour-components/Tank.gd" id="1_crf14"]
 [ext_resource type="PackedScene" uid="uid://bjbp1eyywcerx" path="res://scenes/tanks/player-bars.tscn" id="2_fpj2l"]
 [ext_resource type="Texture2D" uid="uid://c8j5si6u42hca" path="res://icon.png" id="3_jkwhb"]
 [ext_resource type="Script" path="res://scripts/tank-trail.gd" id="4_dsp2w"]
 [ext_resource type="Texture2D" uid="uid://v1h867arh4l5" path="res://assets/sprites/light.png" id="5_7etdb"]
+[ext_resource type="PackedScene" uid="uid://bae55p0tdb4ok" path="res://scenes/starter/sub-components/starter-ai-content.tscn" id="6_m0ecl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bbwtc"]
 radius = 146.113
@@ -39,7 +40,11 @@ tank_color = Color(0, 0.505882, 1, 1)
 username = "Dummy"
 tank_id = 2
 default_zoom = 1.2
+is_ai = true
+ai_content_scene = ExtResource("6_m0ecl")
 metadata/can_be_dragged = false
+metadata/_edit_vertical_guides_ = [105.0]
+metadata/_edit_horizontal_guides_ = [-1319.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

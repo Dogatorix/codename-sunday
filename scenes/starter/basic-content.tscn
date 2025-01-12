@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bbxmex7ovpeqj"]
 
 [ext_resource type="PackedScene" uid="uid://x8gtkj6xeptj" path="res://scenes/starter/sub-components/starter-content.tscn" id="1_jsmmu"]
-[ext_resource type="Script" path="res://scripts/tank-components/ShootingBasic.gd" id="2_6jjqi"]
+[ext_resource type="Script" path="res://scripts/behaviour-components/ShootingBasic.gd" id="2_6jjqi"]
 [ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/starter/sub-components/basic-bullet.tscn" id="3_p5sj5"]
 [ext_resource type="Texture2D" uid="uid://bg76v4dgiyq0e" path="res://assets/sprites/tanks/starter/starter-barrel.png" id="3_uxhhj"]
 [ext_resource type="Texture2D" uid="uid://b3rx5mjjudhk3" path="res://assets/sprites/tanks/starter/starter-core-1.png" id="4_se8o4"]

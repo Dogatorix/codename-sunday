@@ -17,12 +17,12 @@ func _ready():
 	Global.Game.connect("menu_updated", _on_menu_update)
 	Global.connect("restarted", _on_menu_restarted)
 
-	var tank: Tank = Global.Game.create_tank()	
+	var tank: Tank = Global.Game.create_tank()
 	tank.tank_id = Enums.TANKS.BASIC
 	tank.tank_color = Global.Game.TANK_DEFAULT_COLORS.pick_random()
 	tank.is_client = true
 	get_tree().current_scene.add_child(tank)
-	tank.global_position = Vector2(-12, 0)
+	tank.global_position = get_tree().get_nodes_in_group("spawn_locations").pick_random().global_position
 
 func _on_menu_update(_mode):
 	spawn_mode = false
@@ -32,6 +32,12 @@ func _on_menu_update(_mode):
 	
 func _on_menu_restarted():
 	spawn_mode = false
+	#get_tree().reload_current_scene()
+	#await get_tree().current_scene.ready
+	#print(get_tree().current_scene)
+	#queue_free()
+	#get_tree().current_scene = Global.Game
+	#Global.create_game(Enums.GAMEMODES.SANDBOX)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("spawn-mode-toggle") and not paused and Global.Game.client:

@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dhp2o1gd82ykg"]
+
+[node name="AITarget" type="Marker2D" groups=["ai_target"]]

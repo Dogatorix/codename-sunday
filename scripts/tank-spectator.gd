@@ -21,6 +21,10 @@ var wait_time := 10.0
 
 var timer_finished := false
 
+# this is really stupid but idc
+var tween1: Tween
+var tween2: Tween
+
 func _ready():
 	if not is_client:
 		queue_free()
@@ -31,6 +35,8 @@ func _ready():
 	get_tree().call_group("spawn_locations", "show_location")
 	
 	camera.zoom = Vector2(camera_zoom, camera_zoom)
+	tween1 = Global.tween(self, "camera_zoom", .7, 2)
+	tween2 = Global.tween(camera, "zoom", Vector2(0.7, 0.7), 2)
 	
 	if Global.is_mobile:
 		Global.Game.Mobile.enable_spectator_controls()
@@ -99,6 +105,10 @@ func _process(delta):
 		location_pulse.play("pulse")
 			
 func update_camera_zoom():
+	if tween1 or tween2:
+		tween1.kill()
+		tween2.kill()
+	
 	Global.tween(camera, "zoom", Vector2(camera_zoom, camera_zoom), .5)
 
 var location_in_area: SpawnLocation

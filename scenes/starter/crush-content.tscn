@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cmb0auixl7mcy"]
 
 [ext_resource type="PackedScene" uid="uid://x8gtkj6xeptj" path="res://scenes/starter/sub-components/starter-content.tscn" id="1_et7m7"]
-[ext_resource type="Script" path="res://scripts/tank-components/ShootingBasic.gd" id="2_a4cxf"]
+[ext_resource type="Script" path="res://scripts/behaviour-components/ShootingBasic.gd" id="2_a4cxf"]
 [ext_resource type="PackedScene" uid="uid://dbdruvih6st8j" path="res://scenes/starter/sub-components/basic-bullet.tscn" id="3_4jek4"]
 [ext_resource type="AudioStream" uid="uid://dulotk566dhxc" path="res://assets/audio/tanks/starter/crush-shot.mp3" id="4_iiwbx"]
 [ext_resource type="Script" path="res://scripts/helper-components/Audio2D.gd" id="5_s6xwo"]
@@ -199,7 +199,7 @@ delay = NodePath("Delay")
 bullet_scene = ExtResource("3_4jek4")
 bullet_speed = 850.0
 bullet_size = 1.25
-bullet_damage = 45.0
+bullet_damage = 60.0
 component_type = 5
 
 [node name="Delay" type="Timer" parent="BehaviourComponents/Shoot" index="0"]
