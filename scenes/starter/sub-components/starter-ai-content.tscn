@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://bae55p0tdb4ok"]
+[gd_scene load_steps=3 format=3 uid="uid://bae55p0tdb4ok"]
 
-[ext_resource type="Script" path="res://scripts/ai-components/Pathfind.gd" id="1_xiww1"]
 [ext_resource type="Script" path="res://scripts/ai-components/MasterComponentAI.gd" id="2_m1xum"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yt18q"]
@@ -12,10 +11,7 @@ size = Vector2(1506, 892)
 
 [node name="MasterComponentAI" type="Node" parent="AIComponentList"]
 script = ExtResource("2_m1xum")
-
-[node name="Pathfind" type="Node" parent="AIComponentList"]
-script = ExtResource("1_xiww1")
-component_type = 1
+closeup_range = 500
 
 [node name="PlayerView" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -42,6 +38,7 @@ offset_bottom = 100.0
 [node name="PathfindProcess" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.3
+autostart = true
 
 [connection signal="body_entered" from="PlayerView" to="AIComponentList/MasterComponentAI" method="_view_entered"]
 [connection signal="body_exited" from="PlayerView" to="AIComponentList/MasterComponentAI" method="_view_exited"]

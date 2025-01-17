@@ -20,7 +20,7 @@ func _setup_finished():
 
 func _process(delta):
 	if Input.is_action_just_pressed("special_move") and tank_stats \
-	and movement.input_vector and Global.Game.input_autherization():
+	and movement.input_vector and Global.Game.input_autherization() and tank.is_client:
 		if tank_stats.mana > dash_consumption:
 			tank_stats.set_mana(tank_stats.mana - dash_consumption)
 			

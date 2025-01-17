@@ -5,6 +5,7 @@ signal on_upgrade_tank(tank: Enums.TANKS)
 signal tank_switched()
 
 signal stats_setup_finished()
+signal movement_finished()
 
 @export var tank_name := "Tank"
 @export var tank_color := Color(1,1,1)

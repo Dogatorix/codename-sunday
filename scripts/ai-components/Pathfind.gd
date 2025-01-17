@@ -19,11 +19,7 @@ func pathfind_to_target():
 	#var direction = tank.to_local(navigation_agent.get_next_path_position()).normalized()
 	#movement = tank.behaviour(Enums.COMPONENTS.MOVEMENT)
 	#movement.input_vector = direction
-	#
-	#direction_smooth += ((direction - direction_smooth) / 10) * delta * 90
-	#
-	#movement.rotate_tank(rad_to_deg(direction_smooth.angle()) + 90)
-	#
+
 	#if tank.global_position.distance_to(target.global_position) < 400:
 		#target = get_tree().get_nodes_in_group("ai_node").pick_random()
 #
