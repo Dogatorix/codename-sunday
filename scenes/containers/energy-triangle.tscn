@@ -181,6 +181,12 @@ death_color = Color(0.929412, 0.145098, 0, 1)
 metadata/is_container = true
 metadata/bullet_target = true
 
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="."]
+position = Vector2(-2, 1)
+radius = 3.98
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(3.55271e-15, -1)
@@ -206,10 +212,5 @@ external = true
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1)
 shape = SubResource("CircleShape2D_wy4og")
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-visible = false
-vertices = PackedVector2Array(-25, -23, -24, 28, 24, 27, 25, -23)
-affect_navigation_mesh = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

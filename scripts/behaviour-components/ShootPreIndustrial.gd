@@ -25,6 +25,9 @@ func get_shoot_condition():
 	return get_input_condition() and can_shoot \
 	and Global.Game.active_input and tank.is_client and not prevent_shoot and init_can_shoot
 
+func get_ai_shoot_condition():
+	return can_shoot and not prevent_shoot and init_can_shoot
+
 func summon_bullet(target_position: Vector2):
 	var bullet_instance: BasicBullet = bullet_scene.instantiate()
 	

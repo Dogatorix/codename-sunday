@@ -11,6 +11,10 @@ var stats: StatsBasic
 
 var is_dying := false
 
+func _process(delta):
+	if Input.is_action_just_pressed("debug-1") and tank.is_client:
+		instant_death()
+
 func _setup_finished():
 	stats = tank.behaviour(Enums.COMPONENTS.STATS)
 	safety_check([stats, spectator_scene])

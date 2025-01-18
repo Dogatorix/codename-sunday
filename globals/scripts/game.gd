@@ -113,8 +113,8 @@ func _process(_delta):
 		paused = !paused
 		Global.Game.update_menu()
 		
-func input_autherization():
-	return active_input and client.is_client
+func input_autherization(tank):
+	return active_input and tank.is_client
 	
 @export var tank_scene: PackedScene
 func create_tank():

@@ -23,22 +23,29 @@ func _setup_finished():
 	
 func _process(_delta):
 	if get_shoot_condition():
-		can_shoot = false
-		delay.start()
+		_shoot_bullet()
+
+func ai_shoot():
+	if get_ai_shoot_condition():
+		_shoot_bullet()
+
+func _shoot_bullet():
+	can_shoot = false
+	delay.start()
 		
-		summon_bullet(origin.global_position)
+	summon_bullet(origin.global_position)
+	
+	if tank_animations:
+		tank_animations.stop()
+		tank_animations.play("shoot")
 		
-		if tank_animations:
-			tank_animations.stop()
-			tank_animations.play("shoot")
-			
-		shoot_sound.start()
-		
-		var tank_rotation = sprite_node.rotation_degrees + 90
-		
-		if knockback > 0:
-			movement.apply_external_velocity(tank_rotation, knockback, 1000)
-			dash.dash_length -= knockback
-			
+	shoot_sound.start()
+	
+	var tank_rotation = sprite_node.rotation_degrees + 90
+	
+	if knockback > 0:
+		movement.apply_external_velocity(tank_rotation, knockback, 1000)
+		dash.dash_length -= knockback
+
 func _on_delay_timeout():
 	can_shoot = true

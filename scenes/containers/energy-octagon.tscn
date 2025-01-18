@@ -216,13 +216,6 @@ default_damp = 0.0
 metadata/is_container = true
 metadata/bullet_target = true
 
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-visible = false
-position = Vector2(-82, 7.45058e-09)
-scale = Vector2(1, 1)
-vertices = PackedVector2Array(-18, 9, -16, -28, 21, -84, 140, -85, 188, 3, 154, 87, 5.99999, 101)
-affect_navigation_mesh = true
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(0.00552178, 0.0865164)
@@ -249,3 +242,8 @@ stream = ExtResource("2_csx2p")
 volume_db = -7.0
 script = ExtResource("4_7txs2")
 external = true
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 92.65
+affect_navigation_mesh = true
+carve_navigation_mesh = true

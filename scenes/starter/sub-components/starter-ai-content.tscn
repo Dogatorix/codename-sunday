@@ -11,7 +11,8 @@ size = Vector2(1506, 892)
 
 [node name="MasterComponentAI" type="Node" parent="AIComponentList"]
 script = ExtResource("2_m1xum")
-closeup_range = 500
+closeup_range = 400
+orbit_deviation_angle = 2.0
 
 [node name="PlayerView" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -27,6 +28,7 @@ unique_name_in_owner = true
 path_desired_distance = 100.0
 target_desired_distance = 100.0
 path_postprocessing = 1
+avoidance_enabled = true
 
 [node name="Label" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
