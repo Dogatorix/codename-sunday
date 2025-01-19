@@ -2,13 +2,13 @@ extends Node
 class_name GameGlobal
 
 @export var Overlay: CanvasLayer
-@export var PauseMenu: CanvasLayer
 
 @export var sandbox_scene: PackedScene
 @export var mobile_controls_scene: PackedScene
 
 @export var player_interface_scene: PackedScene
 @export var tank_upgrade_scene: PackedScene
+@export var pause_menu_scene: PackedScene
 
 @export var tank_scenes: Array[TankScene]
 
@@ -71,15 +71,18 @@ func timeout_destroy(target: Node, duration: float):
 
 var paused := false
 
+var PauseMenu: CanvasLayer
 func update_menu():
 	if paused:
-		menu_updated.emit(true)
-		PauseMenu.show_menu()
-		active_input = false
+		pass
+		#menu_updated.emit(true)
+		#PauseMenu.show_menu()
+		#active_input = false
 	else:
-		menu_updated.emit(false)
-		PauseMenu.hide_menu()
-		active_input = true
+		pass
+		#menu_updated.emit(false)
+		#PauseMenu.hide_menu()
+		#active_input = true
 		
 var Sandbox: Node
 var Mobile: Node

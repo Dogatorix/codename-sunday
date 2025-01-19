@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://cognsswihe28"]
+
+[ext_resource type="Script" path="res://scenes/pause-menu/lines.gd" id="1_hi73q"]
+[ext_resource type="Script" path="res://scenes/pause-menu/pause-menu.gd" id="1_tr0m0"]
+[ext_resource type="PackedScene" uid="uid://co5yxu300nof7" path="res://scenes/pause-menu/pause-menu-button.tscn" id="2_0hsv7"]
+[ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="3_vcbln"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_tr0m0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_right = 1949.0
+offset_bottom = 1129.0
+color = Color(0, 0.337255, 1, 0.133333)
+
+[node name="Control" type="Control" parent="."]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenuButton" parent="Control" instance=ExtResource("2_0hsv7")]
+layout_mode = 0
+offset_left = 1383.0
+offset_top = 870.0
+offset_right = 1733.0
+offset_bottom = 958.0
+
+[node name="LineMask" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.913725)
+clip_children = 1
+z_index = 1
+position = Vector2(480.132, 539.497)
+rotation = 1.5708
+scale = Vector2(1.09959, 4.36017)
+texture = ExtResource("3_vcbln")
+
+[node name="Lines" type="Node2D" parent="LineMask"]
+clip_children = 1
+position = Vector2(-517.917, 94.2926)
+rotation = -1.5708
+scale = Vector2(0.229349, 0.909428)
+script = ExtResource("1_hi73q")
+
+[node name="Unpleasant-gradient2" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.756863)
+position = Vector2(458.411, 546.584)
+rotation = 1.5708
+scale = Vector2(1.14772, 3.70728)
+texture = ExtResource("3_vcbln")
+
+[node name="Unpleasant-gradient3" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.713726)
+position = Vector2(1439.59, 554.001)
+rotation = -1.5708
+scale = Vector2(1.14772, 4.09341)
+texture = ExtResource("3_vcbln")
+
+[node name="Unpleasant-gradient4" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.713726)
+position = Vector2(999.515, 938.216)
+rotation = -0.261799
+scale = Vector2(2.26331, 3.11874)
+texture = ExtResource("3_vcbln")

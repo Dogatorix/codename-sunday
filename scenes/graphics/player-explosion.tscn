@@ -44,6 +44,7 @@ autostart = true
 [node name="Audio2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_surp2")
 autoplay = true
+bus = &"Tanks"
 script = ExtResource("3_tyffs")
 external = true
 

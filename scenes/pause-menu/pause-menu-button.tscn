@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://co5yxu300nof7"]
+
+[ext_resource type="Texture2D" uid="uid://c05b6mm0ag038" path="res://assets/sprites/ui/starter-ui/pause-menu-button.png" id="1_x721m"]
+[ext_resource type="FontFile" uid="uid://bqdbhmccebyas" path="res://assets/fonts/monster-beast.otf" id="2_ob5gn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7yi0e"]
+font = ExtResource("2_ob5gn")
+font_size = 41
+font_color = Color(0, 0.588235, 1, 1)
+
+[node name="PauseMenuButton" type="TextureButton"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.35159, 1.35159)
+texture_normal = ExtResource("1_x721m")
+texture_pressed = ExtResource("1_x721m")
+texture_hover = ExtResource("1_x721m")
+texture_disabled = ExtResource("1_x721m")
+texture_focused = ExtResource("1_x721m")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 12.0
+offset_right = 319.0
+offset_bottom = 80.0
+text = "leave"
+label_settings = SubResource("LabelSettings_7yi0e")
+horizontal_alignment = 1
+vertical_alignment = 1

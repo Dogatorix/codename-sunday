@@ -89,6 +89,9 @@ upgrades = Array[int]([1, 2, 3, 0])
 tank_animations = NodePath("../../TankSprite/TankAnimations")
 colored_nodes = [NodePath("../../TankSprite/Core")]
 
+[node name="Movement" parent="BehaviourComponents" index="1"]
+speed = 650.0
+
 [node name="Shoot" type="Node" parent="BehaviourComponents" index="5" node_paths=PackedStringArray("tank_animations", "origin", "shoot_sound", "delay")]
 script = ExtResource("2_6jjqi")
 tank_animations = NodePath("../../TankSprite/TankAnimations")
@@ -106,6 +109,7 @@ wait_time = 0.5
 [node name="Shoot" type="AudioStreamPlayer2D" parent="GraphicComponents" index="8"]
 stream = ExtResource("4_yxumf")
 volume_db = -3.0
+bus = &"Tanks"
 script = ExtResource("5_irgrx")
 pitch_range = 0.1
 

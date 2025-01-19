@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2og2osdar5t7"
-path="res://.godot/imported/starter-upgrade-button.png-cf74d3bb6c4c1a6ef4851013a2f189b2.ctex"
+uid="uid://c05b6mm0ag038"
+path="res://.godot/imported/pause-menu-button.png-3e7c393b272a760e00154bb6a92ee0ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/starter-ui/starter-upgrade-button.png"
-dest_files=["res://.godot/imported/starter-upgrade-button.png-cf74d3bb6c4c1a6ef4851013a2f189b2.ctex"]
+source_file="res://assets/sprites/ui/starter-ui/pause-menu-button.png"
+dest_files=["res://.godot/imported/pause-menu-button.png-3e7c393b272a760e00154bb6a92ee0ea.ctex"]
 
 [params]
 

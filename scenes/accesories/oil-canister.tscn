@@ -212,17 +212,20 @@ external = true
 
 [node name="HitAudio" type="AudioStreamPlayer2D" parent="."]
 volume_db = 5.0
+bus = &"Enviroment"
 script = ExtResource("10_bcbls")
 sounds = Array[AudioStream]([ExtResource("2_0m10h"), ExtResource("3_qfdt5")])
 
 [node name="FuseAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_thmav")
 volume_db = -3.0
+bus = &"Enviroment"
 script = ExtResource("10_bcbls")
 
 [node name="ExplosionAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_cvpq2")
 volume_db = 4.0
+bus = &"Enviroment"
 script = ExtResource("10_bcbls")
 external = true
 
@@ -260,7 +263,8 @@ position = Vector2(0, -27)
 shape = SubResource("RectangleShape2D_1mei3")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-vertices = PackedVector2Array(-36, -1, -36, -119, 37, -119, 37, 1)
+visible = false
+vertices = PackedVector2Array(-43, 20, -43, -62, 47, -66, 46, 19)
 affect_navigation_mesh = true
 carve_navigation_mesh = true
 

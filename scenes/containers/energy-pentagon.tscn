@@ -244,6 +244,7 @@ libraries = {
 unique_name_in_owner = true
 stream = ExtResource("2_f0wih")
 volume_db = -7.0
+bus = &"Enviroment"
 script = ExtResource("4_sa1eu")
 external = true
 

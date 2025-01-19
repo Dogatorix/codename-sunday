@@ -8,8 +8,8 @@
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_glcbn"]
 polygon = PackedVector2Array(-105, -100, -105, 90, 85, 90, 85, -100)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cwbu"]
-size = Vector2(35, 37)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ddmay"]
+radius = 17.0
 
 [sub_resource type="Animation" id="Animation_ygvpe"]
 length = 0.001
@@ -193,7 +193,7 @@ occluder = SubResource("OccluderPolygon2D_glcbn")
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(-0.5, -0.5)
-shape = SubResource("RectangleShape2D_1cwbu")
+shape = SubResource("CircleShape2D_ddmay")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -204,11 +204,12 @@ libraries = {
 unique_name_in_owner = true
 stream = ExtResource("2_w6gy3")
 volume_db = -7.0
+bus = &"Enviroment"
 script = ExtResource("4_8ruwk")
 external = true
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="."]
-radius = 3.0
+radius = 13.0
 affect_navigation_mesh = true
 carve_navigation_mesh = true
 

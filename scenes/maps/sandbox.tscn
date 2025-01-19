@@ -775,7 +775,6 @@ position = Vector2(-3025, -2302)
 position = Vector2(-2466, 3757)
 
 [node name="Dispenser5" parent="." instance=ExtResource("12_6b7yh")]
-visible = false
 position = Vector2(2811, -3008)
 rotation = -4.71239
 

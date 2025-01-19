@@ -240,6 +240,7 @@ unique_name_in_owner = true
 visible = false
 stream = ExtResource("2_csx2p")
 volume_db = -7.0
+bus = &"Enviroment"
 script = ExtResource("4_7txs2")
 external = true
 

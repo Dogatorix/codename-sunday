@@ -11,22 +11,6 @@ font_size = 38
 shadow_size = 13
 shadow_color = Color(0, 0, 0, 0.454902)
 
-[sub_resource type="Animation" id="Animation_vppcu"]
-resource_name = "init"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Other:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(0.420448, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_vfy7o"]
 length = 0.001
 tracks/0/type = "value"
@@ -72,6 +56,22 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_vppcu"]
+resource_name = "init"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Other:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.420448, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ys14e"]
 _data = {
 "RESET": SubResource("Animation_vfy7o"),
@@ -87,7 +87,7 @@ splash_button_scene = ExtResource("1_g0vwk")
 
 [node name="Buttons" type="Marker2D" parent="."]
 z_index = 2
-position = Vector2(0, 160)
+position = Vector2(500, 160)
 
 [node name="Other" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -106,6 +106,7 @@ offset_right = 1220.0
 offset_bottom = 190.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(259, 23)
 text = "Upgrade to Tier 2"
 label_settings = SubResource("LabelSettings_qpr8d")
 horizontal_alignment = 1

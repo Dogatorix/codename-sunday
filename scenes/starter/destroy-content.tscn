@@ -222,7 +222,7 @@ origin = NodePath("../../TankSprite/ShootOrigin")
 shoot_sound = NodePath("../../GraphicComponents/Shoot")
 delay = NodePath("Delay")
 bullet_scene = ExtResource("3_k4web")
-bullet_speed = 1350.0
+bullet_speed = 1300.0
 bullet_damage = 30.0
 bullet_penetration = 3
 component_type = 5
@@ -232,6 +232,7 @@ wait_time = 0.65
 
 [node name="Shoot" type="AudioStreamPlayer2D" parent="GraphicComponents" index="8"]
 volume_db = -3.0
+bus = &"Tanks"
 script = ExtResource("5_4wafu")
 sounds = Array[AudioStream]([ExtResource("5_pcxeg"), ExtResource("6_pai1u")])
 pitch_range = 0.1

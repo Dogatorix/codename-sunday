@@ -183,7 +183,7 @@ metadata/bullet_target = true
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="."]
 position = Vector2(-2, 1)
-radius = 3.98
+radius = 13.0
 affect_navigation_mesh = true
 carve_navigation_mesh = true
 
@@ -206,6 +206,7 @@ libraries = {
 unique_name_in_owner = true
 stream = ExtResource("2_4vo5s")
 volume_db = -7.0
+bus = &"Enviroment"
 script = ExtResource("4_irowy")
 external = true
 

@@ -4,8 +4,7 @@ extends CanvasLayer
 @export var splash_button_scene: PackedScene
 @export var upgrade_tier: Enums.TANK_TIERS
 
-@onready var center = get_viewport().size / 2
-
+@onready var center = $Buttons.global_position
 
 const button_size := 250
 
