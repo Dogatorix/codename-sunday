@@ -15,7 +15,8 @@ const TANK_NAMES := {
 	Enums.TANKS.CRUSH: "Crush"
 }
 
-var Game: GameGlobal
+
+var is_logged_in: bool = true
 var username := "Slow Joe"
 var device: DEVICE
 
@@ -53,7 +54,7 @@ func _ready():
 	else:
 		device = DEVICE.MOBILE 
 	
-	create_game(Enums.GAMEMODES.SANDBOX)
+	#create_game(Enums.GAMEMODES.SANDBOX)
 	
 	this_is_necessary_pinky_promise_do_not_remove()
 
@@ -70,6 +71,7 @@ func tween(target: Object, property, final_value, duration: float, transition: T
 	return tween
 	
 @export var game_scene: PackedScene
+var Game: GameGlobal
 func create_game(gamemode: Enums.GAMEMODES):
 	Game = game_scene.instantiate()
 	Game.gamemode = gamemode
@@ -86,3 +88,13 @@ func find_nearest_node(origin: Vector2, nodes: Array):
 		if origin.distance_to(node.global_position) < origin.distance_to(contender.global_position):
 			contender = node 
 	return contender
+
+func switch_current_scene(scene_path: String):
+	get_tree().current_scene.queue_free()
+	get_tree().current_scene = null
+	
+	var new_scene: PackedScene = load(scene_path)
+
+	var instances_scene := new_scene.instantiate()
+	get_tree().root.add_child(instances_scene)
+	get_tree().current_scene = instances_scene

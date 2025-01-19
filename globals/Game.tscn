@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://l5po6sn7y21h"]
+[gd_scene load_steps=18 format=3 uid="uid://l5po6sn7y21h"]
 
 [ext_resource type="Script" path="res://globals/scripts/game.gd" id="1_7e2b8"]
 [ext_resource type="PackedScene" uid="uid://d0bvm4ekcnm0q" path="res://scenes/tanks/player-overlay.tscn" id="2_1vsr1"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c5giyjrgql2yg" path="res://scenes/starter/destroy-content.tscn" id="10_sn8ox"]
 [ext_resource type="PackedScene" uid="uid://tg86jcs0270c" path="res://scenes/tank.tscn" id="11_orvxf"]
 [ext_resource type="PackedScene" uid="uid://csv3bs71hylt7" path="res://scenes/tanks/tank-upgrade-menu.tscn" id="12_w25y4"]
+[ext_resource type="PackedScene" uid="uid://cognsswihe28" path="res://scenes/pause-menu/pause-menu.tscn" id="13_5bmjk"]
 
 [sub_resource type="Resource" id="Resource_yyx6f"]
 script = ExtResource("4_7yt6y")
@@ -40,6 +41,7 @@ sandbox_scene = ExtResource("2_i0l27")
 mobile_controls_scene = ExtResource("5_o8ibu")
 player_interface_scene = ExtResource("9_4qyli")
 tank_upgrade_scene = ExtResource("12_w25y4")
+pause_menu_scene = ExtResource("13_5bmjk")
 tank_scenes = Array[ExtResource("4_7yt6y")]([SubResource("Resource_yyx6f"), SubResource("Resource_nsjth"), SubResource("Resource_gky30"), SubResource("Resource_pu5l8")])
 tank_scene = ExtResource("11_orvxf")
 

@@ -205,7 +205,7 @@ tracks/1/keys = {
 tracks/2/type = "audio"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Dropdown/AudioStreamPlayer")
+tracks/2/path = NodePath("Dropdown/DropdownSound")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -214,7 +214,7 @@ tracks/2/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("11_y0pkp")
 }],
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0.1)
 }
 tracks/2/use_blend = true
 tracks/3/type = "method"
@@ -423,7 +423,6 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_p75vl")
 }
-autoplay = "init"
 
 [node name="Scenery" type="Node" parent="."]
 
@@ -545,8 +544,10 @@ position = Vector2(958, 542)
 unique_name_in_owner = true
 stream = ExtResource("11_qayjv")
 volume_db = -15.0
+bus = &"Music"
 
 [node name="Dropdown" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="DropdownTop" type="Sprite2D" parent="Dropdown"]
 unique_name_in_owner = true
@@ -563,7 +564,8 @@ scale = Vector2(1.62237, 1.62237)
 texture = ExtResource("9_3o2nr")
 flip_v = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Dropdown"]
+[node name="DropdownSound" type="AudioStreamPlayer" parent="Dropdown"]
+bus = &"SoundEffect"
 
 [node name="NameEdit" parent="Dropdown" instance=ExtResource("10_uafp6")]
 unique_name_in_owner = true
@@ -587,7 +589,6 @@ metadata/_edit_use_anchors_ = true
 [node name="LightHumming" type="AudioStreamPlayer" parent="Dropdown"]
 unique_name_in_owner = true
 stream = ExtResource("15_ewebw")
-autoplay = true
 
 [node name="ColorRect" type="ColorRect" parent="Dropdown"]
 z_index = 50
@@ -689,7 +690,7 @@ layout_mode = 2
 [connection signal="text_changed" from="Dropdown/NameEdit/MenuInput" to="." method="_on_menu_input_text_changed"]
 [connection signal="pressed" from="Dropdown/MenuStartButton" to="." method="_on_menu_button_pressed"]
 [connection signal="finished" from="Dropdown/LightHumming" to="Dropdown/LightHumming" method="play"]
-[connection signal="pressed" from="TheSandbox" to="." method="_on__sandbox_pressed"]
+[connection signal="pressed" from="TheSandbox" to="." method="_on_sandbox_pressed"]
 [connection signal="pressed" from="QuitGame" to="." method="_on_quit_game_pressed"]
 
 [editable path="Dropdown/NameEdit"]

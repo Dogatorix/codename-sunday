@@ -1,30 +1,209 @@
-[gd_scene load_steps=4 format=3 uid="uid://co5yxu300nof7"]
+[gd_scene load_steps=13 format=3 uid="uid://co5yxu300nof7"]
 
 [ext_resource type="Texture2D" uid="uid://c05b6mm0ag038" path="res://assets/sprites/ui/starter-ui/pause-menu-button.png" id="1_x721m"]
 [ext_resource type="FontFile" uid="uid://bqdbhmccebyas" path="res://assets/fonts/monster-beast.otf" id="2_ob5gn"]
+[ext_resource type="AudioStream" uid="uid://d1hjfbbvxsf36" path="res://menu/button-click.mp3" id="3_rs6gl"]
+
+[sub_resource type="GDScript" id="GDScript_j4fsf"]
+script/source = "extends TextureButton
+
+@export var text: String
+
+func _ready():
+	$Label.text = text
+
+func _on_pressed():
+	%ClickSound.play()
+	%LabelAnimation.stop()
+	%LabelAnimation.play(\"click\")
+
+func _on_mouse_entered():
+	%ButtonAnimation.play(\"hover\")
+
+func _on_mouse_exited():
+	%ButtonAnimation.play(\"unhover\")
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_7yi0e"]
 font = ExtResource("2_ob5gn")
 font_size = 41
-font_color = Color(0, 0.588235, 1, 1)
+
+[sub_resource type="Animation" id="Animation_wibbx"]
+resource_name = "click"
+length = 0.15
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0.588235, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_p27l4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.588235, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4lyx2"]
+_data = {
+"RESET": SubResource("Animation_p27l4"),
+"click": SubResource("Animation_wibbx")
+}
+
+[sub_resource type="Animation" id="Animation_k6fgv"]
+resource_name = "unhover"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.707107, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.650128, 0.650128, 0.650128, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.707107, 1),
+"update": 0,
+"values": [Vector2(1.35159, 1.35159), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="Animation" id="Animation_w5k83"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.650128, 0.650128, 0.650128, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.35159, 1.35159)]
+}
+
+[sub_resource type="Animation" id="Animation_n58na"]
+resource_name = "hover"
+length = 0.2
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(0.535887, 1),
+"update": 0,
+"values": [Color(0.650128, 0.650128, 0.650128, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(0.535887, 1),
+"update": 0,
+"values": [Vector2(1.2, 1.2), Vector2(1.35159, 1.35159)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_amqes"]
+_data = {
+"RESET": SubResource("Animation_w5k83"),
+"hover": SubResource("Animation_n58na"),
+"unhover": SubResource("Animation_k6fgv")
+}
 
 [node name="PauseMenuButton" type="TextureButton"]
-offset_right = 40.0
-offset_bottom = 40.0
+modulate = Color(0.650128, 0.650128, 0.650128, 1)
+offset_right = 350.0
+offset_bottom = 88.0
 scale = Vector2(1.35159, 1.35159)
+pivot_offset = Vector2(182.008, 45.8719)
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("1_x721m")
 texture_pressed = ExtResource("1_x721m")
 texture_hover = ExtResource("1_x721m")
 texture_disabled = ExtResource("1_x721m")
 texture_focused = ExtResource("1_x721m")
+script = SubResource("GDScript_j4fsf")
 
 [node name="Label" type="Label" parent="."]
+modulate = Color(0, 0.588235, 1, 1)
 layout_mode = 0
 offset_left = 28.0
 offset_top = 12.0
 offset_right = 319.0
 offset_bottom = 80.0
-text = "leave"
+text = "text"
 label_settings = SubResource("LabelSettings_7yi0e")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LabelAnimation" type="AnimationPlayer" parent="Label"]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_4lyx2")
+}
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_rs6gl")
+volume_db = -12.0
+bus = &"SoundEffect"
+
+[node name="ButtonAnimation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_amqes")
+}
+autoplay = "unhover"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

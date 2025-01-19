@@ -74,17 +74,21 @@ var paused := false
 var PauseMenu: CanvasLayer
 func update_menu():
 	if paused:
-		pass
-		#menu_updated.emit(true)
-		#PauseMenu.show_menu()
-		#active_input = false
-	else:
-		pass
-		#menu_updated.emit(false)
-		#PauseMenu.hide_menu()
-		#active_input = true
+		active_input = false
+		if PauseMenu:
+			PauseMenu.queue_free()
+			PauseMenu = null
+		PauseMenu = pause_menu_scene.instantiate()
+		add_child(PauseMenu)
+	elif PauseMenu != null:
+		menu_updated.emit(false)
+		PauseMenu.hide_menu()
+		await PauseMenu.destroy_menu
+		PauseMenu.queue_free()
+		PauseMenu = null
+		active_input = true
 		
-var Sandbox: Node
+var Sandbox: SandboxGlobal
 var Mobile: Node
 
 func _ready():
@@ -96,7 +100,6 @@ func _ready():
 		Sandbox = sandbox_scene.instantiate()
 		add_child(Sandbox)
 		
-
 var player_interface: CanvasLayer
 
 func add_player_interface():
@@ -110,6 +113,12 @@ func add_upgrade_menu(upgrades: Array[Enums.TANKS], tier: Enums.TANK_TIERS):
 	upgrade_menu.upgrades = upgrades
 	upgrade_menu.upgrade_tier = tier
 	client.add_child(upgrade_menu)
+	
+func quit_to_menu():
+	Global.fade_in()
+	await Global.fade_in_complete
+	Global.switch_current_scene("res://menu/menu.tscn")
+	Global.Game.queue_free()
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("fun-menu-show"):

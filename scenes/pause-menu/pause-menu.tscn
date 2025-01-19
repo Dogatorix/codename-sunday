@@ -1,37 +1,209 @@
-[gd_scene load_steps=5 format=3 uid="uid://cognsswihe28"]
+[gd_scene load_steps=12 format=3 uid="uid://cognsswihe28"]
 
 [ext_resource type="Script" path="res://scenes/pause-menu/lines.gd" id="1_hi73q"]
 [ext_resource type="Script" path="res://scenes/pause-menu/pause-menu.gd" id="1_tr0m0"]
 [ext_resource type="PackedScene" uid="uid://co5yxu300nof7" path="res://scenes/pause-menu/pause-menu-button.tscn" id="2_0hsv7"]
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="3_vcbln"]
+[ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="5_21cgc"]
+[ext_resource type="AudioStream" uid="uid://bmhss24agh00k" path="res://assets/audio/game-pause.ogg" id="7_tarvf"]
+
+[sub_resource type="Animation" id="Animation_opwbn"]
+resource_name = "init"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blue:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.380392, 1, 0.509804), Color(0, 0.380392, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/GamemodeText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7k2dj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blue:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.380392, 1, 0.509804)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/GamemodeText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Control:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1452, 621)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Node2D:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_p8ae2"]
+resource_name = "fade_away"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blue:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.380392, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Control:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1.86607, 1),
+"update": 0,
+"values": [Vector2(1452, 621), Vector2(1900, 621)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sg52h"]
+_data = {
+"RESET": SubResource("Animation_7k2dj"),
+"fade_away": SubResource("Animation_p8ae2"),
+"init": SubResource("Animation_opwbn")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_6blvf"]
+font = ExtResource("5_21cgc")
+font_size = 32
+font_color = Color(0, 0.658824, 1, 1)
 
 [node name="PauseMenu" type="CanvasLayer"]
 layer = 20
 script = ExtResource("1_tr0m0")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Blue" type="ColorRect" parent="."]
+z_index = 10
+offset_left = -20.0
+offset_right = 1949.0
+offset_bottom = 1129.0
+mouse_filter = 2
+color = Color(0, 0.380392, 1, 0.509804)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sg52h")
+}
+autoplay = "init"
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Node2D"]
 offset_left = -20.0
 offset_right = 1949.0
 offset_bottom = 1129.0
 color = Color(0, 0.337255, 1, 0.133333)
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="Node2D"]
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1452.0
+offset_top = 621.0
+offset_right = 1452.0
+offset_bottom = 621.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PauseMenuButton" parent="Control" instance=ExtResource("2_0hsv7")]
+[node name="PauseMenuButton" parent="Node2D/Control" instance=ExtResource("2_0hsv7")]
 layout_mode = 0
-offset_left = 1383.0
-offset_top = 870.0
-offset_right = 1733.0
-offset_bottom = 958.0
+offset_left = 17.0
+offset_top = 302.0
+offset_right = 367.0
+offset_bottom = 390.0
+text = "leave"
 
-[node name="LineMask" type="Sprite2D" parent="."]
+[node name="PauseMenuButton2" parent="Node2D/Control" instance=ExtResource("2_0hsv7")]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 159.0
+offset_right = 367.0
+offset_bottom = 247.0
+text = "restart"
+
+[node name="PauseMenuButton3" parent="Node2D/Control" instance=ExtResource("2_0hsv7")]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 13.0
+offset_right = 367.0
+offset_bottom = 101.0
+text = "settings"
+
+[node name="LineMask" type="Sprite2D" parent="Node2D"]
 modulate = Color(1, 1, 1, 0.913725)
 clip_children = 1
 z_index = 1
@@ -40,30 +212,48 @@ rotation = 1.5708
 scale = Vector2(1.09959, 4.36017)
 texture = ExtResource("3_vcbln")
 
-[node name="Lines" type="Node2D" parent="LineMask"]
+[node name="Lines" type="Node2D" parent="Node2D/LineMask"]
 clip_children = 1
 position = Vector2(-517.917, 94.2926)
 rotation = -1.5708
 scale = Vector2(0.229349, 0.909428)
 script = ExtResource("1_hi73q")
 
-[node name="Unpleasant-gradient2" type="Sprite2D" parent="."]
+[node name="Unpleasant-gradient2" type="Sprite2D" parent="Node2D"]
 modulate = Color(0, 0, 0, 0.756863)
 position = Vector2(458.411, 546.584)
 rotation = 1.5708
 scale = Vector2(1.14772, 3.70728)
 texture = ExtResource("3_vcbln")
 
-[node name="Unpleasant-gradient3" type="Sprite2D" parent="."]
+[node name="Unpleasant-gradient3" type="Sprite2D" parent="Node2D"]
 modulate = Color(0, 0, 0, 0.713726)
 position = Vector2(1439.59, 554.001)
 rotation = -1.5708
 scale = Vector2(1.14772, 4.09341)
 texture = ExtResource("3_vcbln")
 
-[node name="Unpleasant-gradient4" type="Sprite2D" parent="."]
+[node name="Unpleasant-gradient4" type="Sprite2D" parent="Node2D"]
 modulate = Color(0, 0, 0, 0.713726)
 position = Vector2(999.515, 938.216)
 rotation = -0.261799
 scale = Vector2(2.26331, 3.11874)
 texture = ExtResource("3_vcbln")
+
+[node name="GamemodeText" type="Label" parent="Node2D"]
+unique_name_in_owner = true
+offset_left = 357.0
+offset_top = 257.0
+offset_right = 963.0
+offset_bottom = 296.0
+text = "Gamemode: Sandbox"
+label_settings = SubResource("LabelSettings_6blvf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_tarvf")
+volume_db = -6.0
+autoplay = true
+bus = &"SoundEffect"
+
+[connection signal="pressed" from="Node2D/Control/PauseMenuButton" to="." method="_on_leave_pressed"]
+[connection signal="pressed" from="Node2D/Control/PauseMenuButton2" to="." method="_on_restart_pressed"]

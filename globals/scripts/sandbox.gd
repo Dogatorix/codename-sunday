@@ -1,6 +1,5 @@
-
-
 extends Node
+class_name SandboxGlobal
 
 @export var spawn_cursor_scene: PackedScene
 @export var move_cursor_scene: PackedScene
@@ -34,12 +33,6 @@ func _on_menu_update(_mode):
 	
 func _on_menu_restarted():
 	spawn_mode = false
-	#get_tree().reload_current_scene()
-	#await get_tree().current_scene.ready
-	#print(get_tree().current_scene)
-	#queue_free()
-	#get_tree().current_scene = Global.Game
-	#Global.create_game(Enums.GAMEMODES.SANDBOX)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("spawn-mode-toggle") and not paused and Global.Game.client:
@@ -48,8 +41,18 @@ func _process(_delta):
 			
 	if Input.is_action_just_pressed("move-mode-toggle") and not paused and Global.Game.client:
 		move_mode = !move_mode
-		update_move()		
+		update_move()
+	
+	if Input.is_action_just_pressed("debug-2"):
+		restart_sandbox()
 		
+func restart_sandbox():
+	Global.fade_in()
+	await Global.fade_in_complete
+	Global.Game.queue_free()
+	Global.switch_current_scene("res://scenes/maps/sandbox.tscn")
+	Global.create_game(Enums.GAMEMODES.SANDBOX)
+	
 func update_spawner():
 	if spawn_mode:
 		move_mode = false

@@ -5,6 +5,15 @@ extends Node2D
 
 func _ready():
 	menu_start_button.disable()
+	
+	if Global.is_logged_in:
+		%Dropdown.queue_free()
+		%MenuMusic.play()
+		enable_menu_buttons()
+		Global.fade_out()
+	else:
+		%LightHumming.play()
+		%MenuAnimations.play("init")
 
 func _on_menu_button_pressed():
 	Global.username = %NameEdit.text_value
@@ -12,7 +21,11 @@ func _on_menu_button_pressed():
 	menu_start_button.disabled = true
 	%MenuAnimations.play("open")
 	%UserLabel.text = "User: " + Global.username
-	
+	Global.is_logged_in = true
+
+	enable_menu_buttons()
+
+func enable_menu_buttons():
 	#%MachineTraining.enable()
 	%TheSandbox.enable()
 	%QuitGame.enable()
@@ -37,7 +50,7 @@ func _on_quit_game_pressed():
 func quit_game():
 	get_tree().quit()
 
-func _on__sandbox_pressed():
+func _on_sandbox_pressed():
 	disable_menu_buttons()	
 	Global.fade_in()
 	await Global.fade_in_complete
