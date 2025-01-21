@@ -50,11 +50,6 @@ func _process(delta):
 		normal_velocity = normal_velocity.move_toward(Vector2.ZERO, friction * delta)
 	
 	tank.velocity = normal_velocity + external_velocity + dash_velocity
-	
-	for i in tank.get_slide_collision_count():
-		var c = tank.get_slide_collision(i)
-		if c.get_collider() is RigidBody2D:
-			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
 
 	if tank_sprite and camera and can_look and not Global.is_mobile:
 		rotate_tank_camera()

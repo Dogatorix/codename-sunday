@@ -30,7 +30,6 @@ const TANK_DEFAULT_COLORS: Array[Color] = [
 signal restarted()
 signal menu_updated(mode: bool)
 
-
 var clients: Array[Tank] = []
 var cameras: Array[GameCamera] = []
 var spawn_location: SpawnLocation
@@ -91,7 +90,13 @@ func update_menu():
 var Sandbox: SandboxGlobal
 var Mobile: Node
 
+var path_points: Array[Vector2i]	
+
 func _ready():
+	var path_points_node = get_tree().get_first_node_in_group("path_points")
+	path_points = path_points_node.get_used_cells()
+	path_points_node.queue_free()
+	
 	if Global.is_mobile:
 		Mobile = mobile_controls_scene.instantiate()
 		add_child(Mobile)
@@ -119,8 +124,12 @@ func quit_to_menu():
 	await Global.fade_in_complete
 	Global.switch_current_scene("res://menu/menu.tscn")
 	Global.Game.queue_free()
+
+var time_spent = 0.0
+
+func _process(delta):
+	time_spent += delta
 	
-func _process(_delta):
 	if Input.is_action_just_pressed("fun-menu-show"):
 		paused = !paused
 		Global.Game.update_menu()

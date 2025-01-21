@@ -2,8 +2,8 @@ extends TankBehaviourComponent
 class_name StatsBasic
 
 const CORE_REQUIREMENT = {
-	Enums.TANK_TIERS.BASIC: 300,
-	Enums.TANK_TIERS.STARTER: 2000,
+	Enums.TANK_TIERS.BASIC: 250,
+	Enums.TANK_TIERS.STARTER: 1000,
 	Enums.TANK_TIERS.INDUSTRIAL: 8000,
 }
 

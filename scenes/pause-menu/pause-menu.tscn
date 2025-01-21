@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cognsswihe28"]
+[gd_scene load_steps=13 format=3 uid="uid://cognsswihe28"]
 
 [ext_resource type="Script" path="res://scenes/pause-menu/lines.gd" id="1_hi73q"]
 [ext_resource type="Script" path="res://scenes/pause-menu/pause-menu.gd" id="1_tr0m0"]
@@ -6,35 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="3_vcbln"]
 [ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="5_21cgc"]
 [ext_resource type="AudioStream" uid="uid://bmhss24agh00k" path="res://assets/audio/game-pause.ogg" id="7_tarvf"]
-
-[sub_resource type="Animation" id="Animation_opwbn"]
-resource_name = "init"
-length = 1.2
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Blue:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0.380392, 1, 0.509804), Color(0, 0.380392, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/GamemodeText:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_7k2dj"]
 length = 0.001
@@ -53,31 +24,31 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/GamemodeText:modulate")
+tracks/1/path = NodePath("Node2D/Control:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(1452, 621)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Control:position")
+tracks/2/path = NodePath("Node2D:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1452, 621)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Node2D:modulate")
+tracks/3/path = NodePath("Node2D/TimeSpent:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -128,6 +99,35 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_opwbn"]
+resource_name = "init"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blue:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.380392, 1, 0.509804), Color(0, 0.380392, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/TimeSpent:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sg52h"]
 _data = {
 "RESET": SubResource("Animation_7k2dj"),
@@ -135,9 +135,14 @@ _data = {
 "init": SubResource("Animation_opwbn")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_6blvf"]
+[sub_resource type="LabelSettings" id="LabelSettings_6bfip"]
 font = ExtResource("5_21cgc")
 font_size = 32
+font_color = Color(0, 0.658824, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6blvf"]
+font = ExtResource("5_21cgc")
+font_size = 42
 font_color = Color(0, 0.658824, 1, 1)
 
 [node name="PauseMenu" type="CanvasLayer"]
@@ -240,18 +245,34 @@ rotation = -0.261799
 scale = Vector2(2.26331, 3.11874)
 texture = ExtResource("3_vcbln")
 
-[node name="GamemodeText" type="Label" parent="Node2D"]
+[node name="TimeSpent" type="Control" parent="Node2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 347.0
+offset_top = 253.0
+offset_right = 795.0
+offset_bottom = 531.0
+
+[node name="GamemodeText" type="Label" parent="Node2D/TimeSpent"]
 unique_name_in_owner = true
-offset_left = 357.0
-offset_top = 257.0
-offset_right = 963.0
-offset_bottom = 296.0
-text = "Gamemode: Sandbox"
+offset_left = 10.0
+offset_top = 11.0
+offset_right = 616.0
+offset_bottom = 68.0
+text = "Gamemode"
+label_settings = SubResource("LabelSettings_6bfip")
+
+[node name="TimeSpent" type="Label" parent="Node2D/TimeSpent"]
+unique_name_in_owner = true
+offset_left = 10.0
+offset_top = 56.0
+offset_right = 616.0
+offset_bottom = 113.0
+text = "Time"
 label_settings = SubResource("LabelSettings_6blvf")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_tarvf")
-volume_db = -6.0
 autoplay = true
 bus = &"SoundEffect"
 

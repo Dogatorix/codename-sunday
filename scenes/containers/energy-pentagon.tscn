@@ -204,11 +204,11 @@ _data = {
 "hit": SubResource("Animation_hcd0i")
 }
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="RigidBody2D" type="RigidBody2D" groups=["shapes"]]
 z_index = 6
 collision_layer = 3
 collision_mask = 0
-mass = 75.0
+mass = 15.0
 linear_damp = 2.0
 script = ExtResource("1_737ok")
 max_health = 60.0

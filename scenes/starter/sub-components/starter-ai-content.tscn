@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bae55p0tdb4ok"]
+[gd_scene load_steps=4 format=3 uid="uid://bae55p0tdb4ok"]
 
+[ext_resource type="Script" path="res://scripts/ai-components/Roaming.gd" id="2_cvbmw"]
 [ext_resource type="Script" path="res://scripts/ai-components/MasterComponentAI.gd" id="2_m1xum"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yt18q"]
@@ -11,8 +12,10 @@ size = Vector2(1506, 892)
 
 [node name="MasterComponentAI" type="Node" parent="AIComponentList"]
 script = ExtResource("2_m1xum")
-closeup_range = 400
-orbit_deviation_angle = 2.0
+
+[node name="Roaming" type="Node" parent="AIComponentList"]
+script = ExtResource("2_cvbmw")
+component_type = 1
 
 [node name="PlayerView" type="Area2D" parent="."]
 unique_name_in_owner = true

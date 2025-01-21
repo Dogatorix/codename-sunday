@@ -168,11 +168,11 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_wy4og"]
 radius = 16.0
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="RigidBody2D" type="RigidBody2D" groups=["shapes"]]
 z_index = 5
 collision_layer = 3
 collision_mask = 0
-mass = 50.0
+mass = 8.0
 linear_damp = 2.0
 script = ExtResource("1_1gv42")
 max_health = 30.0

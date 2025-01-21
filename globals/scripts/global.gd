@@ -15,7 +15,6 @@ const TANK_NAMES := {
 	Enums.TANKS.CRUSH: "Crush"
 }
 
-
 var is_logged_in: bool = true
 var username := "Slow Joe"
 var device: DEVICE
@@ -53,9 +52,7 @@ func _ready():
 		device = DEVICE.DESKTOP
 	else:
 		device = DEVICE.MOBILE 
-	
-	#create_game(Enums.GAMEMODES.SANDBOX)
-	
+		
 	this_is_necessary_pinky_promise_do_not_remove()
 
 func this_is_necessary_pinky_promise_do_not_remove():

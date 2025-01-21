@@ -85,6 +85,12 @@ func switch_tank_scene(tank: Enums.TANKS):
 	
 	tank_switched.emit()
 	
+func _process(_delta):
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody2D:
+			c.get_collider().apply_central_impulse(-c.get_normal() * 100)
+	
 func upgrade_tank(tank: Enums.TANKS):
 	on_upgrade_tank.emit(tank)
 	
