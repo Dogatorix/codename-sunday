@@ -42,7 +42,7 @@ func _on_health_change(health):
 
 func death():
 	var death_instance = death_scene.instantiate()
-	death_instance.set_meta("particle_color", tank.tank_color)
+	death_instance.modulate = tank.tank_color.darkened(0.3)
 	tank.add_sibling(death_instance)
 	death_instance.global_position = tank.global_position
 	tank.queue_free()

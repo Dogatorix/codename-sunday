@@ -1,14 +1,8 @@
 extends TankAIComponent
 class_name MasterComponentAI
 
-enum AI_STATE {
-	ROAM,
-	GRIND,
-	ATTACK,
-	FLEE
-}
-
-var state: AI_STATE = AI_STATE.ROAM
+signal state_changed(state)
+var state: Enums.AI_COMPONENTS = Enums.AI_COMPONENTS.ROAMING
 
 var players_in_vision: Array[Tank] = []
 var nearest_tank: Tank
@@ -32,25 +26,36 @@ var movement: MovementBasic
 
 func _setup_finished():
 	%PathfindProcess.connect("timeout", _on_pathfind_process)
-	#path_points = get_tree().get_first_node_in_group("path_points")
-	#print(path_points.get_used_cells())
-
+	
 func _on_pathfind_process():
 	navigation_agent.target_position = target_position
 
-func _process(delta):
+func pathfind_to(position: Vector2):
+	pathfind_disabled = false
+	target_position = position
+
+func get_path_direction():
+	return tank.to_local(navigation_agent.get_next_path_position()).normalized()
+
+func _process(_delta):
 	movement = tank.behaviour(Enums.COMPONENTS.MOVEMENT)
 	
 	if not pathfind_disabled:
-		tank_path_direction = tank.to_local(navigation_agent.get_next_path_position()).normalized()
+		tank_path_direction = get_path_direction()
 		movement.input_vector = tank_path_direction
 	else:
 		movement.input_vector = Vector2.ZERO
 		
+	look_target_smooth += (look_target_position - look_target_smooth) / 6
 	tank_target_rotation = rad_to_deg((tank.global_position - look_target_smooth).angle()) - 90
-	look_target_smooth += (look_target_position - look_target_smooth) / 5
 	movement.tank_sprite.rotation_degrees = tank_target_rotation
 	
+	#%Label.text = str(look_target_position)
+
+func switch_state(new_state: Enums.AI_COMPONENTS):
+	state = new_state
+	state_changed.emit(new_state)
+
 	#print(path_points)
 	#if nearest_tank != null:
 		#handle_orbit()
@@ -69,7 +74,7 @@ func _process(delta):
 	#shoot.ai_shoot()
 	#
 	#look_at_position(nearest_tank.global_position)
-	
+
 func _view_entered(body):
 	if not body == tank and body is CharacterBody2D:
 		players_in_vision.push_front(body)

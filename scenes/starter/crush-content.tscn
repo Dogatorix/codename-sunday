@@ -189,6 +189,9 @@ colored_nodes = [NodePath("../../TankSprite/Core")]
 [node name="Movement" parent="BehaviourComponents" index="1"]
 speed = 475.0
 
+[node name="StatsBasic" parent="BehaviourComponents" index="2"]
+core_tier = 1
+
 [node name="Shoot" type="Node" parent="BehaviourComponents" index="5" node_paths=PackedStringArray("tank_animations", "origin", "shoot_sound", "delay")]
 script = ExtResource("2_a4cxf")
 knockback = 400.0

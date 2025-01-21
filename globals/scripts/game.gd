@@ -90,11 +90,14 @@ func update_menu():
 var Sandbox: SandboxGlobal
 var Mobile: Node
 
-var path_points: Array[Vector2i]	
+var path_points: Array[Vector2]	
 
 func _ready():
-	var path_points_node = get_tree().get_first_node_in_group("path_points")
-	path_points = path_points_node.get_used_cells()
+	var path_points_node: TileMapLayer = get_tree().get_first_node_in_group("path_points")
+	
+	for cell in path_points_node.get_used_cells():
+		path_points.push_front(path_points_node.map_to_local(cell))
+		
 	path_points_node.queue_free()
 	
 	if Global.is_mobile:
