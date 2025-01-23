@@ -95,6 +95,9 @@ func upgrade_tank(tank: Enums.TANKS):
 	on_upgrade_tank.emit(tank)
 	
 func behaviour(component_name: Enums.COMPONENTS):
+	if not behaviour_components.has(component_name):
+		return null
+		
 	return behaviour_components[component_name]
 	
 func ai(component_name: Enums.AI_COMPONENTS):

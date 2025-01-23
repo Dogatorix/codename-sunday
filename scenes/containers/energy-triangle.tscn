@@ -183,7 +183,7 @@ metadata/bullet_target = true
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="."]
 position = Vector2(-2, 1)
-radius = 34.13
+radius = 41.17
 affect_navigation_mesh = true
 carve_navigation_mesh = true
 
