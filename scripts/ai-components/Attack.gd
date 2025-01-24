@@ -2,9 +2,9 @@ extends TankAIComponent
 class_name Attack
 
 @onready var navigation_agent = %NavigationAgent2D
-@onready var dash_delay = %DashDelay
 
 var master: MasterComponentAI
+var flee: Flee
 var stats: StatsBasic
 
 var closeup_range: int
@@ -24,6 +24,8 @@ var min_health_to_give_up: int
 var combat_time: float
 var dash_chance: int
 
+var shoot_through_walls: bool
+
 func _setup_finished():
 	master = tank.ai(Enums.AI_COMPONENTS.MASTER)
 	var ai_profile: TankAIProfile = master.ai_profile
@@ -36,6 +38,7 @@ func _setup_finished():
 	combat_time_max = ai_profile.attack_combat_time_max
 	min_health_to_give_up = ai_profile.attack_min_health_to_give_up
 	dash_chance = ai_profile.attack_dash_chance
+	shoot_through_walls = ai_profile.shoot_through_walls
 	
 	tank_memory = tank_memory_max
 	
@@ -44,8 +47,6 @@ func _setup_finished():
 	
 	stats = tank.behaviour(Enums.COMPONENTS.STATS)
 	master.state_changed.connect(state_update)
-	
-	dash_delay.start()
 	
 func state_update(new_state: Enums.AI_COMPONENTS):
 	if not new_state == component_type:
@@ -75,9 +76,14 @@ func _process(delta):
 		handle_orbit()
 		master.pathfind_disabled = false
 	
-	var give_up_condition = can_give_up and combat_time > combat_time_max and tank_target.behaviour(Enums.COMPONENTS.STATS).health > min_health_to_give_up
+	var health_condition: bool = false
+	if tank_target != null:
+		health_condition = tank_target.behaviour(Enums.COMPONENTS.STATS).health > min_health_to_give_up
+		
+	var give_up_condition = can_give_up and combat_time > combat_time_max and health_condition
 	
 	if give_up_condition or stats.health < min_health_allowed:
+		tank.ai(Enums.AI_COMPONENTS.FLEE).flee_target = tank_target
 		master.switch_state(Enums.AI_COMPONENTS.FLEE)
 	
 	#%Label.text = str(int(combat_time))	
@@ -92,15 +98,16 @@ func handle_orbit():
 	or not navigation_agent.is_target_reachable():
 		master.target_position = get_next_orbit_position(master.nearest_tank.global_position)
 	
-	var shoot = tank.behaviour(Enums.COMPONENTS.SHOOT)
-	shoot.ai_shoot()
+	if not master.ray_cast_collider is TileMapLayer or shoot_through_walls: 
+		var shoot = tank.behaviour(Enums.COMPONENTS.SHOOT)
+		shoot.ai_shoot()
 	
 	master.look_at_position(master.nearest_tank.global_position)
 
 func get_next_orbit_position(position: Vector2):
 	var alpha = randf_range(-orbit_deviation_angle, orbit_deviation_angle)
 	var alpha_angle = position.angle_to_point(tank.global_position) + alpha
-	var distance = Vector2.from_angle(alpha_angle) * randi_range(closeup_range, closeup_range + 200)
+	var distance = Vector2.from_angle(alpha_angle) * randi_range(closeup_range, closeup_range + 250)
 	
 	return master.nearest_tank.global_position + distance
 
@@ -111,5 +118,3 @@ func _on_dash_delay_timeout():
 	if randi_range(0,100) <= dash_chance: 
 		var tank_dash: DashBasic = tank.behaviour(Enums.COMPONENTS.DASH)
 		tank_dash.dash()
-		
-	dash_delay.start()

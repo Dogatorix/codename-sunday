@@ -6,7 +6,12 @@ signal tank_entered(tank: Tank)
 signal tank_exited(tank: Tank)
 
 @export var ai_profile: TankAIProfile
+@onready var ray_cast: RayCast2D = %RayCast
 
+var ray_cast_collider:
+	get:
+		return ray_cast.get_collider()
+		
 var state: Enums.AI_COMPONENTS = Enums.AI_COMPONENTS.ROAMING
 
 var players_in_vision: Array[Tank] = []
@@ -51,20 +56,17 @@ func _process(_delta):
 	look_target_smooth += (look_target_position - look_target_smooth) / 6
 	tank_target_rotation = rad_to_deg((tank.global_position - look_target_smooth).angle()) - 90
 	movement.tank_sprite.rotation_degrees = tank_target_rotation
+	ray_cast.rotation_degrees = movement.tank_sprite.rotation_degrees 
 	
-	#%Label.text = str(look_target_position)
-
 func switch_state(new_state: Enums.AI_COMPONENTS):
 	state = new_state
 	state_changed.emit(new_state)
-
-	#print(path_points)
-	#else:
-		#pathfind_disabled = true
-		#look_at_position(tank.global_position + Vector2(0, -100))
-
+	
 func _view_entered(body):
 	if not body == tank and body is CharacterBody2D:
+		if body.is_client and Settings.ai_ignore_client:
+			return
+		
 		players_in_vision.push_front(body)
 		update_nearest_tank()
 		tank_entered.emit(body)
@@ -76,16 +78,13 @@ func erase_player_from_vision(body: CharacterBody2D):
 	players_in_vision.erase(body)
 
 func _view_exited(body):
-	if not body == tank and body is CharacterBody2D:		
+	if not body == tank and body is CharacterBody2D:
 		update_nearest_tank()
 		players_in_vision.erase(body)
 		tank_exited.emit(body)
 
 func update_nearest_tank():
 	nearest_tank = Global.find_nearest_node(tank.global_position, players_in_vision)
-	
-	#if nearest_tank:
-		#target_position = get_next_orbit_position(nearest_tank.global_position)
 	
 func look_at_position(position: Vector2):
 	look_target_position = position

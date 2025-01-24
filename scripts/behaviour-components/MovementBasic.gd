@@ -27,9 +27,6 @@ var input_vector := Vector2.ZERO
 
 var can_move := true
 
-func _setup_finished():
-	tank.movement_finished.emit()
-
 func _process(delta):
 	tank.move_and_slide()
 	

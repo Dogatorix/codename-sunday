@@ -3,10 +3,10 @@ extends TextureButton
 var tween: Tween
 @onready var original_scale := scale
 @export var text_value: String
-@export var is_disabled := false
+@export var is_button_disabled := false
 
 func _ready():
-	if is_disabled:
+	if is_button_disabled:
 		disable()
 	else:
 		enable()

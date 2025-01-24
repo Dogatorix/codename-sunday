@@ -88,6 +88,9 @@ func set_points(value):
 	points_change.emit(value)
 
 func damage_tank(amount):
+	if tank.is_client and Settings.client_god_mode:
+		amount = 0
+	
 	if is_immune:
 		set_health(health - abs(amount / 4))
 	else:
@@ -95,14 +98,11 @@ func damage_tank(amount):
 		
 	regen_delay = health_regeneration_delay
 	
-	if health == 0:
+	if health <= 0:
 		return
 	
 	if tank.is_client:
 		Global.Game.Overlay.damage()
-	if sprite_animations:
-		sprite_animations.play("damage")
-	if damage_sounds:
-		damage_sounds.start()
-	if damage_particle:
-		damage_particle.start()
+	sprite_animations.play("damage")
+	damage_sounds.start()
+	damage_particle.start()

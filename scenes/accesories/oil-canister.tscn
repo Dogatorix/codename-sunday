@@ -263,7 +263,7 @@ position = Vector2(0, -27)
 shape = SubResource("RectangleShape2D_1mei3")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-vertices = PackedVector2Array(-55, 27, -50, -67, 49, -66, 49, 29)
+vertices = PackedVector2Array(-71, 36, -72, -68, 72, -67, 69, 38)
 affect_navigation_mesh = true
 carve_navigation_mesh = true
 
