@@ -17,5 +17,8 @@ class_name TankAIProfile
 @export var attack_dash_chance: int = 20
 
 @export_group("Flee")
-@export var flee_timer_max: float = 10.0
+@export var flee_timer_max: float = 5.0
 @export var flee_dash_chance: int = 35
+
+@export_group("Shape")
+@export var shape_closeup_range: float = 300

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bae55p0tdb4ok"]
+[gd_scene load_steps=9 format=3 uid="uid://bae55p0tdb4ok"]
 
 [ext_resource type="Script" path="res://scripts/ai-components/Roaming.gd" id="2_cvbmw"]
 [ext_resource type="Script" path="res://scripts/ai-components/MasterComponentAI.gd" id="2_m1xum"]
 [ext_resource type="Script" path="res://scripts/resources/TankAIProfile.gd" id="2_pr4xa"]
 [ext_resource type="Script" path="res://scripts/ai-components/Attack.gd" id="3_1li13"]
 [ext_resource type="Script" path="res://scripts/ai-components/Flee.gd" id="5_7veom"]
+[ext_resource type="Script" path="res://scripts/ai-components/Shape.gd" id="6_w51p7"]
 
 [sub_resource type="Resource" id="Resource_541nf"]
 script = ExtResource("2_pr4xa")
@@ -17,8 +18,9 @@ attack_can_give_up = true
 attack_combat_time_max = 40
 attack_min_health_to_give_up = 75
 attack_dash_chance = 20
-flee_timer_max = 10.0
+flee_timer_max = 5.0
 flee_dash_chance = 35
+shape_closeup_range = 300.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yt18q"]
 size = Vector2(2756, 1572)
@@ -46,6 +48,10 @@ component_type = 2
 [node name="Flee" type="Node" parent="AIComponentList"]
 script = ExtResource("5_7veom")
 component_type = 3
+
+[node name="Shape" type="Node" parent="AIComponentList"]
+script = ExtResource("6_w51p7")
+component_type = 4
 
 [node name="PlayerView" type="Area2D" parent="."]
 unique_name_in_owner = true

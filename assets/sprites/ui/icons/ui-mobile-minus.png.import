@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1866lp4i3cqp"
-path="res://.godot/imported/ShowcasePreview.png-70f7a50f53e5fc814a0e306c3f1e556a.ctex"
+uid="uid://do2t4w3naqr02"
+path="res://.godot/imported/ui-mobile-minus.png-cfa4d33a447c70890b5dd0399f0e885f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/virtual_joystick/previews/ShowcasePreview.png"
-dest_files=["res://.godot/imported/ShowcasePreview.png-70f7a50f53e5fc814a0e306c3f1e556a.ctex"]
+source_file="res://assets/sprites/ui/icons/ui-mobile-minus.png"
+dest_files=["res://.godot/imported/ui-mobile-minus.png-cfa4d33a447c70890b5dd0399f0e885f.ctex"]
 
 [params]
 

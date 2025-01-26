@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://cognsswihe28"]
+[gd_scene load_steps=14 format=3 uid="uid://cognsswihe28"]
 
 [ext_resource type="Script" path="res://scenes/pause-menu/lines.gd" id="1_hi73q"]
 [ext_resource type="Script" path="res://scenes/pause-menu/pause-menu.gd" id="1_tr0m0"]
 [ext_resource type="PackedScene" uid="uid://co5yxu300nof7" path="res://scenes/pause-menu/pause-menu-button.tscn" id="2_0hsv7"]
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="3_vcbln"]
 [ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="5_21cgc"]
+[ext_resource type="PackedScene" uid="uid://cisphrdydvtcx" path="res://settings.tscn" id="7_oauc0"]
 [ext_resource type="AudioStream" uid="uid://bmhss24agh00k" path="res://assets/audio/game-pause.ogg" id="7_tarvf"]
 
 [sub_resource type="Animation" id="Animation_7k2dj"]
@@ -148,6 +149,7 @@ font_color = Color(0, 0.658824, 1, 1)
 [node name="PauseMenu" type="CanvasLayer"]
 layer = 20
 script = ExtResource("1_tr0m0")
+settings_scene = ExtResource("7_oauc0")
 
 [node name="Blue" type="ColorRect" parent="."]
 z_index = 10
@@ -255,6 +257,7 @@ offset_bottom = 531.0
 
 [node name="GamemodeText" type="Label" parent="Node2D/TimeSpent"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 10.0
 offset_top = 11.0
 offset_right = 616.0
@@ -264,6 +267,7 @@ label_settings = SubResource("LabelSettings_6bfip")
 
 [node name="TimeSpent" type="Label" parent="Node2D/TimeSpent"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 10.0
 offset_top = 56.0
 offset_right = 616.0
@@ -278,3 +282,4 @@ bus = &"SoundEffect"
 
 [connection signal="pressed" from="Node2D/Control/PauseMenuButton" to="." method="_on_leave_pressed"]
 [connection signal="pressed" from="Node2D/Control/PauseMenuButton2" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Node2D/Control/PauseMenuButton3" to="." method="_on_settings_pressed"]

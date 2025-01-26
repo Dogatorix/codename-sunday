@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh2tir4qt2ck4"
-path="res://.godot/imported/ui-mobile-plus.png-6cb1e5244bc76e2d76d4c81c41c40fbd.ctex"
+uid="uid://dijhryqmgwaxn"
+path="res://.godot/imported/ui-background-button-white.png-ff32256bdd9cf32b8338db3765a22739.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/ui-mobile-plus.png"
-dest_files=["res://.godot/imported/ui-mobile-plus.png-6cb1e5244bc76e2d76d4c81c41c40fbd.ctex"]
+source_file="res://assets/sprites/ui/icons/ui-background-button-white.png"
+dest_files=["res://.godot/imported/ui-background-button-white.png-ff32256bdd9cf32b8338db3765a22739.ctex"]
 
 [params]
 

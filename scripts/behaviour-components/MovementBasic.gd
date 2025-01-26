@@ -27,6 +27,24 @@ var input_vector := Vector2.ZERO
 
 var can_move := true
 
+var run_sounds: AudioStreamPlayer2D
+var run_sounds_can_play: bool
+func _setup_finished():
+	if Settings.run_sounds:
+		setup_run_sounds()
+
+func setup_run_sounds():
+	if run_sounds and not Settings.run_sounds:
+		run_sounds.queue_free()
+		run_sounds = null
+		
+	if run_sounds == null and Settings.run_sounds:
+		var run_sounds_scene: PackedScene = load("res://scenes/graphics/run-sound.tscn")
+		run_sounds = run_sounds_scene.instantiate()
+		get_parent().add_sibling.call_deferred(run_sounds)
+		await run_sounds.ready
+		run_sounds.connect("finished", run_sounds.play)
+
 func _process(delta):
 	tank.move_and_slide()
 	
@@ -40,6 +58,7 @@ func _process(delta):
 			Input.get_axis("move_left", "move_right"),
 			Input.get_axis("move_up", "move_down")
 		)
+		
 	
 	if input_vector != Vector2.ZERO and Global.Game.active_input and can_move:
 		normal_velocity = normal_velocity.move_toward(input_vector.normalized() * speed, acceleration * delta)
@@ -58,6 +77,10 @@ func _process(delta):
 		
 		if joystick.is_pressed:
 			rotate_tank(rad_to_deg(direction) + 90)
+	
+	if input_vector == Vector2.ZERO and not run_sounds == null:
+		run_sounds.stop()
+		run_sounds_can_play = true
 
 func rotate_tank_camera():
 	var mouse_position = tank.get_global_mouse_position() - camera.shake_vector
@@ -84,3 +107,9 @@ func apply_external_velocity(direction: float, power: int, decay: int):
 func reset_external_velocity():
 	external_velocity_length = 0
 	external_velocity = Vector2.ZERO
+
+func _input(event):
+	if event.is_action_pressed("move_left") or event.is_action_pressed("move_right") or event.is_action_pressed("move_up") or event.is_action_pressed("move_down"):
+		if run_sounds_can_play and run_sounds:
+			run_sounds_can_play = false
+			run_sounds.play(0)

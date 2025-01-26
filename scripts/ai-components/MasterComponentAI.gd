@@ -4,6 +4,8 @@ class_name MasterComponentAI
 signal state_changed(state: Enums.AI_COMPONENTS)
 signal tank_entered(tank: Tank)
 signal tank_exited(tank: Tank)
+signal shape_entered(shape: RigidBody2D)
+signal shape_exited(shape: RigidBody2D)
 
 @export var ai_profile: TankAIProfile
 @onready var ray_cast: RayCast2D = %RayCast
@@ -13,8 +15,11 @@ var ray_cast_collider:
 		return ray_cast.get_collider()
 		
 var state: Enums.AI_COMPONENTS = Enums.AI_COMPONENTS.ROAMING
-
+	
 var players_in_vision: Array[Tank] = []
+var shapes_in_vision: Array[RigidBody2D] = []
+
+var nearest_shape: RigidBody2D
 var nearest_tank: Tank
 
 var look_target_position: Vector2
@@ -62,7 +67,14 @@ func switch_state(new_state: Enums.AI_COMPONENTS):
 	state = new_state
 	state_changed.emit(new_state)
 	
-func _view_entered(body):
+func _view_entered(body: Node2D):
+	if body.is_in_group("shapes"):
+		shapes_in_vision.push_front(body)
+		update_nearest_shape()
+		shape_entered.emit(body)
+		if not body.is_connected("tree_exiting", erase_shape_from_vision):
+			body.connect("tree_exiting", erase_shape_from_vision.bind(body))
+	
 	if not body == tank and body is CharacterBody2D:
 		if body.is_client and Settings.ai_ignore_client:
 			return
@@ -77,7 +89,16 @@ func erase_player_from_vision(body: CharacterBody2D):
 	update_nearest_tank()
 	players_in_vision.erase(body)
 
-func _view_exited(body):
+func erase_shape_from_vision(body: RigidBody2D):
+	update_nearest_shape()
+	shapes_in_vision.erase(body)
+
+func _view_exited(body: Node2D):
+	if body.is_in_group("shapes"):
+		update_nearest_shape()
+		shapes_in_vision.erase(body)
+		shape_exited.emit()
+		
 	if not body == tank and body is CharacterBody2D:
 		update_nearest_tank()
 		players_in_vision.erase(body)
@@ -85,6 +106,9 @@ func _view_exited(body):
 
 func update_nearest_tank():
 	nearest_tank = Global.find_nearest_node(tank.global_position, players_in_vision)
+	
+func update_nearest_shape():
+	nearest_shape = Global.find_nearest_node(tank.global_position, shapes_in_vision)
 	
 func look_at_position(position: Vector2):
 	look_target_position = position

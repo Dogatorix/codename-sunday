@@ -22,7 +22,6 @@ signal ai_master_setup_finished()
 ### THIS IS TEMPORARY!!!
 @export var ai_content_scene: PackedScene
 
-
 var behaviour_components := {}
 var ai_components := {}
 
@@ -63,8 +62,8 @@ func setup_client():
 		Global.Game.Mobile.enable_tank_controls()
 		
 	var camera_instance = GameCamera.new()
-	camera_instance.zoom = Vector2(default_zoom, default_zoom)
 	add_child(camera_instance)
+	camera_instance.zoom = Vector2(default_zoom, default_zoom)
 	camera = camera_instance
 	Game.Overlay.hide_bars()
 	Global.fade_out()
@@ -73,7 +72,6 @@ func setup_client():
 func setup_ai():
 	var ai_instance = ai_content_scene.instantiate()
 	add_child(ai_instance)
-	
 
 func switch_tank_scene(tank: Enums.TANKS):
 	is_spawning = false

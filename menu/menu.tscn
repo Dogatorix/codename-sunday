@@ -615,7 +615,6 @@ offset_top = 189.0
 offset_right = 1183.0
 offset_bottom = 282.0
 text_value = "Machine Training"
-is_disabled = true
 
 [node name="TheSandbox" parent="." instance=ExtResource("17_k4jks")]
 unique_name_in_owner = true
@@ -624,7 +623,6 @@ offset_top = 310.0
 offset_right = 1183.0
 offset_bottom = 403.0
 text_value = "The Sandbox"
-is_disabled = true
 
 [node name="Settings" parent="." instance=ExtResource("17_k4jks")]
 unique_name_in_owner = true
@@ -633,7 +631,6 @@ offset_top = 431.0
 offset_right = 1183.0
 offset_bottom = 524.0
 text_value = "Settings"
-is_disabled = true
 
 [node name="QuitGame" parent="." instance=ExtResource("17_k4jks")]
 unique_name_in_owner = true
@@ -642,7 +639,6 @@ offset_top = 549.0
 offset_right = 1183.0
 offset_bottom = 642.0
 text_value = "Quit Game"
-is_disabled = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -211.0

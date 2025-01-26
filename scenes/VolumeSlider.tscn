@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://fcvm3nb5ssgt"]
+
+[sub_resource type="GDScript" id="GDScript_yley5"]
+resource_name = "volume_slider"
+script/source = "extends HBoxContainer
+
+@export var label: String
+@export var index: int
+signal volume_update(value, index)
+
+func _ready():
+	%Label.text = label
+	var bus = AudioServer.get_bus_volume_db(index)
+	
+	%MasterVolumeSlider.value = db_to_linear(bus) * 100
+	%MasterVolumeDisplay.text = str(int(%MasterVolumeSlider.value)) + \"%\"
+
+
+func _on_master_volume_slider_value_changed(value):
+	volume_update.emit((value / 100), index)
+	%MasterVolumeDisplay.text = str(int(value)) + \"%\"
+
+	
+"
+
+[node name="VolumeSlider" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+script = SubResource("GDScript_yley5")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+text = "Master Volume"
+vertical_alignment = 1
+
+[node name="MasterVolumeSlider" type="HSlider" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.66
+min_value = 0.1
+value = 100.0
+
+[node name="MasterVolumeDisplay" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+text = "100%"
+horizontal_alignment = 2
+
+[connection signal="value_changed" from="MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]

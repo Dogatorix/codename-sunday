@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3 uid="uid://cisphrdydvtcx"]
+
+[ext_resource type="Theme" uid="uid://dc58x0jek4oh1" path="res://menu/settings.tres" id="1_2nt85"]
+[ext_resource type="Script" path="res://scripts/settings_menu.gd" id="2_1yuw7"]
+[ext_resource type="PackedScene" uid="uid://fcvm3nb5ssgt" path="res://scenes/VolumeSlider.tscn" id="2_38qc8"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1078.0
+offset_bottom = -336.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(437, 380)
+theme = ExtResource("1_2nt85")
+script = ExtResource("2_1yuw7")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Audio" type="VBoxContainer" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Master" parent="TabContainer/Audio" instance=ExtResource("2_38qc8")]
+layout_mode = 2
+label = "Master Volume"
+
+[node name="Master2" parent="TabContainer/Audio" instance=ExtResource("2_38qc8")]
+layout_mode = 2
+label = "Music"
+index = 2
+
+[node name="Master3" parent="TabContainer/Audio" instance=ExtResource("2_38qc8")]
+layout_mode = 2
+label = "Interface"
+index = 1
+
+[node name="Master4" parent="TabContainer/Audio" instance=ExtResource("2_38qc8")]
+layout_mode = 2
+label = "Tanks"
+index = 3
+
+[node name="Master5" parent="TabContainer/Audio" instance=ExtResource("2_38qc8")]
+layout_mode = 2
+label = "Enviroment"
+index = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Audio"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="RunSounds" type="CheckBox" parent="TabContainer/Audio"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Enable Run Sounds"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -286.0
+offset_top = -54.0
+offset_right = -23.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Reset settings"
+
+[node name="CloseDelay" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+
+[connection signal="volume_update" from="TabContainer/Audio/Master" to="." method="_on_volume_update"]
+[connection signal="volume_update" from="TabContainer/Audio/Master2" to="." method="_on_volume_update"]
+[connection signal="volume_update" from="TabContainer/Audio/Master3" to="." method="_on_volume_update"]
+[connection signal="volume_update" from="TabContainer/Audio/Master4" to="." method="_on_volume_update"]
+[connection signal="volume_update" from="TabContainer/Audio/Master5" to="." method="_on_volume_update"]
+[connection signal="toggled" from="TabContainer/Audio/RunSounds" to="." method="_on_run_sounds_toggled"]

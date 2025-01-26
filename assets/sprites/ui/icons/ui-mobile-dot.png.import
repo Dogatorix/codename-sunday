@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuwqv71rjffsx"
-path="res://.godot/imported/Logo.svg-ff6e2b43579b0b50d493f1bf1feaff55.ctex"
+uid="uid://bx0jev2peq5ui"
+path="res://.godot/imported/ui-mobile-dot.png-caaf29b9e1269535662675b6729d439d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/virtual_joystick/previews/Logo.svg"
-dest_files=["res://.godot/imported/Logo.svg-ff6e2b43579b0b50d493f1bf1feaff55.ctex"]
+source_file="res://assets/sprites/ui/icons/ui-mobile-dot.png"
+dest_files=["res://.godot/imported/ui-mobile-dot.png-caaf29b9e1269535662675b6729d439d.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

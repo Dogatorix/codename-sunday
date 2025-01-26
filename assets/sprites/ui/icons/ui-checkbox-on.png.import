@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://i0aqgq23kp2d"
-path="res://.godot/imported/ui-mobile-shoot.png-f930ae8e7720966f1580881894dd34da.ctex"
+uid="uid://wl7t86rg55hb"
+path="res://.godot/imported/ui-checkbox-on.png-ecfd17ad6edf0dd847d7e191912cb41d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/ui-mobile-shoot.png"
-dest_files=["res://.godot/imported/ui-mobile-shoot.png-f930ae8e7720966f1580881894dd34da.ctex"]
+source_file="res://assets/sprites/ui/icons/ui-checkbox-on.png"
+dest_files=["res://.godot/imported/ui-checkbox-on.png-ecfd17ad6edf0dd847d7e191912cb41d.ctex"]
 
 [params]
 

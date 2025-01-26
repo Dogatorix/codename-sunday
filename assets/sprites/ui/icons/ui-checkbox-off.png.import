@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm30au8mjfc2f"
-path="res://.godot/imported/joystick_base_outline.png-1529fbc0a23b5af9e961e1a3d047aa0b.ctex"
+uid="uid://davob4381ot27"
+path="res://.godot/imported/ui-checkbox-off.png-ab4a762481eff7d7fe29d30253eb828e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/virtual_joystick/textures/joystick_base_outline.png"
-dest_files=["res://.godot/imported/joystick_base_outline.png-1529fbc0a23b5af9e961e1a3d047aa0b.ctex"]
+source_file="res://assets/sprites/ui/icons/ui-checkbox-off.png"
+dest_files=["res://.godot/imported/ui-checkbox-off.png-ab4a762481eff7d7fe29d30253eb828e.ctex"]
 
 [params]
 

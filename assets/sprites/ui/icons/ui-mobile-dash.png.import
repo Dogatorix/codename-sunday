@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx0jev2peq5ui"
-path="res://.godot/imported/ui-mobile-dot.png-f556b6798b279aba61cd65e33e2b593c.ctex"
+uid="uid://dwm5u7pfd54ns"
+path="res://.godot/imported/ui-mobile-dash.png-f3231890d7ad0f6ae81ea486fa95fe71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/ui-mobile-dot.png"
-dest_files=["res://.godot/imported/ui-mobile-dot.png-f556b6798b279aba61cd65e33e2b593c.ctex"]
+source_file="res://assets/sprites/ui/icons/ui-mobile-dash.png"
+dest_files=["res://.godot/imported/ui-mobile-dash.png-f3231890d7ad0f6ae81ea486fa95fe71.ctex"]
 
 [params]
 

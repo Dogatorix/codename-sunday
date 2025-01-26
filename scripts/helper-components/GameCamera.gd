@@ -11,6 +11,7 @@ var shake_nodes = {"intensity": {}, "interpolation": {}}
 
 func _ready():
 	Global.Game.cameras.push_front(self)
+	
 
 func _process(_delta):
 	var max_intensity = shake_nodes.intensity.values().max()

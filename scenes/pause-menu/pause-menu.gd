@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+@export var settings_scene: PackedScene
+
 signal destroy_menu()
 
 var is_restarting: bool
@@ -27,6 +29,9 @@ func seconds_to_clock(seconds):
 	
 func hide_menu():
 	$AnimationPlayer.play("fade_away")
+	if not settings_instance == null:
+		settings_instance.close()
+	
 	await $AnimationPlayer.animation_finished
 	destroy_menu.emit()
 
@@ -45,4 +50,21 @@ func _on_leave_pressed():
 	is_restarting = true
 	
 	Global.Game.quit_to_menu()
-	
+
+var settings_instance: Control
+func _on_settings_pressed():	
+	if settings_instance == null:
+		add_settings()
+	else:
+		if settings_instance.is_closing:
+			settings_instance = null
+			add_settings()
+			return
+		settings_instance.close()
+		settings_instance = null
+
+func add_settings():
+	settings_instance = settings_scene.instantiate()
+	add_child(settings_instance)
+	settings_instance.size = Vector2(817, 605)
+	settings_instance.global_position = Vector2(355, 800)

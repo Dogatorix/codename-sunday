@@ -48,7 +48,7 @@ movie_writer/movie_file="D:/GodotRecordings/godot-playback.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/virtual_joystick/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 

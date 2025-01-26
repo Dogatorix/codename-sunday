@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do2t4w3naqr02"
-path="res://.godot/imported/ui-mobile-minus.png-a2eee14487b35df78f4545d6256aba3c.ctex"
+uid="uid://b0oimsj41oudx"
+path="res://.godot/imported/ui-slider-off.png-991b26b0f8eb5a8f54d38086cbcc171c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/ui-mobile-minus.png"
-dest_files=["res://.godot/imported/ui-mobile-minus.png-a2eee14487b35df78f4545d6256aba3c.ctex"]
+source_file="res://assets/sprites/ui/icons/ui-slider-off.png"
+dest_files=["res://.godot/imported/ui-slider-off.png-991b26b0f8eb5a8f54d38086cbcc171c.ctex"]
 
 [params]
 
