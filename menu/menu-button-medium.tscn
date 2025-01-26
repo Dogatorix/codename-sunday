@@ -20,3 +20,4 @@ offset = Vector2(50.7281, -903.529)
 
 [node name="ClickSound" parent="." index="3"]
 volume_db = -10.0
+bus = &"Master"

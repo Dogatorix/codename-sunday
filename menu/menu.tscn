@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://8tiv2vutfnxn"]
+[gd_scene load_steps=36 format=3 uid="uid://8tiv2vutfnxn"]
 
 [ext_resource type="Texture2D" uid="uid://dawy610qsbsyp" path="res://assets/sprites/ui/starter-ui/unpleasant-gradient.png" id="1_37ec0"]
 [ext_resource type="Texture2D" uid="uid://ciurkxfm4xe7" path="res://menu/scenery/looping-buildings.png" id="1_by6mv"]
@@ -15,10 +15,11 @@
 [ext_resource type="AudioStream" uid="uid://4gssajqm70hl" path="res://menu/sons-of-madness.ogg" id="11_qayjv"]
 [ext_resource type="AudioStream" uid="uid://cbulqgtpld56p" path="res://menu/gates-open.mp3" id="11_y0pkp"]
 [ext_resource type="AudioStream" uid="uid://yrd1mpvcvm3f" path="res://menu/light-humming.mp3" id="15_ewebw"]
-[ext_resource type="FontFile" uid="uid://dg31axhh41bjd" path="res://assets/fonts/prototype.ttf" id="16_7rddp"]
+[ext_resource type="FontFile" uid="uid://dhqymx780y6q4" path="res://assets/fonts/mokoto.ttf" id="17_8ibrq"]
 [ext_resource type="PackedScene" uid="uid://ch3mjwdcr0j3v" path="res://menu/menu-button-medium.tscn" id="17_k4jks"]
 [ext_resource type="Texture2D" uid="uid://bay8dyvbyvphs" path="res://menu/training-menu/training-player-list-container.png" id="18_66nsm"]
 [ext_resource type="PackedScene" uid="uid://b42iq26re5kxi" path="res://menu/training-menu/player-card.tscn" id="19_5n4gn"]
+[ext_resource type="PackedScene" uid="uid://cisphrdydvtcx" path="res://settings.tscn" id="20_erhw3"]
 
 [sub_resource type="Animation" id="Animation_f0akj"]
 length = 0.001
@@ -410,13 +411,14 @@ _data = {
 offsets = PackedFloat32Array(0, 0.373016, 0.503968, 0.623016, 1)
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="LabelSettings" id="LabelSettings_v7v34"]
-font = ExtResource("16_7rddp")
-font_size = 64
+[sub_resource type="LabelSettings" id="LabelSettings_t7ic4"]
+font = ExtResource("17_8ibrq")
+font_size = 70
 font_color = Color(0, 0.592157, 0.992157, 1)
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_vm3l5")
+settings_scene = ExtResource("20_erhw3")
 
 [node name="MenuAnimations" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -551,6 +553,7 @@ unique_name_in_owner = true
 
 [node name="DropdownTop" type="Sprite2D" parent="Dropdown"]
 unique_name_in_owner = true
+visible = false
 z_index = 10
 position = Vector2(962, 289)
 scale = Vector2(1.62237, 1.62237)
@@ -558,6 +561,7 @@ texture = ExtResource("8_b6du1")
 
 [node name="DropdownBottom" type="Sprite2D" parent="Dropdown"]
 unique_name_in_owner = true
+visible = false
 z_index = 10
 position = Vector2(963, 866)
 scale = Vector2(1.62237, 1.62237)
@@ -565,18 +569,22 @@ texture = ExtResource("9_3o2nr")
 flip_v = true
 
 [node name="DropdownSound" type="AudioStreamPlayer" parent="Dropdown"]
-bus = &"SoundEffect"
 
 [node name="NameEdit" parent="Dropdown" instance=ExtResource("10_uafp6")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(946, 423)
 scale = Vector2(1.25603, 1.25603)
 
 [node name="MenuInput" parent="Dropdown/NameEdit" index="0"]
 metadata/_edit_use_anchors_ = true
 
+[node name="Light" parent="Dropdown/NameEdit" index="1"]
+visible = false
+
 [node name="MenuStartButton" parent="Dropdown" instance=ExtResource("11_p3ial")]
 unique_name_in_owner = true
+visible = false
 z_index = 20
 offset_left = 806.0
 offset_top = 708.0
@@ -606,39 +614,7 @@ offset_top = 953.0
 offset_right = 1093.0
 offset_bottom = 1029.0
 text = "User: Drill Thrill"
-label_settings = SubResource("LabelSettings_v7v34")
-
-[node name="MachineTraining" parent="." instance=ExtResource("17_k4jks")]
-unique_name_in_owner = true
-offset_left = 711.0
-offset_top = 189.0
-offset_right = 1183.0
-offset_bottom = 282.0
-text_value = "Machine Training"
-
-[node name="TheSandbox" parent="." instance=ExtResource("17_k4jks")]
-unique_name_in_owner = true
-offset_left = 711.0
-offset_top = 310.0
-offset_right = 1183.0
-offset_bottom = 403.0
-text_value = "The Sandbox"
-
-[node name="Settings" parent="." instance=ExtResource("17_k4jks")]
-unique_name_in_owner = true
-offset_left = 711.0
-offset_top = 431.0
-offset_right = 1183.0
-offset_bottom = 524.0
-text_value = "Settings"
-
-[node name="QuitGame" parent="." instance=ExtResource("17_k4jks")]
-unique_name_in_owner = true
-offset_left = 711.0
-offset_top = 549.0
-offset_right = 1183.0
-offset_bottom = 642.0
-text_value = "Quit Game"
+label_settings = SubResource("LabelSettings_t7ic4")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -211.0
@@ -682,11 +658,58 @@ layout_mode = 2
 [node name="PlayerCard7" parent="TrainingMenu/HBoxContainer" instance=ExtResource("19_5n4gn")]
 layout_mode = 2
 
+[node name="GoBack" parent="." instance=ExtResource("17_k4jks")]
+unique_name_in_owner = true
+offset_left = 1970.0
+offset_top = 431.0
+offset_right = 2442.0
+offset_bottom = 524.0
+text_value = "Go Back"
+
+[node name="MenuButtonsContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(946, 407)
+
+[node name="MachineTraining" parent="MenuButtonsContainer" instance=ExtResource("17_k4jks")]
+unique_name_in_owner = true
+offset_left = -235.0
+offset_top = -218.0
+offset_right = 237.0
+offset_bottom = -125.0
+text_value = "Machine Training"
+is_button_disabled = true
+
+[node name="TheSandbox" parent="MenuButtonsContainer" instance=ExtResource("17_k4jks")]
+unique_name_in_owner = true
+offset_left = -235.0
+offset_top = -97.0
+offset_right = 237.0
+offset_bottom = -4.0
+text_value = "The Sandbox"
+
+[node name="Settings" parent="MenuButtonsContainer" instance=ExtResource("17_k4jks")]
+unique_name_in_owner = true
+offset_left = -235.0
+offset_top = 24.0
+offset_right = 237.0
+offset_bottom = 117.0
+text_value = "Settings"
+
+[node name="QuitGame" parent="MenuButtonsContainer" instance=ExtResource("17_k4jks")]
+unique_name_in_owner = true
+offset_left = -235.0
+offset_top = 142.0
+offset_right = 237.0
+offset_bottom = 235.0
+text_value = "Quit Game"
+
 [connection signal="finished" from="MenuMusic" to="MenuMusic" method="play"]
 [connection signal="text_changed" from="Dropdown/NameEdit/MenuInput" to="." method="_on_menu_input_text_changed"]
 [connection signal="pressed" from="Dropdown/MenuStartButton" to="." method="_on_menu_button_pressed"]
 [connection signal="finished" from="Dropdown/LightHumming" to="Dropdown/LightHumming" method="play"]
-[connection signal="pressed" from="TheSandbox" to="." method="_on_sandbox_pressed"]
-[connection signal="pressed" from="QuitGame" to="." method="_on_quit_game_pressed"]
+[connection signal="pressed" from="GoBack" to="." method="_on_go_back_pressed"]
+[connection signal="pressed" from="MenuButtonsContainer/TheSandbox" to="." method="_on_sandbox_pressed"]
+[connection signal="pressed" from="MenuButtonsContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MenuButtonsContainer/QuitGame" to="." method="_on_quit_game_pressed"]
 
 [editable path="Dropdown/NameEdit"]

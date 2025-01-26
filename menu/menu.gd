@@ -3,6 +3,8 @@ extends Node2D
 
 @onready var menu_start_button = %MenuStartButton
 
+@export var settings_scene: PackedScene
+
 func _ready():
 	menu_start_button.disable()
 	
@@ -68,3 +70,26 @@ func disable_menu_buttons():
 	%TheSandbox.disable()
 	%QuitGame.disable()
 	%MachineTraining.disable()
+
+@onready var menu_buttons_container_pos_init = %MenuButtonsContainer.global_position
+@onready var go_back_button_pos_init = %GoBack.global_position
+var settings_instance: Control
+func _on_settings_pressed():
+	if settings_instance != null:
+		settings_instance.queue_free()
+	Global.tween(%MenuButtonsContainer, "global_position", Vector2(2200, menu_buttons_container_pos_init.y), 1)
+	Global.tween(%GoBack, "global_position", Vector2(1250, go_back_button_pos_init.y), 1)
+	settings_instance = settings_scene.instantiate()
+	settings_instance.size = Vector2(900, 700)
+	settings_instance.position = Vector2(150, 100)
+	add_child(settings_instance)
+	%GoBack.enable()
+	%GoBack.modulate = Color("0097fd")
+	#this is fucking awful but i dont know why theyre white so whatever
+
+func _on_go_back_pressed():
+	settings_instance.close()
+	Global.tween(%MenuButtonsContainer, "global_position", menu_buttons_container_pos_init, 1)
+	Global.tween(%GoBack, "global_position", go_back_button_pos_init, 1)
+	%Settings.enable()
+	%Settings.modulate = Color("0097fd")
