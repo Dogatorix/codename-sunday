@@ -195,7 +195,7 @@ libraries = {
 unique_name_in_owner = true
 stream = ExtResource("3_rs6gl")
 volume_db = -12.0
-bus = &"SoundEffect"
+bus = &"Sounds"
 
 [node name="ButtonAnimation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

@@ -481,3 +481,4 @@ libraries = {
 unique_name_in_owner = true
 stream = ExtResource("11_7ekh4")
 volume_db = -4.0
+bus = &"Sounds"

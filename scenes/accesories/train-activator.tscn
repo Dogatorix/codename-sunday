@@ -111,6 +111,7 @@ libraries = {
 
 [node name="PressAudio" type="AudioStreamPlayer2D" parent="."]
 volume_db = 1.0
+bus = &"Sounds"
 script = ExtResource("3_8hekl")
 sounds = Array[AudioStream]([ExtResource("4_hwmh1"), ExtResource("5_cvf4l")])
 

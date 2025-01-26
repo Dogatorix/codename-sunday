@@ -85,7 +85,7 @@ func _on_settings_pressed():
 	add_child(settings_instance)
 	%GoBack.enable()
 	%GoBack.modulate = Color("0097fd")
-	#this is fucking awful but i dont know why theyre white so whatever
+	#this is an awful implementation but i dont know why theyre white so whatever
 
 func _on_go_back_pressed():
 	settings_instance.close()

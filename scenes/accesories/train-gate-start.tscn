@@ -132,6 +132,6 @@ interpolation = 2
 
 [node name="StartupAudio" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, 291)
-bus = &"Enviroment"
+bus = &"Sounds"
 script = ExtResource("4_cu6lc")
 sounds = Array[AudioStream]([ExtResource("5_n7pxh"), ExtResource("6_uwa2u")])

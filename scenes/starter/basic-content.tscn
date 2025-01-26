@@ -109,7 +109,7 @@ wait_time = 0.5
 [node name="Shoot" type="AudioStreamPlayer2D" parent="GraphicComponents" index="8"]
 stream = ExtResource("4_yxumf")
 volume_db = -3.0
-bus = &"Tanks"
+bus = &"Sounds"
 script = ExtResource("5_irgrx")
 pitch_range = 0.1
 

@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://ch3mjwdcr0j3v" path="res://menu/menu-button-medium.tscn" id="17_k4jks"]
 [ext_resource type="Texture2D" uid="uid://bay8dyvbyvphs" path="res://menu/training-menu/training-player-list-container.png" id="18_66nsm"]
 [ext_resource type="PackedScene" uid="uid://b42iq26re5kxi" path="res://menu/training-menu/player-card.tscn" id="19_5n4gn"]
-[ext_resource type="PackedScene" uid="uid://cisphrdydvtcx" path="res://settings.tscn" id="20_erhw3"]
+[ext_resource type="PackedScene" uid="uid://cisphrdydvtcx" path="res://scenes/interface/settings/settings.tscn" id="20_erhw3"]
 
 [sub_resource type="Animation" id="Animation_f0akj"]
 length = 0.001
@@ -569,6 +569,7 @@ texture = ExtResource("9_3o2nr")
 flip_v = true
 
 [node name="DropdownSound" type="AudioStreamPlayer" parent="Dropdown"]
+bus = &"Sounds"
 
 [node name="NameEdit" parent="Dropdown" instance=ExtResource("10_uafp6")]
 unique_name_in_owner = true
@@ -597,6 +598,7 @@ metadata/_edit_use_anchors_ = true
 [node name="LightHumming" type="AudioStreamPlayer" parent="Dropdown"]
 unique_name_in_owner = true
 stream = ExtResource("15_ewebw")
+bus = &"Sounds"
 
 [node name="ColorRect" type="ColorRect" parent="Dropdown"]
 z_index = 50

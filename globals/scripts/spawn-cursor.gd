@@ -12,6 +12,8 @@ func _ready():
 	Global.Game.client.connect("tree_exiting", queue_free)
 
 func _process(delta):
+	Global.Game.client.behaviour(Enums.COMPONENTS.SHOOT).prevent_shoot = true
+	
 	global_position = get_global_mouse_position()
 	if Input.is_action_just_pressed("spawn-cursor-next"):
 		selection_pointer += 1
@@ -46,3 +48,4 @@ func update_scene():
 
 func _exit_tree():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Global.Game.client.behaviour(Enums.COMPONENTS.SHOOT).prevent_shoot = false

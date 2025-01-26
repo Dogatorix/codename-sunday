@@ -22,7 +22,7 @@ func _on_shape_entered(_target_shape):
 	if not master.state == component_type:
 		return
 		
-	master.switch_state(Enums.AI_COMPONENTS.SHAPE)
+	#master.switch_state(Enums.AI_COMPONENTS.SHAPE)
 
 func _on_tank_entered(target_tank: Tank):
 	if not master.state == component_type:

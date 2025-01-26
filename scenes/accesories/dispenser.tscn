@@ -262,14 +262,14 @@ libraries = {
 unique_name_in_owner = true
 stream = ExtResource("6_m5tfy")
 volume_db = 5.0
-bus = &"Enviroment"
+bus = &"Sounds"
 script = ExtResource("6_jtxah")
 
 [node name="ShootAudio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 volume_db = 5.0
 max_distance = 1000.0
-bus = &"Enviroment"
+bus = &"Sounds"
 script = ExtResource("6_jtxah")
 sounds = Array[AudioStream]([ExtResource("7_kls7s"), ExtResource("8_c3ysf")])
 pitch_range = 0.05
@@ -278,14 +278,14 @@ pitch_range = 0.05
 unique_name_in_owner = true
 stream = ExtResource("10_bfric")
 volume_db = 5.0
-bus = &"Enviroment"
+bus = &"Sounds"
 script = ExtResource("6_jtxah")
 
 [node name="TickAudio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("11_ayud1")
 max_distance = 1000.0
-bus = &"Enviroment"
+bus = &"Sounds"
 script = ExtResource("6_jtxah")
 pitch_range = 0.03
 

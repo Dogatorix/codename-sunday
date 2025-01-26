@@ -18,6 +18,11 @@ func close():
 func _ready():
 	open()
 	%RunSounds.button_pressed = Settings.run_sounds
+	%GodMode.button_pressed = Settings.client_god_mode
+	%InfiniteMana.button_pressed = Settings.infinite_mana
+	%NoClip.button_pressed = Settings.client_noclip
+	%SpawnWithAI.button_pressed = Settings.spawn_with_ai
+	%AIIgnoresClient.button_pressed = Settings.ai_ignore_client
 	
 func _on_volume_update(value, index):
 	AudioServer.set_bus_volume_db(index, linear_to_db(value))
@@ -29,3 +34,26 @@ func _on_run_sounds_toggled(toggled_on):
 	if tanks.size() > 0:
 		for tank in tanks:
 			tank.behaviour(Enums.COMPONENTS.MOVEMENT).setup_run_sounds()
+
+
+func _on_god_mode_toggled(toggled_on):
+	Settings.client_god_mode = toggled_on
+
+func _on_infinite_mana_toggled(toggled_on):
+	Settings.infinite_mana = toggled_on
+
+func _on_no_clip_toggled(toggled_on):
+	Settings.client_noclip = toggled_on
+	
+	if Global.Game:
+		if Global.Game.gamemode == Enums.GAMEMODES.SANDBOX and Global.Game.client != null:
+			if toggled_on:
+				Global.Game.client.disable_collision()
+			else:
+				Global.Game.client.enable_collision()
+	
+func _on_disable_tank_ai_toggled(toggled_on):
+	Settings.spawn_with_ai = toggled_on
+
+func _on_ai_ignores_client_toggled(toggled_on):
+	Settings.ai_ignore_client = toggled_on

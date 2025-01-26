@@ -12,3 +12,4 @@ stream_1/stream = ExtResource("3_ta7fe")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
 stream = SubResource("AudioStreamRandomizer_bptpx")
 volume_db = -10.0
+bus = &"Sounds"

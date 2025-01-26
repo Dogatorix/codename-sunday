@@ -13,6 +13,12 @@ const gamemode_texts: Dictionary = {
 
 func _ready():
 	%GamemodeText.text = gamemode_texts[Global.Game.gamemode]
+	
+	if Global.Game.gamemode == Enums.GAMEMODES.SANDBOX:
+		if Global.Game.Sandbox.move_instance != null:
+			Global.Game.Sandbox.move_instance.queue_free()
+		if Global.Game.Sandbox.spawn_instance != null:
+			Global.Game.Sandbox.spawn_instance.queue_free()
 
 func _process(_delta):
 	%TimeSpent.text = seconds_to_clock(int(Global.Game.time_spent))

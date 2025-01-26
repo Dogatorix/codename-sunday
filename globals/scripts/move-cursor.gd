@@ -5,14 +5,13 @@ var chosen_node: Node2D = null
 var is_being_dragged := false
 var drag_offset := Vector2.ZERO
 
-@onready var shoot_component: TankBehaviourComponent
 
 func _ready():
 	global_position = get_global_mouse_position()
 	Global.Game.client.connect("tree_exiting", queue_free)
-
+	
 func _process(_delta):
-	shoot_component = Global.Game.client.behaviour(Enums.COMPONENTS.SHOOT)
+	Global.Game.client.behaviour(Enums.COMPONENTS.SHOOT).prevent_shoot = true
 	
 	global_position = get_global_mouse_position()
 	
@@ -41,13 +40,10 @@ func _process(_delta):
 		
 		drag_offset = chosen_node.global_position - global_position
 		is_being_dragged = true
-		
-		if shoot_component:
-			shoot_component.prevent_shoot = true
 
 	if Input.is_action_just_released("move-mode-drag"):
 		is_being_dragged = false
 		chosen_node = null
-		
-		if shoot_component:
-			shoot_component.prevent_shoot = false
+
+func _exit_tree():
+	Global.Game.client.behaviour(Enums.COMPONENTS.SHOOT).prevent_shoot = false

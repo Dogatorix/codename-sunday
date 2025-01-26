@@ -49,8 +49,10 @@ func _ready():
 		
 	if is_client:
 		setup_client()
+		if Settings.client_noclip:
+			disable_collision()
 	
-	if is_ai:
+	if is_ai and Settings.spawn_with_ai:
 		setup_ai()
 	
 	var tank_content_scene: PackedScene = Global.Game.tank_scenes[tank_id].scene
@@ -102,5 +104,13 @@ func behaviour(component_name: Enums.COMPONENTS):
 func ai(component_name: Enums.AI_COMPONENTS):
 	return ai_components[component_name]
 
+func enable_collision():
+	#set_collision_layer_value(1, true)
+	set_collision_mask_value(1, true)
+
+func disable_collision():
+	#set_collision_layer_value(1, false)
+	set_collision_mask_value(1, false)
+	
 func _exit_tree():
 	Game.clients.erase(self)

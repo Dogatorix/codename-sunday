@@ -113,6 +113,7 @@ shape = SubResource("RectangleShape2D_vuu4n")
 occluder = SubResource("OccluderPolygon2D_8k38t")
 
 [node name="DoorStream" type="AudioStreamPlayer2D" parent="."]
+bus = &"Sounds"
 
 [node name="CloseRegion" type="Area2D" parent="."]
 
