@@ -24,7 +24,7 @@ func state_update(new_state):
 		return
 		
 	flee_timer = 0
-	set_target_point(flee_target.global_position)
+	set_target_point()
 
 func _process(delta):
 	if not master.state == component_type:
@@ -43,8 +43,7 @@ func _process(delta):
 	var shoot = tank.behaviour(Enums.COMPONENTS.SHOOT)
 	shoot.ai_shoot()
 
-func set_target_point(position: Vector2):
-	var alpha_angle = position.angle_to_point(tank.global_position)
+func set_target_point():
 	var target_node = fartherst_node(tank.global_position, Global.Game.path_points)
 	master.pathfind_to(target_node)
 

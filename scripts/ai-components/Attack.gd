@@ -51,6 +51,9 @@ func _setup_finished():
 func state_update(new_state: Enums.AI_COMPONENTS):
 	if not new_state == component_type:
 		return
+	
+	if master.nearest_tank == null:
+		return
 		
 	master.target_position = get_next_orbit_position(master.nearest_tank.global_position)
 	combat_time = 0

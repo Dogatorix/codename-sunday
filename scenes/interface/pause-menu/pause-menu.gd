@@ -8,7 +8,8 @@ var is_restarting: bool
 
 const gamemode_texts: Dictionary = {
 	Enums.GAMEMODES.SANDBOX: "Gamemode - The Sandbox",
-	Enums.GAMEMODES.MACHINE_TRAINING: "Gamemode - Machine Training"
+	Enums.GAMEMODES.MACHINE_TRAINING: "Gamemode - Machine Training",
+	Enums.GAMEMODES.LOBBY: "The Lobby"
 }
 
 func _ready():

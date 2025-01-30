@@ -12,7 +12,7 @@ func _ready():
 	%TierText.text = "Upgrade to Tier " + str(upgrade_tier)
 	
 	var camera: GameCamera = Global.Game.client.camera
-	Global.tween(camera, "offset", Vector2(0, -60), 1)
+	Global.tween(camera, "camera_offset", Vector2(0, -60), 1)
 
 	var upgrade_size = upgrades.size()
 	
@@ -36,7 +36,7 @@ func _ready():
 
 func close():
 	var camera: GameCamera = Global.Game.client.camera
-	Global.tween(camera, "offset", Vector2(0, 0), 1)
+	Global.tween(camera, "camera_offset", Vector2(0, 0), 1)
 
 	$AnimationPlayer.play("destroy")
 	for button in $Buttons.get_children():

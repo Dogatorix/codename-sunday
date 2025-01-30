@@ -25,8 +25,11 @@ var max_core_points := 1000
 signal health_change(value)
 signal rust_change(value)
 signal mana_change(value)
-signal points_change(value) 
+signal points_change(value)
+
+@warning_ignore("unused_signal")
 signal on_damaged(amount)
+
 signal max_points()
 
 @onready var health = max_health

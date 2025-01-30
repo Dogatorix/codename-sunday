@@ -50,6 +50,16 @@ movie_writer/movie_file="D:/GodotRecordings/godot-playback.avi"
 
 enabled=PackedStringArray()
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "red",
+"res://globals/": "orange",
+"res://menu/": "yellow",
+"res://scenes/": "green",
+"res://scripts/": "blue"
+}
+
 [input]
 
 move_left={

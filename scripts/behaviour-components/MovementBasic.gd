@@ -14,18 +14,20 @@ const acceleration: float = 2500
 const friction: float = 2000
 const push_force: float = 80
 
-var normal_velocity := Vector2.ZERO
-var dash_velocity := Vector2.ZERO
+var normal_velocity: Vector2
+var dash_velocity: Vector2
 
-var external_velocity := Vector2.ZERO
+var external_velocity: Vector2
 
 var external_velocity_decay := 0
 var external_velocity_length := 0
 var external_velocity_direction := 0.0
 
-var input_vector := Vector2.ZERO
+var input_vector: Vector2
 
 var can_move := true
+
+var movement_delta: Vector2
 
 var run_sounds: AudioStreamPlayer2D
 var run_sounds_can_play: bool
@@ -46,6 +48,8 @@ func setup_run_sounds():
 		run_sounds.connect("finished", run_sounds.play)
 
 func _process(delta):
+	var movement_first = tank.global_position
+	
 	tank.move_and_slide()
 	
 	camera = tank.camera
@@ -67,9 +71,6 @@ func _process(delta):
 	
 	tank.velocity = normal_velocity + external_velocity + dash_velocity
 
-	if tank_sprite and camera and can_look and not Global.is_mobile:
-		rotate_tank_camera()
-		camera_control()
 		
 	if Global.is_mobile:
 		var joystick: VirtualJoystick = Global.Game.Mobile.direction_joystick
@@ -81,9 +82,14 @@ func _process(delta):
 	if input_vector == Vector2.ZERO and not run_sounds == null:
 		run_sounds.stop()
 		run_sounds_can_play = true
-
+		
+	movement_delta = tank.global_position - movement_first
+	if tank_sprite and camera and can_look and not Global.is_mobile:
+		camera_control()
+		rotate_tank_camera()
+	
 func rotate_tank_camera():
-	var mouse_position = tank.get_global_mouse_position() - camera.shake_vector
+	var mouse_position = (tank.get_global_mouse_position() + movement_delta) - camera.shake_vector
 	var direction = (mouse_position - tank.global_position).normalized()
 	var angle = atan2(direction.y, direction.x)
 	var final_angle = rad_to_deg(angle) + 90

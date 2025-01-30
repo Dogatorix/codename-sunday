@@ -58,7 +58,7 @@ func _process(delta):
 	if not Input.is_action_pressed("spectator_speedup"):
 		speed = speed_normal
 	else:
-		speed = speed_normal * 2.5
+		speed = int(speed_normal * 2.5)
 	
 	var input_vector = Vector2(
 		Input.get_axis("move_left", "move_right"),

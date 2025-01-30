@@ -11,7 +11,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	Global.Game.client.connect("tree_exiting", queue_free)
 
-func _process(delta):
+func _process(_delta):
 	Global.Game.client.behaviour(Enums.COMPONENTS.SHOOT).prevent_shoot = true
 	
 	global_position = get_global_mouse_position()

@@ -4,9 +4,8 @@ class_name Tank
 signal on_upgrade_tank(tank: Enums.TANKS)
 signal tank_switched()
 
+@warning_ignore("unused_signal")
 signal stats_setup_finished()
-
-signal ai_master_setup_finished()
 
 @export var tank_name := "Tank"
 @export var tank_color := Color(1,1,1)
@@ -91,7 +90,7 @@ func _process(_delta):
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody2D:
 			c.get_collider().apply_central_impulse(-c.get_normal() * 100)
-	
+
 func upgrade_tank(tank: Enums.TANKS):
 	on_upgrade_tank.emit(tank)
 	

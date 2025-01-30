@@ -1,5 +1,7 @@
 extends Node2D
 
+signal death(experience)
+
 enum CONTAINER_TYPE {
 	SQUARE,
 	TRIANGLE,
@@ -80,6 +82,7 @@ func _on_death(energy, color):
 func add_experience():
 	add_sibling(experience_instance)
 	experience_instance.global_position = container_instance.global_position
+	death.emit(experience_instance)
 	
 func get_tint_color(value):
 	var green_color = Color(0, 1, 0)

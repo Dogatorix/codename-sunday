@@ -11,7 +11,7 @@ var stats: StatsBasic
 
 var is_dying := false
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("debug-1") and tank.is_client:
 		instant_death()
 
@@ -56,7 +56,9 @@ func death():
 		await spectator_instance.ready
 		spectator_instance.global_position = tank.global_position
 
-func instant_death():
+func instant_death():	
 	if tank.is_client:
+		if Settings.client_god_mode:
+			return
 		Global.Game.Overlay.show_bars()
 	death()

@@ -619,25 +619,25 @@ text = "User: Drill Thrill"
 label_settings = SubResource("LabelSettings_t7ic4")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -211.0
-offset_top = -1369.0
-offset_right = 2150.0
-offset_bottom = -14.0
+offset_left = -760.0
+offset_top = -1722.0
+offset_right = 1601.0
+offset_bottom = -367.0
 color = Color(0, 0, 0, 1)
 
 [node name="TrainingMenu" type="Node" parent="."]
 
 [node name="ListContainer" type="Sprite2D" parent="TrainingMenu"]
-position = Vector2(6.65094, -90.3207)
+position = Vector2(-542.349, -443.321)
 scale = Vector2(2.33019, 2.33019)
 texture = ExtResource("18_66nsm")
 offset = Vector2(413, -102)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TrainingMenu"]
-offset_left = 15.0
-offset_top = -453.0
-offset_right = 1915.0
-offset_bottom = -125.0
+offset_left = -534.0
+offset_top = -806.0
+offset_right = 1366.0
+offset_bottom = -478.0
 
 [node name="PlayerCard" parent="TrainingMenu/HBoxContainer" instance=ExtResource("19_5n4gn")]
 layout_mode = 2

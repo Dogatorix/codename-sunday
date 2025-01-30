@@ -27,7 +27,9 @@ const TANK_DEFAULT_COLORS: Array[Color] = [
 	Color.HOT_PINK
 ]
 
+@warning_ignore("unused_signal")
 signal restarted()
+
 signal menu_updated(mode: bool)
 
 var clients: Array[Tank] = []

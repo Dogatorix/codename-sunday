@@ -11,24 +11,41 @@ func _setup_finished():
 	master.state_changed.connect(state_update)
 	var ai_profile: TankAIProfile = master.ai_profile
 	
+	@warning_ignore("narrowing_conversion")
 	closeup_range = ai_profile.shape_closeup_range
 	
 func state_update(new_state):
 	if not new_state == component_type:
 		return
 	
+	update_nearest_shape()
+
+func update_nearest_shape():
 	target_shape = master.nearest_shape
 	master.pathfind_to(target_shape.global_position)
 
-func _process(delta):
+func on_shape_death(_xp_instance):
+	target_shape.disconnect("death", on_shape_death)
+	update_nearest_shape()
+
+func _process(_delta):
 	if not master.state == component_type:
 		return
+	
+	if target_shape == null:
+		update_nearest_shape()
 
 	master.look_at_position(target_shape.global_position)
-
-	 
 	
-	#%Label.text = str(tank.global_position.distance_to(target_shape.global_position))
+	
+	var shape_in_vision = not master.ray_cast_collider is TileMapLayer
+	var shape_distance = tank.global_position.distance_to(target_shape.global_position)
+	
+	if shape_in_vision and shape_distance < 250:
+		var shoot = tank.behaviour(Enums.COMPONENTS.SHOOT)
+		shoot.ai_shoot()
+		master.pathfind_disabled = true	
+			
 
 func get_next_orbit_position(position: Vector2):
 	var alpha = randf_range(-2, 2)
