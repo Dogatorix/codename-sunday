@@ -6,13 +6,14 @@ signal tank_entered(tank: Tank)
 signal tank_exited(tank: Tank)
 signal shape_entered(shape: RigidBody2D)
 signal shape_exited(shape: RigidBody2D)
+signal activator_entered(activator: Area2D)
 
 @export var ai_profile: TankAIProfile
-@onready var ray_cast: RayCast2D = %RayCast
+@onready var ray_cast: ShapeCast2D = %RayCast
 
 var ray_cast_collider:
 	get:
-		return ray_cast.get_collider()
+		return ray_cast.get_collider(0)
 		
 var state: Enums.AI_COMPONENTS = Enums.AI_COMPONENTS.ROAMING
 	
@@ -91,7 +92,6 @@ func _view_entered(body: Node2D):
 		
 		players_in_vision.push_front(body)
 		update_nearest_tank()
-		print('test')
 		tank_entered.emit(body)
 		if not body.is_connected("tree_exiting", erase_player_from_vision):
 			body.connect("tree_exiting", erase_player_from_vision.bind(body))
@@ -123,3 +123,8 @@ func update_nearest_shape():
 	
 func look_at_position(position: Vector2):
 	look_target_position = position
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("activator"):
+		activator_entered.emit(area)
+		

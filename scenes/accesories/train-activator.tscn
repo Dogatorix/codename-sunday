@@ -99,7 +99,7 @@ _data = {
 "back": SubResource("Animation_fjmd4")
 }
 
-[node name="TrainActivator" type="Area2D"]
+[node name="TrainActivator" type="Area2D" groups=["activator"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vlo36")

@@ -113,6 +113,9 @@ func _ready():
 var player_interface: CanvasLayer
 
 func add_player_interface():
+	#if client == null:
+		#return
+	
 	player_interface = player_interface_scene.instantiate()
 	client.add_child(player_interface)
 	

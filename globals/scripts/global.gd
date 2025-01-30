@@ -15,7 +15,7 @@ const TANK_NAMES := {
 	Enums.TANKS.CRUSH: "Crush"
 }
 
-var is_logged_in: bool = true
+var is_logged_in: bool = false
 var username := "Slow Joe"
 var device: DEVICE
 

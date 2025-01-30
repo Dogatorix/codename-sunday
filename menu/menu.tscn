@@ -553,7 +553,6 @@ unique_name_in_owner = true
 
 [node name="DropdownTop" type="Sprite2D" parent="Dropdown"]
 unique_name_in_owner = true
-visible = false
 z_index = 10
 position = Vector2(962, 289)
 scale = Vector2(1.62237, 1.62237)
@@ -561,7 +560,6 @@ texture = ExtResource("8_b6du1")
 
 [node name="DropdownBottom" type="Sprite2D" parent="Dropdown"]
 unique_name_in_owner = true
-visible = false
 z_index = 10
 position = Vector2(963, 866)
 scale = Vector2(1.62237, 1.62237)
@@ -573,19 +571,14 @@ bus = &"Sounds"
 
 [node name="NameEdit" parent="Dropdown" instance=ExtResource("10_uafp6")]
 unique_name_in_owner = true
-visible = false
 position = Vector2(946, 423)
 scale = Vector2(1.25603, 1.25603)
 
 [node name="MenuInput" parent="Dropdown/NameEdit" index="0"]
 metadata/_edit_use_anchors_ = true
 
-[node name="Light" parent="Dropdown/NameEdit" index="1"]
-visible = false
-
 [node name="MenuStartButton" parent="Dropdown" instance=ExtResource("11_p3ial")]
 unique_name_in_owner = true
-visible = false
 z_index = 20
 offset_left = 806.0
 offset_top = 708.0
@@ -688,6 +681,7 @@ offset_top = -97.0
 offset_right = 237.0
 offset_bottom = -4.0
 text_value = "The Sandbox"
+is_button_disabled = true
 
 [node name="Settings" parent="MenuButtonsContainer" instance=ExtResource("17_k4jks")]
 unique_name_in_owner = true
@@ -696,6 +690,7 @@ offset_top = 24.0
 offset_right = 237.0
 offset_bottom = 117.0
 text_value = "Settings"
+is_button_disabled = true
 
 [node name="QuitGame" parent="MenuButtonsContainer" instance=ExtResource("17_k4jks")]
 unique_name_in_owner = true
@@ -704,6 +699,7 @@ offset_top = 142.0
 offset_right = 237.0
 offset_bottom = 235.0
 text_value = "Quit Game"
+is_button_disabled = true
 
 [connection signal="finished" from="MenuMusic" to="MenuMusic" method="play"]
 [connection signal="text_changed" from="Dropdown/NameEdit/MenuInput" to="." method="_on_menu_input_text_changed"]

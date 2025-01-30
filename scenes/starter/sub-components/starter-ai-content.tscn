@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bae55p0tdb4ok"]
+[gd_scene load_steps=10 format=3 uid="uid://bae55p0tdb4ok"]
 
 [ext_resource type="Script" path="res://scripts/ai-components/Roaming.gd" id="2_cvbmw"]
 [ext_resource type="Script" path="res://scripts/ai-components/MasterComponentAI.gd" id="2_m1xum"]
@@ -10,7 +10,7 @@
 [sub_resource type="Resource" id="Resource_541nf"]
 script = ExtResource("2_pr4xa")
 shoot_through_walls = false
-attack_basic_chance = 15
+activate_train_chance = true
 attack_closeup_range = 450
 attack_orbit_deviation_angle = 1.5
 attack_memory = 8.0
@@ -19,14 +19,14 @@ attack_can_give_up = true
 attack_combat_time_max = 40
 attack_min_health_to_give_up = 75
 attack_dash_chance = 20
-flee_timer_max = 5.0
+flee_timer_max = 6.0
 flee_dash_chance = 35
 shape_closeup_range = 300.0
-shape_attack_outsider_chance = 30
-shape_leave_tank_chance = 100
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yt18q"]
 size = Vector2(2756, 1572)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tas5t"]
 
 [node name="StarterAIContent" type="Node2D"]
 
@@ -89,10 +89,14 @@ unique_name_in_owner = true
 wait_time = 0.8
 autostart = true
 
-[node name="RayCast" type="RayCast2D" parent="."]
+[node name="RayCast" type="ShapeCast2D" parent="."]
 unique_name_in_owner = true
-target_position = Vector2(-2, -920)
+shape = SubResource("RectangleShape2D_tas5t")
+target_position = Vector2(0, -909)
+max_results = 1
 
+[connection signal="area_entered" from="PlayerView" to="AIComponentList/MasterComponentAI" method="_on_area_entered"]
+[connection signal="area_exited" from="PlayerView" to="AIComponentList/MasterComponentAI" method="_on_area_exited"]
 [connection signal="body_entered" from="PlayerView" to="AIComponentList/MasterComponentAI" method="_view_entered"]
 [connection signal="body_exited" from="PlayerView" to="AIComponentList/MasterComponentAI" method="_view_exited"]
 [connection signal="timeout" from="DashDelay" to="AIComponentList/Attack" method="_on_dash_delay_timeout"]

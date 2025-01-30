@@ -617,7 +617,7 @@ metadata/_edit_lock_ = true
 
 [node name="PathPoints" type="TileMapLayer" parent="Tiles" groups=["path_points"]]
 visible = false
-tile_map_data = PackedByteArray("AAAJANv/AAAAAAAAAAAfAOb/AAAAAAAAAAAUAOb/AAAAAAAAAAD//+b/AAAAAAAAAAD6/9z/AAAAAAAAAAAJAPH/AAAAAAAAAAD3//H/AAAAAAAAAAD2/wUAAAAAAAAAAAALAAUAAAAAAAAAAAAfAPj/AAAAAAAAAAAaAAQAAAAAAAAAAADa/9n/AAAAAAAAAADf/8//AAAAAAAAAADo/9r/AAAAAAAAAADh//D/AAAAAAAAAADV//D/AAAAAAAAAADd/w4AAAAAAAAAAADd/xgAAAAAAAAAAADt/x4AAAAAAAAAAADW/yUAAAAAAAAAAADi/ywAAAAAAAAAAADt/ycAAAAAAAAAAAALACcAAAAAAAAAAAAYACsAAAAAAAAAAAAmACUAAAAAAAAAAAAcABkAAAAAAAAAAAAwABkAAAAAAAAAAAAhADwAAAAAAAAAAADk/zwAAAAAAAAAAAD9/zEAAAAAAAAAAAAOADEAAAAAAAAAAAD+/xsAAAAAAAAAAAAwADAAAAAAAAAAAAAoAA8AAAAAAAAAAADY/wAAAAAAAAAAAAAoAOb/AAAAAAAAAAAoAPH/AAAAAAAAAAAfAN//AAAAAAAAAAAUANn/AAAAAAAAAAAfANn/AAAAAAAAAAAoANn/AAAAAAAAAADa/+L/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAJANv/AAAAAAAAAAAfAOb/AAAAAAAAAAAUAOb/AAAAAAAAAAD//+b/AAAAAAAAAAD6/9z/AAAAAAAAAAAJAPH/AAAAAAAAAAD3//H/AAAAAAAAAAD2/wUAAAAAAAAAAAALAAUAAAAAAAAAAAAfAPj/AAAAAAAAAAAaAAQAAAAAAAAAAADa/9n/AAAAAAAAAADf/8//AAAAAAAAAADo/9r/AAAAAAAAAADh//D/AAAAAAAAAADV//D/AAAAAAAAAADd/w4AAAAAAAAAAADd/xgAAAAAAAAAAADt/x4AAAAAAAAAAADW/yUAAAAAAAAAAADi/ywAAAAAAAAAAADt/ycAAAAAAAAAAAALACcAAAAAAAAAAAAYACsAAAAAAAAAAAAmACUAAAAAAAAAAAAcABkAAAAAAAAAAAAwABkAAAAAAAAAAAAhADwAAAAAAAAAAADk/zwAAAAAAAAAAAD9/zEAAAAAAAAAAAAOADEAAAAAAAAAAAD+/xsAAAAAAAAAAAAwADAAAAAAAAAAAAAoAA8AAAAAAAAAAADY/wAAAAAAAAAAAAAoAOb/AAAAAAAAAAAoAPH/AAAAAAAAAAAfAN//AAAAAAAAAAAUANn/AAAAAAAAAAAfANn/AAAAAAAAAAAoANn/AAAAAAAAAADa/+L/AAAAAAAAAAD9/ycAAAAAAAAAAAAFAD0AAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_1216k")
 
 [node name="Accesories" type="Node" parent="."]
@@ -680,7 +680,7 @@ position = Vector2(-711, -338)
 [node name="Train" parent="Accesories" instance=ExtResource("8_g15t4")]
 
 [node name="TrainActivator" parent="Accesories/Train" instance=ExtResource("9_hmjst")]
-position = Vector2(-172, -1364)
+position = Vector2(-172, -1355)
 
 [node name="TrainGateStart" parent="Accesories/Train" instance=ExtResource("10_u1drw")]
 position = Vector2(149, -1370)
@@ -691,7 +691,7 @@ position = Vector2(153, -791)
 [node name="Train2" parent="Accesories" instance=ExtResource("8_g15t4")]
 
 [node name="TrainActivator" parent="Accesories/Train2" instance=ExtResource("9_hmjst")]
-position = Vector2(-1981, -1587)
+position = Vector2(-1981, -1576)
 
 [node name="TrainGateStart" parent="Accesories/Train2" instance=ExtResource("10_u1drw")]
 position = Vector2(-2692, -1610)
@@ -702,7 +702,7 @@ position = Vector2(-2688, -875)
 [node name="Train3" parent="Accesories" instance=ExtResource("8_g15t4")]
 
 [node name="TrainActivator" parent="Accesories/Train3" instance=ExtResource("9_hmjst")]
-position = Vector2(-494, 2764)
+position = Vector2(-494, 2777)
 
 [node name="TrainGateStart" parent="Accesories/Train3" instance=ExtResource("10_u1drw")]
 position = Vector2(-181, 2771)

@@ -8,6 +8,8 @@ extends Node2D
 func _ready():
 	menu_start_button.disable()
 	
+	%UserLabel.text = "User: " + Global.username
+	
 	if Global.is_logged_in:
 		%Dropdown.queue_free()
 		%MenuMusic.play()
@@ -29,6 +31,7 @@ func _on_menu_button_pressed():
 
 func enable_menu_buttons():
 	#%MachineTraining.enable()
+	%Settings.enable()
 	%TheSandbox.enable()
 	%QuitGame.enable()
 
