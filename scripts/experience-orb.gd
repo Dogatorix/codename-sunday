@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 @export var glow: Sprite2D
 @export var animation_player: AnimationPlayer

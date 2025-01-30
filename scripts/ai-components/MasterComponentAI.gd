@@ -64,7 +64,7 @@ func _process(_delta):
 	ray_cast.rotation_degrees = movement.tank_sprite.rotation_degrees 
 	
 	var stats: StatsBasic = tank.behaviour(Enums.COMPONENTS.STATS)
-	%Label.text = str(stats.max_core_points - stats.points)
+	#%Label.text = str(stats.max_core_points - stats.points)
 	
 func switch_state(new_state: Enums.AI_COMPONENTS):
 	state = new_state

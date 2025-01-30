@@ -70,7 +70,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_nkl67"]
 radius = 200.0
 
-[node name="ExperienceOrb" type="Node2D" node_paths=PackedStringArray("glow", "animation_player")]
+[node name="ExperienceOrb" type="Area2D" node_paths=PackedStringArray("glow", "animation_player") groups=["xp"]]
 z_index = -1
 position = Vector2(0, 1)
 script = ExtResource("1_7excv")
@@ -95,10 +95,8 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_nkl67")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_area_2d_body_entered"]

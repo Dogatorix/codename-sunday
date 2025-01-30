@@ -16,7 +16,7 @@ warnings/check_angle_interpolation_type_conflicting=false
 [application]
 
 config/name="Codename Sunday"
-config/version="Alpha 1.3"
+config/version="alpha-1.3"
 run/main_scene="res://menu/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -38,8 +38,6 @@ Settings="*res://globals/scripts/Settings.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
-window/size/borderless=true
 window/stretch/mode="viewport"
 
 [editor]
@@ -54,6 +52,8 @@ enabled=PackedStringArray()
 
 folder_colors={
 "res://assets/": "red",
+"res://assets/audio/": "purple",
+"res://assets/sprites/": "green",
 "res://globals/": "orange",
 "res://menu/": "yellow",
 "res://scenes/": "green",
