@@ -61,10 +61,14 @@ func _ready():
 func setup_client():
 	if Global.is_mobile:
 		Global.Game.Mobile.enable_tank_controls()
-		
+	
 	var camera_instance = GameCamera.new()
 	add_child(camera_instance)
-	camera_instance.zoom = Vector2(default_zoom, default_zoom)
+	
+	if Global.Game.gamemode == Enums.GAMEMODES.SANDBOX:
+		camera_instance.zoom = Vector2(Settings.sandbox_custom_zoom, Settings.sandbox_custom_zoom)
+	else:
+		camera_instance.zoom = Vector2(default_zoom, default_zoom)
 	camera = camera_instance
 	Game.Overlay.hide_bars()
 	Global.fade_out()

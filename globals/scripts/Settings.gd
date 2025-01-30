@@ -7,3 +7,5 @@ var client_noclip: bool = false
 var run_sounds: bool = false
 var ai_ignore_client: bool = false
 var spawn_with_ai: bool = true
+
+var sandbox_custom_zoom: float = 1.1

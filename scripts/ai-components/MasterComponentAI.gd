@@ -49,6 +49,9 @@ func pathfind_to(position: Vector2):
 func get_path_direction():
 	return tank.to_local(navigation_agent.get_next_path_position()).normalized()
 
+# TODO: THIS IS STUPID, FIX LATER
+var is_upgrading: bool
+
 func _process(_delta):
 	movement = tank.behaviour(Enums.COMPONENTS.MOVEMENT)
 	
@@ -64,7 +67,11 @@ func _process(_delta):
 	ray_cast.rotation_degrees = movement.tank_sprite.rotation_degrees 
 	
 	var stats: StatsBasic = tank.behaviour(Enums.COMPONENTS.STATS)
-	#%Label.text = str(stats.max_core_points - stats.points)
+	if stats.max_core_points - stats.points == 0 and not is_upgrading:
+		var upgrades := [Enums.TANKS.CRUSH, Enums.TANKS.ASSAULT, Enums.TANKS.DESTROY]
+		is_upgrading = true
+		tank.upgrade_tank(upgrades.pick_random())
+		switch_state(Enums.AI_COMPONENTS.ROAMING)
 	
 func switch_state(new_state: Enums.AI_COMPONENTS):
 	state = new_state
@@ -84,6 +91,7 @@ func _view_entered(body: Node2D):
 		
 		players_in_vision.push_front(body)
 		update_nearest_tank()
+		print('test')
 		tank_entered.emit(body)
 		if not body.is_connected("tree_exiting", erase_player_from_vision):
 			body.connect("tree_exiting", erase_player_from_vision.bind(body))

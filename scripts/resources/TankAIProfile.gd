@@ -1,10 +1,9 @@
 extends Resource
 class_name TankAIProfile
 
-# Attack
-
 @export_group("General")
 @export var shoot_through_walls: bool = false
+@export var attack_basic_chance: int = 15
 
 @export_group("Attack")
 @export var attack_closeup_range: int = 300
@@ -22,3 +21,5 @@ class_name TankAIProfile
 
 @export_group("Shape")
 @export var shape_closeup_range: float = 300
+@export var shape_attack_outsider_chance: int = 30
+@export var shape_leave_tank_chance: int = 100

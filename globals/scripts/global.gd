@@ -95,3 +95,6 @@ func switch_current_scene(scene_path: String):
 	var instances_scene := new_scene.instantiate()
 	get_tree().root.add_child(instances_scene)
 	get_tree().current_scene = instances_scene
+
+func random_chance(chance: float):
+	return randi_range(0,100) <= chance

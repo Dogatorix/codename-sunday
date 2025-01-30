@@ -62,6 +62,12 @@ func _process(delta):
 	if not master.state == component_type:
 		return
 		
+	var stats = tank.behaviour(Enums.COMPONENTS.STATS)
+	
+	if stats == null:
+		await tank.stats_setup_finished
+		stats = tank_target.behaviour(Enums.COMPONENTS.STATS)
+		
 	if master.players_in_vision.size() < 1 and not tank_target:
 		master.switch_state(Enums.AI_COMPONENTS.ROAMING)
 		
@@ -80,6 +86,7 @@ func _process(delta):
 		master.pathfind_disabled = false
 	
 	var health_condition: bool = false
+	
 	if tank_target != null:
 		health_condition = tank_target.behaviour(Enums.COMPONENTS.STATS).health > min_health_to_give_up
 		
@@ -115,9 +122,9 @@ func get_next_orbit_position(position: Vector2):
 	return master.nearest_tank.global_position + distance
 
 func _on_dash_delay_timeout():
-	if not component_type == master.state:
+	if not component_type == master.state or master.ray_cast_collider is TileMapLayer:
 		return
 	
-	if randi_range(0,100) <= dash_chance: 
+	if Global.random_chance(dash_chance): 
 		var tank_dash: DashBasic = tank.behaviour(Enums.COMPONENTS.DASH)
 		tank_dash.dash()

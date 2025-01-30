@@ -48,4 +48,5 @@ func update_scene():
 
 func _exit_tree():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	Global.Game.client.behaviour(Enums.COMPONENTS.SHOOT).prevent_shoot = false
+	if Global.Game.client != null:
+		Global.Game.client.behaviour(Enums.COMPONENTS.SHOOT).prevent_shoot = false

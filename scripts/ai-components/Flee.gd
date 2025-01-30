@@ -62,6 +62,6 @@ func _on_dash_delay_timeout():
 	if not component_type == master.state:
 		return
 	
-	if randi_range(0,100) <= dash_chance: 
+	if Global.random_chance(dash_chance): 
 		var tank_dash: DashBasic = tank.behaviour(Enums.COMPONENTS.DASH)
 		tank_dash.dash()

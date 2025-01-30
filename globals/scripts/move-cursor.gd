@@ -46,4 +46,5 @@ func _process(_delta):
 		chosen_node = null
 
 func _exit_tree():
-	Global.Game.client.behaviour(Enums.COMPONENTS.SHOOT).prevent_shoot = false
+	if Global.Game.client != null:
+		Global.Game.client.behaviour(Enums.COMPONENTS.SHOOT).prevent_shoot = false

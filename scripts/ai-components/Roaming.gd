@@ -24,22 +24,27 @@ func _on_shape_entered(_target_shape):
 		
 	master.switch_state(Enums.AI_COMPONENTS.SHAPE)
 
+# TODO: figure out why this function gets called so many damn times
 func _on_tank_entered(target_tank: Tank):
 	if not master.state == component_type:
 		return
-	
-	if tank.behaviour(Enums.COMPONENTS.STATS).health > min_health_allowed:
-		%Delay.start()
-		await %Delay.timeout
-		master.switch_state(Enums.AI_COMPONENTS.ATTACK)	
+
+	if tank.behaviour(Enums.COMPONENTS.STATS).health > min_health_allowed:	
+		switch_to_attack(target_tank)
 	else:
 		tank.ai(Enums.AI_COMPONENTS.FLEE).flee_target = target_tank
 		master.switch_state(Enums.AI_COMPONENTS.FLEE)
+
+func switch_to_attack(target_tank: Tank):
+	%Delay.start()
+	await %Delay.timeout
+	master.switch_state(Enums.AI_COMPONENTS.ATTACK)
 
 func state_update(new_state):
 	if not new_state == component_type:
 		return
 	
+	print('adadadadadada')
 	if master.nearest_tank:
 		_on_tank_entered(master.nearest_tank)
 	

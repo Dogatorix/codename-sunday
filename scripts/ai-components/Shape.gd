@@ -33,6 +33,9 @@ func _process(_delta):
 	if not master.state == component_type:
 		return
 	
+	if master.nearest_tank != null:
+		master.switch_state(Enums.AI_COMPONENTS.ATTACK)
+	
 	if target_shape == null:
 		update_nearest_shape()
 	else:

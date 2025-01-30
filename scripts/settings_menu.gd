@@ -23,6 +23,8 @@ func _ready():
 	%NoClip.button_pressed = Settings.client_noclip
 	%SpawnWithAI.button_pressed = Settings.spawn_with_ai
 	%AIIgnoresClient.button_pressed = Settings.ai_ignore_client
+	%ZoomSlider.value = Settings.sandbox_custom_zoom
+	_on_zoom_slider_value_changed(Settings.sandbox_custom_zoom)
 	
 func _on_volume_update(value, index):
 	AudioServer.set_bus_volume_db(index, linear_to_db(value))
@@ -57,3 +59,10 @@ func _on_disable_tank_ai_toggled(toggled_on):
 
 func _on_ai_ignores_client_toggled(toggled_on):
 	Settings.ai_ignore_client = toggled_on
+
+func _on_zoom_slider_value_changed(value: float) -> void:
+	if Global.Game != null:
+		if Global.Game.client != null:
+			Global.tween(Global.Game.client.camera, "zoom", Vector2(value, value), 0.5)
+	Settings.sandbox_custom_zoom = value
+	%ZoomSliderDisplay.text = "x" + str(value - 0.1).rpad(2,".0")
